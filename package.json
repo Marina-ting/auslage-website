@@ -1,0 +1,25 @@
+{
+  "name": "auslage-website-v2",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "npm run build && wrangler deploy"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.0",
+    "@fontsource/poppins": "^5.0.14",
+    "@fontsource/inter": "^5.0.18",
+    "@fontsource/lora": "^5.0.19"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.1",
+    "wrangler": "^3.72.0"
+  }
+}

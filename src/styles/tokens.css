@@ -1,0 +1,78 @@
+/* ───────────────────────────────────────────────────────────────────────────
+   Auslage — Design-Tokens
+   Farben aus Notion → Branding (Stand 2026-08-06), unverändert.
+   Kontrastwerte in den Kommentaren sind gegen Creme (#FBF6EE) gerechnet.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* ── Farbe ─────────────────────────────────────────────────────────────── */
+  --teal: #2f5d50;          /* 7,0:1 auf Creme — Überschriften, Flächen        */
+  --teal-deep: #234636;     /* Footer, Hover auf Teal                          */
+  --teal-soft: #4a7a6b;     /* Ränder und Linien innerhalb von Teal-Flächen    */
+
+  --terracotta: #d9773f;    /* 2,9:1 — NIE Fließtext. Fläche, Linie, Licht.    */
+  --terracotta-deep: #b45a26;
+  --terracotta-text: #a34f20; /* 5,3:1 — Terrakotta als Text auf Creme         */
+  --terracotta-light: #f5c9a8; /* 5,0:1 auf Teal — Akzenttext auf dunklem Grund */
+
+  --cream: #fbf6ee;
+  --cream-alt: #f3ecdd;
+  --cream-deep: #ebe2ce;
+
+  --ink: #2b2420;           /* 14,2:1 — Fließtext                              */
+  --ink-muted: #5d554c;     /* 7,4:1 — Sekundärtext                            */
+  /* 5,3:1 auf Creme, 4,8:1 auf Creme-Alt. Fußnoten und Platzhalter sind Text
+     und müssen 4,5:1 erfüllen — ein hellerer Grauton wäre hier eine Ausrede. */
+  --ink-faint: #6e665b;
+
+  --border: #e0d8c6;
+  --border-strong: #cfc4ac;
+
+  /* ── Typografie ────────────────────────────────────────────────────────── */
+  --font-display: "Poppins", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
+
+  /* Stetige Skala per clamp — kein Springen an Breakpoints. */
+  --t-hero: clamp(2.6rem, 1.1rem + 6.2vw, 5.6rem);
+  --t-h2: clamp(1.9rem, 1.05rem + 3.4vw, 3.3rem);
+  --t-h3: clamp(1.2rem, 1.02rem + 0.75vw, 1.55rem);
+  --t-lead: clamp(1.06rem, 0.96rem + 0.46vw, 1.32rem);
+  --t-body: clamp(1rem, 0.96rem + 0.18vw, 1.08rem);
+  --t-small: 0.9rem;
+  --t-eyebrow: 0.78rem;
+
+  --measure: 34rem;         /* ~66 Zeichen Fließtext */
+  --measure-wide: 46rem;
+
+  /* ── Raum ──────────────────────────────────────────────────────────────── */
+  --space-section: clamp(4.5rem, 3rem + 6.5vw, 8rem);
+  --gutter: clamp(1.25rem, 0.6rem + 2.6vw, 2.5rem);
+  --container: 72rem;
+  --container-narrow: 58rem;
+
+  /* ── Form ──────────────────────────────────────────────────────────────── */
+  /* Der Radius stammt aus dem Markenicon: gerundetes Fensterquadrat. */
+  --radius-frame: 22px;
+  --radius-card: 16px;
+  --radius-pill: 999px;
+
+  --shadow-soft: 0 1px 2px rgba(43, 36, 32, 0.04), 0 6px 18px rgba(43, 36, 32, 0.05);
+  --shadow-lift: 0 2px 4px rgba(43, 36, 32, 0.05), 0 16px 40px rgba(43, 36, 32, 0.1);
+  --shadow-warm: 0 2px 4px rgba(164, 79, 32, 0.08), 0 18px 44px rgba(164, 79, 32, 0.16);
+
+  /* ── Bewegung ──────────────────────────────────────────────────────────── */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 160ms;
+  --dur: 320ms;
+  --dur-slow: 620ms;
+}
+
+/* Bewegungsreduktion: nicht nur Animation entfernen, sondern Endzustand
+   sofort herstellen — sonst bleiben Reveal-Elemente unsichtbar. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 1ms;
+    --dur: 1ms;
+    --dur-slow: 1ms;
+  }
+}

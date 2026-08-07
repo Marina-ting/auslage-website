@@ -1,0 +1,289 @@
+/* ───────────────────────────────────────────────────────────────────────────
+   Auslage — Basis: Reset, Typografie, Grundraster, Zugänglichkeit
+   ─────────────────────────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Ankersprünge dürfen nicht unter der fixierten Navigation landen. */
+  scroll-padding-top: 5.5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  color: var(--teal);
+  margin: 0;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--t-hero);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+h2 {
+  font-size: var(--t-h2);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.028em;
+}
+
+h3 {
+  font-size: var(--t-h3);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.012em;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+a {
+  color: var(--terracotta-text);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+a:hover {
+  color: var(--terracotta-deep);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+/* ── Fokus ────────────────────────────────────────────────────────────────
+   Sichtbar auf jedem interaktiven Element. Nie ohne Ersatz entfernt.        */
+:focus-visible {
+  outline: 2px solid var(--terracotta-text);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Auf Teal-Flächen ist Terrakotta zu dunkel — dort Creme als Fokusfarbe. */
+.on-teal :focus-visible,
+.on-teal:focus-visible {
+  outline-color: var(--cream);
+}
+
+.skip-link {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -120%);
+  z-index: 200;
+  background: var(--teal);
+  color: var(--cream);
+  padding: 0.75rem 1.4rem;
+  border-radius: 0 0 var(--radius-card) var(--radius-card);
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.skip-link:focus-visible {
+  transform: translate(-50%, 0);
+  color: var(--cream);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Raster ──────────────────────────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.container--narrow {
+  max-width: var(--container-narrow);
+}
+
+.section {
+  padding-block: var(--space-section);
+  position: relative;
+}
+
+.section--tight {
+  padding-block: calc(var(--space-section) * 0.62);
+}
+
+.section--cream-alt {
+  background: var(--cream-alt);
+}
+
+/* Teal-Bänder sind die Atempausen der Seite. Sparsam einsetzen. */
+.section--teal {
+  background: var(--teal);
+  color: rgba(251, 246, 238, 0.82);
+  overflow: hidden;
+}
+
+.section--teal h2,
+.section--teal h3 {
+  color: var(--cream);
+}
+
+/* :not(.btn) ist hier keine Kosmetik: ohne den Ausschluss gewinnt diese Regel
+   gegen .btn--primary und färbt den Haupt-CTA im Teal-Band cremefarben auf
+   Terrakotta ein — 2,9:1 statt 4,8:1. */
+.section--teal a:not(.btn) {
+  color: var(--cream);
+}
+
+/* Warmes Licht hinter Teal-Flächen — die beleuchtete Auslage. */
+.section--teal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    62rem 32rem at 78% 8%,
+    rgba(217, 119, 63, 0.24),
+    transparent 68%
+  );
+  pointer-events: none;
+}
+
+.section > .container {
+  position: relative;
+}
+
+/* ── Wiederkehrende Textbausteine ────────────────────────────────────────── */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-body);
+  font-size: var(--t-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--terracotta-text);
+  margin-bottom: 1rem;
+}
+
+/* Die Ablage-Linie aus dem Markenicon, hier als Marke vor dem Eyebrow. */
+.eyebrow::before {
+  content: "";
+  width: 1.9rem;
+  height: 2px;
+  background: var(--terracotta);
+  border-radius: 2px;
+  flex: none;
+}
+
+/* Volles Terrakotta erreicht auf Teal nur 2,4:1. Der Strich davor bleibt
+   Terrakotta — er ist Dekor und trägt keine Information. */
+.section--teal .eyebrow {
+  color: var(--terracotta-light);
+}
+
+.lead {
+  font-size: var(--t-lead);
+  line-height: 1.6;
+  color: var(--ink-muted);
+  max-width: var(--measure);
+}
+
+.section--teal .lead {
+  color: rgba(251, 246, 238, 0.86);
+}
+
+.section-head {
+  max-width: var(--measure-wide);
+  margin-bottom: clamp(2.5rem, 1.6rem + 3vw, 4rem);
+}
+
+.section-head .lead {
+  margin-top: 1.1rem;
+}
+
+.footnote {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--ink-faint);
+  margin-top: 0.7rem;
+}
+
+/* 0,75 statt 0,6: bei 0,6 liegt der Kontrast auf Teal nur bei 3,7:1. */
+.section--teal .footnote {
+  color: rgba(251, 246, 238, 0.75);
+}
+
+/* ── Scroll-Reveal ────────────────────────────────────────────────────────
+   Startzustand nur setzen, wenn Bewegung erwünscht ist. Sonst wäre der
+   Inhalt bei abgeschaltetem JavaScript oder reduzierter Bewegung unsichtbar. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity var(--dur-slow) var(--ease-out),
+      transform var(--dur-slow) var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}

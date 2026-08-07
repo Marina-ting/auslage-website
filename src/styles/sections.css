@@ -1,0 +1,988 @@
+/* ───────────────────────────────────────────────────────────────────────────
+   Auslage — Abschnitte
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* ── Hero ─────────────────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  padding-top: clamp(7.5rem, 5.5rem + 7vw, 11rem);
+  padding-bottom: clamp(4rem, 2.5rem + 5vw, 7rem);
+  overflow: hidden;
+}
+
+/* Warmes Licht von rechts oben — die beleuchtete Auslage bei Dämmerung. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      48rem 34rem at 82% 12%,
+      rgba(217, 119, 63, 0.2),
+      transparent 62%
+    ),
+    radial-gradient(38rem 30rem at 8% 96%, rgba(47, 93, 80, 0.09), transparent 66%);
+  pointer-events: none;
+}
+
+.hero__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.02fr 0.98fr;
+  gap: clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
+  align-items: center;
+}
+
+.hero__headline {
+  margin-bottom: 1.5rem;
+}
+
+/* Die Frage bekommt die Farbe — sie ist der eigentliche Satz. */
+.hero__accent {
+  display: block;
+  color: var(--terracotta-text);
+}
+
+.hero__sub {
+  max-width: 33rem;
+  margin-bottom: 2.1rem;
+}
+
+.hero__trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.6rem;
+  list-style: none;
+  margin-top: 2.4rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--border);
+}
+
+.hero__trust li {
+  position: relative;
+  padding-left: 1.2rem;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+}
+
+.hero__trust li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.64em;
+  width: 0.6rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--terracotta);
+}
+
+/* ── Fenster-Mock: die Auslage selbst ────────────────────────────────────
+   Bewusst abstrakt, kein erfundener Kunden-Screenshot.                     */
+.window {
+  position: relative;
+  border-radius: var(--radius-frame);
+  border: 1px solid var(--border-strong);
+  background: var(--cream);
+  box-shadow: var(--shadow-lift);
+  overflow: hidden;
+  transform: rotate(-0.6deg);
+}
+
+.window__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.7rem 0.95rem;
+  background: var(--cream-alt);
+  border-bottom: 1px solid var(--border);
+}
+
+.window__dot {
+  width: 0.52rem;
+  height: 0.52rem;
+  border-radius: 50%;
+  background: var(--border-strong);
+  flex: none;
+}
+
+.window__url {
+  margin-left: 0.5rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: var(--radius-pill);
+  background: var(--cream);
+  border: 1px solid var(--border);
+  font-size: 0.68rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.02em;
+}
+
+.window__body {
+  padding: clamp(1.1rem, 0.8rem + 1vw, 1.75rem);
+  display: grid;
+  gap: 0.85rem;
+}
+
+.window__hero {
+  border-radius: 12px;
+  background: linear-gradient(145deg, var(--teal) 0%, var(--teal-deep) 100%);
+  padding: clamp(1rem, 0.7rem + 1vw, 1.5rem);
+  display: grid;
+  gap: 0.55rem;
+}
+
+.bar {
+  height: 0.55rem;
+  border-radius: 3px;
+  background: var(--cream-deep);
+}
+
+.window__hero .bar {
+  background: rgba(251, 246, 238, 0.9);
+}
+
+.window__hero .bar--dim {
+  background: rgba(251, 246, 238, 0.4);
+  height: 0.4rem;
+}
+
+.window__hero .bar--cta {
+  width: 5.5rem;
+  height: 1.35rem;
+  border-radius: var(--radius-pill);
+  background: var(--terracotta);
+  margin-top: 0.35rem;
+}
+
+.window__cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+}
+
+.window__tile {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.6rem;
+  display: grid;
+  gap: 0.35rem;
+  background: var(--cream);
+}
+
+.window__tile .bar {
+  height: 0.34rem;
+}
+
+.window__shelf {
+  height: 2px;
+  background: var(--terracotta);
+  border-radius: 2px;
+  opacity: 0.55;
+}
+
+@media (max-width: 62rem) {
+  .hero__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__visual {
+    max-width: 30rem;
+  }
+
+  .window {
+    transform: none;
+  }
+}
+
+/* ── Problem (Teal-Band) ──────────────────────────────────────────────────── */
+.problem__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.1rem;
+  margin-top: clamp(2rem, 1.4rem + 2vw, 3rem);
+}
+
+.problem__closing {
+  max-width: var(--measure-wide);
+  margin-top: clamp(2.2rem, 1.6rem + 2vw, 3.2rem);
+  padding-top: 1.8rem;
+  border-top: 1px solid var(--teal-soft);
+  font-size: var(--t-lead);
+  line-height: 1.55;
+  color: var(--cream);
+  font-family: var(--font-display);
+  font-weight: 300;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+/* ── Leistungsraster ──────────────────────────────────────────────────────── */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.1rem;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: 1.1rem;
+}
+
+/* ── Pakete ───────────────────────────────────────────────────────────────── */
+.packages {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.pkg {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: clamp(1.6rem, 1.2rem + 1.3vw, 2.2rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-frame);
+  background: var(--cream);
+  transition: transform var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out);
+}
+
+.pkg:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lift);
+  border-color: var(--border-strong);
+}
+
+/* Die Empfehlung ist beleuchtet — Terrakotta als Lichtquelle. */
+.pkg--recommended {
+  border-color: var(--terracotta);
+  box-shadow: var(--shadow-warm);
+  background: linear-gradient(180deg, #fefaf3 0%, var(--cream) 42%);
+}
+
+.pkg--recommended:hover {
+  border-color: var(--terracotta);
+  box-shadow: 0 3px 6px rgba(164, 79, 32, 0.1), 0 22px 52px rgba(164, 79, 32, 0.2);
+}
+
+.pkg__badge {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0.35rem 1rem;
+  border-radius: var(--radius-pill);
+  background: var(--terracotta);
+  color: var(--ink);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.pkg__name {
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.pkg__for {
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--terracotta-text);
+  margin-top: 0.4rem;
+}
+
+.pkg__pitch {
+  margin-top: 0.9rem;
+  color: var(--ink-muted);
+  font-size: 0.99rem;
+  min-height: 3.2em;
+}
+
+.pkg__price {
+  margin-top: 1.4rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.pkg__amount {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--teal);
+}
+
+.pkg__per {
+  font-size: 0.95rem;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
+.pkg__setup {
+  width: 100%;
+  margin-top: 0.55rem;
+  font-size: 0.92rem;
+  color: var(--ink-muted);
+}
+
+.pkg__setup strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.pkg__features {
+  margin-top: 1.4rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--border);
+  flex: 1;
+}
+
+.pkg__cta {
+  margin-top: 1.6rem;
+}
+
+.pkg__cta .btn {
+  width: 100%;
+}
+
+/* ── Preisanker ──────────────────────────────────────────────────────────── */
+.anchor-note {
+  display: grid;
+  gap: 0.6rem;
+  padding: clamp(1.3rem, 1rem + 1vw, 1.9rem) clamp(1.4rem, 1rem + 1.2vw, 2.2rem);
+  border-radius: var(--radius-card);
+  background: var(--cream-alt);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--terracotta);
+  max-width: var(--measure-wide);
+  margin-bottom: clamp(2rem, 1.5rem + 2vw, 3rem);
+}
+
+/* Kein <h3>: der Kasten ist ein Hinweis, keine Gliederungsebene. Als Überschrift
+   ausgezeichnet würde er die Reihenfolge H1 → H3 erzwingen. */
+.anchor-note__title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--teal);
+}
+
+.anchor-note p {
+  color: var(--ink-muted);
+  font-size: 1rem;
+}
+
+.anchor-note strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ── Warum / Grenzen ──────────────────────────────────────────────────────── */
+.why__item {
+  padding: clamp(1.5rem, 1.1rem + 1.2vw, 2rem);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border);
+  background: var(--cream);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  transition: border-color var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out);
+}
+
+.why__item:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-soft);
+}
+
+.why__item .shelf {
+  width: 2.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.why__item p {
+  color: var(--ink-muted);
+  font-size: 1rem;
+}
+
+/* Die Grenzen sitzen auf abgesetzter Fläche — sie sind ein eigener Gedanke. */
+.limits__item {
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--border-strong);
+  display: grid;
+  gap: 0.55rem;
+}
+
+.limits__item h3 {
+  font-size: 1.12rem;
+  color: var(--ink);
+}
+
+.limits__item p {
+  color: var(--ink-muted);
+  font-size: 0.99rem;
+}
+
+/* ── Ablauf ───────────────────────────────────────────────────────────────── */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: clamp(1.5rem, 1rem + 2vw, 2.75rem);
+  counter-reset: step;
+}
+
+.step {
+  position: relative;
+  padding-top: 2rem;
+}
+
+/* Ablage-Linie über jedem Schritt: die Seite zählt in derselben Formsprache. */
+.step::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--border-strong);
+  border-radius: 2px;
+}
+
+.step:first-child::before {
+  background: var(--terracotta);
+}
+
+.step__num {
+  font-family: var(--font-display);
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--terracotta-text);
+  margin-bottom: 0.7rem;
+}
+
+.step h3 {
+  margin-bottom: 0.6rem;
+}
+
+.step p {
+  color: var(--ink-muted);
+}
+
+/* ── Über mich ────────────────────────────────────────────────────────────── */
+.about__grid {
+  display: grid;
+  grid-template-columns: 0.78fr 1.22fr;
+  gap: clamp(2rem, 1.4rem + 3vw, 4rem);
+  align-items: start;
+}
+
+.about__photo {
+  position: relative;
+  border-radius: var(--radius-frame);
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-soft);
+  background: var(--cream-alt);
+}
+
+.about__photo img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+/* Die Ablage-Linie im unteren Drittel — direkt aus dem Markenicon. */
+.about__photo::after {
+  content: "";
+  position: absolute;
+  left: 1.2rem;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--terracotta);
+}
+
+.about__text p + p {
+  margin-top: 1.1rem;
+}
+
+.about__text p {
+  color: var(--ink-muted);
+  font-size: var(--t-lead);
+  line-height: 1.62;
+  max-width: var(--measure);
+}
+
+.about__sig {
+  margin-top: 1.8rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--teal);
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 54rem) {
+  .about__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about__photo {
+    max-width: 20rem;
+  }
+}
+
+/* ── FAQ ──────────────────────────────────────────────────────────────────
+   <details>/<summary>: funktioniert ohne JavaScript, nativ per Tastatur.    */
+.faq {
+  max-width: var(--measure-wide);
+  display: grid;
+  gap: 0.6rem;
+}
+
+.faq__item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--cream);
+  transition: border-color var(--dur) var(--ease-out),
+    background-color var(--dur) var(--ease-out);
+}
+
+.faq__item[open] {
+  border-color: var(--border-strong);
+  background: var(--cream-alt);
+}
+
+.faq__item summary {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1.1rem 1.35rem;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-display);
+  font-size: 1.06rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.012em;
+  color: var(--teal);
+  border-radius: var(--radius-card);
+}
+
+.faq__item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq__item summary:hover {
+  color: var(--teal-deep);
+}
+
+/* Plus, das zum Minus wird — aus zwei Linien der Formsprache gebaut. */
+.faq__sign {
+  position: relative;
+  flex: none;
+  width: 1.05rem;
+  height: 1.05rem;
+  margin-top: 0.28rem;
+}
+
+.faq__sign::before,
+.faq__sign::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--terracotta);
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.faq__sign::after {
+  transform: rotate(90deg);
+}
+
+.faq__item[open] .faq__sign::after {
+  transform: rotate(0deg);
+}
+
+.faq__answer {
+  padding: 0 1.35rem 1.35rem;
+  color: var(--ink-muted);
+  max-width: var(--measure-wide);
+}
+
+/* ── Kontakt ──────────────────────────────────────────────────────────────── */
+.contact__grid {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: clamp(2rem, 1.4rem + 3vw, 3.5rem);
+  align-items: start;
+}
+
+.contact__reassurance {
+  list-style: none;
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 2rem;
+  padding-top: 1.8rem;
+  border-top: 1px solid var(--border);
+}
+
+.contact__reassurance li {
+  position: relative;
+  padding-left: 1.6rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.contact__reassurance li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.66em;
+  width: 0.85rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--terracotta);
+}
+
+.contact__form {
+  padding: clamp(1.5rem, 1.1rem + 1.5vw, 2.4rem);
+  border-radius: var(--radius-frame);
+  border: 1px solid var(--border-strong);
+  background: var(--cream-alt);
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  gap: 1.1rem;
+}
+
+.contact__form h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.contact__form .btn {
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+.contact__note {
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--ink-faint);
+}
+
+/* Statusmeldung nach dem Absenden — per aria-live angekündigt. */
+.contact__status {
+  padding: 0.85rem 1.1rem;
+  border-radius: var(--radius-card);
+  background: rgba(47, 93, 80, 0.09);
+  border: 1px solid var(--teal-soft);
+  color: var(--teal);
+  font-size: 0.94rem;
+  font-weight: 500;
+}
+
+@media (max-width: 54rem) {
+  .contact__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── CTA-Band ─────────────────────────────────────────────────────────────── */
+.cta-band {
+  padding-block: clamp(3.5rem, 2.5rem + 4vw, 5.5rem);
+}
+
+.cta-band__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.cta-band h2 {
+  max-width: 22ch;
+}
+
+.cta-band p {
+  max-width: 34rem;
+  margin-top: 0.9rem;
+  color: rgba(251, 246, 238, 0.82);
+}
+
+/* ── Footer ───────────────────────────────────────────────────────────────── */
+.footer {
+  background: var(--teal-deep);
+  color: rgba(251, 246, 238, 0.7);
+  padding-block: clamp(3rem, 2.2rem + 2.5vw, 4.5rem) 2rem;
+  font-size: 0.94rem;
+}
+
+.footer__top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(251, 246, 238, 0.14);
+}
+
+.footer__logo img {
+  height: 2.9rem;
+  width: auto;
+}
+
+.footer__tagline {
+  margin-top: 1rem;
+  max-width: 22rem;
+  color: rgba(251, 246, 238, 0.66);
+}
+
+/* h3, nicht h4: nach dem letzten H2 der Seite wäre H4 ein Sprung in der
+   Gliederung. Die Optik macht ohnehin diese Regel, nicht die Ebene. */
+.footer h3 {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  /* Auf dem dunklen Footer erreicht volles Terrakotta nur 3,4:1. */
+  color: var(--terracotta-light);
+  margin-bottom: 1rem;
+}
+
+.footer ul {
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+}
+
+/* padding-block hebt die Trefferfläche über die 24-px-Mindestgröße
+   (WCAG 2.5.8) — ohne es sind die Links nur 19 px hoch. */
+.footer a {
+  display: inline-block;
+  padding-block: 0.2rem;
+  color: rgba(251, 246, 238, 0.78);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: var(--cream);
+  text-decoration: underline;
+}
+
+.footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.75rem;
+  justify-content: space-between;
+  padding-top: 1.75rem;
+  font-size: 0.86rem;
+  /* 0,68 statt 0,55 — darunter fällt die Zeile auf 4,2:1 gegen den Footer. */
+  color: rgba(251, 246, 238, 0.68);
+}
+
+@media (max-width: 46rem) {
+  .footer__top {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer__brand {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ── Preisseite ───────────────────────────────────────────────────────────── */
+.page-head {
+  padding-top: clamp(7.5rem, 5.5rem + 7vw, 10rem);
+  padding-bottom: clamp(2.5rem, 2rem + 2vw, 4rem);
+  position: relative;
+  overflow: hidden;
+}
+
+.page-head::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    44rem 26rem at 88% 0%,
+    rgba(217, 119, 63, 0.16),
+    transparent 64%
+  );
+  pointer-events: none;
+}
+
+.terms {
+  list-style: none;
+  display: grid;
+  gap: 0.85rem;
+  max-width: var(--measure-wide);
+}
+
+.terms li {
+  position: relative;
+  padding-left: 1.75rem;
+  color: var(--ink-muted);
+}
+
+.terms li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.68em;
+  width: 0.85rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--terracotta);
+}
+
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--cream);
+  max-width: var(--measure-wide);
+}
+
+table.simple {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.98rem;
+  min-width: 26rem;
+}
+
+table.simple th,
+table.simple td {
+  padding: 0.9rem 1.2rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+table.simple thead th {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--terracotta-text);
+  background: var(--cream-alt);
+}
+
+table.simple tbody tr:last-child th,
+table.simple tbody tr:last-child td {
+  border-bottom: none;
+}
+
+table.simple tbody th {
+  font-weight: 600;
+  color: var(--teal);
+}
+
+table.simple td {
+  color: var(--ink-muted);
+}
+
+/* ── Rechtstexte ──────────────────────────────────────────────────────────── */
+.legal {
+  padding-top: clamp(7.5rem, 5.5rem + 7vw, 9.5rem);
+  padding-bottom: var(--space-section);
+}
+
+.legal__body {
+  max-width: 44rem;
+}
+
+.legal__body h2 {
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  margin-top: 2.4rem;
+  margin-bottom: 0.8rem;
+}
+
+.legal__body p,
+.legal__body li {
+  color: var(--ink-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.legal__body p + p {
+  margin-top: 1rem;
+}
+
+.legal__body ul {
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.legal__body ul li {
+  position: relative;
+  padding-left: 1.6rem;
+}
+
+.legal__body ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 0.85rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--terracotta);
+}
+
+/* Entwurfshinweis — die Rechtstexte sind nicht anwaltlich geprüft. */
+.legal__disclaimer {
+  display: flex;
+  gap: 0.9rem;
+  padding: 1.1rem 1.35rem;
+  margin-bottom: 2.5rem;
+  border-radius: var(--radius-card);
+  background: var(--cream-alt);
+  border: 1px solid var(--border-strong);
+  border-left: 3px solid var(--terracotta);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--ink-muted);
+  max-width: 44rem;
+}
+
+/* ── 404 ──────────────────────────────────────────────────────────────────── */
+.notfound {
+  min-height: 70vh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  gap: 1.25rem;
+  padding: 8rem var(--gutter) 4rem;
+}
+
+.notfound .btn-row {
+  justify-content: center;
+}

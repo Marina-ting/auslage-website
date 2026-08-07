@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<meta name="theme-color" content="#2F5D50">
+
+<title>Auslage – Websites für Betriebe im Bezirk Baden &amp; Triestingtal</title>
+<meta name="description" content="Website-as-a-Service für lokale Betriebe im Bezirk Baden und Triestingtal. In rund zwei Wochen online, ab 200 € Einrichtung und 50 € im Monat — inklusive Domain, Hosting, Wartung und Änderungen.">
+
+<!-- Sobald auslage.io registriert und live ist: <link rel="canonical"> und og:url ergänzen. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Auslage">
+<meta property="og:title" content="Auslage – Websites für Betriebe im Bezirk Baden &amp; Triestingtal">
+<meta property="og:description" content="In rund zwei Wochen online, ab 200 € Einrichtung und 50 € im Monat. Domain, Hosting, Wartung und Änderungen inklusive.">
+<meta property="og:image" content="/images/auslage-logo.png">
+<meta property="og:locale" content="de_AT">
+<meta name="twitter:card" content="summary">
+
+<!-- LocalBusiness-Schema. Telefon fehlt bewusst, solange keine Nummer feststeht —
+     ein erfundener Wert wäre schlimmer als ein fehlendes Feld.
+     E-Mail eintragen, sobald office@auslage.io aktiv ist. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Auslage",
+  "description": "Website-as-a-Service für lokale Betriebe im Bezirk Baden und Triestingtal.",
+  "founder": { "@type": "Person", "name": "Marina Zaiser" },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Kruppstraße 24",
+    "postalCode": "2560",
+    "addressLocality": "Berndorf",
+    "addressRegion": "Niederösterreich",
+    "addressCountry": "AT"
+  },
+  "areaServed": [
+    { "@type": "AdministrativeArea", "name": "Bezirk Baden" },
+    { "@type": "AdministrativeArea", "name": "Triestingtal" }
+  ],
+  "priceRange": "€€",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Website-Pakete",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "Starter",
+        "price": "50",
+        "priceCurrency": "EUR",
+        "description": "50 € im Monat zzgl. 200 € einmalige Einrichtung."
+      },
+      {
+        "@type": "Offer",
+        "name": "Business",
+        "price": "100",
+        "priceCurrency": "EUR",
+        "description": "100 € im Monat zzgl. 300 € einmalige Einrichtung."
+      },
+      {
+        "@type": "Offer",
+        "name": "Premium",
+        "price": "150",
+        "priceCurrency": "EUR",
+        "description": "150 € im Monat zzgl. 500 € einmalige Einrichtung."
+      }
+    ]
+  }
+}
+</script>
+
+<!-- Tracking nach waas-seo-Standard: Plausible statt GA4 — cookiefrei, kein
+     Einwilligungsbanner nötig. Einbinden, sobald Domain und Konto stehen,
+     mit einem Conversion-Event auf das Absenden des Kontaktformulars.
+     <script defer data-domain="auslage.io" src="https://plausible.io/js/script.js"></script> -->
+</head>
+<body>
+<div id="root"></div>
+<script type="module" src="/src/main.jsx"></script>
+</body>
+</html>
