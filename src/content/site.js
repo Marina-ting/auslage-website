@@ -10,8 +10,15 @@
 // Jede belegbare Zahl trägt unten ihre Quelle als Kommentar.
 // ─────────────────────────────────────────────────────────────────────────────
 
+// Schalter für die Coming-Soon-Seite: true zeigt auf "/" und "/preise" nur die
+// Platzhalterseite statt der echten Inhalte (siehe ComingSoon.jsx). Impressum,
+// Datenschutz, AGB und AVV bleiben immer erreichbar (Impressumspflicht gilt
+// unabhängig davon, ob die Seite "fertig" ist). Einfach auf false setzen und
+// neu deployen, um die Seite wieder voll live zu schalten.
+export const comingSoon = true;
+
 export const business = {
-  name: "Auslage",
+  name: "auslage",
   owner: "Marina Zaiser",
   tagline: "deine auslage im netz",
   areaServed: "Bezirk Baden & Triestingtal",
@@ -22,9 +29,10 @@ export const business = {
     country: "AT",
   },
   email: "office@auslage.io",
-  // office@auslage.io ist noch nicht aktiv. Solange false, weist das Kontaktformular
-  // darauf hin und alle mailto-Links bleiben trotzdem funktionsfähig vorbereitet.
-  emailActive: false,
+  // auslage.io bei World4You registriert, Cloudflare-Zone aktiv, Mail-Routing live
+  // (office@/hallo@/support@/vertrieb@ → waas.auslage@gmail.com, "Senden als" in
+  // Gmail konfiguriert). Quelle: Notion → Tasks Manager, Stand 2026-08-08.
+  emailActive: true,
   // Telefon, WhatsApp und Maps-Link stehen nicht fest. Komponenten, die diese Werte
   // bräuchten, rendern nicht — bewusst kein Platzhalter.
   phone: null,
@@ -53,22 +61,26 @@ export const proof = {
 };
 
 // ─── Hero ────────────────────────────────────────────────────────────────────
-// Headline als rhetorische Frage: greift die Marken-Metapher (Auslage =
-// Schaufenster) direkt auf und trifft die Zielgruppe dort, wo sie ihren Betrieb
-// schon versteht. Der konkrete Nutzen und der Preisanker stehen in der Subline,
-// damit die Überschrift nicht preisgetrieben wirkt.
+// Headline als rhetorische Frage übers Suchverhalten statt über die Marken-
+// Metapher (Auslage = Schaufenster): "Dein Betrieb hat eine Auslage" war als
+// Prämisse falsch für alle ohne physisches Schaufenster (Handwerker, mobile
+// Dienstleister) — der erste Satz widersprach der Realität eines großen Teils
+// der Zielgruppe. Jobs-to-be-Done-Framing stattdessen: Kunden wollen gefunden
+// werden, nicht "eine Auslage haben". Knüpft direkt an die Problem-Sektion an
+// ("Wer nicht gefunden wird, wird auch nicht angerufen."). Marinas Wahl aus
+// drei Vorschlägen (marketing-psychology + copywriting Skills), 2026-08-07.
 export const hero = {
   eyebrow: "Websites für Betriebe im Bezirk Baden & Triestingtal",
-  headline: "Dein Betrieb hat eine Auslage.",
-  headlineAccent: "Im Netz auch?",
+  headline: "Deine Kunden suchen online.",
+  headlineAccent: "Finden sie dich?",
   subline:
-    "Ich baue und betreue die Website für deinen Betrieb. In rund zwei Wochen online, ab 200 € Einrichtung und 50 € im Monat — mit Domain, Hosting und Wartung. Ohne Technik-Kauderwelsch, mit einer Ansprechperson statt einem Ticketsystem.",
+    "Ich baue und betreue die Website für deinen Betrieb. In rund zwei Wochen online, ab 200 € Einrichtung und 50 € im Monat, mit Domain, Hosting und Wartung. Ohne Technik-Kauderwelsch, mit einer Ansprechperson statt einem Ticketsystem.",
   primaryCta: { label: "Jetzt Auslage sichern", href: "/#kontakt" },
   secondaryCta: { label: "Pakete & Preise ansehen", href: "/preise" },
   // Nur Belegbares. Keine Kundenzahlen — die gibt es noch nicht.
   trustItems: [
     "15 Jahre Erfahrung",
-    "Aus Berndorf, für den Bezirk",
+    "Aus Berndorf, Niederösterreich",
     "Domain, Hosting & Wartung inklusive",
   ],
 };
@@ -79,7 +91,7 @@ export const hero = {
 export const problem = {
   eyebrow: "Warum das zählt",
   heading: "Wer nicht gefunden wird, wird auch nicht angerufen.",
-  body: "Wer heute einen Installateur, ein Wirtshaus oder einen Friseur sucht, tippt zuerst am Handy. Was dabei auftaucht, entscheidet, wer den Auftrag bekommt — nicht, wer die bessere Arbeit macht.",
+  body: "Wer heute einen Installateur, ein Wirtshaus oder einen Friseur sucht, tippt zuerst am Handy. Was dabei auftaucht, entscheidet, wer den Auftrag bekommt. Nicht, wer die bessere Arbeit macht.",
   points: [
     {
       title: "Gar keine Website",
@@ -91,24 +103,24 @@ export const problem = {
     },
     {
       title: "Eine, die niemand findet",
-      text: "Sie ist da und sieht ordentlich aus — nur taucht sie bei Google nirgends auf.",
+      text: "Sie ist da und sieht ordentlich aus, nur taucht sie bei Google nirgends auf.",
     },
   ],
   closing:
-    "In allen drei Fällen ruft der Kunde bei jemand anderem an. Meistens bei einem Betrieb, der nicht besser ist. Nur besser sichtbar.",
+    "In allen drei Fällen ruft der Kunde bei jemand anderem an, meistens bei einem Betrieb, der nicht besser ist. Nur besser sichtbar.",
 };
 
 // ─── In jedem Paket enthalten ────────────────────────────────────────────────
 // Wert-Stapel vor dem Preis: erst zeigen, was drin ist, dann was es kostet.
 export const included = {
   eyebrow: "In jedem Paket",
-  heading: "Alles, was eine Website zum Laufen braucht — inklusive.",
+  heading: "Alles, was eine Website zum Laufen braucht, inklusive.",
   intro:
     "Kein Baukasten-Abo, das du selbst befüllst, und keine Rechnung im dritten Monat für etwas, von dem du dachtest, es wäre dabei.",
   items: [
     {
       title: "Wunschdomain & Firmen-E-Mail",
-      text: "Deine eigene Adresse und ein Postfach darauf. Registrierung läuft auf dich, nicht auf mich.",
+      text: "Deine eigene Adresse und ein Postfach darauf. Die Domain läuft auf deinen Namen, ich übernehme die Einrichtung.",
     },
     {
       title: "Hosting & SSL",
@@ -116,7 +128,7 @@ export const included = {
     },
     {
       title: "Laufende Wartung",
-      text: "Updates, Backups, Sicherheits-Checks und Erreichbarkeitsprüfung — ohne dass du davon etwas mitbekommst.",
+      text: "Updates, Backups, Sicherheits-Checks und Erreichbarkeitsprüfung, ohne dass du davon etwas mitbekommst.",
     },
     {
       title: "Google-Business-Profil",
@@ -128,7 +140,7 @@ export const included = {
     },
     {
       title: "Änderungen inklusive",
-      text: "Neue Öffnungszeiten, ein anderer Preis, ein aktuelles Foto — je nach Paket 1 bis 4 Änderungen pro Monat.",
+      text: "Neue Öffnungszeiten, ein anderer Preis, ein aktuelles Foto: je nach Paket 1 bis 4 Änderungen pro Monat.",
     },
   ],
 };
@@ -160,7 +172,7 @@ export const packages = [
     setup: "300 €",
     monthly: "100 €",
     forWhom: "KMU mit mehreren Leistungen",
-    pitch: "Der Betrieb mit allem, was er anbietet — und ein Formular, das Anfragen bringt.",
+    pitch: "Der Betrieb mit allem, was er anbietet, und ein Formular, das Anfragen bringt.",
     recommended: true,
     recommendLabel: "Passt für die meisten Betriebe",
     features: [
@@ -181,10 +193,13 @@ export const packages = [
     pitch: "Wenn Kunden nicht nur anrufen, sondern gleich buchen sollen.",
     features: [
       "Alles aus Business",
+      {
+        text: "Eigene Seite, damit auch ChatGPT & Co. deinen Betrieb richtig wiedergeben",
+        tag: "Nur in Premium",
+      },
       "Buchungstool eingebunden",
       "Interaktive Karte, datenschutzfreundlich per Klick geladen",
       "Laufende SEO-Betreuung",
-      "Eigene Faktenseite für KI-Suche (ChatGPT & Co.)",
       "4 Änderungswünsche pro Monat, umgesetzt in 48 Stunden",
     ],
     ablöse: "250 €",
@@ -196,32 +211,27 @@ export const pricingTerms = [
   "Kündbar mit 3 Monaten Frist zum Ende der jeweiligen Laufzeit.",
   "Jahreszahlung auf Wunsch, mit 10 % Rabatt auf das Monatshonorar.",
   "Änderungswünsche gelten für den laufenden Monat und verfallen am Monatsende.",
-  "Größere Erweiterungen — neue Bereiche oder Funktionen — werden vorher angeboten und separat verrechnet.",
-  "Kleinunternehmerin gemäß § 6 Abs. 1 Z 27 UStG, daher keine Umsatzsteuer.",
+  "Größere Erweiterungen (neue Bereiche oder Funktionen) werden vorher angeboten und separat verrechnet.",
 ];
 
 // ─── Warum Auslage ───────────────────────────────────────────────────────────
 export const why = {
-  eyebrow: "Warum Auslage",
-  heading: "Vier Gründe, die sich nachrechnen lassen.",
+  eyebrow: "Warum auslage",
+  heading: "Drei Gründe, die sich nachrechnen lassen.",
   items: [
     {
       title: "Der Einstieg tut nicht weh",
-      text: `Vergleichbare Websites starten in Österreich bei ${proof.marktSetupVon} bis ${proof.marktSetupBis} einmalig. Bei Auslage sind es 200 €. Du musst nicht erst ein halbes Jahresbudget aufmachen, um herauszufinden, ob es dir etwas bringt.`,
+      text: `Vergleichbare Websites starten in Österreich bei ${proof.marktSetupVon} bis ${proof.marktSetupBis} einmalig. Bei auslage sind es 200 €. Du musst nicht erst ein halbes Jahresbudget aufmachen, um herauszufinden, ob es dir etwas bringt.`,
       footnote: proof.marktQuelle,
     },
     {
       title: "Zwei Wochen statt zwei Monate",
-      text: `Der größte Mitbewerber im Land nennt selbst ${proof.mitbewerbDauer} Umsetzungsdauer. Bei mir ist deine Seite in ${proof.eigeneDauer} online — vorausgesetzt, ich bekomme deine Texte und Fotos zügig.`,
+      text: `Der größte Mitbewerber im Land nennt selbst ${proof.mitbewerbDauer} Umsetzungsdauer. Bei mir ist deine Seite in ${proof.eigeneDauer} online, vorausgesetzt, ich bekomme deine Texte und Fotos zügig.`,
       footnote: proof.mitbewerbQuelle,
     },
     {
       title: "Du redest immer mit mir",
       text: "Kein Ticketsystem, keine wechselnden Ansprechpartner, keine Warteschleife. Du schreibst mir, ich antworte. Das ist der Vorteil eines Ein-Personen-Betriebs, und der einzige Grund, warum Änderungen in 48 Stunden überhaupt möglich sind.",
-    },
-    {
-      title: "Barrierefrei von Anfang an",
-      text: "Gute Lesbarkeit, klare Struktur, bedienbar auch per Tastatur. Nicht als Aufpreis und nicht nachträglich draufgesetzt, sondern weil eine Website, die manche Menschen aussperrt, ihre Aufgabe nicht erfüllt.",
     },
   ],
 };
@@ -232,25 +242,25 @@ export const why = {
 // der niedrige Grundpreis ist genau deshalb möglich.
 export const limits = {
   eyebrow: "Ehrlich gesagt",
-  heading: "Was Auslage nicht ist.",
+  heading: "Was auslage nicht ist.",
   intro:
     "Der Preis funktioniert, weil das Angebot schlank ist. Das heißt aber auch: manches ist nicht dabei. Besser, du weißt es jetzt als nach der Auftragsbestätigung.",
   items: [
     {
       title: "Keine Rundum-Agentur",
-      text: "Fotoshooting, Logo-Entwicklung und Google-Ads-Betreuung mache ich, aber sie sind nicht im Paket. Sie werden separat angeboten und verrechnet — sonst müsste der Grundpreis für alle höher sein.",
-    },
-    {
-      title: "Die Texte kommen von dir",
-      text: "Du kennst deinen Betrieb, ich nicht. Ich frage, sortiere, formuliere um und mache daraus etwas Lesbares — aber der Inhalt muss von dir kommen. Wer stattdessen fertige Texte vom Anbieter will, ist bei einer größeren Agentur besser aufgehoben.",
+      text: "Zusatzleistungen sind möglich, wenn dein Betrieb mehr braucht als die Website selbst. Automatisch inklusive sind sie aber nicht. Sie werden separat angeboten und verrechnet, sonst müsste der Grundpreis für alle höher sein.",
     },
     {
       title: "Kein Online-Shop",
-      text: "Ich baue Websites, die Anfragen und Kunden in den Betrieb bringen. Einen Webshop mit Lager, Versand und Zahlungsabwicklung nicht.",
+      text: "Ich baue Websites, die Anfragen und Kunden in den Betrieb bringen. Einen Webshop mit Lager, Versand und Zahlungsabwicklung nicht. auslage macht dich sichtbar, verkauft aber nicht für dich.",
+    },
+    {
+      title: "Die Texte kommen von dir",
+      text: "Du kennst deinen Betrieb, ich nicht. Ich frage, sortiere, formuliere um und mache daraus etwas Lesbares, aber der Inhalt muss von dir kommen. Wer stattdessen fertige Texte vom Anbieter will, ist bei einer größeren Agentur besser aufgehoben.",
     },
     {
       title: "Keine Bindung ohne Gegenleistung",
-      text: "12 Monate Mindestlaufzeit sind eine Bindung, das verschweige ich nicht. Sie ist der Grund, warum die Einrichtung 200 € kostet statt 2.000 €. Wer sich nicht binden will, zahlt bei anderen Anbietern die Einrichtung voll — auch ein legitimer Weg.",
+      text: "12 Monate Mindestlaufzeit sind eine Bindung, das verschweige ich nicht. Sie ist der Grund, warum die Einrichtung 200 € kostet statt 2.000 €. Wer sich nicht binden will, zahlt bei anderen Anbietern die Einrichtung voll. Auch ein legitimer Weg.",
     },
   ],
 };
@@ -264,17 +274,17 @@ export const process = {
     {
       number: "01",
       title: "Kurz reden",
-      text: "Ein Anruf oder ein paar Zeilen per Mail. Ich frage, was dein Betrieb macht und wer anrufen soll. Kostenlos, unverbindlich, kein Termin beim Notar.",
+      text: "Ein Anruf oder ein paar Zeilen per Mail. Ich frage, was dein Betrieb macht und was auf der Website stehen soll. Kostenlos und unverbindlich.",
     },
     {
       number: "02",
       title: "Ich baue",
-      text: "Du schickst mir Texte und Fotos, um alles Technische kümmere ich mich. Zwischendurch zeige ich dir den Stand, du sagst, was anders soll.",
+      text: "Du schickst mir Texte und Fotos. Um alles Technische kümmere ich mich. Zwischendurch zeige ich dir den Stand, du sagst mir, was anders sein soll.",
     },
     {
       number: "03",
       title: "Online und betreut",
-      text: "Die Seite geht live, das Google-Profil steht. Ab da läuft die Wartung, und Änderungen sagst du mir einfach.",
+      text: "Die Seite geht live, das Google-Profil steht. Ab da läuft die Wartung, und Änderungswünsche schickst du mir einfach.",
     },
   ],
 };
@@ -283,14 +293,37 @@ export const process = {
 export const about = {
   eyebrow: "Wer dahintersteckt",
   heading: "Ich bin Marina.",
-  paragraphs: [
-    "Ich bin in Berndorf aufgewachsen, war ein paar Jahre in der Steiermark — und dann ziemlich klar wieder zurück. Seit 15 Jahren mache ich Websites, Online-Shops, SEO und Marketing.",
-    "Auslage gibt es aus einem einfachen Grund: Viele Betriebe hier im Bezirk sind online kaum zu finden. Nicht, weil ihnen die Kunden fehlen, sondern weil eine gute Website bisher teuer und kompliziert war. Das wollte ich ändern.",
-    "Was du bekommst, ist eine Website, die etwas bringt — ohne dass du ein Vermögen ausgibst oder dich selbst durch die Technik kämpfst. Und jemanden, der den Bezirk kennt, weil sie von hier ist.",
+  // Vier Blöcke mit eigener Mini-Überschrift statt Fließtext-Wand (Marinas Wunsch).
+  // Steiermark bewusst raus (Marinas Wunsch, "uninteressant"). "15 Jahre" bleibt
+  // konsistent mit proof.jahreErfahrung, aber ohne die private/beruflich-Liste
+  // wörtlich zu wiederholen. Baukasten-Erwähnung: sie hat die Alternative selbst
+  // benutzt, macht ihre FAQ-Antwort zu "Kann ich das nicht selbst mit einem
+  // Baukasten machen?" glaubwürdiger (Authority Bias). Ehrlichkeit/Verlässlichkeit
+  // im letzten Block sind Marinas eigene Antwort auf "was ist dir bei Kunden
+  // wichtig" — bewusst nicht "persönliche Nähe" nochmal, das steht schon in der
+  // Warum-Sektion ("Du redest immer mit mir"). Berndorf/Region erst im dritten
+  // Block genannt (Marinas Wunsch) — vorher bleibt der Ort unerwähnt.
+  sections: [
+    {
+      heading: "Früh von Technik gepackt",
+      text: "Programmieren hat mich schon in den frühen 2000ern gepackt, dabei war mir klassisches Coding aber schnell zu aufwendig. Geblieben ist die Lust am Tüfteln, bis eine Lösung passt, und am Ausprobieren neuer Tools.",
+    },
+    {
+      heading: "Vom Baukasten zur KI",
+      text: "Von frühen Baukasten-Systemen bis zu den KI-Elementen, mit denen ich heute arbeite: Eine Website entsteht damit inzwischen relativ schnell. Seit 15 Jahren beschäftige ich mich mit Websites, Onlineshops und allem, was dazugehört, beruflich vor allem mit Brandbuilding und Marketing.",
+    },
+    {
+      heading: "Warum ausgerechnet hier",
+      text: "Berndorf in Niederösterreich und die Region drum herum liegen mir am Herzen. Ich sehe hier viel Potenzial. auslage gibt es deshalb aus einem einfachen Grund: Viele Betriebe hier sind online kaum zu finden. Nicht, weil ihnen die Kunden fehlen, sondern weil eine gute Website bisher teuer und kompliziert war. Das will ich ändern.",
+    },
+    {
+      heading: "Was du bekommst",
+      text: "Eine Website, die ehrlich kalkuliert ist, ohne dass du ein Vermögen ausgibst oder dich selbst durch die Technik kämpfen musst. Und eine Ansprechperson, auf die Verlass ist und die die Region kennt, weil sie von hier ist.",
+    },
   ],
   photo: "/images/marina-portrait.jpg",
   photoAlt: "Marina Zaiser",
-  signature: "Marina Zaiser · Berndorf",
+  signature: "Marina Zaiser",
 };
 
 // ─── FAQ ─────────────────────────────────────────────────────────────────────
@@ -301,11 +334,11 @@ export const faq = {
   items: [
     {
       q: "Warum 12 Monate Mindestlaufzeit?",
-      a: "Weil die Einrichtung sonst nicht 200 € kosten könnte. Die eigentliche Arbeit steckt am Anfang — Aufbau, Domain, Google-Profil, Struktur. Andere Anbieter verrechnen das einmalig mit 1.790 € aufwärts. Ich verteile es über die Laufzeit. Die Bindung ist der Preis dafür, und sie gilt in beide Richtungen: ich bin die 12 Monate auch für dich da.",
+      a: "Weil die Einrichtung sonst nicht 200 € kosten könnte. Die eigentliche Arbeit steckt am Anfang: Aufbau, Domain, Google-Profil, Struktur. Andere Anbieter verrechnen das einmalig mit 1.790 € aufwärts. Ich verteile es über die Laufzeit. Die Bindung ist der Preis dafür, und sie gilt in beide Richtungen: ich bin die 12 Monate auch für dich da.",
     },
     {
       q: "Kann ich meine Website mitnehmen, wenn ich kündige?",
-      a: "Ja. Gegen eine einmalige Ablöse-Gebühr — 100 € bei Starter, 150 € bei Business, 250 € bei Premium — bekommst du Quellcode und Inhalte in einem Format, mit dem jeder andere Dienstleister weiterarbeiten kann. Die Domain gehört ohnehin von Anfang an dir.",
+      a: "Ja. Gegen eine einmalige Ablöse-Gebühr (100 € bei Starter, 150 € bei Business, 250 € bei Premium) bekommst du Quellcode und Inhalte in einem Format, mit dem jeder andere Dienstleister weiterarbeiten kann. Die Domain gehört ohnehin von Anfang an dir.",
     },
     {
       q: "Wie lange dauert es, bis meine Website online ist?",
@@ -313,7 +346,7 @@ export const faq = {
     },
     {
       q: "Kann ich das nicht selbst mit einem Baukasten machen?",
-      a: "Grundsätzlich ja, und für manche ist das genau richtig. Rechne nur ehrlich mit: Der Baukasten kostet auch monatlich, dazu kommen Domain und meist ein Aufpreis fürs eigene Postfach. Der eigentliche Preis sind die Abende, die du damit verbringst — und danach das Nachpflegen, das erfahrungsgemäß nach ein paar Monaten liegen bleibt.",
+      a: "Grundsätzlich ja, und für manche ist das genau richtig. Rechne nur ehrlich mit: Der Baukasten kostet auch monatlich, dazu kommen Domain und meist ein Aufpreis fürs eigene Postfach. Der eigentliche Preis sind die Abende, die du damit verbringst, und danach das Nachpflegen, das erfahrungsgemäß nach ein paar Monaten liegen bleibt.",
     },
     {
       q: "Muss ich mich um Hosting, SSL oder Updates kümmern?",
@@ -322,6 +355,10 @@ export const faq = {
     {
       q: "Sind Domain und E-Mail-Adresse wirklich inklusive?",
       a: "Ja, in allen drei Paketen. Deine Wunschdomain, sofern noch frei, und ein Firmen-Postfach darauf. Die Domain wird auf dich registriert, nicht auf mich.",
+    },
+    {
+      q: "Was ist die Faktenseite für KI-Suche im Premium-Paket?",
+      a: "Eine zusätzliche Seite, die speziell für KI-Assistenten wie ChatGPT aufbereitet ist, statt für menschliche Besucher. Immer mehr Menschen fragen KI-Tools statt Google, wenn sie einen Betrieb in der Nähe suchen. Diese Seite sorgt dafür, dass die Antwort stimmt: richtige Öffnungszeiten, richtige Leistungen, richtige Adresse.",
     },
     {
       q: "Was, wenn ich später etwas brauche, das über mein Paket hinausgeht?",
@@ -358,7 +395,7 @@ export const contact = {
   // Solange emailActive false ist, erklärt die Seite offen, dass das Formular
   // ein mailto öffnet, statt so zu tun, als gäbe es ein Backend.
   mailtoNote:
-    "Das Formular öffnet dein E-Mail-Programm mit der fertigen Nachricht — es wird nichts auf dieser Seite gespeichert.",
+    "Das Formular öffnet dein E-Mail-Programm mit der fertigen Nachricht. Es wird nichts auf dieser Seite gespeichert.",
 };
 
 export const ctaBand = {
@@ -391,7 +428,7 @@ export const brandAssets = {
 
 // ─── Preisseite ──────────────────────────────────────────────────────────────
 export const pricingPage = {
-  title: "Preise & Pakete – Auslage",
+  title: "Preise & Pakete – auslage",
   metaDescription:
     "Drei Pakete für lokale Betriebe im Bezirk Baden und Triestingtal: ab 200 € Einrichtung und 50 € im Monat, inklusive Domain, Hosting, Wartung und Änderungen.",
   eyebrow: "Preise",
@@ -400,7 +437,7 @@ export const pricingPage = {
     "Drei Pakete, alle Preise offen. Kein Angebot auf Anfrage, keine Staffelung nach Betriebsgröße und nichts, was erst im Gespräch dazukommt.",
   anchor: {
     heading: "Zum Einordnen",
-    text: `Vergleichbare Websites kosten in Österreich ${proof.marktSetupVon} bis ${proof.marktSetupBis} einmalig, bevor überhaupt eine monatliche Betreuung dazukommt. Auslage startet bei 200 € Einrichtung und 50 € im Monat — dafür mit Mindestlaufzeit.`,
+    text: `Vergleichbare Websites kosten in Österreich ${proof.marktSetupVon} bis ${proof.marktSetupBis} einmalig, bevor überhaupt eine monatliche Betreuung dazukommt. auslage startet bei 200 € Einrichtung und 50 € im Monat, dafür mit Mindestlaufzeit.`,
     footnote: proof.marktQuelle,
   },
   ablöseHeading: "Wenn du wieder gehst",

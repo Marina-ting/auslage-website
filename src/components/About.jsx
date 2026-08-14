@@ -18,8 +18,11 @@ export default function About() {
           <div className="about__text reveal" style={{ "--reveal-delay": "100ms" }}>
             <p className="eyebrow">{about.eyebrow}</p>
             <h2 style={{ marginBottom: "1.4rem" }}>{about.heading}</h2>
-            {about.paragraphs.map((p) => (
-              <p key={p.slice(0, 24)}>{p}</p>
+            {about.sections.map((s) => (
+              <div className="about__block" key={s.heading}>
+                <h3>{s.heading}</h3>
+                <p>{s.text}</p>
+              </div>
             ))}
             <p className="about__sig">{about.signature}</p>
           </div>

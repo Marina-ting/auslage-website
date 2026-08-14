@@ -65,13 +65,17 @@
   color: var(--ink-muted);
 }
 
+/* top: 50% + translateY statt em-basiertem top — sonst kann der 2px-Strich je
+   nach Zeile (Flex-Wrap) auf einem leicht anderen Subpixel landen und beim
+   Anti-Aliasing unterschiedlich dick wirken, obwohl die Werte identisch sind. */
 .hero__trust li::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 0.64em;
+  top: 50%;
+  transform: translateY(-50%);
   width: 0.6rem;
-  height: 2px;
+  height: 3px;
   border-radius: 2px;
   background: var(--terracotta);
 }
@@ -276,7 +280,7 @@
   padding: 0.35rem 1rem;
   border-radius: var(--radius-pill);
   background: var(--terracotta);
-  color: var(--ink);
+  color: #fff;
   font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -419,6 +423,20 @@
   font-size: 1rem;
 }
 
+/* Feste 2 Spalten statt geteiltem .grid-2 (repeat(auto-fit)): bei genau 4
+   Karten würde auto-fit auf Desktop-Breite 3+1 ergeben. */
+.limits__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem 2rem;
+}
+
+@media (min-width: 54.01rem) {
+  .limits__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* Die Grenzen sitzen auf abgesetzter Fläche — sie sind ein eigener Gedanke. */
 .limits__item {
   padding-left: 1.5rem;
@@ -518,13 +536,23 @@
   background: var(--terracotta);
 }
 
-.about__text p + p {
-  margin-top: 1.1rem;
+.about__block + .about__block {
+  margin-top: 1.6rem;
 }
 
-.about__text p {
+.about__block h3 {
+  /* Feste Größe statt var(--t-h3): die volle Section-Überschriftenskala
+     (bis 1.55rem) wirkte neben den anderen Card-Überschriften der Seite
+     (.limits__item h3, .step h3 etc. bei ~1.12–1.15rem) überdimensioniert.
+     1.2rem bleibt bei jeder Breite über dem Absatztext (var(--t-body),
+     max. 1.08rem) und liegt nah an der Card-Konvention der übrigen Seite. */
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.about__block p {
   color: var(--ink-muted);
-  font-size: var(--t-lead);
+  font-size: var(--t-body);
   line-height: 1.62;
   max-width: var(--measure);
 }
@@ -538,6 +566,17 @@
   font-weight: 500;
   color: var(--teal);
   letter-spacing: -0.01em;
+}
+
+/* Nur Desktop: Foto bleibt beim Scrollen der (jetzt längeren) Textspalte stehen,
+   statt darüber viel leere Fläche zu lassen. Mobile bewusst unverändert
+   (Marinas Wunsch — dort sieht es schon gut aus, kein Sticky nötig, weil die
+   Spalten ohnehin untereinander stehen). */
+@media (min-width: 54.01rem) {
+  .about__photo {
+    position: sticky;
+    top: 6rem;
+  }
 }
 
 @media (max-width: 54rem) {
@@ -660,9 +699,10 @@
   content: "";
   position: absolute;
   left: 0;
-  top: 0.66em;
+  top: 50%;
+  transform: translateY(-50%);
   width: 0.85rem;
-  height: 2px;
+  height: 3px;
   border-radius: 2px;
   background: var(--terracotta);
 }
@@ -852,9 +892,10 @@
   content: "";
   position: absolute;
   left: 0;
-  top: 0.68em;
+  top: 50%;
+  transform: translateY(-50%);
   width: 0.85rem;
-  height: 2px;
+  height: 3px;
   border-radius: 2px;
   background: var(--terracotta);
 }
@@ -950,9 +991,10 @@ table.simple td {
   content: "";
   position: absolute;
   left: 0;
-  top: 0.72em;
+  top: 50%;
+  transform: translateY(-50%);
   width: 0.85rem;
-  height: 2px;
+  height: 3px;
   border-radius: 2px;
   background: var(--terracotta);
 }
@@ -985,4 +1027,55 @@ table.simple td {
 
 .notfound .btn-row {
   justify-content: center;
+}
+
+/* ── Coming Soon ──────────────────────────────────────────────────────────── */
+.coming-soon {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  text-align: center;
+  background: radial-gradient(
+      48rem 34rem at 82% 12%,
+      rgba(217, 119, 63, 0.16),
+      transparent 60%
+    ),
+    var(--cream);
+}
+
+.coming-soon__inner {
+  max-width: 26rem;
+  display: grid;
+  gap: 1.2rem;
+  justify-items: center;
+}
+
+.coming-soon__logo {
+  height: 2.4rem;
+  width: auto;
+  margin-bottom: 0.6rem;
+}
+
+.coming-soon h1 {
+  color: var(--teal);
+}
+
+.coming-soon p {
+  color: var(--ink-muted);
+  font-size: var(--t-lead);
+  line-height: 1.6;
+}
+
+.coming-soon p a {
+  color: var(--terracotta-text);
+  font-weight: 600;
+}
+
+.coming-soon__legal {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }

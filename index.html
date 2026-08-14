@@ -9,15 +9,31 @@
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
 <meta name="theme-color" content="#2F5D50">
 
-<title>Auslage – Websites für Betriebe im Bezirk Baden &amp; Triestingtal</title>
-<meta name="description" content="Website-as-a-Service für lokale Betriebe im Bezirk Baden und Triestingtal. In rund zwei Wochen online, ab 200 € Einrichtung und 50 € im Monat — inklusive Domain, Hosting, Wartung und Änderungen.">
+<!-- COMING-SOON-MODUS: an src/content/site.js → `comingSoon` gekoppelt, aber
+     NICHT automatisch synchron — index.html wird statisch ausgeliefert und
+     kann den JS-Wert nicht lesen. Titel/Description/og:-Tags unten sind
+     bewusst neutral gehalten und robots ist auf noindex gesetzt, weil
+     Crawler und Link-Vorschauen (WhatsApp, Slack etc.) kein JS ausführen und
+     sonst trotz Platzhalterseite die vollen Marketingtexte/Preise sehen
+     würden. Beim Live-Schalten (comingSoon auf false) HIER GLEICHZEITIG:
+     robots-Zeile entfernen, Titel/Description/og:-Tags wieder auf die
+     Werte unten in den Kommentaren setzen. -->
+<meta name="robots" content="noindex,nofollow">
+<title>Bald online – auslage</title>
+<meta name="description" content="auslage ist bald online.">
 
 <!-- Sobald auslage.io registriert und live ist: <link rel="canonical"> und og:url ergänzen. -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Auslage">
-<meta property="og:title" content="Auslage – Websites für Betriebe im Bezirk Baden &amp; Triestingtal">
+<meta property="og:site_name" content="auslage">
+<!-- Live-Werte (beim Live-Schalten hier eintragen, siehe Hinweis oben):
+<title>auslage – Websites für Betriebe im Bezirk Baden &amp; Triestingtal</title>
+<meta name="description" content="Website-as-a-Service für lokale Betriebe im Bezirk Baden und Triestingtal. In rund zwei Wochen online, ab 200 € Einrichtung und 50 € im Monat — inklusive Domain, Hosting, Wartung und Änderungen.">
+<meta property="og:title" content="auslage – Websites für Betriebe im Bezirk Baden &amp; Triestingtal">
 <meta property="og:description" content="In rund zwei Wochen online, ab 200 € Einrichtung und 50 € im Monat. Domain, Hosting, Wartung und Änderungen inklusive.">
-<meta property="og:image" content="/images/auslage-logo.png">
+-->
+<meta property="og:title" content="Bald online – auslage">
+<meta property="og:description" content="auslage ist bald online.">
+<meta property="og:image" content="/images/og-image.png">
 <meta property="og:locale" content="de_AT">
 <meta name="twitter:card" content="summary">
 
@@ -28,7 +44,7 @@
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  "name": "Auslage",
+  "name": "auslage",
   "description": "Website-as-a-Service für lokale Betriebe im Bezirk Baden und Triestingtal.",
   "founder": { "@type": "Person", "name": "Marina Zaiser" },
   "address": {

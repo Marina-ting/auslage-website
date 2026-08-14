@@ -26,17 +26,20 @@ export default function Impressum() {
         Dienstleistungen in der automatischen Datenverarbeitung und Informationstechnik.
       </p>
 
-      <h2>Umsatzsteuer</h2>
+      <h2>Gewerbeberechtigung</h2>
+      <p>Erteilt am 09.06.2026 von der Bezirkshauptmannschaft Baden.</p>
+
+      <h2>Mitgliedschaften</h2>
       <p>
-        Kleinunternehmerin gemäß § 6 Abs. 1 Z 27 UStG — es wird keine Umsatzsteuer
-        ausgewiesen und keine UID-Nummer geführt.
+        Mitglied der Wirtschaftskammer Niederösterreich, Fachgruppe Unternehmensberatung und
+        Informationstechnologie.
       </p>
 
-      <h2>Noch zu ergänzen</h2>
+      <h2>Streitbeilegung</h2>
       <p>
-        Gewerbeberechtigung und zuständige Behörde, Mitgliedschaft bei der Wirtschaftskammer
-        (sofern zutreffend) sowie der Link zur EU-Online-Streitbeilegungsplattform, falls
-        Verträge im Fernabsatz mit Verbraucherinnen und Verbrauchern geschlossen werden.
+        auslage schließt Verträge ausschließlich mit Unternehmerinnen und Unternehmern. Die
+        Bestimmungen zur Online-Streitbeilegung für Verbraucherinnen und Verbraucher (Art. 14
+        Abs. 1 ODR-VO) sind daher nicht einschlägig.
       </p>
     </LegalLayout>
   );

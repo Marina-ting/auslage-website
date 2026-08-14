@@ -45,11 +45,10 @@ export default function Agb() {
       <h2>4. Preise und Zahlungsbedingungen</h2>
       <p>
         Es gelten die im Angebot genannten Preise zuzüglich der einmaligen Einrichtungsgebühr.
-        Die Anbieterin ist Kleinunternehmerin im Sinne des § 6 Abs. 1 Z 27 UStG; es wird daher
-        keine Umsatzsteuer ausgewiesen. Rechnungen sind, sofern nicht anders vereinbart,
-        innerhalb von 14 Tagen ab Rechnungsdatum ohne Abzug fällig. Bei Zahlungsverzug ist die
-        Anbieterin berechtigt, gesetzliche Verzugszinsen zu verrechnen und nach erfolgloser
-        Zahlungserinnerung die Leistung bis zum Zahlungseingang auszusetzen.
+        Rechnungen sind, sofern nicht anders vereinbart, innerhalb von 14 Tagen ab
+        Rechnungsdatum ohne Abzug fällig. Bei Zahlungsverzug ist die Anbieterin berechtigt,
+        gesetzliche Verzugszinsen zu verrechnen und nach erfolgloser Zahlungserinnerung die
+        Leistung bis zum Zahlungseingang auszusetzen.
       </p>
 
       <h2>5. Vertragslaufzeit und Kündigung</h2>

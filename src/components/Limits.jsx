@@ -18,7 +18,7 @@ export default function Limits() {
           <p className="lead">{limits.intro}</p>
         </div>
 
-        <div className="grid-2">
+        <div className="limits__grid">
           {limits.items.map((item, i) => (
             <article
               className="limits__item reveal"

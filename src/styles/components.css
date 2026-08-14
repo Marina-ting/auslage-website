@@ -29,15 +29,18 @@
   transform: translateY(1px);
 }
 
+/* Weißer Text auf Terracotta liegt bei ~2,9:1 und verfehlt WCAG AA (4,5:1) für
+   Fließtext — bei Marina auf der Hauptseite bewusst so gewählt (Markenentscheidung,
+   siehe auslage-website/Button.module.css), hier auf ihren Wunsch übernommen. */
 .btn--primary {
   background: var(--terracotta);
-  color: var(--ink);
+  color: #fff;
   box-shadow: var(--shadow-warm);
 }
 
 .btn--primary:hover {
   background: #e2854e;
-  color: var(--ink);
+  color: #fff;
   transform: translateY(-2px);
 }
 
@@ -364,16 +367,38 @@
   color: var(--ink-muted);
 }
 
-/* Häkchen aus der Rahmenformsprache: kleine Ablage-Linie statt Icon-Set. */
+/* Häkchen aus der Rahmenformsprache: kleine Ablage-Linie statt Icon-Set.
+   top: 50% + translateY statt em-basiertem top — sonst kann der 2px-Strich
+   je nach Zeile auf einem leicht anderen Subpixel landen und beim
+   Anti-Aliasing unterschiedlich dick wirken (siehe .hero__trust li::before). */
 .checklist li::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 0.66em;
+  top: 50%;
+  transform: translateY(-50%);
   width: 0.85rem;
-  height: 2px;
+  height: 3px;
   border-radius: 2px;
   background: var(--terracotta);
+}
+
+/* Dezente Outline-Pille für einzelne, hervorzuhebende Features (z. B. "Neu").
+   Bewusst als Umriss statt Vollfläche, damit sie nicht mit .pkg__badge
+   (der Terrakotta-Empfehlungsbadge) um Aufmerksamkeit konkurriert. */
+.checklist__tag {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.05rem 0.5rem;
+  border: 1px solid var(--terracotta);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--terracotta-text);
+  vertical-align: middle;
+  white-space: nowrap;
 }
 
 /* ── Formular ─────────────────────────────────────────────────────────────── */

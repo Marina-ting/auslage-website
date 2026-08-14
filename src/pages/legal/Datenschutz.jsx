@@ -27,9 +27,11 @@ export default function Datenschutz() {
 
       <h2>Hosting</h2>
       <p>
-        Der Hosting-Anbieter ist noch nicht final gewählt; aktuell wird Cloudflare Workers
-        getestet. Zu ergänzen, sobald entschieden: Anbieter, Serverstandort und
-        Auftragsverarbeitungsvertrag. Grundsätzlich schließt Auslage mit jedem Kunden einen
+        Hosting-Anbieter ist Cloudflare, Inc. (Cloudflare Workers). Cloudflare betreibt ein
+        weltweites Netzwerk und hat seinen Sitz in den USA, personenbezogene Daten können daher
+        auch außerhalb der EU/des EWR verarbeitet werden. Dafür gelten die
+        Standardvertragsklauseln der EU-Kommission bzw. eine Zertifizierung im Rahmen des EU-US
+        Data Privacy Framework. auslage schließt mit jedem Kunden einen
         Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO ab — <a href="/avv">Muster ansehen</a>.
       </p>
 

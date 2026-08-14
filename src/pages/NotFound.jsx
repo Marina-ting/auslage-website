@@ -3,8 +3,8 @@ import { useDocumentMeta } from "../lib/useReveal";
 
 export default function NotFound() {
   useDocumentMeta(
-    "Seite nicht gefunden – Auslage",
-    "Diese Seite gibt es nicht. Zurück zur Startseite von Auslage."
+    "Seite nicht gefunden – auslage",
+    "Diese Seite gibt es nicht. Zurück zur Startseite von auslage."
   );
 
   return (

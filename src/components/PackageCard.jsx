@@ -29,9 +29,16 @@ export default function PackageCard({ pkg, detailed = false, delay = 0 }) {
 
       <div className="pkg__features">
         <ul className="checklist">
-          {features.map((f) => (
-            <li key={f}>{f}</li>
-          ))}
+          {features.map((f) => {
+            const text = typeof f === "string" ? f : f.text;
+            const tag = typeof f === "string" ? null : f.tag;
+            return (
+              <li key={text}>
+                {text}
+                {tag && <span className="checklist__tag">{tag}</span>}
+              </li>
+            );
+          })}
           {hidden > 0 && <li>und {hidden} weitere Leistungen</li>}
         </ul>
       </div>

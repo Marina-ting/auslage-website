@@ -27,7 +27,7 @@ import { useDocumentMeta, useReveal } from "../lib/useReveal";
  */
 export default function Home() {
   useDocumentMeta(
-    "Auslage – Websites für Betriebe im Bezirk Baden & Triestingtal",
+    "auslage – Websites für Betriebe im Bezirk Baden & Triestingtal",
     "Website-as-a-Service für lokale Betriebe im Bezirk Baden und Triestingtal. In rund zwei Wochen online, ab 200 € Einrichtung und 50 € im Monat — inklusive Domain, Hosting, Wartung und Änderungen."
   );
   useReveal();
