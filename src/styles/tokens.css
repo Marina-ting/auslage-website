@@ -28,6 +28,17 @@
   --border: #e0d8c6;
   --border-strong: #cfc4ac;
 
+  /* Statusfarben für die Verfügbarkeitsanzeige. Bewusst zur Teal-Familie hin
+     gemischt statt Ampel-Reinfarben, damit der Punkt nicht wie ein Fremdkörper
+     im Markenbild sitzt. Der Textton erfüllt 4,5:1 auf Creme, der Punkt trägt
+     keine Aussage allein (die steht im Text daneben) und darf leuchten. */
+  --status-free: #2b6b48;       /* 5,9:1 auf Creme — Text "verfügbar"           */
+  --status-free-dot: #3fa06a;   /* nur Fläche, kein Text                        */
+  --status-wait: #8a6512;       /* 5,0:1 auf Creme — Reserve "Wartezeit"        */
+  --status-wait-dot: #d9a13f;
+  --status-busy: #9c3b28;       /* 5,6:1 auf Creme — Reserve "ausgelastet"      */
+  --status-busy-dot: #c2543c;
+
   /* ── Typografie ────────────────────────────────────────────────────────── */
   --font-display: "Poppins", "Segoe UI", system-ui, sans-serif;
   --font-body: "Inter", "Segoe UI", system-ui, sans-serif;

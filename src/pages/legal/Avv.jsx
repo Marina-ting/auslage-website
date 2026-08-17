@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import { business } from "../../content/site";
 import LegalLayout from "./LegalLayout";
 
-// Arbeitsentwurf aus Notion (Verträge > AVV). In der Praxis wird der AVV als
-// Anhang zum Dienstleistungsvertrag mit den Kundendaten ausgefüllt — diese
+// Gültige Fassung aus Notion (Verträge > AVV, bestätigt 10.08.2026). In der
+// Praxis wird der AVV als Anhang zum Dienstleistungsvertrag mit den
+// Kundendaten ausgefüllt — diese
 // Seite zeigt das Muster, wie in der AGB (Punkt 9) referenziert.
 export default function Avv() {
   return (
@@ -68,9 +69,9 @@ export default function Avv() {
         Unterauftragsverarbeiter.
       </p>
       <p>
-        Der konkrete Anbieter ist hier einzutragen, sobald das Hosting final entschieden ist.
-        Der ursprüngliche Notion-Entwurf nannte Vercel Inc. (USA); derzeit wird Cloudflare
-        Workers getestet. Bis zur Entscheidung steht hier bewusst kein Anbietername.
+        Als Hosting-Unterauftragsverarbeiter wird Cloudflare, Inc. eingesetzt
+        (Hosting-Infrastruktur, unter anderem Cloudflare Workers). Der Verantwortliche stimmt
+        dem Einsatz dieses Unterauftragsverarbeiters zu.
       </p>
 
       <h2>6. Technische und organisatorische Maßnahmen</h2>

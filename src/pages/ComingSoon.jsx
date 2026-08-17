@@ -35,8 +35,8 @@ export default function ComingSoon() {
         <img
           src={brandAssets.logoLight}
           alt={business.name}
-          width="180"
-          height="48"
+          width="613"
+          height="321"
           className="coming-soon__logo"
         />
         <h1>Bald online.</h1>

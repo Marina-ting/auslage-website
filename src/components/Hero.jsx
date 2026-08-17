@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { hero } from "../content/site";
-import WindowMock from "./WindowMock";
+import { availability, hero } from "../content/site";
+import Shopfront from "./Shopfront";
 
 export default function Hero() {
   return (
@@ -26,6 +26,16 @@ export default function Hero() {
               </Link>
             </div>
 
+            {/* Verfügbarkeit direkt unter den Buttons: dort, wo die Entscheidung
+                fällt. Der Punkt selbst ist dekorativ (aria-hidden) — die Aussage
+                steht im Text daneben, damit sie auch ohne Farbe ankommt. */}
+            {availability && (
+              <p className={`availability availability--${availability.state}`}>
+                <span className="availability__dot" aria-hidden="true" />
+                {availability.label}
+              </p>
+            )}
+
             <ul className="hero__trust">
               {hero.trustItems.map((item) => (
                 <li key={item}>{item}</li>
@@ -34,7 +44,7 @@ export default function Hero() {
           </div>
 
           <div className="hero__visual reveal" style={{ "--reveal-delay": "140ms" }}>
-            <WindowMock />
+            <Shopfront />
           </div>
         </div>
       </div>

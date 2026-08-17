@@ -94,17 +94,24 @@ export default function Preise() {
             <p className="lead" style={{ fontSize: "var(--t-body)" }}>
               {pricingPage.ablöseText}
             </p>
+            <p className="lead" style={{ fontSize: "var(--t-body)" }}>
+              {pricingPage.ablöseTextQuellcode}
+            </p>
+            <p className="lead" style={{ fontSize: "var(--t-body)" }}>
+              {pricingPage.ablöseTextDomain}
+            </p>
           </div>
 
           <div className="table-wrap reveal">
             <table className="simple">
               <caption className="visually-hidden">
-                Einmalige Ablöse-Gebühr je Paket bei Übergabe von Quellcode und Inhalten
+                Einmalige Ablöse-Gebühr je Paket für die Übergabe des Quellcodes. Inhalte und
+                Anfragen bekommst du unabhängig davon kostenlos.
               </caption>
               <thead>
                 <tr>
                   <th scope="col">Paket</th>
-                  <th scope="col">Ablöse-Gebühr</th>
+                  <th scope="col">Quellcode-Ablöse (optional)</th>
                   <th scope="col">Monatlich</th>
                   <th scope="col">Einrichtung</th>
                 </tr>

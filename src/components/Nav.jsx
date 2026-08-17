@@ -35,7 +35,7 @@ export default function Nav() {
       <div className="container">
         <div className="nav__inner">
           <Link className="nav__logo" to="/" aria-label={`${business.name} – zur Startseite`}>
-            <img src={brandAssets.logoLight} alt={business.name} width="150" height="40" />
+            <img src={brandAssets.logoLight} alt={business.name} width="613" height="321" />
           </Link>
 
           <nav aria-label="Hauptnavigation">
@@ -77,15 +77,20 @@ export default function Nav() {
       <div id="nav-drawer" className={`nav__drawer${open ? " is-open" : ""}`}>
         <div className="container">
           <ul>
-            {nav.map((item) => (
-              <li key={item.href}>
+            {nav.map((item, i) => (
+              <li key={item.href} style={{ "--i": i }}>
                 <Link className="nav__link" to={item.href} tabIndex={open ? 0 : -1}>
                   {item.label}
                 </Link>
               </li>
             ))}
           </ul>
-          <Link className="btn btn--primary" to="/#kontakt" tabIndex={open ? 0 : -1}>
+          <Link
+            className="btn btn--primary"
+            to="/#kontakt"
+            tabIndex={open ? 0 : -1}
+            style={{ "--i": nav.length }}
+          >
             Jetzt Auslage sichern
           </Link>
         </div>

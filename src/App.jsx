@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 
-import { comingSoon } from "./content/site";
+import { comingSoon, previewKey } from "./content/site";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -40,6 +40,20 @@ function ScrollManager() {
   return null;
 }
 
+/**
+ * Vorschau-Modus. Einmal beim Laden aus der Adresszeile gelesen und dann als
+ * Modul-Konstante festgehalten — deshalb bleibt er auch dann bestehen, wenn man
+ * anschließend im Menü weiterklickt und React Router den Query-Parameter aus der
+ * URL nimmt. Ein echter Neuladen ohne Parameter beendet ihn wieder.
+ * Zweck: die fertige Seite ansehen, ohne `comingSoon` umzulegen.
+ */
+const previewMode =
+  typeof window !== "undefined" &&
+  Boolean(previewKey) &&
+  new URLSearchParams(window.location.search).get("vorschau") === previewKey;
+
+const showSite = !comingSoon || previewMode;
+
 export default function App() {
   return (
     <>
@@ -47,11 +61,11 @@ export default function App() {
         Zum Inhalt springen
       </a>
       <ScrollManager />
-      {!comingSoon && <Nav />}
+      {showSite && <Nav />}
       <main id="main">
         <Routes>
-          <Route path="/" element={comingSoon ? <ComingSoon /> : <Home />} />
-          <Route path="/preise" element={comingSoon ? <ComingSoon /> : <Preise />} />
+          <Route path="/" element={showSite ? <Home /> : <ComingSoon />} />
+          <Route path="/preise" element={showSite ? <Preise /> : <ComingSoon />} />
           <Route path="/impressum" element={<Impressum />} />
           <Route path="/datenschutz" element={<Datenschutz />} />
           <Route path="/agb" element={<Agb />} />
@@ -59,7 +73,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-      {!comingSoon && <Footer />}
+      {showSite && <Footer />}
     </>
   );
 }

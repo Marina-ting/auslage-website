@@ -17,6 +17,22 @@
 // neu deployen, um die Seite wieder voll live zu schalten.
 export const comingSoon = true;
 
+// Vorschau-Schlüssel: Solange comingSoon aktiv ist, zeigt "/?vorschau=<Wert>"
+// trotzdem die fertige Seite — zum Draufschauen während des Umbaus, ohne den
+// Schalter oben umlegen (und womöglich so committen) zu müssen. Der Schlüssel
+// bleibt für die ganze Sitzung aktiv, auch wenn man danach im Menü weiterklickt.
+// Er ist kein Passwort: wer ihn kennt oder errät, sieht die Seite. Zum Ändern
+// einfach einen anderen Wert eintragen.
+export const previewKey = "werner";
+
+// Schalter für die Reichweitenmessung: true, sobald das Cloudflare-Web-Analytics-
+// Script tatsächlich eingebunden ist. Solange er false ist, blendet die
+// Datenschutzerklärung den Abschnitt "Webanalyse" aus — eine Datenschutzerklärung
+// darf keine Messung beschreiben, die technisch nicht läuft (geprüft 16.08.2026:
+// auf auslage.io ist kein Analytics-Script eingebunden). Umlegen gemeinsam mit
+// dem Einbau, Task "Analytics-Script auf auslage.io einbinden" (Bereich Thomas).
+export const analyticsActive = false;
+
 export const business = {
   name: "auslage",
   owner: "Marina Zaiser",
@@ -58,6 +74,23 @@ export const proof = {
   eigeneDauer: "rund zwei Wochen",
   // Aus Marinas Bio (Notion → Branding / About). Keine gerundete Schätzung.
   jahreErfahrung: "15 Jahre",
+  // Marina, 12.08.: "15 Jahre Erfahrung" stand ohne Bezugsgröße da und las sich
+  // wie 15 Jahre Webdesign-Handwerk. Ehrlicher ist das Feld, in dem sie die Zeit
+  // tatsächlich verbracht hat — deckungsgleich mit dem Über-mich-Abschnitt
+  // (Websites, Onlineshops, Brandbuilding/Marketing). Bewusst nicht aufgeblasen.
+  erfahrungClaim: "15 Jahre mit Websites & Onlinemarketing",
+};
+
+// ─── Verfügbarkeit ───────────────────────────────────────────────────────────
+// Marina-Entscheidung 15.08.: fix grün mit dem Hinweis "verfügbar". Die drei-
+// stufige Farblogik (grün verfügbar / gelb Wartezeit / rot ausgelastet) ist als
+// Struktur angelegt, aber noch nicht in Betrieb — umgeschaltet wird über `state`,
+// die Bezeichnungen sind laut Marina noch nicht final.
+// Ungeprüft (Herr Rat, 15.08.): ob eine dauerhaft grüne Anzeige lauterkeits-
+// rechtlich unbedenklich ist. Bei der nächsten Anwaltsrunde mitprüfen lassen.
+export const availability = {
+  state: "frei", // "frei" | "wartezeit" | "ausgelastet"
+  label: "Verfügbar für neue Projekte",
 };
 
 // ─── Hero ────────────────────────────────────────────────────────────────────
@@ -71,20 +104,29 @@ export const proof = {
 // drei Vorschlägen (marketing-psychology + copywriting Skills), 2026-08-07.
 export const hero = {
   eyebrow: "Websites für Betriebe im Bezirk Baden & Triestingtal",
-  headline: "Deine Kunden suchen online.",
-  headlineAccent: "Finden sie dich?",
+  // Etappe 2 des Redesigns (17.08.): kürzer und ohne Frage. Behält das
+  // Jobs-to-be-Done-Framing der Vorgänger-Headline ("Deine Kunden suchen
+  // online. Finden sie dich?"), passt aber in zwei Zeilen — die alte Headline
+  // füllte bei 1440x900 allein den ganzen ersten Bildschirm, Buttons und
+  // Vertrauenszeile lagen unter der Kante.
+  headline: "Damit dich findet,",
+  headlineAccent: "wer dich sucht.",
+  // Aus vier Sätzen einer. Das Technik-Versprechen und die Ansprechperson
+  // stehen weiter unten auf der Seite ohnehin ausführlich.
   subline:
-    "Ich baue und betreue die Website für deinen Betrieb. In rund zwei Wochen online, ab 200 € Einrichtung und 50 € im Monat, mit Domain, Hosting und Wartung. Ohne Technik-Kauderwelsch, mit einer Ansprechperson statt einem Ticketsystem.",
+    "Ich baue die Website für deinen Betrieb und halte sie am Laufen — in rund zwei Wochen online, ab 200 € Einrichtung und 50 € im Monat.",
+  // PLATZHALTER: Der neue Wortlaut ist Marks offener Task ("Neuen CTA-Wortlaut
+  // liefern"). Bis dahin bleibt der bisherige Text stehen — er ist die einzige
+  // Stelle, an der der Markenname bewusst groß geschrieben wird.
   primaryCta: { label: "Jetzt Auslage sichern", href: "/#kontakt" },
-  secondaryCta: { label: "Pakete & Preise ansehen", href: "/preise" },
+  secondaryCta: { label: "Pakete & Preise", href: "/preise" },
   // Nur Belegbares. Keine Kundenzahlen — die gibt es noch nicht.
   trustItems: [
-    "15 Jahre Erfahrung",
+    proof.erfahrungClaim,
     "Aus Berndorf, Niederösterreich",
-    "Domain, Hosting & Wartung inklusive",
+    ".at-Domain, Hosting & Wartung inklusive",
   ],
 };
-
 // ─── Problem ─────────────────────────────────────────────────────────────────
 // Verlustaversion statt Gewinnversprechen: der Schmerz ist die verlorene Anfrage,
 // nicht die fehlende Website. Bewusst ohne erfundene Prozentzahlen.
@@ -119,8 +161,8 @@ export const included = {
     "Kein Baukasten-Abo, das du selbst befüllst, und keine Rechnung im dritten Monat für etwas, von dem du dachtest, es wäre dabei.",
   items: [
     {
-      title: "Wunschdomain & Firmen-E-Mail",
-      text: "Deine eigene Adresse und ein Postfach darauf. Die Domain läuft auf deinen Namen, ich übernehme die Einrichtung.",
+      title: "Wunsch-.at-Domain & Firmen-E-Mail",
+      text: "Deine eigene .at-Adresse und ein Postfach darauf. Registrierung, Gebühren und Verwaltung sind im Paket enthalten. Inhaberin oder Inhaber der Domain bist du.",
     },
     {
       title: "Hosting & SSL",
@@ -158,12 +200,12 @@ export const packages = [
     pitch: "Eine Seite, die dich findbar macht und erreichbar hält.",
     features: [
       "Startseite plus bis zu 2 weitere Bereiche",
-      "Wunschdomain & Firmen-E-Mail-Postfach",
+      "Wunsch-.at-Domain & Firmen-E-Mail-Postfach, inklusive",
       "Hosting, SSL & laufende Wartung",
       "Google-Business-Profil eingerichtet",
       "SEO-Grundausstattung",
       "Kontakt per Telefon-, Mail- und WhatsApp-Link",
-      "1 Änderungswunsch pro Monat, umgesetzt in 5 Werktagen",
+      "bis zu 1 Änderungswunsch pro Monat, umgesetzt in 5 Werktagen",
     ],
     ablöse: "100 €",
   },
@@ -181,7 +223,7 @@ export const packages = [
       "Kontaktformular",
       "Öffnungszeiten, Adresse & Routenlink",
       "Lokale SEO-Basis",
-      "2 Änderungswünsche pro Monat, umgesetzt in 3 Werktagen",
+      "bis zu 2 Änderungswünsche pro Monat, umgesetzt in 3 Werktagen",
     ],
     ablöse: "150 €",
   },
@@ -195,20 +237,20 @@ export const packages = [
       "Alles aus Business",
       {
         text: "Eigene Seite, damit auch ChatGPT & Co. deinen Betrieb richtig wiedergeben",
-        tag: "Nur in Premium",
+        tag: "Premium Feature",
       },
       "Buchungstool eingebunden",
       "Interaktive Karte, datenschutzfreundlich per Klick geladen",
       "Laufende SEO-Betreuung",
-      "4 Änderungswünsche pro Monat, umgesetzt in 48 Stunden",
+      "bis zu 4 Änderungswünsche pro Monat, umgesetzt in 48 Stunden",
     ],
     ablöse: "250 €",
   },
 ];
 
 export const pricingTerms = [
-  "Mindestlaufzeit 12 Monate, danach automatische Verlängerung um jeweils weitere 12 Monate.",
-  "Kündbar mit 3 Monaten Frist zum Ende der jeweiligen Laufzeit.",
+  "Mindestlaufzeit 12 Monate, kündbar mit einem Monat Frist zum Ende des zwölften Vertragsmonats.",
+  "Wird nicht gekündigt, läuft der Vertrag auf unbestimmte Zeit weiter — kündbar mit einem Monat Frist zum Monatsletzten.",
   "Jahreszahlung auf Wunsch, mit 10 % Rabatt auf das Monatshonorar.",
   "Änderungswünsche gelten für den laufenden Monat und verfallen am Monatsende.",
   "Größere Erweiterungen (neue Bereiche oder Funktionen) werden vorher angeboten und separat verrechnet.",
@@ -293,36 +335,39 @@ export const process = {
 export const about = {
   eyebrow: "Wer dahintersteckt",
   heading: "Ich bin Marina.",
-  // Vier Blöcke mit eigener Mini-Überschrift statt Fließtext-Wand (Marinas Wunsch).
-  // Steiermark bewusst raus (Marinas Wunsch, "uninteressant"). "15 Jahre" bleibt
-  // konsistent mit proof.jahreErfahrung, aber ohne die private/beruflich-Liste
-  // wörtlich zu wiederholen. Baukasten-Erwähnung: sie hat die Alternative selbst
-  // benutzt, macht ihre FAQ-Antwort zu "Kann ich das nicht selbst mit einem
-  // Baukasten machen?" glaubwürdiger (Authority Bias). Ehrlichkeit/Verlässlichkeit
-  // im letzten Block sind Marinas eigene Antwort auf "was ist dir bei Kunden
-  // wichtig" — bewusst nicht "persönliche Nähe" nochmal, das steht schon in der
-  // Warum-Sektion ("Du redest immer mit mir"). Berndorf/Region erst im dritten
-  // Block genannt (Marinas Wunsch) — vorher bleibt der Ort unerwähnt.
-  sections: [
+  // Umbau 15.08. (Marina, 12.08.): weg von vier Fließtext-Absätzen, hin zu
+  // Stationen — Marke links, ein Satz rechts. Inhaltlich ist nichts Neues dazu-
+  // gekommen; die vier alten Blöcke sind auf ihren Kern eingedampft, der Rest
+  // ist gestrichen. Steiermark bleibt draußen (Marinas Wunsch, "uninteressant").
+  // Die Baukasten-Station bleibt bewusst drin: Marina hat die Alternative selbst
+  // benutzt, das trägt ihre FAQ-Antwort zu "Kann ich das nicht selbst mit einem
+  // Baukasten machen?".
+  lead: "Kurz, woher ich komme und warum es auslage gibt.",
+  stations: [
     {
-      heading: "Früh von Technik gepackt",
-      text: "Programmieren hat mich schon in den frühen 2000ern gepackt, dabei war mir klassisches Coding aber schnell zu aufwendig. Geblieben ist die Lust am Tüfteln, bis eine Lösung passt, und am Ausprobieren neuer Tools.",
+      label: "Frühe 2000er",
+      text: "Programmieren hat mich gepackt, klassisches Coding war mir schnell zu aufwendig. Geblieben ist die Lust am Tüfteln, bis eine Lösung passt.",
     },
     {
-      heading: "Vom Baukasten zur KI",
-      text: "Von frühen Baukasten-Systemen bis zu den KI-Elementen, mit denen ich heute arbeite: Eine Website entsteht damit inzwischen relativ schnell. Seit 15 Jahren beschäftige ich mich mit Websites, Onlineshops und allem, was dazugehört, beruflich vor allem mit Brandbuilding und Marketing.",
+      label: "Vom Baukasten zur KI",
+      text: "Erst frühe Baukasten-Systeme, heute KI-Werkzeuge. Eine Website entsteht damit in einem Bruchteil der Zeit.",
     },
     {
-      heading: "Warum ausgerechnet hier",
-      text: "Berndorf in Niederösterreich und die Region drum herum liegen mir am Herzen. Ich sehe hier viel Potenzial. auslage gibt es deshalb aus einem einfachen Grund: Viele Betriebe hier sind online kaum zu finden. Nicht, weil ihnen die Kunden fehlen, sondern weil eine gute Website bisher teuer und kompliziert war. Das will ich ändern.",
+      label: "15 Jahre im Fach",
+      text: "Websites, Onlineshops und alles, was dazugehört. Beruflich vor allem Brandbuilding und Marketing.",
     },
     {
-      heading: "Was du bekommst",
-      text: "Eine Website, die ehrlich kalkuliert ist, ohne dass du ein Vermögen ausgibst oder dich selbst durch die Technik kämpfen musst. Und eine Ansprechperson, auf die Verlass ist und die die Region kennt, weil sie von hier ist.",
+      label: "Heute, in Berndorf",
+      text: "Viele Betriebe hier sind online kaum zu finden. Nicht, weil ihnen Kunden fehlen, sondern weil eine gute Website bisher teuer und kompliziert war.",
     },
   ],
-  photo: "/images/marina-portrait.jpg",
-  photoAlt: "Marina Zaiser",
+  closing:
+    "Was du bekommst: eine ehrlich kalkulierte Website, ohne dich selbst durch die Technik kämpfen zu müssen. Und eine Ansprechperson, die die Region kennt, weil sie von hier ist.",
+  // Marina-Entscheidung 14.08., endgültig: kein Porträtfoto auf der Website.
+  // Wie bei phone/whatsapp bewusst null statt Platzhalter — die Komponente
+  // rendert den Bildteil dann gar nicht erst.
+  photo: null,
+  photoAlt: null,
   signature: "Marina Zaiser",
 };
 
@@ -338,7 +383,7 @@ export const faq = {
     },
     {
       q: "Kann ich meine Website mitnehmen, wenn ich kündige?",
-      a: "Ja. Gegen eine einmalige Ablöse-Gebühr (100 € bei Starter, 150 € bei Business, 250 € bei Premium) bekommst du Quellcode und Inhalte in einem Format, mit dem jeder andere Dienstleister weiterarbeiten kann. Die Domain gehört ohnehin von Anfang an dir.",
+      a: "Deine Inhalte ja, und zwar kostenlos: Texte, Bilder, Logos, Firmendaten und alle Anfragen, die über die Website hereingekommen sind, bekommst du nach Vertragsende unentgeltlich in einem gängigen Format. Sag mir binnen drei Monaten Bescheid, dann hast du sie binnen vier Wochen. Den Quellcode gibt es gegen eine einmalige Ablöse: 100 € bei Starter, 150 € bei Business, 250 € bei Premium. Damit darfst du die Website unbefristet selbst weiterbetreiben und weiterentwickeln lassen, von wem du willst. Ausgenommen sind Bestandteile von Dritten wie Schriften, Bildmaterial und Softwarebibliotheken, für die du eigene Lizenzen brauchst — welche das sind, weise ich dir bei der Übergabe aus. Die Domain gehört ohnehin von Anfang an dir.",
     },
     {
       q: "Wie lange dauert es, bis meine Website online ist?",
@@ -354,7 +399,7 @@ export const faq = {
     },
     {
       q: "Sind Domain und E-Mail-Adresse wirklich inklusive?",
-      a: "Ja, in allen drei Paketen. Deine Wunschdomain, sofern noch frei, und ein Firmen-Postfach darauf. Die Domain wird auf dich registriert, nicht auf mich.",
+      a: "Ja, in allen drei Paketen. Deine Wunsch-.at-Domain, sofern noch frei, und ein Firmen-Postfach darauf. Registrierung und laufende Gebühren übernehme ich, registriert wird sie aber auf dich und nicht auf mich. Nach Vertragsende bekommst du binnen zwei Wochen die Authinfo, mit der du die Domain zu einem Anbieter deiner Wahl mitnimmst; ab dann trägst du die Verlängerungskosten selbst. Nimm den Umzug binnen acht Wochen vor — danach wird die Domain nicht weiter verlängert und kann verfallen.",
     },
     {
       q: "Was ist die Faktenseite für KI-Suche im Premium-Paket?",
@@ -422,8 +467,8 @@ export const legalLinks = [
 ];
 
 export const brandAssets = {
-  logoLight: "/images/auslage-logo.png",
-  logoDark: "/images/auslage-logo-dark.png",
+  logoLight: "/images/auslage-logo.webp",
+  logoDark: "/images/auslage-logo-dark.webp",
 };
 
 // ─── Preisseite ──────────────────────────────────────────────────────────────
@@ -441,7 +486,13 @@ export const pricingPage = {
     footnote: proof.marktQuelle,
   },
   ablöseHeading: "Wenn du wieder gehst",
+  // Getrennt nach AGB §7 (Stand 16.08.): Inhalte unentgeltlich, Entgelt nur für
+  // den Quellcode, Domain mit den beiden Bedingungen nach Vertragsende.
   ablöseText:
-    "Am Ende der Laufzeit bekommst du auf Wunsch Quellcode und Inhalte deiner Website übergeben, in einem Format, mit dem jeder andere Dienstleister weiterarbeiten kann. Dafür fällt einmalig eine Ablöse-Gebühr an. Die Domain gehört von Anfang an dir und bleibt bei dir.",
+    "Deine Inhalte gehören dir, kostenlos. Texte, Bilder, Logos, Firmendaten und alle Anfragen, die über die Website hereingekommen sind, bekommst du nach Vertragsende unentgeltlich heraus, in einem gängigen Format zum Weiterverwenden. Sag binnen drei Monaten nach Vertragsende Bescheid, dann hast du sie binnen vier Wochen.",
+  ablöseTextQuellcode:
+    "Den Quellcode gibt es gegen eine einmalige Ablöse: 100 € bei Starter, 150 € bei Business, 250 € bei Premium. Damit darfst du die Website unbefristet selbst weiterbetreiben, bearbeiten und weiterentwickeln lassen, von wem du willst. Ausgenommen sind Bestandteile von Dritten — Schriften, Bildmaterial, Softwarebibliotheken —, für die du eigene Lizenzen brauchst; welche das sind, weise ich dir bei der Übergabe aus.",
+  ablöseTextDomain:
+    "Die Domain gehört dir, während der Laufzeit und danach. Nach Vertragsende bekommst du binnen zwei Wochen die Authinfo, mit der du sie zu einem Anbieter deiner Wahl mitnimmst; beim Umzug helfe ich. Ab Vertragsende trägst du die Verlängerungskosten selbst. Wichtig: Nimm den Umzug binnen acht Wochen vor — danach wird die Domain nicht weiter verlängert und kann verfallen.",
   termsHeading: "Das Kleingedruckte, groß geschrieben",
 };
