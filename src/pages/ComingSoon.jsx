@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { business, brandAssets } from "../content/site";
+import { business, brandAssets, comingSoonMeta } from "../content/site";
 
 /**
  * Steht anstelle von Home/Preise, solange content/site.js `comingSoon: true`
@@ -8,25 +8,31 @@ import { business, brandAssets } from "../content/site";
  * unabhängig vom Baustatus erreichbar sein muss.
  *
  * Setzt Titel, Meta-Description und robots-Tag selbst, statt useDocumentMeta
- * zu nutzen: die statischen Werte in index.html (Titel, og:-Tags, Preise im
- * JSON-LD-Schema) verraten trotzdem noch alles an Crawler und Link-Vorschauen
- * (WhatsApp, Slack etc.), die kein JS ausführen — siehe Kommentar dort.
+ * zu nutzen. Seit dem Prerendering (18.08.) stehen dieselben Werte schon im
+ * ausgelieferten HTML — das hier ist die zweite Sicherung für den Fall, dass
+ * jemand im Browser von einer Rechtstext-Seite hierher navigiert.
+ * Wortlaut kommt aus site.js, damit beide Wege denselben Text tragen.
  */
 export default function ComingSoon() {
   useEffect(() => {
-    document.title = "Bald online – auslage";
+    document.title = comingSoonMeta.title;
     const desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.setAttribute("content", "auslage ist bald online.");
+    if (desc) desc.setAttribute("content", comingSoonMeta.description);
 
-    let robots = document.querySelector('meta[name="robots"]');
-    if (!robots) {
-      robots = document.createElement("meta");
+    // Ein robots-Tag, das schon im ausgelieferten HTML steht, gehört dem
+    // Prerendering — dann nur den Wert setzen und es beim Verlassen der Seite
+    // stehen lassen. Nur ein selbst erzeugtes Tag wird auch selbst weggeräumt.
+    const vorhanden = document.querySelector('meta[name="robots"]');
+    const robots = vorhanden || document.createElement("meta");
+    if (!vorhanden) {
       robots.setAttribute("name", "robots");
       document.head.appendChild(robots);
     }
     robots.setAttribute("content", "noindex,nofollow");
 
-    return () => robots?.remove();
+    return () => {
+      if (!vorhanden) robots.remove();
+    };
   }, []);
 
   return (

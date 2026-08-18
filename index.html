@@ -9,40 +9,31 @@
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
 <meta name="theme-color" content="#2F5D50">
 
-<!-- COMING-SOON-MODUS: an src/content/site.js → `comingSoon` gekoppelt, aber
-     NICHT automatisch synchron — index.html wird statisch ausgeliefert und
-     kann den JS-Wert nicht lesen. Titel/Description/og:-Tags unten sind
-     bewusst neutral gehalten und robots ist auf noindex gesetzt, weil
-     Crawler und Link-Vorschauen (WhatsApp, Slack etc.) kein JS ausführen und
-     sonst trotz Platzhalterseite die vollen Marketingtexte/Preise sehen
-     würden. Beim Live-Schalten (comingSoon auf false) HIER GLEICHZEITIG:
-     robots-Zeile entfernen, Titel/Description/og:-Tags wieder auf die
-     Werte unten in den Kommentaren setzen. -->
+<!-- ─── Von Hand nichts mehr ändern: dieser Block wird beim Bauen ersetzt ───
+     Alles zwischen den beiden Markern schreibt `scripts/prerender.mjs` beim
+     `npm run build` für JEDE Seite neu — Titel, Beschreibung, Vorschau-Tags
+     und die robots-Zeile. Die Werte kommen aus src/content/site.js
+     (`routes`, `pageMeta`, `pricingPage`, `comingSoon`).
+
+     Was hier steht, sieht man deshalb nur beim Entwickeln (`npm run dev`).
+     Es ist bewusst der Coming-Soon-Wortlaut: sollte der Prerender-Schritt je
+     ausfallen, ist ein zu zurückhaltender Titel der harmlosere Fehler.
+
+     Beim Go-Live gibt es hier nichts mehr umzustellen. Es genügt, in
+     site.js `comingSoon` auf false zu setzen — Titel, Beschreibungen und die
+     robots-Zeile ziehen im nächsten Build von selbst nach. -->
+<!-- PRERENDER:META -->
 <meta name="robots" content="noindex,nofollow">
 <title>Bald online – auslage</title>
 <meta name="description" content="auslage ist bald online.">
-
-<!-- Sobald auslage.io registriert und live ist: <link rel="canonical"> und og:url ergänzen. -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="auslage">
-<!-- Live-Werte (beim Live-Schalten diesen Block einkommentieren und die drei
-     Coming-Soon-Zeilen darüber/darunter entfernen, siehe Hinweis oben).
-     Stand 18.08.2026: Wortlaut von Susi, Zeichenzahlen von ihr gezählt
-     (Title 52, Description 151). Die frühere Fassung trug "Bezirk Baden" —
-     Marina hat Baden am 15.08. aus dem Zuschnitt genommen — und war mit
-     62 Zeichen zu lang für die Ergebnisliste.
-     Sie bleiben auskommentiert, solange `comingSoon` auf true steht: die
-     Seite trägt oben robots noindex, ein Live-Title dazu wäre widersprüchlich.
-<title>Webdesign Triestingtal – Website mieten statt kaufen</title>
-<meta name="description" content="Deine Website im Triestingtal: in rund zwei Wochen online, ab 200 € Einrichtung und 50 € im Monat. Domain, Hosting und Wartung inklusive. Aus Berndorf.">
-<meta property="og:title" content="Webdesign Triestingtal – Website mieten statt kaufen">
-<meta property="og:description" content="In zwei Wochen online, ab 200 € Einrichtung und 50 € im Monat. Domain, Hosting, Wartung und Änderungen inklusive.">
--->
 <meta property="og:title" content="Bald online – auslage">
 <meta property="og:description" content="auslage ist bald online.">
 <meta property="og:image" content="/images/og-image.png">
 <meta property="og:locale" content="de_AT">
 <meta name="twitter:card" content="summary">
+<!-- /PRERENDER:META -->
 
 <!-- LocalBusiness-Schema. Telefon fehlt bewusst, solange keine Nummer feststeht —
      ein erfundener Wert wäre schlimmer als ein fehlendes Feld.

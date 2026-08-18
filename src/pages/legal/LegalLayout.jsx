@@ -1,3 +1,4 @@
+import { legalMeta } from "../../content/site";
 import { useDocumentMeta } from "../../lib/useReveal";
 
 /**
@@ -9,7 +10,10 @@ import { useDocumentMeta } from "../../lib/useReveal";
  * davon, ob der Hinweis hier steht.
  */
 export default function LegalLayout({ title, children }) {
-  useDocumentMeta(`${title} – auslage`, `${title} von auslage, Marina Zaiser, Berndorf.`);
+  // Wortlaut kommt aus site.js, damit das Prerendering im Build und die Anzeige
+  // im Browser nicht auseinanderlaufen können.
+  const meta = legalMeta(title);
+  useDocumentMeta(meta.title, meta.description);
 
   return (
     <section className="legal">

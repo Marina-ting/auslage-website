@@ -754,3 +754,70 @@ export const pricingPage = {
     "Die Domain gehört dir, während der Laufzeit und danach. Nach Vertragsende bekommst du binnen zwei Wochen die Authinfo, mit der du sie zu einem Anbieter deiner Wahl mitnimmst; beim Umzug helfe ich. Ab Vertragsende trägst du die Verlängerungskosten selbst. Wichtig: Nimm den Umzug binnen acht Wochen vor — danach wird die Domain nicht weiter verlängert und kann verfallen.",
   termsHeading: "Das Kleingedruckte, groß geschrieben",
 };
+
+// ─── Seitenverzeichnis fürs Prerendering ─────────────────────────────────────
+// Warum es das gibt: Die Seite ist eine Single-Page-App. Ohne diesen Schritt
+// steht im ausgelieferten HTML jeder Unterseite nur der Titel aus index.html —
+// die richtigen Werte setzt erst JavaScript im Browser. Wer kein JavaScript
+// ausführt (WhatsApp-, Facebook-, LinkedIn- und Signal-Vorschauen, einfachere
+// Crawler, die meisten KI-Assistenten), sieht auf jeder Unterseite den Text der
+// Startseite. Befund von Susi, 17.08.2026.
+//
+// `npm run build` rendert deshalb nach dem normalen Build jede Seite dieser
+// Liste einmal fertig und legt sie als eigene HTML-Datei in dist/ ab. Titel,
+// Beschreibung, Vorschau-Tags und der Sichtbarkeits-Schalter kommen dabei aus
+// dieser Datei — nicht mehr aus von Hand gepflegten Zeilen in index.html.
+//
+// WER HIER EINE ROUTE ERGÄNZT, ERGÄNZT SIE AUCH IN App.jsx — und umgekehrt.
+// Der Build bricht mit einer Fehlermeldung ab, wenn beide Listen auseinander-
+// laufen; das ist Absicht und keine Schikane.
+
+// Die eigene Adresse. Trägt die canonical- und og:url-Angabe jeder Seite.
+export const siteUrl = "https://auslage.io";
+
+// Titel und Beschreibung der Platzhalterseite. Stehen hier, damit ComingSoon.jsx
+// und das Prerendering denselben Wortlaut verwenden.
+export const comingSoonMeta = {
+  title: "Bald online – auslage",
+  description: "auslage ist bald online.",
+};
+
+// Titel und Beschreibung der Rechtstexte folgen einer Formel statt einzelner
+// Einträge. LegalLayout.jsx nutzt dieselbe Funktion — ein Wortlaut, eine Stelle.
+export function legalMeta(titel) {
+  return {
+    title: `${titel} – auslage`,
+    description: `${titel} von auslage, Marina Zaiser, Berndorf.`,
+  };
+}
+
+// `gesperrt: true` heißt: Diese Seite liegt hinter der Coming-Soon-Sperre und
+// zeigt die Platzhalterseite, solange `comingSoon` oben auf true steht.
+// Die Rechtstexte sind nie gesperrt — die Impressumspflicht gilt unabhängig
+// davon, ob die Seite fertig ist.
+export const routes = [
+  { pfad: "/", datei: "index.html", gesperrt: true, meta: pageMeta.home },
+  {
+    pfad: "/preise",
+    datei: "preise.html",
+    gesperrt: true,
+    meta: { title: pricingPage.title, description: pricingPage.metaDescription },
+  },
+  {
+    pfad: "/warum-eine-website",
+    datei: "warum-eine-website.html",
+    gesperrt: true,
+    meta: pageMeta.warumWebsite,
+  },
+  {
+    pfad: "/warum-auslage",
+    datei: "warum-auslage.html",
+    gesperrt: true,
+    meta: pageMeta.warumAuslage,
+  },
+  { pfad: "/fragen", datei: "fragen.html", gesperrt: true, meta: pageMeta.fragen },
+  { pfad: "/impressum", datei: "impressum.html", meta: legalMeta("Impressum") },
+  { pfad: "/datenschutz", datei: "datenschutz.html", meta: legalMeta("Datenschutz") },
+  { pfad: "/agb", datei: "agb.html", meta: legalMeta("AGB") },
+  { pfad: "/avv", datei: "avv.html", meta: legalMeta("AVV") },
+];
