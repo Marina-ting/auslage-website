@@ -30,17 +30,21 @@
 
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const wurzel = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
+// `pathToFileURL` ist unter Windows Pflicht: `import()` nimmt dort keinen
+// gewöhnlichen Pfad entgegen ("C:\..." liest Node als Adresse mit dem Schema
+// "c:") und bricht mit ERR_UNSUPPORTED_ESM_URL_SCHEME ab. Unter Linux fällt
+// das nicht auf — genau so ist der Fehler am 18.08. durch die Prüfung gerutscht.
 const {
   render,
   routes,
   comingSoon,
   comingSoonMeta,
   siteUrl,
-} = await import(resolve(wurzel, "dist-ssr/entry-server.js"));
+} = await import(pathToFileURL(resolve(wurzel, "dist-ssr/entry-server.js")).href);
 
 /** Zeichen, die in HTML eine eigene Bedeutung haben, unschädlich machen. */
 function esc(text) {
