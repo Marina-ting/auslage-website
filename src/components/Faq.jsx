@@ -7,14 +7,18 @@ import { faq } from "../content/site";
  * funktionsfähig, auch wenn JavaScript scheitert. Eine nachgebaute
  * Accordion-Komponente wäre hier nur schlechter.
  */
-export default function Faq() {
+export default function Faq({ headless = false }) {
   return (
     <section className="section" id="fragen">
       <div className="container">
-        <div className="section-head reveal">
-          <p className="eyebrow">{faq.eyebrow}</p>
-          <h2>{faq.heading}</h2>
-        </div>
+        {/* `headless` auf /fragen: dort trägt der Seitenkopf schon Eyebrow und
+            Überschrift, hier würde sie ein zweites Mal stehen. */}
+        {!headless && (
+          <div className="section-head reveal">
+            <p className="eyebrow">{faq.eyebrow}</p>
+            <h2>{faq.heading}</h2>
+          </div>
+        )}
 
         <div className="faq">
           {faq.items.map((item, i) => (

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { contact, business } from "../content/site";
+import { contact, business, cta } from "../content/site";
 
 /**
  * Kontaktformular ohne Backend.
@@ -55,6 +55,27 @@ export default function Contact() {
                 <li key={item}>{item}</li>
               ))}
             </ul>
+
+            {/* Telefon, WhatsApp und Mail gleichrangig nebeneinander, wie die
+                Blockfolge es verlangt. Telefon und WhatsApp tragen sichtbaren
+                Platzhaltertext statt einer erfundenen Nummer — eine falsche
+                Nummer, die jemand tatsächlich wählt, ist der teurere Fehler
+                (Marina, 17.08.). Ein Wert ohne `href` wird deshalb bewusst
+                nicht verlinkt. */}
+            <dl className="contact__channels">
+              {contact.channels.map((channel) => (
+                <div className="contact__channel" key={channel.label}>
+                  <dt>{channel.label}</dt>
+                  <dd>
+                    {channel.href ? (
+                      <a href={channel.href}>{channel.value}</a>
+                    ) : (
+                      <span className="contact__channel-pending">{channel.value}</span>
+                    )}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
 
           <form
@@ -94,8 +115,11 @@ export default function Contact() {
               />
             </div>
 
+            {/* Derselbe Wortlaut wie überall sonst. Er passt hier zusätzlich
+                als Absende-Beschriftung unter einem Formular — das war ein
+                Argument für die Wahl am 18.08. */}
             <button className="btn btn--primary" type="submit">
-              {contact.submit}
+              {cta.label}
             </button>
 
             {/* aria-live: die Bestätigung wird auch von Screenreadern angesagt. */}

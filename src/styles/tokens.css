@@ -1,25 +1,52 @@
 /* ───────────────────────────────────────────────────────────────────────────
    Auslage — Design-Tokens
-   Farben aus Notion → Branding (Stand 2026-08-06), unverändert.
+
+   ACHTUNG, hier stand bis 18.08. etwas Falsches: „Farben aus Notion →
+   Branding, unverändert." Das stimmt nur für vier Werte. Die Markenpalette
+   nennt GENAU VIER Farben — Teal #2F5D50, Terrakotta #D9773F, Creme #FBF6EE,
+   Tinte #2B2420. Alles andere in diesem Block ist daraus ABGELEITET, im Code
+   entstanden und nirgends von Marina freigegeben. Die abgeleiteten Töne sind
+   unten einzeln als solche gekennzeichnet.
+
+   Warum das zählt: Marina ist am 18.08. selbst über den Sprung zwischen
+   CTA-Band (--teal) und Footer (--teal-deep) gestolpert — „warum haben wir
+   eigentlich 2 unterschiedliche teal nuancen?". Ein abgeleiteter Ton, der als
+   Markenfarbe gelesen wird, ist genau diese Falle. Wer hier einen Wert
+   ergänzt, schreibt dazu, ob er aus dem Branding kommt oder abgeleitet ist.
+
    Kontrastwerte in den Kommentaren sind gegen Creme (#FBF6EE) gerechnet.
    ─────────────────────────────────────────────────────────────────────────── */
 
 :root {
   /* ── Farbe ─────────────────────────────────────────────────────────────── */
+  /* AUS DEM BRANDING */
   --teal: #2f5d50;          /* 7,0:1 auf Creme — Überschriften, Flächen        */
-  --teal-deep: #234636;     /* Footer, Hover auf Teal                          */
-  --teal-soft: #4a7a6b;     /* Ränder und Linien innerhalb von Teal-Flächen    */
+  /* ABGELEITET, nicht im Branding. Seit dem ersten Commit im Projekt.
+     Trägt Footer und Hover. 44 % dunkler als --teal; die beiden Flächen
+     stehen zueinander bei 1,4:1. Er ist kein bloßes Dekor: auf --teal-deep
+     bleibt Creme bis hinunter zu 0,58 Deckkraft über 4,5:1, auf --teal erst
+     ab 0,74 — die leise Textstufe im Footer gibt es nur wegen dieses Tons. */
+  --teal-deep: #234636;
+  /* ABGELEITET, nicht im Branding. Nur Ränder und Linien, nie Fläche. */
+  --teal-soft: #4a7a6b;
 
+  /* AUS DEM BRANDING */
   --terracotta: #d9773f;    /* 2,9:1 — NIE Fließtext. Fläche, Linie, Licht.    */
+  /* ABGELEITET, nicht im Branding — die drei folgenden Töne existieren, weil
+     reines Terrakotta als Text die Kontrastgrenze reißt. */
   --terracotta-deep: #b45a26;
   --terracotta-text: #a34f20; /* 5,3:1 — Terrakotta als Text auf Creme         */
   --terracotta-light: #f5c9a8; /* 5,0:1 auf Teal — Akzenttext auf dunklem Grund */
 
+  /* AUS DEM BRANDING */
   --cream: #fbf6ee;
+  /* ABGELEITET, nicht im Branding — abgesetzte Flächen und Ränder. */
   --cream-alt: #f3ecdd;
   --cream-deep: #ebe2ce;
 
+  /* AUS DEM BRANDING */
   --ink: #2b2420;           /* 14,2:1 — Fließtext                              */
+  /* ABGELEITET, nicht im Branding — Sekundär- und Fußnotentext. */
   --ink-muted: #5d554c;     /* 7,4:1 — Sekundärtext                            */
   /* 5,3:1 auf Creme, 4,8:1 auf Creme-Alt. Fußnoten und Platzhalter sind Text
      und müssen 4,5:1 erfüllen — ein hellerer Grauton wäre hier eine Ausrede. */

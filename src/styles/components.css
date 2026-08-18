@@ -29,18 +29,21 @@
   transform: translateY(1px);
 }
 
-/* Weißer Text auf Terracotta liegt bei ~2,9:1 und verfehlt WCAG AA (4,5:1) für
-   Fließtext — bei Marina auf der Hauptseite bewusst so gewählt (Markenentscheidung,
-   siehe auslage-website/Button.module.css), hier auf ihren Wunsch übernommen. */
+/* Teal ist seit 17.08. die Aktionsfarbe (Entscheidung Marina, im Rendervergleich
+   getroffen). Terrakotta bleibt Schmuckfarbe — Linien, Häkchen, Markise — und
+   trägt keine Klicks mehr. Nebeneffekt, der die alte Ausnahme auflöst: Creme auf
+   Teal liegt bei 7,0:1 und erfüllt WCAG AA; der frühere Terrakotta-Button mit
+   weißem Text lag bei ~2,9:1 und war bewusst als Markenentscheidung in Kauf
+   genommen. Diese Ausnahme braucht es jetzt nicht mehr. */
 .btn--primary {
-  background: var(--terracotta);
-  color: #fff;
-  box-shadow: var(--shadow-warm);
+  background: var(--teal);
+  color: var(--cream);
+  box-shadow: 0 2px 4px rgba(35, 70, 54, 0.1), 0 18px 44px rgba(35, 70, 54, 0.18);
 }
 
 .btn--primary:hover {
-  background: #e2854e;
-  color: #fff;
+  background: var(--teal-deep);
+  color: var(--cream);
   transform: translateY(-2px);
 }
 
@@ -58,6 +61,21 @@
   background: rgba(47, 93, 80, 0.06);
   color: var(--teal);
   border-color: var(--teal-soft);
+}
+
+/* Auf Teal-Flächen dreht der Hauptbutton um: ein teal Button auf teal Grund
+   wäre unsichtbar. Creme trägt hier die Aktion, der Text steht in Teal-Deep. */
+.on-teal .btn--primary,
+.section--teal .btn--primary {
+  background: var(--cream);
+  color: var(--teal-deep);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 18px 44px rgba(0, 0, 0, 0.18);
+}
+
+.on-teal .btn--primary:hover,
+.section--teal .btn--primary:hover {
+  background: #fff;
+  color: var(--teal-deep);
 }
 
 /* Auf Teal-Flächen */
@@ -531,4 +549,43 @@
   outline: none;
   border-color: var(--terracotta);
   box-shadow: 0 0 0 3px rgba(217, 119, 63, 0.22);
+}
+
+/* ── Ruhiger Textlink ─────────────────────────────────────────────────────────
+   Der zweite Weg neben dem Knopf, sichtbar aber untergeordnet. Er ersetzt seit
+   18.08. den zweiten Knopf im Kopfbereich: zwei Knöpfe nebeneinander sind zwei
+   Entscheidungen, die Blockfolge lässt nur eine zu.
+   Bewusst mit Unterstreichung statt nur Farbe — Terrakotta als Text erfüllt den
+   Kontrast, aber Farbe allein ist kein Linkhinweis.                          */
+.link-quiet {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  font-weight: 500;
+  color: var(--terracotta-text);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.28em;
+  text-decoration-color: color-mix(in srgb, var(--terracotta) 45%, transparent);
+  transition: text-decoration-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+.link-quiet:hover {
+  color: var(--terracotta-deep);
+  text-decoration-color: var(--terracotta);
+}
+
+.on-teal .link-quiet,
+.section--teal .link-quiet {
+  color: var(--terracotta-light);
+  text-decoration-color: color-mix(in srgb, var(--terracotta-light) 45%, transparent);
+}
+
+.on-teal .link-quiet:hover,
+.section--teal .link-quiet:hover {
+  color: var(--cream);
+  text-decoration-color: var(--cream);
 }

@@ -6,6 +6,13 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Preise from "./pages/Preise";
+// Neu seit 18.08.: Die Startseite trägt nur noch die neun Blöcke der
+// Blockfolge. Die Abschnitte, die dort weggefallen sind, stehen jetzt auf
+// diesen drei Seiten — Texte unverändert und weiterhin freigegeben
+// (Marina, 17.08.: "nicht verwerfen").
+import WarumWebsite from "./pages/WarumWebsite";
+import WarumAuslage from "./pages/WarumAuslage";
+import Fragen from "./pages/Fragen";
 import ComingSoon from "./pages/ComingSoon";
 import Impressum from "./pages/legal/Impressum";
 import Datenschutz from "./pages/legal/Datenschutz";
@@ -66,6 +73,17 @@ export default function App() {
         <Routes>
           <Route path="/" element={showSite ? <Home /> : <ComingSoon />} />
           <Route path="/preise" element={showSite ? <Preise /> : <ComingSoon />} />
+          {/* Hinter derselben Coming-Soon-Sperre wie Start- und Preisseite —
+              sie tragen Verkaufsinhalte, keine Pflichtangaben. */}
+          <Route
+            path="/warum-eine-website"
+            element={showSite ? <WarumWebsite /> : <ComingSoon />}
+          />
+          <Route
+            path="/warum-auslage"
+            element={showSite ? <WarumAuslage /> : <ComingSoon />}
+          />
+          <Route path="/fragen" element={showSite ? <Fragen /> : <ComingSoon />} />
           <Route path="/impressum" element={<Impressum />} />
           <Route path="/datenschutz" element={<Datenschutz />} />
           <Route path="/agb" element={<Agb />} />

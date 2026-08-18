@@ -54,38 +54,10 @@
   margin-bottom: 1.8rem;
 }
 
-.hero__trust {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.6rem;
-  list-style: none;
-  margin-top: 1.9rem;
-  padding-top: 1.3rem;
-  border-top: 1px solid var(--border);
-}
-
-.hero__trust li {
-  position: relative;
-  padding-left: 1.2rem;
-  font-size: 0.92rem;
-  font-weight: 500;
-  color: var(--ink-muted);
-}
-
-/* top: 50% + translateY statt em-basiertem top — sonst kann der 2px-Strich je
-   nach Zeile (Flex-Wrap) auf einem leicht anderen Subpixel landen und beim
-   Anti-Aliasing unterschiedlich dick wirken, obwohl die Werte identisch sind. */
-.hero__trust li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 0.6rem;
-  height: 3px;
-  border-radius: 2px;
-  background: var(--terracotta);
-}
+/* .hero__trust ist am 18.08. entfallen: die drei Vertrauenspunkte im
+   Kopfbereich sind mit der neuen Blockfolge zu Block 2 geworden — vier eigene
+   Kacheln statt einer Textzeile unter den Buttons. Styles dafür: .trust__* am
+   Ende dieser Datei. */
 
 /* ── Schaufenster-Illustration ───────────────────────────────────────────
    Der visuelle Part des Headers (Marina 17.08.). Die Grafik selbst steht in
@@ -281,16 +253,19 @@
   border-color: var(--border-strong);
 }
 
-/* Die Empfehlung ist beleuchtet — Terrakotta als Lichtquelle. */
+/* Die Empfehlung ist beleuchtet. Seit 17.08. in Teal statt Terrakotta: der
+   Hauptbutton in dieser Karte ist jetzt teal, und eine Karte mit zwei
+   Signalfarben zerfällt optisch. Markierung und Handlung ziehen am selben
+   Strang; Terrakotta bleibt in Häkchen und Eyebrow als Schmuck erhalten. */
 .pkg--recommended {
-  border-color: var(--terracotta);
-  box-shadow: var(--shadow-warm);
-  background: linear-gradient(180deg, #fefaf3 0%, var(--cream) 42%);
+  border-color: var(--teal);
+  box-shadow: 0 2px 4px rgba(35, 70, 54, 0.08), 0 18px 44px rgba(35, 70, 54, 0.16);
+  background: linear-gradient(180deg, #f6faf7 0%, var(--cream) 42%);
 }
 
 .pkg--recommended:hover {
-  border-color: var(--terracotta);
-  box-shadow: 0 3px 6px rgba(164, 79, 32, 0.1), 0 22px 52px rgba(164, 79, 32, 0.2);
+  border-color: var(--teal);
+  box-shadow: 0 3px 6px rgba(35, 70, 54, 0.1), 0 22px 52px rgba(35, 70, 54, 0.2);
 }
 
 .pkg__badge {
@@ -300,8 +275,8 @@
   transform: translate(-50%, -50%);
   padding: 0.35rem 1rem;
   border-radius: var(--radius-pill);
-  background: var(--terracotta);
-  color: #fff;
+  background: var(--teal);
+  color: var(--cream);
   font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -477,11 +452,27 @@
 }
 
 /* ── Ablauf ───────────────────────────────────────────────────────────────── */
+/* Seit 18.08. vier Schritte statt drei. Mit auto-fit/minmax(16rem) brach die
+   vierte Karte in eine eigene Zeile und stand als Waise unter den anderen
+   dreien — bei 1440 px in der Sichtprüfung gesehen. Deshalb feste Spaltenzahl
+   statt auto-fit, mit zwei Stufen nach unten. */
 .steps {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: clamp(1.5rem, 1rem + 2vw, 2.75rem);
   counter-reset: step;
+}
+
+@media (max-width: 68rem) {
+  .steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 34rem) {
+  .steps {
+    grid-template-columns: 1fr;
+  }
 }
 
 .step {
@@ -799,7 +790,16 @@
 .footer {
   background: var(--teal-deep);
   color: rgba(251, 246, 238, 0.7);
-  padding-block: clamp(1.5rem, 1rem + 1.6vw, 2.25rem) 2rem;
+  /* Oben bewusst KEIN Innenabstand (Marina, 18.08.): die Terrakotta-Linie
+     muss genau auf der Oberkante des Footers liegen — dort, wo auch der
+     Farbwechsel von --teal auf --teal-deep passiert. Vorher lagen beide
+     Trennungen rund 115 px auseinander: erst der Farbsprung an der Oberkante,
+     dann die Linie darunter. Zwei Trennungen, die dasselbe sagen, lesen sich
+     als Versehen. Ihre Frage war „warum haben wir eigentlich 2
+     unterschiedliche teal nuancen?" — der Ton war nie das Problem, der
+     doppelte Übergang schon. Wer hier wieder ein padding-top einsetzt, holt
+     den Fehler zurück. */
+  padding-block: 0 2rem;
   font-size: 0.94rem;
 }
 
@@ -811,56 +811,157 @@
    --teal-deep-Fläche austariert ist (siehe .footer__bottom unten). */
 .footer__sill {
   position: relative;
+  /* Die Box sitzt seit 18.08. UNTER der Linie statt darüber: sie ist jetzt
+     der Raum, in den das Licht fällt. Ihre Höhe ist damit zugleich die Luft
+     zwischen Linie und Fußzeileninhalt, um die Marina am 17.08. gebeten hat —
+     deshalb braucht es kein eigenes margin-bottom mehr. */
   height: clamp(2.25rem, 1.7rem + 2vw, 3.25rem);
+  margin-bottom: 0;
   overflow: hidden;
 }
 
+/* Zweimal gescheitert an denselben Reglern (Radius, Deckkraft), bis die
+   eigentliche Ursache klar war: eine helle, halbdurchsichtige Fläche MISCHT
+   sich mit dem dunklen Teal darunter und wird graubraun — sie sah aus wie
+   Schmutz auf der Scheibe, nicht wie Licht. Licht muss addiert werden, nicht
+   aufgelegt. Deshalb Terrakotta statt Creme, und mix-blend-mode: screen.
+   Das ::before liegt hinter der Linie, nicht über den Texten — der Blendmodus
+   kann den Kontrast der Fußzeile also nicht antasten.
+   Richtungswechsel 18.08.: Der Ankerpunkt steht jetzt auf 0 % statt 100 %,
+   das Licht fällt also nach UNTEN in den Footer statt nach oben. Grund ist
+   allein, dass die Linie an die Oberkante gewandert ist — über ihr liegt jetzt
+   die Fläche des vorigen Blocks, dort hat der Schein nichts verloren. Die
+   Technik bleibt die am 17.08. gewählte: Terrakotta, additiv per screen.
+
+   Lage 18.08. (Marina, im Vergleich von vier Fassungen gewählt): breit über
+   die ganze Kante, hellster Punkt bei 78 % — dort ist die Fläche frei, links
+   steht die Wortmarke. Vorher saß er bei 12 % und drängte sich genau an der
+   engsten Stelle; das war der Anlass ihrer Frage.
+
+   Die drei Zahlen hängen zusammen, wer eine ändert, prüft die anderen:
+   58rem Breite, 2.2rem Höhe, 0,50 Deckkraft. Ein breiter Verlauf verträgt
+   WENIGER Deckkraft als ein schmaler — eine Fassung über die volle Breite mit
+   0,42 wurde im Test zu einem Ockerband mit harter Unterkante, also zu einer
+   Farbfläche statt zu Licht. Der runde Verlauf ist hier nicht Geschmack: er
+   ist der Grund, warum es keine sichtbare Abrisskante gibt. */
 .footer__sill::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(22rem 1.6rem at 12% 100%, rgba(247, 212, 182, 0.22), transparent 70%);
+  background: radial-gradient(58rem 2.2rem at 78% 0%,
+    rgba(217, 119, 63, 0.5), rgba(217, 119, 63, 0) 72%);
+  mix-blend-mode: screen;
   pointer-events: none;
 }
 
+/* top statt bottom — die Linie schließt den Footer nach oben ab. */
 .footer__sill .shelf {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
+  top: 0;
   height: 2px;
 }
 
+/* Marina, 18.08.: Wortmarke auf volle Größe, Markenclaim rechts daneben auf
+   derselben Grundlinie. Vorher standen hier drei Spalten (Marke, Seite,
+   Rechtliches); die rechten zwei füllten ihre Drittel nicht aus, und dieser
+   Leerraum war ihr Hauptkritikpunkt. Ohne Spalten kann er nicht entstehen.
+   Kein border-bottom mehr — die Trennung übernimmt die Linkzeile darunter,
+   die ohnehin oben und unten eine Feinlinie trägt. */
 .footer__top {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
-  gap: 2.5rem;
-  padding-bottom: 2.5rem;
-  border-bottom: 1px solid rgba(251, 246, 238, 0.14);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  padding-bottom: 1.75rem;
 }
 
 .footer__logo img {
-  height: 2.9rem;
+  height: 6.2rem;
   width: auto;
 }
 
-.footer__tagline {
-  margin-top: 1rem;
-  max-width: 22rem;
-  color: rgba(251, 246, 238, 0.66);
+.footer__claim {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(1.3rem, 0.9rem + 1.2vw, 1.9rem);
+  letter-spacing: -0.02em;
+  /* 0,72 — der Claim ist Begleitung der Wortmarke, nicht Fließtext, und darf
+     zurücktreten. Bei 0,72 auf --teal-deep noch über 4,5:1. */
+  color: rgba(251, 246, 238, 0.72);
+}
+
+/* Die Linkzeile zwischen zwei Feinlinien: drei beschriftete Gruppen statt
+   einer langen Reihe Einzellinks (Marinas Auflage vom 18.08., sobald die
+   Ortsnamen dazukommen). */
+.footer__rail {
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(251, 246, 238, 0.14);
+  border-bottom: 1px solid rgba(251, 246, 238, 0.14);
+}
+
+/* Überschrift links neben ihrer Zeile: alle Links beginnen auf derselben
+   Kante, die drei Beschriftungen bilden eine ruhige Spalte, und der Footer
+   bleibt flach. 8,5 rem ist an "RECHTLICHES" gemessen, dem längsten Wort. */
+.fgroup {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  align-items: baseline;
+  gap: 0 1rem;
+  padding-block: 0.35rem;
+}
+
+.fgroup + .fgroup {
+  border-top: 1px solid rgba(251, 246, 238, 0.08);
+  padding-top: 0.8rem;
+  margin-top: 0.55rem;
 }
 
 /* h3, nicht h4: nach dem letzten H2 der Seite wäre H4 ein Sprung in der
-   Gliederung. Die Optik macht ohnehin diese Regel, nicht die Ebene. */
-.footer h3 {
+   Gliederung. Die Optik macht ohnehin diese Regel, nicht die Ebene.
+   margin: 0 statt der früheren 1rem — die Überschrift steht jetzt neben der
+   Zeile, nicht mehr darüber. */
+.footer .fgroup__label {
   font-family: var(--font-body);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   /* Auf dem dunklen Footer erreicht volles Terrakotta nur 3,4:1. */
   color: var(--terracotta-light);
-  margin-bottom: 1rem;
+  margin: 0;
+}
+
+/* .footer ul setzt display:grid — eine Regel auf .rail allein verlöre an
+   Spezifität und die Zeile bliebe eine Spalte. Deshalb .footer .rail. */
+.footer .rail {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.6rem;
+  margin: 0;
+  padding: 0;
+}
+
+/* Die Rechtstexte sind Pflichtangabe, kein Navigationsangebot — sie dürfen
+   leiser stehen. 0,58 auf --teal-deep sind 4,6:1, also noch über der Grenze. */
+.footer .rail--legal a {
+  color: rgba(251, 246, 238, 0.58);
+  font-size: 0.88rem;
+}
+
+.footer .rail--legal a:hover {
+  color: var(--cream);
+}
+
+/* Vorbereitet für die dritte Gruppe: die vier Ortsseiten + /einzugsgebiet.
+   Sie stehen zwischen Menü und Rechtstexten und tragen normale Linkfarbe —
+   sie sind Angebot, nicht Kleingedrucktes. Die Links selbst fehlen in
+   Footer.jsx noch, weil die Seiten am 18.08. nicht existieren. */
+.footer .rail--orte a {
+  color: rgba(251, 246, 238, 0.78);
 }
 
 .footer ul {
@@ -894,13 +995,16 @@
   color: rgba(251, 246, 238, 0.68);
 }
 
+/* Schmal steht die Überschrift über ihrer Zeile statt daneben: eine
+   8,5-rem-Spalte frisst auf 390 px die halbe Breite, und die Links brächen
+   Wort für Wort um. Der frühere Block hier (grid-template-columns für
+   .footer__top, .footer__brand über beide Spalten) ist ersatzlos entfallen —
+   .footer__top ist seit 18.08. Flexbox und bricht von selbst um, und
+   .footer__brand gibt es nicht mehr. */
 @media (max-width: 46rem) {
-  .footer__top {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .footer__brand {
-    grid-column: 1 / -1;
+  .fgroup {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
   }
 }
 
@@ -1247,4 +1351,364 @@ table.simple td {
     grid-template-columns: 1fr;
     gap: 0.3rem;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Blockfolge vom 18.08.2026 — Blöcke 2, 3, 5, 6 und 7
+   Reihenfolge hier wie auf der Seite, damit man beim Suchen nicht springt.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Block 1, Zusatz: die Zeile unter dem Knopf ───────────────────────────────
+   NICHT ausgegraut. "Jetzt anfragen" ist eine reine Handlungsaufforderung —
+   die Entwarnung muss lesbar danebenstehen, sonst fehlt das Gegengewicht.
+   Deshalb --ink und nicht --ink-muted, und deshalb 500 statt 400.           */
+.hero__cta-note {
+  margin-top: 0.85rem;
+  font-size: var(--t-small);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* ── Block 2: Vertrauensleiste ─────────────────────────────────────────────── */
+.trust {
+  border-block: 1px solid var(--border);
+  background: var(--cream-alt);
+}
+
+.trust__grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: clamp(1.4rem, 1rem + 1.6vw, 2.4rem);
+}
+
+.trust__item {
+  display: grid;
+  gap: 0.85rem;
+  justify-items: start;
+}
+
+/* Heller Kreis mit Strichicon — dieselbe Formsprache wie die Ablage-Linien:
+   ruhig, keine Fläche, die mit dem Knopf konkurriert. */
+.trust__icon {
+  display: grid;
+  place-items: center;
+  width: 2.9rem;
+  height: 2.9rem;
+  flex: none;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 1px solid var(--border-strong);
+  color: var(--terracotta-text);
+}
+
+.trust__icon svg {
+  width: 1.45rem;
+  height: 1.45rem;
+}
+
+.trust__text {
+  font-weight: 500;
+  color: var(--ink);
+  max-width: 15rem;
+  text-wrap: balance;
+}
+
+/* ── Block 3: Der Einwand ──────────────────────────────────────────────────── */
+.objection__grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(2rem, 1.2rem + 3.5vw, 4rem);
+  align-items: center;
+}
+
+.objection__lead {
+  margin-top: 1.2rem;
+}
+
+.objection__body {
+  margin-top: 1rem;
+  max-width: var(--measure);
+  color: var(--ink-muted);
+}
+
+.objection__more {
+  margin-top: 1.6rem;
+}
+
+.objection__visual {
+  justify-self: center;
+  width: min(100%, 17rem);
+}
+
+.objection__visual svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.objection__phone {
+  fill: var(--cream-alt);
+  stroke: var(--border-strong);
+  stroke-width: 1.5;
+}
+
+.objection__speaker {
+  fill: var(--border-strong);
+}
+
+.objection__field {
+  fill: var(--cream);
+  stroke: var(--border-strong);
+  stroke-width: 1.5;
+}
+
+.objection__glass {
+  fill: none;
+  stroke: var(--terracotta);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.objection__typed {
+  fill: var(--border-strong);
+}
+
+/* Der erste Treffer trägt, die darunter verblassen. Das ist die Aussage des
+   Blocks in Bildform: wer weiter unten steht, wird nicht angerufen. */
+.objection__result rect {
+  fill: var(--ink);
+}
+
+.objection__result--0 {
+  opacity: 0.72;
+}
+
+.objection__result--1 {
+  opacity: 0.3;
+}
+
+.objection__result--2 {
+  opacity: 0.14;
+}
+
+.objection__result--0 rect:first-child {
+  fill: var(--teal);
+}
+
+/* ── Block 5: Häkchenliste und Preisgründe ─────────────────────────────────── */
+.service-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: 1rem 2.2rem;
+}
+
+.service-list__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  color: var(--ink-muted);
+  line-height: 1.55;
+}
+
+.service-list__mark {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  margin-top: 0.1rem;
+  border-radius: 50%;
+  background: var(--teal);
+  color: var(--cream);
+}
+
+.service-list__mark svg {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+.service-list__label {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.service-list__note {
+  margin-top: 1.6rem;
+  max-width: var(--measure-wide);
+  font-size: var(--t-small);
+  color: var(--ink-faint);
+}
+
+.price-reasons {
+  margin-top: clamp(2.5rem, 1.8rem + 2.4vw, 3.75rem);
+}
+
+.price-reasons__heading {
+  font-size: var(--t-h3);
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+}
+
+.price-reasons__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+}
+
+.price-reasons__card {
+  padding: 1.15rem 1.3rem;
+  border-radius: var(--radius-card);
+  background: var(--cream);
+  border: 1px solid var(--border);
+  color: var(--ink-muted);
+  font-size: var(--t-small);
+  line-height: 1.6;
+}
+
+/* ── Block 6: Was dir gehört ───────────────────────────────────────────────── */
+/* Volle Containerbreite: mit max-width lag die rechte Hälfte der dunklen
+   Fläche leer da, was die Zeilen wie einen abgeschnittenen Rest wirken ließ
+   (Sichtprüfung 1440 px). Als durchgehende Tabelle trägt der Block seine
+   Fläche selbst. */
+.ownership__list {
+  display: grid;
+  gap: 0;
+}
+
+.ownership__row {
+  display: grid;
+  grid-template-columns: 15rem 1fr;
+  gap: 0.6rem 2.4rem;
+  align-items: baseline;
+  padding-block: 1.15rem;
+  border-top: 1px solid var(--teal-soft);
+}
+
+.ownership__row:last-child {
+  border-bottom: 1px solid var(--teal-soft);
+}
+
+.ownership__label {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--cream);
+}
+
+.ownership__text {
+  color: color-mix(in srgb, var(--cream) 82%, var(--teal));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.7rem;
+}
+
+.ownership__badge {
+  padding: 0.18rem 0.62rem;
+  border-radius: var(--radius-pill);
+  background: var(--terracotta);
+  color: var(--cream);
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ── Block 7: Referenzen ───────────────────────────────────────────────────── */
+/* Rendert erst, wenn references.items in site.js befüllt ist. */
+.reference {
+  padding: clamp(1.3rem, 1rem + 1vw, 1.8rem);
+  border-radius: var(--radius-card);
+  background: var(--cream);
+  border: 1px solid var(--border);
+  display: grid;
+  gap: 0.8rem;
+  align-content: start;
+}
+
+.reference__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+
+.reference__quote {
+  margin: 0;
+  padding-left: 1rem;
+  border-left: 3px solid var(--terracotta);
+  color: var(--ink-muted);
+}
+
+.reference__by {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.9rem;
+  font-size: var(--t-small);
+  color: var(--ink-faint);
+}
+
+/* ── Block 9, Zusatz: die Kontaktzeilen ────────────────────────────────────── */
+.contact__channels {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 1.8rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--border);
+}
+
+.contact__channel {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: 0.9rem;
+  align-items: baseline;
+}
+
+.contact__channel dt {
+  font-size: var(--t-small);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+}
+
+.contact__channel dd {
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Kursiv statt grau: der Platzhalter muss lesbar bleiben (4,5:1), soll aber
+   erkennbar keine Nummer sein. Sobald die Business-Nummer da ist, fällt die
+   Klasse mit dem Platzhaltertext weg. */
+.contact__channel-pending {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-faint);
+}
+
+/* ── Schmale Fenster ───────────────────────────────────────────────────────── */
+@media (max-width: 62rem) {
+  .objection__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .objection__visual {
+    order: -1;
+    width: min(100%, 13rem);
+    justify-self: start;
+  }
+
+  .ownership__row {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+
+  .contact__channel {
+    grid-template-columns: 5.5rem 1fr;
+  }
+}
+
+/* Auf den drei neuen Seiten folgt direkt unter dem Seitenkopf schon der erste
+   Abschnitt. Beide bringen ihren vollen Blockabstand mit, zusammen wurde daraus
+   eine leere Fläche von rund 300 px zwischen Überschrift und Inhalt
+   (Sichtprüfung /warum-auslage, 1440 px). Hier einmal halbiert. */
+.page-head + .section {
+  padding-top: calc(var(--space-section) * 0.45);
 }

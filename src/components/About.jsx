@@ -44,7 +44,10 @@ export default function About() {
 
             {about.closing && <p className="about__closing">{about.closing}</p>}
 
-            <p className="about__sig">{about.signature}</p>
+            {/* Seit 18.08. null: die Überschrift sagt schon "Ich bin Marina."
+                Gleiche Guard-Logik wie beim Foto — wer die Zeile zurückwill,
+                füllt in site.js ein Feld und ändert hier nichts. */}
+            {about.signature && <p className="about__sig">{about.signature}</p>}
           </div>
         </div>
       </div>

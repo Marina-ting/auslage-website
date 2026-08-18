@@ -1,13 +1,21 @@
 import { why } from "../content/site";
 
-export default function Why() {
+/**
+ * `headless` unterdrückt Eyebrow und Überschrift. Gebraucht auf
+ * /warum-auslage, wo derselbe Satz schon als h1 im Seitenkopf steht — zweimal
+ * hintereinander gelesen wirkt er wie ein Fehler, und zwei identische
+ * Überschriften auf einer Seite sind auch für die Suche keine gute Idee.
+ */
+export default function Why({ headless = false }) {
   return (
     <section className="section" id="warum">
       <div className="container">
-        <div className="section-head reveal">
-          <p className="eyebrow">{why.eyebrow}</p>
-          <h2>{why.heading}</h2>
-        </div>
+        {!headless && (
+          <div className="section-head reveal">
+            <p className="eyebrow">{why.eyebrow}</p>
+            <h2>{why.heading}</h2>
+          </div>
+        )}
 
         <div className="grid-2">
           {why.items.map((item, i) => (

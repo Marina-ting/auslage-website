@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { nav, brandAssets, business } from "../content/site";
+// Der Knopftext stand hier bis 18.08. zweimal hart im Code (Header und
+// Burger-Menü) und wurde deshalb bei jeder CTA-Änderung übersehen. Er kommt
+// jetzt aus site.js wie jeder andere Sichttext auch.
+import { nav, brandAssets, business, cta } from "../content/site";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -51,8 +54,8 @@ export default function Nav() {
           </nav>
 
           <div className="nav__actions">
-            <Link className="btn btn--primary" to="/#kontakt">
-              Jetzt Auslage sichern
+            <Link className="btn btn--primary" to={cta.href}>
+              {cta.label}
             </Link>
             <button
               ref={toggleRef}
@@ -87,11 +90,11 @@ export default function Nav() {
           </ul>
           <Link
             className="btn btn--primary"
-            to="/#kontakt"
+            to={cta.href}
             tabIndex={open ? 0 : -1}
             style={{ "--i": nav.length }}
           >
-            Jetzt Auslage sichern
+            {cta.label}
           </Link>
         </div>
       </div>

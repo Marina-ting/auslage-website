@@ -69,7 +69,7 @@ export const proof = {
   // Notion → Preismodell / Wettbewerbsanalyse Herold: Herold nennt in der eigenen
   // FAQ 30–60 Tage Umsetzungsdauer. Erfasst 2026-08-05.
   mitbewerbDauer: "30 bis 60 Tage",
-  mitbewerbQuelle: "laut FAQ des größten österreichischen Mitbewerbers, 08/2026",
+  mitbewerbQuelle: "laut FAQ eines großen österreichischen Mitbewerbers, 08/2026",
 
   eigeneDauer: "rund zwei Wochen",
   // Aus Marinas Bio (Notion → Branding / About). Keine gerundete Schätzung.
@@ -93,6 +93,17 @@ export const availability = {
   label: "Verfügbar für neue Projekte",
 };
 
+// ─── Der eine Knopftext ──────────────────────────────────────────────────────
+// Die Blockfolge (Herr Rat, 17.08.) verlangt EINEN einzigen CTA-Text auf der
+// ganzen Seite. Marina hat ihn am 18.08. entschieden: "Jetzt anfragen"
+// (Nadelöhr "Neuer CTA-Wortlaut", Option A). Er steht deshalb genau hier und
+// wird von Hero, ctaBand, Nav und dem Absende-Knopf im Kontaktformular
+// gelesen — vier Stellen, ein Wortlaut, eine Zeile zum Ändern.
+// Damit fällt "Jetzt Auslage sichern" weg und mit ihm die einzige Stelle, an
+// der der Markenname groß geschrieben wurde. Ab jetzt gilt "auslage" überall
+// klein, ohne Ausnahme.
+export const cta = { label: "Jetzt anfragen", href: "/#kontakt" };
+
 // ─── Hero ────────────────────────────────────────────────────────────────────
 // Headline als rhetorische Frage übers Suchverhalten statt über die Marken-
 // Metapher (Auslage = Schaufenster): "Dein Betrieb hat eine Auslage" war als
@@ -103,7 +114,15 @@ export const availability = {
 // ("Wer nicht gefunden wird, wird auch nicht angerufen."). Marinas Wahl aus
 // drei Vorschlägen (marketing-psychology + copywriting Skills), 2026-08-07.
 export const hero = {
-  eyebrow: "Websites für Betriebe im Bezirk Baden & Triestingtal",
+  // Der regionale Claim ist hier am 17.08. rausgeflogen (Marina: zu prominent
+  // ausgesprochen). Susi hat den Wegfall SEO-seitig freigegeben, unter zwei
+  // Bedingungen, die beide erfüllt sind: der Trust-Punkt "Aus Berndorf,
+  // Niederösterreich" bleibt stehen, und die vollständige Adresse steht
+  // sichtbar im Footer. Der Ortsbezug für die Suche sitzt in Title,
+  // Description und im ProfessionalService-JSON-LD, nicht in dieser Zeile.
+  // An ihre Stelle rückt das Geschäftsmodell — der eigentliche Unterschied
+  // zu jedem anderen Webdesigner (Marinas Wahl aus drei Vorschlägen).
+  eyebrow: "Website mieten statt kaufen",
   // Etappe 2 des Redesigns (17.08.): kürzer und ohne Frage. Behält das
   // Jobs-to-be-Done-Framing der Vorgänger-Headline ("Deine Kunden suchen
   // online. Finden sie dich?"), passt aber in zwei Zeilen — die alte Headline
@@ -111,23 +130,67 @@ export const hero = {
   // Vertrauenszeile lagen unter der Kante.
   headline: "Damit dich findet,",
   headlineAccent: "wer dich sucht.",
-  // Aus vier Sätzen einer. Das Technik-Versprechen und die Ansprechperson
-  // stehen weiter unten auf der Seite ohnehin ausführlich.
+  // Endfassung Block 1 (Mark, freigegeben von Marina am 18.08.). Gegenüber der
+  // Fassung vom 17.08. um die Hälfte gekürzt: der Einstieg "Du willst online
+  // gefunden werden" stand doppelt, das sagt die Headline schon. Aus "in rund
+  // zwei Wochen" ist "in zwei Wochen" geworden — das "rund" hat nur genuschelt.
   subline:
-    "Ich baue die Website für deinen Betrieb und halte sie am Laufen — in rund zwei Wochen online, ab 200 € Einrichtung und 50 € im Monat.",
-  // PLATZHALTER: Der neue Wortlaut ist Marks offener Task ("Neuen CTA-Wortlaut
-  // liefern"). Bis dahin bleibt der bisherige Text stehen — er ist die einzige
-  // Stelle, an der der Markenname bewusst groß geschrieben wird.
-  primaryCta: { label: "Jetzt Auslage sichern", href: "/#kontakt" },
-  secondaryCta: { label: "Pakete & Preise", href: "/preise" },
-  // Nur Belegbares. Keine Kundenzahlen — die gibt es noch nicht.
-  trustItems: [
-    proof.erfahrungClaim,
-    "Aus Berndorf, Niederösterreich",
-    ".at-Domain, Hosting & Wartung inklusive",
+    "Fehlt es an Zeit, Lust oder Technikwissen? Ich baue die Website für deinen Betrieb und halte sie am Laufen. In zwei Wochen online, ab 200 € Einrichtung und 50 € im Monat.",
+  primaryCta: cta,
+  // Zweiter Knopf wird Textlink (Marina, 17.08.): zwei Knöpfe nebeneinander
+  // sind zwei Entscheidungen, und die Blockfolge lässt nur eine zu.
+  secondaryLink: { label: "Pakete & Preise", href: "/preise" },
+  // Die kleine Zeile unter dem Knopf. Sie trägt jetzt allein, was vorher im
+  // Knopftext steckte: "Kostenloses Erstgespräch" hatte die Unverbindlichkeit
+  // im Wort selbst, "Jetzt anfragen" ist eine reine Handlungsaufforderung.
+  // Deshalb sichtbar und nicht ausgegraut — sie ist das Gegengewicht.
+  // Die Zusage zur Antwortzeit steht nicht mehr hier, sondern unten im
+  // Kontaktblock, dort, wo tatsächlich abgeschickt wird.
+  ctaNote: "Kostenlos und unverbindlich.",
+};
+
+// ─── Block 2: Vertrauensleiste ───────────────────────────────────────────────
+// Die frühere `hero.trustItems`-Zeile im Kopfbereich ist mit der neuen
+// Blockfolge (18.08.) zu einem eigenen Abschnitt geworden: vier Kacheln statt
+// drei Textpunkte. Aufbau nach Herr Rats Auswertung — DREI Ängste verneint und
+// EIN Beweis, nicht vier Selbstlobe.
+// Kachel 4 trägt "aus Berndorf" nicht dekorativ: Susi hat den Wegfall des
+// regionalen Claims aus dem Kopfbereich genau unter der Bedingung freigegeben,
+// dass der Ortsname im sichtbaren Text stehen bleibt. Nicht wegkürzen ohne
+// Rückfrage bei ihr.
+export const trust = {
+  items: [
+    { icon: "baukasten", text: "Kein Baukasten zum Selberbefüllen" },
+    { icon: "rechnung", text: "Keine Überraschung auf der Rechnung" },
+    { icon: "adresse", text: "Deine Internetadresse läuft auf dich" },
+    {
+      icon: "erfahrung",
+      // Zahl aus `proof`, damit sie nur an einer Stelle steht. Wortlaut sonst
+      // wie von Marina freigegeben ("und" statt "&", Ort angehängt).
+      text: `${proof.jahreErfahrung} mit Websites und Onlinemarketing, aus Berndorf`,
+    },
   ],
 };
+
+// ─── Block 3: Der Einwand ────────────────────────────────────────────────────
+// Arbeitet MIT dem Einwand statt gegen ihn (marketing-psychology): Wer über
+// Empfehlung lebt, macht etwas richtig — das wird zuerst bestätigt, bevor der
+// Text zeigt, wo die Empfehlung heute trotzdem verloren geht.
+// Die Langfassung dieses Blocks steht auf /warum-eine-website.
+export const objection = {
+  eyebrow: "Brauchst du das überhaupt?",
+  heading: "Bei dir läuft alles offline. Wozu dann eine Website?",
+  paragraphs: [
+    "Dein Name wird weitergegeben und der Nächste sucht ihn am Handy, bevor er anruft. Findet er nichts, landet der Auftrag woanders.",
+    "Eine Website ersetzt keine Empfehlung. Sie ist das, was er findet, wenn er deinen Namen bei Google eintippt.",
+  ],
+  more: { label: "Die lange Fassung", href: "/warum-eine-website" },
+};
+
 // ─── Problem ─────────────────────────────────────────────────────────────────
+// Steht seit 18.08. NICHT mehr auf der Startseite, sondern auf der eigenen
+// Seite /warum-eine-website (Marina, 17.08.). Auf der Startseite trägt die
+// Kurzfassung: `objection` (Block 3).
 // Verlustaversion statt Gewinnversprechen: der Schmerz ist die verlorene Anfrage,
 // nicht die fehlende Website. Bewusst ohne erfundene Prozentzahlen.
 export const problem = {
@@ -162,7 +225,10 @@ export const included = {
   items: [
     {
       title: "Wunsch-.at-Domain & Firmen-E-Mail",
-      text: "Deine eigene .at-Adresse und ein Postfach darauf. Registrierung, Gebühren und Verwaltung sind im Paket enthalten. Inhaberin oder Inhaber der Domain bist du.",
+      // Umformuliert 18.08.: inkludiert sind mehrere E-Mail-ADRESSEN, aber nur
+      // EIN Postfach (Weiterleitung). "ein Postfach darauf" war missverständlich
+      // in die andere Richtung. Quelle: Preismodell-Seite, Update 18.08.
+      text: "Deine eigene .at-Adresse und die E-Mail-Adressen darauf, die alle in ein Postfach laufen. Registrierung, Gebühren und Verwaltung sind im Paket.",
     },
     {
       title: "Hosting & SSL",
@@ -200,7 +266,8 @@ export const packages = [
     pitch: "Eine Seite, die dich findbar macht und erreichbar hält.",
     features: [
       "Startseite plus bis zu 2 weitere Bereiche",
-      "Wunsch-.at-Domain & Firmen-E-Mail-Postfach, inklusive",
+      // 18.08.: mehrere Adressen, ein Postfach — siehe included.items[0].
+      "Wunschadresse mit .at-Endung & E-Mail-Adressen darauf, inklusive",
       "Hosting, SSL & laufende Wartung",
       "Google-Business-Profil eingerichtet",
       "SEO-Grundausstattung",
@@ -237,7 +304,7 @@ export const packages = [
       "Alles aus Business",
       {
         text: "Eigene Seite, damit auch ChatGPT & Co. deinen Betrieb richtig wiedergeben",
-        tag: "Premium Feature",
+        tag: "Früh dran",
       },
       "Buchungstool eingebunden",
       "Interaktive Karte, datenschutzfreundlich per Klick geladen",
@@ -263,12 +330,12 @@ export const why = {
   items: [
     {
       title: "Der Einstieg tut nicht weh",
-      text: `Vergleichbare Websites starten in Österreich bei ${proof.marktSetupVon} bis ${proof.marktSetupBis} einmalig. Bei auslage sind es 200 €. Du musst nicht erst ein halbes Jahresbudget aufmachen, um herauszufinden, ob es dir etwas bringt.`,
+      text: `Vergleichbare Websites starten bei anderen Anbietern bei ${proof.marktSetupVon} bis ${proof.marktSetupBis} einmalig. Bei auslage sind es 200 €. Du musst nicht erst ein halbes Jahresbudget aufmachen, um herauszufinden, ob es dir etwas bringt.`,
       footnote: proof.marktQuelle,
     },
     {
       title: "Zwei Wochen statt zwei Monate",
-      text: `Der größte Mitbewerber im Land nennt selbst ${proof.mitbewerbDauer} Umsetzungsdauer. Bei mir ist deine Seite in ${proof.eigeneDauer} online, vorausgesetzt, ich bekomme deine Texte und Fotos zügig.`,
+      text: `Ein großer österreichischer Mitbewerber nennt selbst ${proof.mitbewerbDauer} Umsetzungsdauer. Bei mir ist deine Seite in ${proof.eigeneDauer} online, vorausgesetzt, ich bekomme deine Texte und Fotos zügig.`,
       footnote: proof.mitbewerbQuelle,
     },
     {
@@ -309,26 +376,117 @@ export const limits = {
 
 // ─── Ablauf ──────────────────────────────────────────────────────────────────
 // Startenergie senken: der erste Schritt kostet den Kunden fast nichts.
+// Endfassung Block 4 (18.08.): aus drei Schritten vier. Die Kauf-Entscheidung
+// ist damit als eigener Schritt sichtbar und sitzt NICHT am Anfang — das war
+// Herr Rats Punkt an der Blockfolge. Das Vorbild lässt das Ja erst nach einer
+// fertigen Gratis-Vorschau fallen; die gibt es bei auslage (noch) nicht, und ob
+// es sie geben soll, liegt als eigener Nadelöhr-Eintrag bei Marina. Bis dahin
+// beschreibt der Block, wie es wirklich läuft: Kaufentscheidung bei 02, Ja zum
+// Livegang bei 04. Nichts hier behauptet eine Vorschau.
 export const process = {
   eyebrow: "So läuft es ab",
-  heading: "Drei Schritte, und keiner davon kostet dich einen Nachmittag.",
+  heading: "Vier Schritte und keiner kostet dich einen Nachmittag.",
   steps: [
     {
       number: "01",
       title: "Kurz reden",
-      text: "Ein Anruf oder ein paar Zeilen per Mail. Ich frage, was dein Betrieb macht und was auf der Website stehen soll. Kostenlos und unverbindlich.",
+      text: "Ein Anruf oder ein paar Zeilen. Kostenlos und unverbindlich.",
     },
     {
       number: "02",
-      title: "Ich baue",
-      text: "Du schickst mir Texte und Fotos. Um alles Technische kümmere ich mich. Zwischendurch zeige ich dir den Stand, du sagst mir, was anders sein soll.",
+      title: "Angebot",
+      text: "Fester Preis, festes Paket. Du entscheidest.",
     },
     {
       number: "03",
-      title: "Online und betreut",
-      text: "Die Seite geht live, das Google-Profil steht. Ab da läuft die Wartung, und Änderungswünsche schickst du mir einfach.",
+      title: "Ich baue",
+      text: "Du schickst Texte und Fotos, den Rest mache ich.",
+    },
+    {
+      number: "04",
+      title: "Live und betreut",
+      text: "Online geht die Seite erst mit deinem Ja.",
     },
   ],
+};
+
+// ─── Block 5: Was drin ist (Startseite) ──────────────────────────────────────
+// Bewusst eine ZWEITE Fassung neben `included`, nicht dessen Ersatz.
+// `included` (Karten mit Erklärabsatz) steht weiter auf /preise — dort liest
+// jemand, der schon interessiert ist, und dort darf es ausführlich sein.
+// Hier auf der Startseite trägt die Häkchenliste: ein Stichwort, eine Zeile.
+// Marina, 18.08.: die Zeilen sind bewusst gleich lang gehalten, unterschiedliche
+// Längen fallen bei einer Häkchenliste sofort auf. Wer hier kürzt oder ergänzt,
+// hält die Länge — sonst franst die Liste optisch aus.
+export const services = {
+  eyebrow: "In jedem Paket",
+  heading: "Alles, was eine Website zum Laufen braucht, inklusive.",
+  items: [
+    { label: "Adresse und E-Mail", text: "Wunschadresse auf .at, dazu Adressen wie office@" },
+    { label: "Hosting und Sicherheit", text: "läuft verschlüsselt, ohne Handgriff für dich" },
+    { label: "Google-Karte", text: "dein Betrieb mit Adresse und Öffnungszeiten" },
+    { label: "Gefunden werden", text: "Titel, Beschreibungen und Struktur richte ich ein" },
+    { label: "Wartung", text: "Updates, Backups und Sicherheits-Checks übernehme ich" },
+    { label: "Änderungen", text: "neue Öffnungszeiten oder ein neues Foto, monatlich" },
+  ],
+  // Steht klein unter der Liste. Die Ein-Postfach-Klarstellung ist keine
+  // Kosmetik: inkludiert sind mehrere E-Mail-ADRESSEN, aber nur EIN Postfach
+  // (Weiterleitung). Festgehalten auf der Preismodell-Seite, Update 18.08.
+  // Für alle Texte gilt seither: "E-Mail-Adressen" versprechen, nie
+  // "Postfächer" im Plural.
+  note: "Alle E-Mail-Adressen laufen in ein Postfach. Wie viele Änderungen im Monat drin sind, hängt vom Paket ab.",
+  // Nimmt die Haken-Frage vorweg, statt sie im Kopf des Lesers stehen zu lassen.
+  // "Kein Büro" ist am 18.08. als Verkaufsargument gestrichen worden — es stimmt
+  // nicht. Nicht wieder einsetzen.
+  priceReasonHeading: "Warum das zu dem Preis geht",
+  priceReasons: [
+    "Eine Person. Kein Ticketsystem, keine Zwischenebene.",
+    "Schlankes Angebot. Kein Shop, keine Sonderprogrammierung.",
+    "Die Einrichtung zahlst du nicht auf einen Schlag. 200 € am Anfang, den Rest trägt der Monatspreis über die Laufzeit.",
+  ],
+};
+
+// ─── Block 6: Was dir gehört ─────────────────────────────────────────────────
+// Herr Rat: der Block, den ein Miet-Anbieter normalerweise nicht haben kann,
+// und deshalb das stärkste Argument der Seite. Risikoumkehr, gehört in den
+// Verkaufsteil und nicht in eine FAQ.
+// AUSDRÜCKLICH KEINE Vergleichsaussage über Mitbewerber: ein Satz wie "bei
+// Mietmodellen ist nach der Kündigung alles weg" ist für EINEN Anbieter geprüft,
+// nicht für Mietmodelle allgemein. Der Block trägt nur, was für auslage gilt.
+export const ownership = {
+  eyebrow: "Was dir gehört",
+  heading: "Du mietest die Website. Deine Internetadresse gehört dir.",
+  items: [
+    {
+      label: "Deine Internetadresse",
+      text: "läuft vom ersten Tag an auf deinen Namen",
+    },
+    {
+      label: "Deine Inhalte",
+      text: "nach Vertragsende kostenlos zurück, Texte, Bilder und Logos als Dateien",
+    },
+    {
+      label: "Die Seite selbst",
+      text: "Ablöse ab 100 €, je nach Paket. Danach läuft sie ohne mich weiter.",
+      badge: "ab 100 €",
+    },
+  ],
+};
+
+// ─── Block 7: Referenzen ─────────────────────────────────────────────────────
+// Bleibt leer, bis die erste Kundenseite online ist. Werner-Entscheidung beim
+// Einbau (18.08.): die Komponente existiert, rendert aber nichts, solange
+// `items` leer ist — wie bei about.photo und business.phone. Ein Abschnitt mit
+// erfundenen oder Platzhalter-Zitaten wäre auf einer Seite, die mit Ehrlichkeit
+// argumentiert, der teurere Fehler.
+// Aufbau pro Karte, wenn befüllt wird: `title` (was der Betrieb macht, plus
+// Ort), `quote` (ein Satz vom Kunden, wörtlich und unspektakulär), `name`,
+// `company`, `href`. Die Zitate sollen bestätigen, was oben versprochen wird
+// (unkompliziert, schnell, wenig Aufwand) — das Design loben sie nicht.
+export const references = {
+  eyebrow: "Aus der Nachbarschaft",
+  heading: "Betriebe, die schon online sind.",
+  items: [],
 };
 
 // ─── Über Marina ─────────────────────────────────────────────────────────────
@@ -336,39 +494,61 @@ export const about = {
   eyebrow: "Wer dahintersteckt",
   heading: "Ich bin Marina.",
   // Umbau 15.08. (Marina, 12.08.): weg von vier Fließtext-Absätzen, hin zu
-  // Stationen — Marke links, ein Satz rechts. Inhaltlich ist nichts Neues dazu-
-  // gekommen; die vier alten Blöcke sind auf ihren Kern eingedampft, der Rest
-  // ist gestrichen. Steiermark bleibt draußen (Marinas Wunsch, "uninteressant").
-  // Die Baukasten-Station bleibt bewusst drin: Marina hat die Alternative selbst
-  // benutzt, das trägt ihre FAQ-Antwort zu "Kann ich das nicht selbst mit einem
-  // Baukasten machen?".
+  // Stationen — Marke links, ein Satz rechts.
+  //
+  // Textwechsel 17.08. (Marina): Der lange "Über mich"-Text aus Marks Task
+  // ersetzt die bisherigen vier Kurz-Stationen. AUSDRÜCKLICH KEINE eigene Route
+  // /ueber-mich — der bestehende Anker /#ueber-mich bleibt, das Design bleibt
+  // unverändert, nur der Text wechselt.
+  // Gültige Fassung ist der Abschnitt "Finaler Text" im Notion-Task
+  // 3be1b3c5-e9e0-8163-9b99-e908de7c59de (Bereich Mark), NICHT dieser Code und
+  // nicht das Gedächtnis. Vor jeder Änderung dort nachlesen.
+  // Die fünf Zwischenüberschriften des Textes sitzen als 4 Stationen + closing:
+  // der letzte Block ("Was das für dich heißt") ist bewusst das closing, weil
+  // er der einzige ist, der nach vorne zum Kunden spricht statt zurück in die
+  // Biografie.
+  // Wortlaut nicht eigenmächtig glätten — Marinas Formulierungen sind einzeln
+  // erkämpft (siehe Task-Protokoll). Windows, der Name der Blockchain, der Name
+  // des Tech-Unternehmens und die Shop-Umsatzzahl bleiben endgültig draußen.
   lead: "Kurz, woher ich komme und warum es auslage gibt.",
   stations: [
     {
-      label: "Frühe 2000er",
-      text: "Programmieren hat mich gepackt, klassisches Coding war mir schnell zu aufwendig. Geblieben ist die Lust am Tüfteln, bis eine Lösung passt.",
+      label: "Aufgewachsen in Berndorf",
+      text: "Meine Kindheit habe ich im Berndorf der Achtziger und Neunziger Jahre mit C64 und Gameboy verbracht. Mit sechzehn oder siebzehn habe ich mir „Programmieren für Dummies“ gekauft. Programmiererin ist keine aus mir geworden.",
     },
     {
-      label: "Vom Baukasten zur KI",
-      text: "Erst frühe Baukasten-Systeme, heute KI-Werkzeuge. Eine Website entsteht damit in einem Bruchteil der Zeit.",
+      label: "Apotheke, Großhandel, Außendienst",
+      text: "Nach den Pflichtschuljahren ging es in die Lehre. In der Pottensteiner Apotheke, damals noch mit Lochkarten, denn die ersten Barcodescanner bekamen wir erst später. Danach Pharmagroßhandel in Graz, drei Jahre später Wien, dann auf eigene Rechnung im Außendienst für Apothekenzulieferer.",
     },
     {
-      label: "15 Jahre im Fach",
-      text: "Websites, Onlineshops und alles, was dazugehört. Beruflich vor allem Brandbuilding und Marketing.",
+      label: "Seit 2010 eigene Projekte",
+      text: "Websites, Blogs, Onlineshops, Tools. Bei Krypto und Blockchain war ich jahrelang tief drin. Mal mehr und ganz oft weniger erfolgreich. Das meiste habe ich mir selbst beigebracht und weiß inzwischen ziemlich genau, was ich kann und was nicht.",
     },
     {
-      label: "Heute, in Berndorf",
-      text: "Viele Betriebe hier sind online kaum zu finden. Nicht, weil ihnen Kunden fehlen, sondern weil eine gute Website bisher teuer und kompliziert war.",
+      // Der Bindestrich in "E‑Commerce" ist ein geschützter (U+2011), sonst
+      // bricht die 11rem breite Marken-Spalte das Wort auf "E-" / "Commerce"
+      // um. Sieht in der Sichtprüfung bei 1440 px genau so aus. Nicht durch
+      // einen normalen Bindestrich ersetzen.
+      label: "Vorher im E‑Commerce, jetzt KI",
+      text: "Zuletzt angestellt bei einer Apotheke mit eigener Nahrungsergänzungsmittel-Marke: Brandbuilding, Marketing, Logistik und die Betreuung des Onlineshops. Aktuell arbeite ich selbständig von zuhause aus für ein großes Tech-Unternehmen an KI-Werkzeugen für den medizinischen Bereich.",
     },
   ],
+  // Achtung: Der bisherige closing-Satz trug die Triestingtal-Formulierung
+  // (eingebaut 17.08. früher am Tag). Der freigegebene Text hat sie nicht — sie
+  // ist mit diesem Wechsel aus dem Abschnitt verschwunden und liegt Marina als
+  // offene Frage vor. Nicht stillschweigend wieder einsetzen.
   closing:
-    "Was du bekommst: eine ehrlich kalkulierte Website, ohne dich selbst durch die Technik kämpfen zu müssen. Und eine Ansprechperson, die die Region kennt, weil sie von hier ist.",
+    "Alle diese Erfahrungen kombiniere ich heute mit KI und Google-Optimierung und baue damit Websites, die für uns arbeiten und nicht umgekehrt. Kein Verkaufs-Blabla, sondern eine Ansprechperson auf Augenhöhe. Du kümmerst dich um dein Tagesgeschäft, ich um Aufbau, Pflege, Auffindbarkeit und Technik deiner Website.",
   // Marina-Entscheidung 14.08., endgültig: kein Porträtfoto auf der Website.
   // Wie bei phone/whatsapp bewusst null statt Platzhalter — die Komponente
   // rendert den Bildteil dann gar nicht erst.
   photo: null,
   photoAlt: null,
-  signature: "Marina Zaiser",
+  // Namenszeile am Ende gestrichen (Marina, 18.08.): die Überschrift sagt
+  // schon "Ich bin Marina.", die Signatur darunter war eine Dopplung.
+  // Wie photo bewusst null statt gelöscht — die Komponente rendert sie dann
+  // gar nicht erst, und wer sie zurückwill, füllt eine Zeile.
+  signature: null,
 };
 
 // ─── FAQ ─────────────────────────────────────────────────────────────────────
@@ -387,11 +567,11 @@ export const faq = {
     },
     {
       q: "Wie lange dauert es, bis meine Website online ist?",
-      a: "In der Regel ein bis zwei Wochen. Was es länger macht, ist fast immer dasselbe: Ich warte auf Texte oder Fotos. Wenn du die parat hast, geht es schnell.",
+      a: "In der Regel rund zwei Wochen. Was es länger macht, ist fast immer dasselbe: Ich warte auf Texte oder Fotos. Wenn du die parat hast, geht es schnell.",
     },
     {
       q: "Kann ich das nicht selbst mit einem Baukasten machen?",
-      a: "Grundsätzlich ja, und für manche ist das genau richtig. Rechne nur ehrlich mit: Der Baukasten kostet auch monatlich, dazu kommen Domain und meist ein Aufpreis fürs eigene Postfach. Der eigentliche Preis sind die Abende, die du damit verbringst, und danach das Nachpflegen, das erfahrungsgemäß nach ein paar Monaten liegen bleibt.",
+      a: "Du kannst die Website bei mir auch einfach monatlich mieten, statt sie selbst zusammenzubauen: Grundsätzlich ja, und für manche ist das genau richtig. Rechne nur ehrlich mit: Der Baukasten kostet auch monatlich, dazu kommen Domain und meist ein Aufpreis fürs eigene Postfach. Der eigentliche Preis sind die Abende, die du damit verbringst, und danach das Nachpflegen, das erfahrungsgemäß nach ein paar Monaten liegen bleibt.",
     },
     {
       q: "Muss ich mich um Hosting, SSL oder Updates kümmern?",
@@ -404,6 +584,10 @@ export const faq = {
     {
       q: "Was ist die Faktenseite für KI-Suche im Premium-Paket?",
       a: "Eine zusätzliche Seite, die speziell für KI-Assistenten wie ChatGPT aufbereitet ist, statt für menschliche Besucher. Immer mehr Menschen fragen KI-Tools statt Google, wenn sie einen Betrieb in der Nähe suchen. Diese Seite sorgt dafür, dass die Antwort stimmt: richtige Öffnungszeiten, richtige Leistungen, richtige Adresse.",
+    },
+    {
+      q: "Wie unterscheidet sich die Suchmaschinenoptimierung in den drei Paketen?",
+      a: "In allen drei Paketen ist eine SEO-Grundausstattung dabei: saubere Struktur, Seitentitel und Beschreibungen, damit Google versteht, was dein Betrieb macht. Ab Business kommt die lokale SEO-Basis dazu — wichtig, wenn deine Kunden vor allem aus der Umgebung suchen. Bei Premium betreue ich die SEO laufend weiter und du bekommst zusätzlich eine eigene Faktenseite, extra für KI-Assistenten wie ChatGPT aufbereitet, damit die auch die richtigen Infos über deinen Betrieb ausgeben.",
     },
     {
       q: "Was, wenn ich später etwas brauche, das über mein Paket hinausgeht?",
@@ -419,13 +603,30 @@ export const faq = {
 // ─── Kontakt ─────────────────────────────────────────────────────────────────
 export const contact = {
   eyebrow: "Erster Schritt",
+  // Bleibt ohne Ortsnamen (Marina, 18.08., Nadelöhr "Trägt eine H2 den
+  // Ortsnamen Triestingtal?", Option B). Susis Vorschlag war "… von deinem
+  // Betrieb im Triestingtal."; der Ortsbezug trägt stattdessen über die
+  // Vertrauenskachel "Aus Berndorf, Niederösterreich", den Footer und das
+  // Impressum.
   heading: "Erzähl mir von deinem Betrieb.",
-  text: "Ein paar Zeilen reichen. Ich schaue mir an, wie dein Betrieb online gerade dasteht, und sage dir ehrlich, ob und welches Paket Sinn ergibt. Antwort innerhalb von 24 Stunden.",
+  text: "Ein paar Zeilen reichen. Ich schaue mir deinen Betrieb online an und sage dir ehrlich, ob und welches Paket zu dir passt.",
   // Risikoumkehr: alle drei Punkte sind Zusagen, die Marina tatsächlich einhält.
+  // "in der Regel" ist am 18.08. rausgeflogen — Marina: "das passt schon so,
+  // auch im Urlaub." Damit ist die Antwortzeit eine Zusage, keine Tendenz.
   reassurance: [
-    "Antwort innerhalb von 24 Stunden",
+    "Antwort innerhalb eines Werktags",
     "Kostenlos und unverbindlich",
     "Kein Verkaufsgespräch, wenn es nicht passt",
+  ],
+  // Telefon und WhatsApp stehen bewusst als Platzhaltertext und nicht als
+  // erfundene Ziffernfolge (Marina, 17.08.). Eine falsche Nummer, die jemand
+  // tatsächlich wählt, ist der teurere Fehler. Sobald der Task
+  // "Business-Nummer" durch ist, wandern die echten Werte nach `business`
+  // (phone/whatsapp) und die beiden Platzhalterzeilen fallen weg.
+  channels: [
+    { label: "Telefon", value: business.phone ?? "Nummer folgt" },
+    { label: "WhatsApp", value: business.whatsapp ?? "Nummer folgt" },
+    { label: "E-Mail", value: business.email, href: `mailto:${business.email}` },
   ],
   formHeading: "Anfrage",
   fields: {
@@ -436,7 +637,8 @@ export const contact = {
   },
   messagePlaceholder:
     "Was macht dein Betrieb, und was soll die Website können? Ein paar Stichworte genügen.",
-  submit: "Anfrage senden",
+  // "submit" gibt es hier nicht mehr: der Absende-Knopf trägt seit 18.08.
+  // denselben Wortlaut wie jeder andere CTA der Seite und liest ihn aus `cta`.
   // Solange emailActive false ist, erklärt die Seite offen, dass das Formular
   // ein mailto öffnet, statt so zu tun, als gäbe es ein Backend.
   mailtoNote:
@@ -445,25 +647,45 @@ export const contact = {
 
 export const ctaBand = {
   heading: "Zwei Wochen von hier bis online.",
-  text: "Kostenloses Erstgespräch, ohne Verpflichtung und ohne dass dir danach jemand hinterhertelefoniert.",
-  cta: { label: "Jetzt Auslage sichern", href: "/#kontakt" },
+  // "Kostenloses Erstgespräch" ist hier rausgeflogen: der Wortlaut war der
+  // unterlegene Knopftext-Vorschlag und stand nach der Entscheidung vom 18.08.
+  // im Widerspruch zum Knopf daneben.
+  text: "Schreib mir ein paar Zeilen. Ohne Verpflichtung und ohne dass dir danach jemand hinterhertelefoniert.",
+  cta,
 };
 
 // ─── Navigation & Footer ─────────────────────────────────────────────────────
+// Umbau 18.08.: Die Startseite trägt nur noch die neun Blöcke der Blockfolge.
+// "Warum" und "Fragen" zeigten auf Anker in Abschnitten, die es dort nicht mehr
+// gibt — sie zeigen jetzt auf die eigenen Seiten. "Leistungen" bleibt ein Anker,
+// der Abschnitt steht weiter auf der Startseite (Block 5).
 export const nav = [
-  { label: "Warum", href: "/#warum" },
+  { label: "Warum", href: "/warum-auslage" },
   { label: "Leistungen", href: "/#leistungen" },
   { label: "Preise", href: "/preise" },
   { label: "Ablauf", href: "/#ablauf" },
   { label: "Über mich", href: "/#ueber-mich" },
-  { label: "Fragen", href: "/#fragen" },
+  { label: "Fragen", href: "/fragen" },
 ];
 
+// Die Rechtstexte, die ÖFFENTLICH im Footer stehen — nicht die Liste aller
+// vorhandenen Rechtsseiten.
+//
+// Der AVV ist hier am 18.08.2026 herausgenommen worden (Marina). Er ist kein
+// Aushang, sondern ein Vertrag zwischen zwei Parteien: der Kunde ist der
+// Verantwortliche, auslage die Auftragsverarbeiterin. Er muss vor Beginn der
+// Verarbeitung schriftlich vorliegen und der Aufsichtsbehörde nur AUF
+// VERLANGEN vorgelegt werden — eine Pflicht zur Veröffentlichung gibt es
+// nicht. Öffentlich müssen Impressum und Datenschutzerklärung sein, die AGB
+// nur, weil sie Vertragsbestandteil werden sollen.
+//
+// WICHTIG: Seite und Route /avv bleiben bestehen (App.jsx, pages/legal/Avv).
+// Nur der Footer-Link ist weg. Der AVV wird beim Onboarding übergeben. Wer
+// die Seite für tot hält und löscht, nimmt Marina ein Vertragsdokument weg.
 export const legalLinks = [
   { label: "Impressum", href: "/impressum" },
   { label: "Datenschutz", href: "/datenschutz" },
   { label: "AGB", href: "/agb" },
-  { label: "AVV", href: "/avv" },
 ];
 
 export const brandAssets = {
@@ -471,18 +693,54 @@ export const brandAssets = {
   logoDark: "/images/auslage-logo-dark.webp",
 };
 
+// ─── Seiten-Metadaten ────────────────────────────────────────────────────────
+// Alle Werte von Susi (18.08.), Zeichenzahlen von ihr gezählt, Zielkorridor
+// Title 50–60, Description 150–160. Nicht selbst umformulieren: die Wortwahl
+// folgt dem Keyword-Set, nicht dem Geschmack.
+// Ehrlichkeitshinweis von Susi, unverändert gültig: das Set beruht auf
+// Erfahrungswerten und Marinas Ortskenntnis, nicht auf gemessenem Suchvolumen
+// (OpenSEO-Konto steht auf 0 Credits). Umkehrbar, sobald Zahlen da sind.
+export const pageMeta = {
+  home: {
+    // 52 Zeichen. Der frühere Live-Wert hatte 62 und wurde abgeschnitten.
+    title: "Webdesign Triestingtal – Website mieten statt kaufen",
+    // 151 Zeichen.
+    description:
+      "Deine Website im Triestingtal: in rund zwei Wochen online, ab 200 € Einrichtung und 50 € im Monat. Domain, Hosting und Wartung inklusive. Aus Berndorf.",
+  },
+  warumWebsite: {
+    title: "Warum dein Betrieb eine Website braucht – auslage",
+    description:
+      "Bei dir läuft alles über Empfehlung? Wer weiterempfohlen wird, wird gegoogelt. Was eine Website leistet, wenn dein Betrieb von Mundpropaganda lebt. Ehrlich.",
+  },
+  warumAuslage: {
+    title: "Warum auslage: Website mieten statt einmal kaufen",
+    description:
+      "Website mieten statt einmal kaufen: was das kostet, was inklusive ist, was dir gehört und wo die Grenzen liegen. Ehrlich aufgelistet, auch das Kleingedruckte.",
+  },
+  fragen: {
+    title: "Fragen & Fakten zu auslage – Website mieten im Triestingtal",
+    description:
+      "Alle Eckdaten zu auslage auf einen Blick: Leistungen, Pakete, Preise, Einzugsgebiet und Kontakt. Dazu die zehn Fragen, die am häufigsten gestellt werden.",
+  },
+};
+
 // ─── Preisseite ──────────────────────────────────────────────────────────────
+// Title und Description von Susi (18.08., Task "Title-Tags, H1 und URLs
+// ausrichten"). Der alte Wortlaut trug "Bezirk Baden" — Marina hat Baden am
+// 15.08. aus dem Zuschnitt genommen, seither trägt der Zuschnitt "Triestingtal".
+// Zeichenzahlen von Susi gezählt: Title 49, Description 152.
 export const pricingPage = {
-  title: "Preise & Pakete – auslage",
+  title: "Preise: Website mieten ab 50 € im Monat – auslage",
   metaDescription:
-    "Drei Pakete für lokale Betriebe im Bezirk Baden und Triestingtal: ab 200 € Einrichtung und 50 € im Monat, inklusive Domain, Hosting, Wartung und Änderungen.",
+    "Drei Pakete mit festem Monatspreis: ab 200 € Einrichtung und 50 € im Monat, inklusive Domain, Hosting, Wartung und Änderungen. Keine versteckten Kosten.",
   eyebrow: "Preise",
   heading: "Was es kostet, und was dafür drin ist.",
   intro:
-    "Drei Pakete, alle Preise offen. Kein Angebot auf Anfrage, keine Staffelung nach Betriebsgröße und nichts, was erst im Gespräch dazukommt.",
+    "Du mietest deine Website quasi, statt sie einmalig zu kaufen — ohne hohe Startkosten, monatlich kündbar nach dem ersten Jahr. Drei Pakete, alle Preise offen. Kein Angebot auf Anfrage, keine Staffelung nach Betriebsgröße und nichts, was erst im Gespräch dazukommt.",
   anchor: {
     heading: "Zum Einordnen",
-    text: `Vergleichbare Websites kosten in Österreich ${proof.marktSetupVon} bis ${proof.marktSetupBis} einmalig, bevor überhaupt eine monatliche Betreuung dazukommt. auslage startet bei 200 € Einrichtung und 50 € im Monat, dafür mit Mindestlaufzeit.`,
+    text: `Vergleichbare Websites kosten bei anderen Anbietern ${proof.marktSetupVon} bis ${proof.marktSetupBis} einmalig, bevor überhaupt eine monatliche Betreuung dazukommt. auslage startet bei 200 € Einrichtung und 50 € im Monat, dafür mit Mindestlaufzeit.`,
     footnote: proof.marktQuelle,
   },
   ablöseHeading: "Wenn du wieder gehst",
