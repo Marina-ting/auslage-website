@@ -68,7 +68,18 @@ export default function Contact() {
                   <dt>{channel.label}</dt>
                   <dd>
                     {channel.href ? (
-                      <a href={channel.href}>{channel.value}</a>
+                      // WhatsApp führt auf wa.me und damit aus der Seite hinaus —
+                      // das geht in einen neuen Tab, damit der Besucher die Seite
+                      // nicht verliert. `tel:` und `mailto:` bleiben im selben Tab,
+                      // sie öffnen ohnehin nur ein Programm.
+                      <a
+                        href={channel.href}
+                        {...(channel.href.startsWith("http")
+                          ? { target: "_blank", rel: "noreferrer" }
+                          : {})}
+                      >
+                        {channel.value}
+                      </a>
                     ) : (
                       <span className="contact__channel-pending">{channel.value}</span>
                     )}

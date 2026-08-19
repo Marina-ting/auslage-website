@@ -30,9 +30,9 @@
 <meta property="og:site_name" content="auslage">
 <meta property="og:title" content="Bald online – auslage">
 <meta property="og:description" content="auslage ist bald online.">
-<meta property="og:image" content="/images/og-image.png">
+<meta property="og:image" content="/images/og-1200x630.png">
 <meta property="og:locale" content="de_AT">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <!-- /PRERENDER:META -->
 
 <!-- LocalBusiness-Schema. Telefon und E-Mail stehen seit 19.08.2026 hier —
@@ -92,10 +92,19 @@
 }
 </script>
 
-<!-- Tracking nach waas-seo-Standard: Plausible statt GA4 — cookiefrei, kein
-     Einwilligungsbanner nötig. Einbinden, sobald Domain und Konto stehen,
-     mit einem Conversion-Event auf das Absenden des Kontaktformulars.
-     <script defer data-domain="auslage.io" src="https://plausible.io/js/script.js"></script> -->
+<!-- Reichweitenmessung: Cloudflare Web Analytics, entschieden am 11.08.2026 im
+     Nadelöhr — für auslage.io und für alle Kundenseiten. Cookiefrei, kein
+     Einwilligungsbanner nötig, kostenlos und ohne Seitenlimit. Plausible und
+     Umami sind mit derselben Entscheidung vom Tisch; der Kommentar an dieser
+     Stelle nannte bis 19.08. noch Plausible und war damit falsch.
+     Der Preis der Entscheidung, offen gesagt: Cloudflare kann keine eigenen
+     Ereignisse messen. Ob jemand das Kontaktformular abschickt oder auf die
+     Telefonnummer tippt, ist damit auf keiner Seite zählbar.
+
+     Beim Einbau gehört das Script hierher, und im selben Zug wird in
+     src/content/site.js `analyticsActive` auf true gesetzt — sonst beschreibt
+     die Datenschutzerklärung eine Messung, die es gibt, aber verschweigt sie.
+     Zuständig: Task "Analytics-Script auf auslage.io einbinden" (Thomas). -->
 </head>
 <body>
 <div id="root"></div>

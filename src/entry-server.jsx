@@ -23,10 +23,17 @@ export function render(url) {
 
 // Das Prerender-Skript liest die Seitenliste und die Schalter durch dieses
 // Bundle mit, damit es site.js nicht ein zweites Mal auf eigenem Weg laden muss.
+//
+// `faq` steht seit 19.08.2026 mit in der Liste: Das Prerendering baut daraus das
+// FAQPage-JSON-LD für /fragen. Es wird bewusst aus derselben Quelle gelesen wie
+// der sichtbare Text — strukturierte Daten, die etwas anderes behaupten als die
+// Seite zeigt, sind ein Verstoß gegen Googles Richtlinien und nebenbei der
+// häufigste Weg, wie so ein Block still veraltet (Susi).
 export {
   routes,
   notFoundRoute,
   comingSoon,
   comingSoonMeta,
   siteUrl,
+  faq,
 } from "./content/site";

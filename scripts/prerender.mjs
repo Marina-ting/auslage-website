@@ -45,6 +45,7 @@ const {
   comingSoon,
   comingSoonMeta,
   siteUrl,
+  faq,
 } = await import(pathToFileURL(resolve(wurzel, "dist-ssr/entry-server.js")).href);
 
 /** Zeichen, die in HTML eine eigene Bedeutung haben, unschädlich machen. */
@@ -54,6 +55,110 @@ function esc(text) {
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;");
+}
+
+/**
+ * Maße des Vorschaubildes, aus der Datei gelesen statt hingeschrieben.
+ *
+ * Warum überhaupt: `og:image` allein genügt vielen Diensten nicht. WhatsApp,
+ * Facebook, LinkedIn und Signal holen das Bild sonst erst nach und zeigen beim
+ * ersten Teilen einen leeren Kasten; mit Breite und Höhe im Kopf können sie den
+ * Platz sofort reservieren.
+ *
+ * Warum gemessen: Ein hingeschriebenes Maß stimmt genau so lange, bis jemand das
+ * Bild austauscht — und niemand merkt es, weil die Seite weiter baut. Gelesen
+ * wird der IHDR-Block einer PNG-Datei: die Bytes 16 bis 24 tragen Breite und
+ * Höhe, jeweils als 32-Bit-Zahl. Fehlt die Datei, bricht der Build ab. Das ist
+ * Absicht: ein `og:image`, das ins Leere zeigt, ist schlimmer als kein Bild.
+ */
+async function vorschaubildMasse(pfadInPublic) {
+  const datei = await readFile(resolve(wurzel, "public", pfadInPublic)).catch(() => {
+    throw new Error(
+      `Prerendering abgebrochen: public/${pfadInPublic} fehlt, wird aber als og:image ausgeliefert.`
+    );
+  });
+  if (datei.subarray(1, 4).toString("latin1") !== "PNG") {
+    throw new Error(
+      `Prerendering abgebrochen: public/${pfadInPublic} ist keine PNG-Datei; die Maße lassen sich nicht lesen.`
+    );
+  }
+  return { breite: datei.readUInt32BE(16), hoehe: datei.readUInt32BE(20) };
+}
+
+// 19.08.2026: von "images/og-image.png" (512 × 512) auf das neue Bild im
+// Verhältnis 1,91:1 umgestellt. Das quadratische Bild bleibt in public/images/
+// liegen — es taugt weiter für quadratische Zwecke, nur nicht für die Kachel.
+// Das Bild entsteht mit `node scripts/og-bild.mjs`; Maße werden unten aus der
+// Datei gelesen, nicht hingeschrieben.
+const ogBildPfad = "images/og-1200x630.png";
+const ogBild = await vorschaubildMasse(ogBildPfad);
+
+/**
+ * FAQPage-JSON-LD für /fragen — aus denselben Fragen gebaut, die die Seite zeigt.
+ *
+ * ── Was es NICHT mehr bringt (Susi, 19.08.2026, an Googles eigener Doku
+ * nachgelesen) ──────────────────────────────────────────────────────────────
+ * FAQ-Rich-Results, also die aufklappbaren Fragen direkt im Suchergebnis, sind
+ * bei Google seit 07.05.2026 abgeschafft; die Unterstützung ist im Juni 2026
+ * ausgelaufen. Dieser Block bringt in der Google-Suche also keine Position und
+ * keine zusätzliche Zeile. Wer etwas anderes verspricht, verspricht zu viel.
+ *
+ * ── Warum er trotzdem drinsteht ────────────────────────────────────────────
+ * Er ist die maschinenlesbare Fassung eines Textes, der ohnehin auf der Seite
+ * steht: Frage, Antwort, und die feste Adresse jeder einzelnen Frage. Genau das
+ * ist der erklärte Zweck von /fragen — zitierbar sein für Assistenten, die die
+ * Seite lesen statt sie anzuzeigen. Kosten: 5,7 Kilobyte unkomprimiert auf
+ * einer einzigen Seite (am 19.08.2026 nachgemessen, nicht geschätzt). Unbelegt
+ * bleibt, wie viel einzelne Assistenten davon tatsächlich verwerten; das ist
+ * eine Vermutung und kein Messwert.
+ *
+ * ── Die Bedingung ──────────────────────────────────────────────────────────
+ * Ausgegeben wird der Block nur, wenn die Seite ihre Fragen auch wirklich
+ * anzeigt. Hinter der Coming-Soon-Sperre steht dort die Platzhalterseite — ein
+ * FAQPage-Schema auf einer Seite ohne sichtbare Fragen behauptet Inhalte, die
+ * niemand sieht. Das verbieten Googles Richtlinien für strukturierte Daten
+ * ausdrücklich, und es wäre auch schlicht unwahr.
+ */
+function faqSchema(route) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${siteUrl}${route.pfad}`,
+    inLanguage: "de-AT",
+    mainEntity: faq.items.map((frage) => ({
+      "@type": "Question",
+      name: frage.q,
+      // Die feste id aus site.js, damit auch maschinell nachvollziehbar ist,
+      // worauf ein Verweis wie /fragen#mindestlaufzeit zeigt.
+      url: `${siteUrl}${route.pfad}#${frage.id}`,
+      acceptedAnswer: { "@type": "Answer", text: frage.a },
+    })),
+  };
+}
+
+/**
+ * Welche Seite welches Schema bekommt.
+ *
+ * Das LocalBusiness-Schema steht in index.html und liegt damit auf jeder Seite;
+ * hier stehen nur die Blöcke, die zu genau einer Seite gehören.
+ */
+const schemaProSeite = { "/fragen": faqSchema };
+
+/**
+ * JSON-LD als `<script>`-Zeile.
+ *
+ * `<` wird escaped: stünde in einem Antworttext je die Zeichenfolge `</script>`,
+ * würde der Browser das Skript an dieser Stelle beenden und den Rest als Text
+ * anzeigen. Heute kommt sie nirgends vor — die Absicherung kostet nichts und
+ * hält auch dann, wenn später jemand einen Antworttext ergänzt.
+ */
+function schemaBlock(route) {
+  const bauen = schemaProSeite[route.pfad];
+  if (!bauen) return null;
+  if (comingSoon && route.gesperrt) return null;
+
+  const json = JSON.stringify(bauen(route), null, 2).replaceAll("<", "\\u003c");
+  return `<script type="application/ld+json">\n${json}\n</script>`;
 }
 
 /**
@@ -116,9 +221,20 @@ function metaBlock(route) {
   zeilen.push(`<meta property="og:title" content="${esc(meta.title)}">`);
   zeilen.push(`<meta property="og:description" content="${esc(meta.description)}">`);
   // Absolute Adresse: relative Bildpfade zeigen in Link-Vorschauen nichts an.
-  zeilen.push(`<meta property="og:image" content="${siteUrl}/images/og-image.png">`);
+  zeilen.push(`<meta property="og:image" content="${siteUrl}/${ogBildPfad}">`);
+  zeilen.push(`<meta property="og:image:width" content="${ogBild.breite}">`);
+  zeilen.push(`<meta property="og:image:height" content="${ogBild.hoehe}">`);
+  zeilen.push(
+    '<meta property="og:image:alt" content="auslage — Website mieten statt kaufen. Triestingtal, Niederösterreich.">'
+  );
   zeilen.push('<meta property="og:locale" content="de_AT">');
-  zeilen.push('<meta name="twitter:card" content="summary">');
+  // `summary_large_image` seit 19.08.2026: die große Kachel statt des kleinen
+  // Bildchens am Zeilenrand. Die Bedingung dafür ist jetzt erfüllt — das
+  // Vorschaubild liegt im Verhältnis 1,91:1 vor. Die beiden Zeilen gehören
+  // zusammen: mit einem quadratischen Bild würde das breite Format links und
+  // rechts beschneiden oder mit Balken auffüllen. Wer das Bild je gegen ein
+  // quadratisches tauscht, stellt hier auf `summary` zurück.
+  zeilen.push('<meta name="twitter:card" content="summary_large_image">');
   return zeilen.join("\n");
 }
 
@@ -143,14 +259,19 @@ await pfadeAbgleichen();
 
 // Die 404-Seite läuft mit durch, obwohl sie in `routes` nichts verloren hat:
 // sie hat keine eigene Adresse, sondern hängt in App.jsx an `path="*"`.
+let schemaSeiten = 0;
+
 for (const route of [...routes, notFoundRoute]) {
   const inhalt = render(route.pfad);
 
+  // Das seitenspezifische JSON-LD hängt am Meta-Block, damit es beim nächsten
+  // Bauen mit ihm zusammen ersetzt wird und keine zweite Fundstelle entsteht.
+  const schema = schemaBlock(route);
+  if (schema) schemaSeiten += 1;
+  const kopf = schema ? `${metaBlock(route)}\n${schema}` : metaBlock(route);
+
   const seite = huelle
-    .replace(
-      new RegExp(`${ANFANG}[\\s\\S]*?${ENDE}`),
-      `${ANFANG}\n${metaBlock(route)}\n${ENDE}`
-    )
+    .replace(new RegExp(`${ANFANG}[\\s\\S]*?${ENDE}`), `${ANFANG}\n${kopf}\n${ENDE}`)
     .replace('<div id="root"></div>', `<div id="root">${inhalt}</div>`);
 
   const ziel = resolve(wurzel, "dist", route.datei);
@@ -218,6 +339,13 @@ const zustand = comingSoon
   ? "Coming-Soon steht auf true: gesperrte Seiten tragen den Platzhalter-Titel, alle Seiten robots noindex."
   : "Coming-Soon steht auf false: jede Seite trägt ihren echten Titel, keine robots-Sperre.";
 
+// Beim Bauen mitzählen statt hinterher glauben: Steht hier eine 0, wo eine 1
+// stehen müsste, ist das seitenspezifische Schema stumm ausgefallen.
+const schemaMeldung =
+  schemaSeiten === 0
+    ? "Seiten-Schema: keines ausgegeben (hinter der Coming-Soon-Sperre)."
+    : `Seiten-Schema: auf ${schemaSeiten} Seite(n) ausgegeben.`;
+
 console.log(
-  `\nPrerendering: ${routes.length} Seiten + 404-Seite geschrieben. ${zustand} ${sitemapMeldung}\n`
+  `\nPrerendering: ${routes.length} Seiten + 404-Seite geschrieben. ${zustand} ${sitemapMeldung} ${schemaMeldung} Vorschaubild: ${ogBild.breite} × ${ogBild.hoehe}.\n`
 );

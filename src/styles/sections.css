@@ -603,6 +603,15 @@
 
 /* ── FAQ ──────────────────────────────────────────────────────────────────
    <details>/<summary>: funktioniert ohne JavaScript, nativ per Tastatur.    */
+
+/* Überschrift im headless-Fall (/fragen, unterhalb des Faktenblocks). Eine
+   Stufe kleiner als der Seitentitel darüber, damit die Rangfolge stimmt —
+   gleiche Größe wie .facts__heading, die beiden Abschnitte sind gleichrangig. */
+.faq__heading {
+  font-size: var(--t-h3);
+  margin-bottom: 1.6rem;
+}
+
 .faq {
   max-width: var(--measure-wide);
   display: grid;
@@ -1735,4 +1744,68 @@ table.simple td {
    (Sichtprüfung /warum-auslage, 1440 px). Hier einmal halbiert. */
 .page-head + .section {
   padding-top: calc(var(--space-section) * 0.45);
+}
+
+/* ── Faktenblock (/fragen) ────────────────────────────────────────────────────
+   Bewusst nüchtern: keine Karten, keine Icons, kein Akzentrahmen. Der Block
+   soll wie ein Datenblatt aussehen und nicht wie ein weiterer Verkaufsabschnitt
+   — Susis Vorgabe vom 18.08. lautet "kein Marketing, nachprüfbar und
+   langweilig". Die Haarlinien-Zeilen sind dieselbe Formsprache wie in
+   "Was dir gehört" (.ownership__row), nur auf Creme statt auf Teal.          */
+.facts {
+  /* Der Abschnitt steht zwischen Seitenkopf und Fragen. Nach unten reicht der
+     halbe Blockabstand: darunter folgt sofort die FAQ, und zwei volle Abstände
+     hintereinander ergeben ein Loch von rund 250 px (dieselbe Ursache wie bei
+     `.page-head + .section` weiter oben). */
+  padding-bottom: calc(var(--space-section) * 0.55);
+}
+
+.facts__heading {
+  font-size: var(--t-h3);
+  margin-bottom: 1.6rem;
+}
+
+.facts__list {
+  max-width: var(--measure-wide);
+  margin: 0;
+}
+
+.facts__row {
+  display: grid;
+  grid-template-columns: 13rem 1fr;
+  gap: 0.35rem 2rem;
+  align-items: baseline;
+  padding-block: 0.95rem;
+  border-top: 1px solid var(--border);
+}
+
+.facts__row:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.facts__label {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--teal);
+}
+
+.facts__value {
+  margin: 0;
+  color: var(--ink-muted);
+}
+
+.facts__stand {
+  margin-top: 1.1rem;
+  font-size: var(--t-small);
+  color: var(--ink-faint);
+}
+
+@media (max-width: 720px) {
+  /* Untereinander statt nebeneinander: bei 390 px blieben von 1fr neben einem
+     13-rem-Label rund 8 rem übrig, und die längeren Angaben (Einzugsgebiet,
+     Änderungen) brechen dort in Zwei-Wort-Zeilen. */
+  .facts__row {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
 }

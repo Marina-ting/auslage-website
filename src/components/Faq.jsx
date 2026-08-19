@@ -34,9 +34,15 @@ export default function Faq({ headless = false }) {
   return (
     <section className="section" id="fragen">
       <div className="container">
-        {/* `headless` auf /fragen: dort trägt der Seitenkopf schon Eyebrow und
-            Überschrift, hier würde sie ein zweites Mal stehen. */}
-        {!headless && (
+        {/* `headless` auf /fragen: dort trägt der Seitenkopf schon das Eyebrow,
+            das hier ein zweites Mal stünde. Die Überschrift bleibt trotzdem —
+            seit der Faktenblock darüber steht, ist das nicht mehr die einzige
+            Überschrift der Seite, und ein Abschnitt ohne eigene Überschrift läse
+            sich wie eine Fortsetzung der Fakten. Sie fällt eine Stufe kleiner
+            aus als der Seitentitel, damit der oben dominant bleibt. */}
+        {headless ? (
+          <h2 className="faq__heading reveal">{faq.heading}</h2>
+        ) : (
           <div className="section-head reveal">
             <p className="eyebrow">{faq.eyebrow}</p>
             <h2>{faq.heading}</h2>

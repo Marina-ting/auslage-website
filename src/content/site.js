@@ -55,11 +55,14 @@ export const business = {
   // hebt unter der Nummer niemand ab. Quelle: Notion → Task "Eigene
   // auslage-Business-Nummer". `phoneHref` ist dieselbe Nummer ohne Leerzeichen,
   // weil `tel:` keine verträgt.
-  // WhatsApp und Maps-Link stehen weiter nicht fest. Komponenten, die diese
-  // Werte bräuchten, rendern nicht — bewusst kein Platzhalter.
+  // WhatsApp läuft auf derselben Nummer (Marina, 19.08.). `whatsappHref` zeigt
+  // auf wa.me, das die Nummer ohne Pluszeichen und ohne Leerzeichen verlangt.
+  // Der Maps-Link steht weiter nicht fest; Komponenten, die ihn bräuchten,
+  // rendern nicht — bewusst kein Platzhalter.
   phone: "+43 670 3532122",
   phoneHref: "tel:+436703532122",
-  whatsapp: null,
+  whatsapp: "+43 670 3532122",
+  whatsappHref: "https://wa.me/436703532122",
   googleMapsLink: null,
 };
 
@@ -621,6 +624,100 @@ export const faq = {
   ],
 };
 
+// Deutsche Aufzählung: "a, b und c". Nur hier gebraucht, deshalb keine eigene
+// Datei. Bei einem einzigen Eintrag kommt schlicht dieser Eintrag heraus.
+function aufzaehlung(teile) {
+  if (teile.length < 2) return teile.join("");
+  return `${teile.slice(0, -1).join(", ")} und ${teile[teile.length - 1]}`;
+}
+
+// ─── Faktenblock ─────────────────────────────────────────────────────────────
+// Steht auf /fragen OBERHALB der Fragen. Zweck: harte, zitierfähige Angaben für
+// KI-Assistenten und für Menschen, die nur nachschlagen wollen (Susi, 18.08.:
+// "kein Marketing, nachprüfbar und langweilig"). Beschriftung plus Fakt in
+// ganzen Sätzen, damit jede Zeile für sich zitierbar bleibt.
+//
+// DER WORTLAUT IST EINE ENDFASSUNG. Marina hat ihn am 18.08. in vier Runden
+// Zeile für Zeile durchgesehen und am 19.08. im Nadelöhr freigegeben (Option A).
+// Hier wird nicht umformuliert — wer etwas ändern will, holt vorher eine
+// Freigabe. Quelle: Notion → Task "Faktenblock für die Fragen-Seite schreiben".
+//
+// Was bewusst NICHT drinsteht (alles Marina, 18.08.): die volle Anschrift (steht
+// im Impressum), der Bezirk Baden (Kaumberg liegt im Bezirk Lilienfeld), die
+// Umsatzsteuer-Zeile, die Antwortzeit (steht im Kontaktblock), die Fristen zur
+// Datenherausgabe, die Kontaktformular-Nachrichten. Die Jahreszahlung ist am
+// 19.08. ganz gestrichen und kommt auch später nicht herein.
+//
+// Preise und Ablöse werden aus `packages` gelesen statt abgeschrieben. Der
+// Wortlaut ist derselbe wie in der Endfassung, nur stehen die Zahlen jetzt an
+// einer Stelle weniger — bei der nächsten Preisänderung zieht der Block mit.
+export const facts = {
+  heading: "Fakten zu auslage",
+  items: [
+    {
+      label: "Betrieb",
+      text: `${business.name} ist ein Einzelunternehmen von ${business.owner}.`,
+    },
+    {
+      label: "Sitz",
+      text: "Berndorf in Niederösterreich. Die vollständige Anschrift steht im Impressum.",
+    },
+    { label: "Erfahrung", text: "seit 2010 mit Websites und Onlinemarketing." },
+    {
+      label: "Leistung",
+      text: "Websites für lokale Betriebe. Die Website wird gebaut und danach laufend betreut. Der Betrieb mietet sie monatlich, statt sie zu kaufen.",
+    },
+    {
+      label: "Einzugsgebiet",
+      text: "das Triestingtal in Niederösterreich. Dazu gehören Kaumberg, Altenmarkt an der Triesting, Furth an der Triesting, Weissenbach an der Triesting, Pottenstein, Berndorf, Hernstein, Hirtenberg, Enzesfeld-Lindabrunn und Leobersdorf.",
+    },
+    {
+      label: "Pakete und Preise",
+      text: packages
+        .map((p) => `${p.name} ${p.setup} Einrichtung und ${p.monthly} im Monat.`)
+        .join(" "),
+    },
+    {
+      label: "Vertrag",
+      text: "Die Mindestlaufzeit beträgt zwölf Monate. Danach ist der Vertrag monatlich kündbar mit einem Monat Frist zum Monatsende.",
+    },
+    { label: "Dauer bis online", text: "zwei Wochen." },
+    {
+      label: "Internetadresse",
+      text: "In jedem Paket ist eine Wunschadresse mit .at-Endung enthalten, zum Beispiel deinbetrieb.at. Registrierung, Gebühren und Verwaltung übernimmt auslage. Inhaber der Adresse ist der Betrieb selbst.",
+    },
+    {
+      label: "E-Mail",
+      text: "Adressen auf der eigenen Internetadresse sind enthalten, zum Beispiel office@deinbetrieb.at. Alle Adressen laufen in ein Postfach.",
+    },
+    {
+      label: "In jedem Paket enthalten",
+      text: "Hosting, Verschlüsselung, Updates, Backups, Sicherheits-Checks, die Einrichtung des Google-Business-Profils sowie Seitentitel, Beschreibungen und Seitenstruktur für die Auffindbarkeit bei Google.",
+    },
+    {
+      label: "Änderungen",
+      text: "Starter eine pro Monat, umgesetzt in fünf Werktagen. Business zwei pro Monat, umgesetzt in drei Werktagen. Premium vier pro Monat, umgesetzt in 48 Stunden. Nicht genutzte Änderungen verfallen am Monatsende.",
+    },
+    {
+      label: "Nach dem Vertragsende",
+      text: `Texte, Bilder, Logos und Firmendaten bekommt der Betrieb kostenlos zurück. Die Seite selbst kann abgelöst werden, um ${aufzaehlung(
+        packages.map((p) => `${p.ablöse} bei ${p.name}`),
+      )}.`,
+    },
+    // Die Telefonnummer war in der Endfassung der EINE geplante Nachtrag:
+    // "bleibt der einzige Nachtrag, sobald die Business-Nummer bestellt ist"
+    // (Freigabe-Vermerk vom 19.08.). Die spusu-Wertkarte ist am 19.08. bestellt,
+    // die Nummer steht seit demselben Tag im Impressum und im Kontaktblock —
+    // damit ist die Bedingung erfüllt, und ohne sie widerspräche der Faktenblock
+    // dem Rest der Seite. Beide Werte kommen aus `business`, damit sie nicht
+    // auseinanderlaufen.
+    { label: "Kontakt", text: `${business.email}, Telefon ${business.phone}.` },
+  ],
+  // Datum der letzten inhaltlichen Änderung, nicht des Builds. Die Endfassung
+  // trug den 18. August; mit der Telefonnummer ist es der 19. geworden.
+  stand: "Stand: 19. August 2026",
+};
+
 // ─── Kontakt ─────────────────────────────────────────────────────────────────
 export const contact = {
   eyebrow: "Erster Schritt",
@@ -639,13 +736,13 @@ export const contact = {
     "Kostenlos und unverbindlich",
     "Kein Verkaufsgespräch, wenn es nicht passt",
   ],
-  // Telefon trägt seit 19.08. die echte Business-Nummer und ist verlinkt.
-  // WhatsApp steht weiter als Platzhaltertext und nicht als erfundene
-  // Ziffernfolge (Marina, 17.08.): eine falsche Nummer, die jemand tatsächlich
-  // wählt, ist der teurere Fehler. Ein Wert ohne `href` wird nicht verlinkt.
+  // Telefon und WhatsApp tragen seit 19.08. dieselbe echte Business-Nummer und
+  // sind beide verlinkt. Fällt einer der Werte je wieder auf `null`, zeigt die
+  // Zeile "Nummer folgt" und wird nicht verlinkt — lieber ein sichtbarer
+  // Platzhalter als ein Link, der ins Leere führt.
   channels: [
     { label: "Telefon", value: business.phone ?? "Nummer folgt", href: business.phoneHref },
-    { label: "WhatsApp", value: business.whatsapp ?? "Nummer folgt" },
+    { label: "WhatsApp", value: business.whatsapp ?? "Nummer folgt", href: business.whatsappHref },
     { label: "E-Mail", value: business.email, href: `mailto:${business.email}` },
   ],
   formHeading: "Anfrage",
@@ -739,9 +836,15 @@ export const pageMeta = {
       "Website mieten statt einmal kaufen: was das kostet, was inklusive ist, was dir gehört und wo die Grenzen liegen. Ehrlich aufgelistet, auch das Kleingedruckte.",
   },
   fragen: {
+    // Title 59 Zeichen, Description 154 — beide von Susi gezählt.
+    // Die Zahl im Text ist am 19.08.2026 rausgeflogen: dort stand "die zehn
+    // Fragen", auf der Seite stehen neun. Ersetzt wurde sie nicht durch "neun",
+    // sondern durch gar keine Zahl — eine Beschreibung, die mitzählen muss, geht
+    // beim nächsten Zusatz still wieder falsch, und im Suchergebnis prüft das
+    // niemand nach. Der Wortlaut folgt jetzt der Überschrift des FAQ-Blocks.
     title: "Fragen & Fakten zu auslage – Website mieten im Triestingtal",
     description:
-      "Alle Eckdaten zu auslage auf einen Blick: Leistungen, Pakete, Preise, Einzugsgebiet und Kontakt. Dazu die zehn Fragen, die am häufigsten gestellt werden.",
+      "Alle Eckdaten zu auslage auf einen Blick: Leistungen, Pakete, Preise, Einzugsgebiet und Kontakt. Dazu die Fragen, die vor der Zusage am häufigsten kommen.",
   },
 };
 
