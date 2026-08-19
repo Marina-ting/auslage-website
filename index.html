@@ -35,9 +35,11 @@
 <meta name="twitter:card" content="summary">
 <!-- /PRERENDER:META -->
 
-<!-- LocalBusiness-Schema. Telefon fehlt bewusst, solange keine Nummer feststeht —
-     ein erfundener Wert wäre schlimmer als ein fehlendes Feld.
-     E-Mail eintragen, sobald office@auslage.io aktiv ist. -->
+<!-- LocalBusiness-Schema. Telefon und E-Mail stehen seit 19.08.2026 hier —
+     die Business-Nummer ist endgültig (spusu, keine Rufnummernmitnahme).
+     Achtung: dieser Block wird beim Bauen NICHT ersetzt, anders als der
+     PRERENDER:META-Block darüber. Änderungen an Anschrift, Nummer oder
+     Paketpreisen gehören von Hand auch hierher. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -45,6 +47,8 @@
   "name": "auslage",
   "description": "Website-as-a-Service für lokale Betriebe im Bezirk Baden und Triestingtal.",
   "founder": { "@type": "Person", "name": "Marina Zaiser" },
+  "telephone": "+436703532122",
+  "email": "office@auslage.io",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Kruppstraße 24",

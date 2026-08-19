@@ -6,8 +6,10 @@ import LegalLayout from "./LegalLayout";
 // Unternehmensgegenstand, Gewerbebehörde, Fachgruppe).
 // Bewusst NICHT enthalten: Bankdaten (Betrugsrisiko), UID-Nummer (Kleinunternehmerin,
 // nur auf Antrag), OS-Streitbeilegungsplattform (gilt für Verbrauchergeschäfte).
-// Die Telefonnummer fehlt noch — die Business-Nummer ist entschieden, aber nicht
-// bestellt. Bis dahin bewusst keine Zeile statt eines Platzhalters.
+// Die Telefonnummer steht seit 19.08.2026 (spusu-Wertkarte, endgültige Nummer,
+// keine Rufnummernmitnahme). Marina hat entschieden, sie sofort auszuweisen,
+// obwohl die eSIM noch auf die Freischaltung wartet. Wert und tel:-Link kommen
+// aus `business` in site.js.
 export default function Impressum() {
   return (
     <LegalLayout title="Impressum">
@@ -30,6 +32,12 @@ export default function Impressum() {
       <p>
         E-Mail: <a href={`mailto:${business.email}`}>{business.email}</a>
         {!business.emailActive && <em> (Adresse noch in Einrichtung)</em>}
+        {business.phone && (
+          <>
+            <br />
+            Telefon: <a href={business.phoneHref}>{business.phone}</a>
+          </>
+        )}
       </p>
 
       <h2>Unternehmensgegenstand</h2>

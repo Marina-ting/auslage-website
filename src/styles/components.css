@@ -489,7 +489,7 @@
 
 /* Dezente Outline-Pille für einzelne, hervorzuhebende Features (z. B. "Neu").
    Bewusst als Umriss statt Vollfläche, damit sie nicht mit .pkg__badge
-   (der Terrakotta-Empfehlungsbadge) um Aufmerksamkeit konkurriert. */
+   (der Empfehlungsbadge, seit 17.08. in Teal) um Aufmerksamkeit konkurriert. */
 .checklist__tag {
   display: inline-block;
   margin-left: 0.5rem;

@@ -49,9 +49,16 @@ export const business = {
   // (office@/hallo@/support@/vertrieb@ → waas.auslage@gmail.com, "Senden als" in
   // Gmail konfiguriert). Quelle: Notion → Tasks Manager, Stand 2026-08-08.
   emailActive: true,
-  // Telefon, WhatsApp und Maps-Link stehen nicht fest. Komponenten, die diese Werte
-  // bräuchten, rendern nicht — bewusst kein Platzhalter.
-  phone: null,
+  // Die Business-Nummer steht seit 19.08.2026 (spusu-Wertkarte, keine
+  // Rufnummernmitnahme, also endgültig). Marina hat entschieden, sie sofort
+  // einzutragen, obwohl die eSIM noch auf die Freischaltung wartet — bis dahin
+  // hebt unter der Nummer niemand ab. Quelle: Notion → Task "Eigene
+  // auslage-Business-Nummer". `phoneHref` ist dieselbe Nummer ohne Leerzeichen,
+  // weil `tel:` keine verträgt.
+  // WhatsApp und Maps-Link stehen weiter nicht fest. Komponenten, die diese
+  // Werte bräuchten, rendern nicht — bewusst kein Platzhalter.
+  phone: "+43 670 3532122",
+  phoneHref: "tel:+436703532122",
   whatsapp: null,
   googleMapsLink: null,
 };
@@ -556,43 +563,58 @@ export const about = {
 
 // ─── FAQ ─────────────────────────────────────────────────────────────────────
 // Reihenfolge nach Einwandstärke: Geld und Bindung zuerst, Technik danach.
+// Jede Frage trägt eine feste `id`. Sie steht als Anker im Markup, damit andere
+// Seiten auf eine einzelne Frage verlinken können (/fragen#hosting-ssl-updates,
+// Susi 19.08. für die ℹ︎-Verweise von der Preisseite). Die ids sind bewusst von
+// Hand vergeben und NICHT aus dem Fragetext abgeleitet: eine umformulierte Frage
+// darf bestehende Links nicht ins Leere laufen lassen. Wer eine Frage ergänzt,
+// vergibt eine neue id; wer eine entfernt, prüft vorher, wer darauf zeigt.
 export const faq = {
   eyebrow: "Was meistens gefragt wird",
   heading: "Die Fragen, die vor der Zusage kommen.",
   items: [
     {
+      id: "mindestlaufzeit",
       q: "Warum 12 Monate Mindestlaufzeit?",
       a: "Weil die Einrichtung sonst nicht 200 € kosten könnte. Die eigentliche Arbeit steckt am Anfang: Aufbau, Domain, Google-Profil, Struktur. Andere Anbieter verrechnen das einmalig mit 1.790 € aufwärts. Ich verteile es über die Laufzeit. Die Bindung ist der Preis dafür, und sie gilt in beide Richtungen: ich bin die 12 Monate auch für dich da.",
     },
     {
+      id: "website-mitnehmen",
       q: "Kann ich meine Website mitnehmen, wenn ich kündige?",
       a: "Deine Inhalte ja, und zwar kostenlos: Texte, Bilder, Logos, Firmendaten und alle Anfragen, die über die Website hereingekommen sind, bekommst du nach Vertragsende unentgeltlich in einem gängigen Format. Sag mir binnen drei Monaten Bescheid, dann hast du sie binnen vier Wochen. Den Quellcode gibt es gegen eine einmalige Ablöse: 100 € bei Starter, 150 € bei Business, 250 € bei Premium. Damit darfst du die Website unbefristet selbst weiterbetreiben und weiterentwickeln lassen, von wem du willst. Ausgenommen sind Bestandteile von Dritten wie Schriften, Bildmaterial und Softwarebibliotheken, für die du eigene Lizenzen brauchst — welche das sind, weise ich dir bei der Übergabe aus. Die Domain gehört ohnehin von Anfang an dir.",
     },
     {
+      id: "dauer-bis-online",
       q: "Wie lange dauert es, bis meine Website online ist?",
       a: "In der Regel rund zwei Wochen. Was es länger macht, ist fast immer dasselbe: Ich warte auf Texte oder Fotos. Wenn du die parat hast, geht es schnell.",
     },
     {
+      id: "baukasten",
       q: "Kann ich das nicht selbst mit einem Baukasten machen?",
       a: "Du kannst die Website bei mir auch einfach monatlich mieten, statt sie selbst zusammenzubauen: Grundsätzlich ja, und für manche ist das genau richtig. Rechne nur ehrlich mit: Der Baukasten kostet auch monatlich, dazu kommen Domain und meist ein Aufpreis fürs eigene Postfach. Der eigentliche Preis sind die Abende, die du damit verbringst, und danach das Nachpflegen, das erfahrungsgemäß nach ein paar Monaten liegen bleibt.",
     },
     {
+      id: "hosting-ssl-updates",
       q: "Muss ich mich um Hosting, SSL oder Updates kümmern?",
       a: "Nein. Das ist in jedem Paket enthalten und der Grund, warum es überhaupt ein Monatsmodell ist. Du bekommst davon nichts mit, außer dass die Seite läuft.",
     },
     {
+      id: "domain-und-email",
       q: "Sind Domain und E-Mail-Adresse wirklich inklusive?",
       a: "Ja, in allen drei Paketen. Deine Wunsch-.at-Domain, sofern noch frei, und ein Firmen-Postfach darauf. Registrierung und laufende Gebühren übernehme ich, registriert wird sie aber auf dich und nicht auf mich. Nach Vertragsende bekommst du binnen zwei Wochen die Authinfo, mit der du die Domain zu einem Anbieter deiner Wahl mitnimmst; ab dann trägst du die Verlängerungskosten selbst. Nimm den Umzug binnen acht Wochen vor — danach wird die Domain nicht weiter verlängert und kann verfallen.",
     },
     {
+      id: "faktenseite-ki",
       q: "Was ist die Faktenseite für KI-Suche im Premium-Paket?",
       a: "Eine zusätzliche Seite, die speziell für KI-Assistenten wie ChatGPT aufbereitet ist, statt für menschliche Besucher. Immer mehr Menschen fragen KI-Tools statt Google, wenn sie einen Betrieb in der Nähe suchen. Diese Seite sorgt dafür, dass die Antwort stimmt: richtige Öffnungszeiten, richtige Leistungen, richtige Adresse.",
     },
     {
+      id: "seo-in-den-paketen",
       q: "Wie unterscheidet sich die Suchmaschinenoptimierung in den drei Paketen?",
       a: "In allen drei Paketen ist eine SEO-Grundausstattung dabei: saubere Struktur, Seitentitel und Beschreibungen, damit Google versteht, was dein Betrieb macht. Ab Business kommt die lokale SEO-Basis dazu — wichtig, wenn deine Kunden vor allem aus der Umgebung suchen. Bei Premium betreue ich die SEO laufend weiter und du bekommst zusätzlich eine eigene Faktenseite, extra für KI-Assistenten wie ChatGPT aufbereitet, damit die auch die richtigen Infos über deinen Betrieb ausgeben.",
     },
     {
+      id: "zusatzleistungen",
       q: "Was, wenn ich später etwas brauche, das über mein Paket hinausgeht?",
       a: "Dann bekommst du vorher ein Angebot dafür. Es wird nie etwas verrechnet, das du nicht vorher freigegeben hast.",
     },
@@ -617,13 +639,12 @@ export const contact = {
     "Kostenlos und unverbindlich",
     "Kein Verkaufsgespräch, wenn es nicht passt",
   ],
-  // Telefon und WhatsApp stehen bewusst als Platzhaltertext und nicht als
-  // erfundene Ziffernfolge (Marina, 17.08.). Eine falsche Nummer, die jemand
-  // tatsächlich wählt, ist der teurere Fehler. Sobald der Task
-  // "Business-Nummer" durch ist, wandern die echten Werte nach `business`
-  // (phone/whatsapp) und die beiden Platzhalterzeilen fallen weg.
+  // Telefon trägt seit 19.08. die echte Business-Nummer und ist verlinkt.
+  // WhatsApp steht weiter als Platzhaltertext und nicht als erfundene
+  // Ziffernfolge (Marina, 17.08.): eine falsche Nummer, die jemand tatsächlich
+  // wählt, ist der teurere Fehler. Ein Wert ohne `href` wird nicht verlinkt.
   channels: [
-    { label: "Telefon", value: business.phone ?? "Nummer folgt" },
+    { label: "Telefon", value: business.phone ?? "Nummer folgt", href: business.phoneHref },
     { label: "WhatsApp", value: business.whatsapp ?? "Nummer folgt" },
     { label: "E-Mail", value: business.email, href: `mailto:${business.email}` },
   ],

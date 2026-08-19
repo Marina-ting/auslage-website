@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { faq } from "../content/site";
 
 /**
@@ -6,8 +7,30 @@ import { faq } from "../content/site";
  * Nativ per Tastatur bedienbar, von Screenreadern korrekt angekündigt und
  * funktionsfähig, auch wenn JavaScript scheitert. Eine nachgebaute
  * Accordion-Komponente wäre hier nur schlechter.
+ *
+ * Jedes <details> trägt die feste `id` aus `faq.items` (site.js), damit von
+ * außen auf eine einzelne Frage verlinkt werden kann. Der Sprung allein reicht
+ * aber nicht: ein zugeklapptes <details> zeigt nur seine Kopfzeile, die Antwort
+ * bliebe verborgen. Der Effekt unten klappt die adressierte Frage deshalb auf.
+ * Ohne JavaScript springt der Browser trotzdem richtig hin — dann muss man
+ * einmal klicken. Das ist der vertretbare Rest.
  */
 export default function Faq({ headless = false }) {
+  useEffect(() => {
+    function oeffneAdressierteFrage() {
+      const id = decodeURIComponent(window.location.hash.slice(1));
+      if (!id) return;
+      const ziel = document.getElementById(id);
+      if (!(ziel instanceof HTMLDetailsElement)) return;
+      ziel.open = true;
+      ziel.scrollIntoView({ block: "start" });
+    }
+
+    oeffneAdressierteFrage();
+    window.addEventListener("hashchange", oeffneAdressierteFrage);
+    return () => window.removeEventListener("hashchange", oeffneAdressierteFrage);
+  }, []);
+
   return (
     <section className="section" id="fragen">
       <div className="container">
@@ -24,7 +47,8 @@ export default function Faq({ headless = false }) {
           {faq.items.map((item, i) => (
             <details
               className="faq__item reveal"
-              key={item.q}
+              id={item.id}
+              key={item.id ?? item.q}
               style={{ "--reveal-delay": `${Math.min(i, 4) * 50}ms` }}
             >
               <summary>
