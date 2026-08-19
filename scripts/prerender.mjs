@@ -41,6 +41,7 @@ const wurzel = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const {
   render,
   routes,
+  notFoundRoute,
   comingSoon,
   comingSoonMeta,
   siteUrl,
@@ -97,7 +98,15 @@ function metaBlock(route) {
   // Solange irgendetwas an der Seite Platzhalter ist, bleibt die ganze Seite
   // aus dem Index — Rechtstexte eingeschlossen. Beim Go-Live fällt die Zeile
   // von selbst weg, weil `comingSoon` dann false ist.
-  if (comingSoon) zeilen.push('<meta name="robots" content="noindex,nofollow">');
+  //
+  // Danach bleiben die Seiten mit `ausIndex` weiterhin draußen: der AVV und die
+  // 404-Seite. Dort steht `follow` statt `nofollow` — die Seite selbst gehört
+  // nicht in die Ergebnisliste, ihren Links darf ein Crawler trotzdem folgen.
+  if (comingSoon) {
+    zeilen.push('<meta name="robots" content="noindex,nofollow">');
+  } else if (route.ausIndex) {
+    zeilen.push('<meta name="robots" content="noindex,follow">');
+  }
   zeilen.push(`<title>${esc(meta.title)}</title>`);
   zeilen.push(`<meta name="description" content="${esc(meta.description)}">`);
   zeilen.push(`<link rel="canonical" href="${adresse}">`);
@@ -132,7 +141,9 @@ if (!huelle.includes('<div id="root"></div>')) {
 
 await pfadeAbgleichen();
 
-for (const route of routes) {
+// Die 404-Seite läuft mit durch, obwohl sie in `routes` nichts verloren hat:
+// sie hat keine eigene Adresse, sondern hängt in App.jsx an `path="*"`.
+for (const route of [...routes, notFoundRoute]) {
   const inhalt = render(route.pfad);
 
   const seite = huelle
@@ -147,8 +158,66 @@ for (const route of routes) {
   await writeFile(ziel, seite, "utf8");
 }
 
+/**
+ * robots.txt — wird bei jedem Build neu geschrieben, damit sie nicht als tote
+ * Datei in public/ altert.
+ *
+ * Bewusst KEIN `Disallow: /` während der Coming-Soon-Phase, auch wenn es
+ * naheliegt: Wer das Crawlen sperrt, verhindert, dass Google das `noindex` im
+ * Kopf überhaupt liest — die Adresse kann dann trotzdem ohne Inhalt im Index
+ * landen. Das `noindex` ist das schärfere Werkzeug und braucht Zugang, um zu
+ * wirken. Vorgabe von Susi, 19.08.2026.
+ *
+ * Die `Sitemap:`-Zeile hängt am selben Schalter wie die Sitemap selbst.
+ */
+const robotsZeilen = ["User-agent: *", "Allow: /"];
+if (!comingSoon) robotsZeilen.push("", `Sitemap: ${siteUrl}/sitemap.xml`);
+await writeFile(
+  resolve(wurzel, "dist/robots.txt"),
+  `${robotsZeilen.join("\n")}\n`,
+  "utf8"
+);
+
+/**
+ * sitemap.xml — nur bei `comingSoon === false`.
+ *
+ * Solange die Seiten `noindex` tragen, wäre eine Sitemap ein Widerspruch in
+ * sich: sie lädt Google zu Seiten ein, die Google nicht behalten darf. Derselbe
+ * Schalter, der den Platzhalter-Titel und das `noindex` fallen lässt, schaltet
+ * sie ein.
+ *
+ * Die Liste ist dieselbe wie fürs Prerendering, gefiltert auf `ausIndex`. Zwei
+ * Listen, die auseinanderlaufen können, sollen hier nicht entstehen.
+ *
+ * `<loc>` genügt. `<changefreq>` und `<priority>` wertet Google nicht aus.
+ * `<lastmod>` bliebe ein Build-Zeitstempel — eine Angabe, die bei jedem Deploy
+ * stimmt und trotzdem nichts aussagt.
+ */
+const imIndex = routes.filter((route) => !route.ausIndex);
+let sitemapMeldung = "Sitemap: nicht erzeugt (Coming-Soon).";
+
+if (!comingSoon) {
+  const eintraege = imIndex
+    .map((route) => `  <url><loc>${siteUrl}${route.pfad}</loc></url>`)
+    .join("\n");
+  await writeFile(
+    resolve(wurzel, "dist/sitemap.xml"),
+    [
+      '<?xml version="1.0" encoding="UTF-8"?>',
+      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+      eintraege,
+      "</urlset>",
+      "",
+    ].join("\n"),
+    "utf8"
+  );
+  sitemapMeldung = `Sitemap: ${imIndex.length} Adressen.`;
+}
+
 const zustand = comingSoon
   ? "Coming-Soon steht auf true: gesperrte Seiten tragen den Platzhalter-Titel, alle Seiten robots noindex."
   : "Coming-Soon steht auf false: jede Seite trägt ihren echten Titel, keine robots-Sperre.";
 
-console.log(`\nPrerendering: ${routes.length} Seiten geschrieben. ${zustand}\n`);
+console.log(
+  `\nPrerendering: ${routes.length} Seiten + 404-Seite geschrieben. ${zustand} ${sitemapMeldung}\n`
+);

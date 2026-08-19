@@ -4,6 +4,15 @@
   "compatibility_date": "2026-08-06",
   "assets": {
     "directory": "./dist",
-    "not_found_handling": "single-page-application"
+    // "404-page" statt "single-page-application" (19.08.2026): Eine Adresse, die
+    // es nicht gibt, liefert jetzt dist/404.html mit dem Status 404 aus. Vorher
+    // kam dort die Startseite mit Status 200 zurück — ein Soft 404. Solange die
+    // ausgelieferte Datei leer war, war das harmlos; seit dem Prerendering steht
+    // hinter jeder erfundenen Adresse der volle Startseitentext, und Google sähe
+    // beliebig viele Kopien genau der Seite, die ranken soll.
+    // Der Rückfall auf die Single-Page-App wird dafür nicht gebraucht: jede
+    // Route hat seit dem Prerendering ihre eigene Datei, und der Abgleich
+    // App.jsx ↔ routes bricht den Build ab, falls je eine fehlt.
+    "not_found_handling": "404-page"
   }
 }

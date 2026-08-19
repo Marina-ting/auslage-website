@@ -23,4 +23,10 @@ export function render(url) {
 
 // Das Prerender-Skript liest die Seitenliste und die Schalter durch dieses
 // Bundle mit, damit es site.js nicht ein zweites Mal auf eigenem Weg laden muss.
-export { routes, comingSoon, comingSoonMeta, siteUrl } from "./content/site";
+export {
+  routes,
+  notFoundRoute,
+  comingSoon,
+  comingSoonMeta,
+  siteUrl,
+} from "./content/site";

@@ -1234,7 +1234,8 @@ table.simple td {
 }
 
 /* ── Verfügbarkeitsanzeige ────────────────────────────────────────────────
-   Marina-Entscheidung 15.08.: fix grün, Hinweis "verfügbar". Die Stufen für
+   Marina-Entscheidung 15.08.: grün, Hinweis "verfügbar"; seit 19.08. atmet der
+   Punkt zusätzlich (Animation weiter unten). Die Stufen für
    Wartezeit und Ausgelastet sind hier schon angelegt, aber nicht in Betrieb —
    umgeschaltet wird über `availability.state` in site.js, nicht im CSS.
    Der Punkt ist reine Verstärkung: die Aussage trägt der Text, damit sie auch
@@ -1269,9 +1270,32 @@ table.simple td {
 
 .availability--frei .availability__dot {
   background: var(--status-free-dot);
-  /* Weicher Hof statt Blinken — eine pulsierende Animation wäre an dieser
-     Stelle Werbedruck und würde bei prefers-reduced-motion ohnehin wegfallen. */
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--status-free-dot) 22%, transparent);
+}
+
+/* Der Punkt atmet (Marina, 19.08.2026: "der Verfügbar Punkt soll blinken").
+   Bewusst langsames Auf- und Abblenden über 2,4 Sekunden statt hartem Blinken:
+   ein hart blinkendes Element zieht dauerhaft Aufmerksamkeit vom Knopf daneben
+   ab. Der Punkt bleibt in jeder Phase deutlich sichtbar — er wird schwächer,
+   nicht unsichtbar; der Hof weitet sich dabei und wird dünner.
+   Nur die Stufe "frei" bewegt sich: Wartezeit und Ausgelastet sind Zustände,
+   über die man nicht auch noch blinkt. */
+@media (prefers-reduced-motion: no-preference) {
+  .availability--frei .availability__dot {
+    animation: verfuegbar-puls 2.4s ease-in-out infinite;
+  }
+}
+
+@keyframes verfuegbar-puls {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--status-free-dot) 22%, transparent);
+  }
+  50% {
+    opacity: 0.5;
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--status-free-dot) 7%, transparent);
+  }
 }
 
 .availability--wartezeit {

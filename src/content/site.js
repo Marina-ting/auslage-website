@@ -82,7 +82,11 @@ export const proof = {
 };
 
 // ─── Verfügbarkeit ───────────────────────────────────────────────────────────
-// Marina-Entscheidung 15.08.: fix grün mit dem Hinweis "verfügbar". Die drei-
+// Marina-Entscheidung 15.08.: grün mit dem Hinweis "verfügbar".
+// Nachtrag 19.08.: Der Punkt soll sich bewegen ("der Verfügbar Punkt soll
+// blinken"). Gebaut als langsames Atmen, nicht als Blinken — die Animation
+// steht in sections.css unter `verfuegbar-puls` und fällt bei
+// prefers-reduced-motion weg. Die drei-
 // stufige Farblogik (grün verfügbar / gelb Wartezeit / rot ausgelastet) ist als
 // Struktur angelegt, aber noch nicht in Betrieb — umgeschaltet wird über `state`,
 // die Bezeichnungen sind laut Marina noch nicht final.
@@ -318,7 +322,6 @@ export const packages = [
 export const pricingTerms = [
   "Mindestlaufzeit 12 Monate, kündbar mit einem Monat Frist zum Ende des zwölften Vertragsmonats.",
   "Wird nicht gekündigt, läuft der Vertrag auf unbestimmte Zeit weiter — kündbar mit einem Monat Frist zum Monatsletzten.",
-  "Jahreszahlung auf Wunsch, mit 10 % Rabatt auf das Monatshonorar.",
   "Änderungswünsche gelten für den laufenden Monat und verfallen am Monatsende.",
   "Größere Erweiterungen (neue Bereiche oder Funktionen) werden vorher angeboten und separat verrechnet.",
 ];
@@ -593,10 +596,6 @@ export const faq = {
       q: "Was, wenn ich später etwas brauche, das über mein Paket hinausgeht?",
       a: "Dann bekommst du vorher ein Angebot dafür. Es wird nie etwas verrechnet, das du nicht vorher freigegeben hast.",
     },
-    {
-      q: "Kann ich jährlich statt monatlich zahlen?",
-      a: "Ja, mit 10 % Rabatt auf das Monatshonorar.",
-    },
   ],
 };
 
@@ -819,5 +818,29 @@ export const routes = [
   { pfad: "/impressum", datei: "impressum.html", meta: legalMeta("Impressum") },
   { pfad: "/datenschutz", datei: "datenschutz.html", meta: legalMeta("Datenschutz") },
   { pfad: "/agb", datei: "agb.html", meta: legalMeta("AGB") },
-  { pfad: "/avv", datei: "avv.html", meta: legalMeta("AVV") },
+  // `ausIndex: true`: Diese Seite gehört nicht in die Suchergebnisse und nicht
+  // in die Sitemap. Der AVV ist ein Vertrag, kein Aushang — der Footer-Link ist
+  // am 18.08. entfernt worden, übergeben wird die Seite beim Onboarding.
+  // Das `noindex` allein reicht nicht als Weglassen aus der Sitemap, sobald die
+  // Adresse irgendwo verlinkt wird; umgekehrt wäre ein `Disallow` in der
+  // robots.txt falsch, weil ein gesperrter Pfad gar nicht gecrawlt wird und
+  // Google das `noindex` dann nie liest (Susi, 19.08.2026).
+  { pfad: "/avv", datei: "avv.html", ausIndex: true, meta: legalMeta("AVV") },
 ];
+
+// Die 404-Seite steht bewusst NICHT in `routes`: In App.jsx hängt sie an
+// `path="*"` und hat keine eigene Adresse, die abzugleichen wäre. Das
+// Prerendering rendert sie trotzdem einmal fertig nach dist/404.html — von dort
+// liefert Cloudflare sie mit dem Status 404 aus (`not_found_handling` steht in
+// wrangler.jsonc auf "404-page"). Vorher kam bei einer erfundenen Adresse die
+// Startseite mit Status 200 zurück; mit vollem Text dahinter sähe Google
+// beliebig viele Kopien genau der Seite, die ranken soll.
+export const notFoundRoute = {
+  pfad: "/404",
+  datei: "404.html",
+  ausIndex: true,
+  meta: {
+    title: "Seite nicht gefunden – auslage",
+    description: "Diese Seite gibt es nicht. Zurück zur Startseite von auslage.",
+  },
+};
