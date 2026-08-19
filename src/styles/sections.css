@@ -70,6 +70,134 @@
   box-shadow: 0 3px 6px rgba(43, 36, 32, 0.08), 0 26px 56px rgba(35, 70, 54, 0.22);
 }
 
+/* ── Die Auslage in Bewegung (Marina 19.08., Stärkegrad 2 von drei) ───────
+   Vier Bewegungen, alle langsam und alle im Dauerlauf: die Lampe atmet, die
+   Website im Fenster scrollt, eine zweite Lichtbahn zieht über die Scheibe,
+   Türfenster und Markise geben kurze Lebenszeichen. Bewusst KEIN GIF — als
+   CSS auf dem Inline-SVG bleibt die Grafik scharf, kostet keine zusätzliche
+   Anfrage und lässt sich abschalten.
+
+   Hartes Blinken der Lampe war die verworfene Variante: das sieht nach
+   kaputtem Neon aus, nicht nach Feierabend.
+
+   Die Haken sitzen als Klassen in Shopfront.jsx. Jede Bewegung ist ein
+   eigener Block — wer eine davon nicht will, löscht ihren Block, der Rest
+   läuft weiter.
+
+   Alles steht in (prefers-reduced-motion: no-preference): wer Bewegung
+   reduziert hat, bekommt exakt das ruhige Bild von vorher. Deshalb liegt der
+   Ruhezustand auch im Markup und nicht in einem Startbild der Animation. */
+
+@keyframes shopfront-glow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.78;
+  }
+}
+
+/* Die Seite hält oben und unten kurz an, statt endlos zu fahren. */
+@keyframes shopfront-scroll {
+  0%,
+  10% {
+    transform: translateY(0);
+  }
+  42%,
+  60% {
+    transform: translateY(-54px);
+  }
+  93%,
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes shopfront-sheen {
+  0%,
+  52% {
+    transform: translateX(-260px);
+    opacity: 0;
+  }
+  58% {
+    opacity: 0.1;
+  }
+  90% {
+    transform: translateX(330px);
+    opacity: 0.1;
+  }
+  94%,
+  100% {
+    transform: translateX(330px);
+    opacity: 0;
+  }
+}
+
+@keyframes shopfront-door {
+  0%,
+  78% {
+    opacity: 0.24;
+  }
+  85% {
+    opacity: 0.46;
+  }
+  93% {
+    opacity: 0.27;
+  }
+  100% {
+    opacity: 0.24;
+  }
+}
+
+@keyframes shopfront-awning {
+  0%,
+  100% {
+    transform: rotate(-0.55deg);
+  }
+  50% {
+    transform: rotate(0.55deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Lampe */
+  .shopfront .lampGlow,
+  .shopfront .lampBulb {
+    animation: shopfront-glow 5s ease-in-out infinite;
+  }
+
+  /* Fensterlicht und Lichtschein am Boden atmen langsamer und versetzt mit —
+     sonst pulsiert die ganze Fassade im Takt. */
+  .shopfront .winGlow,
+  .shopfront .spill {
+    animation: shopfront-glow 8s ease-in-out infinite;
+    animation-delay: -1.2s;
+  }
+
+  /* Website im Schaufenster */
+  .shopfront .site {
+    animation: shopfront-scroll 15s ease-in-out infinite;
+  }
+
+  /* Wandernde Spiegelung */
+  .shopfront .sheen {
+    animation: shopfront-sheen 10s linear infinite;
+  }
+
+  /* Türfenster */
+  .shopfront .doorLight {
+    animation: shopfront-door 12s ease-in-out infinite;
+  }
+
+  /* Markise: dreht um ihre eigene obere Kante, nicht um die Bildmitte. */
+  .shopfront .awning {
+    transform-box: view-box;
+    transform-origin: 320px 192px;
+    animation: shopfront-awning 8.5s ease-in-out infinite;
+  }
+}
+
 /* ── Fenster-Mock ────────────────────────────────────────────────────────
    Seit 17.08. NICHT mehr im Header — dort steht die Schaufenster-
    Illustration. WindowMock.jsx und diese Regeln bleiben liegen, weil sie

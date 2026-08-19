@@ -39,13 +39,21 @@
      die Business-Nummer ist endgültig (spusu, keine Rufnummernmitnahme).
      Achtung: dieser Block wird beim Bauen NICHT ersetzt, anders als der
      PRERENDER:META-Block darüber. Änderungen an Anschrift, Nummer oder
-     Paketpreisen gehören von Hand auch hierher. -->
+     Paketpreisen gehören von Hand auch hierher.
+
+     Der Bezirk steht seit 19.08.2026 nur noch in "areaServed", nicht mehr in
+     "description": eine Gebietsangabe sagt, wen auslage bedient, ein Fließ-
+     textsatz wird zitiert wie ein Sichttext. Begründung und Beleg im Task
+     "JSON-LD-Beschreibungssatz in index.html" (Susi). Kommentare gehen mit
+     ins ausgelieferte HTML, deshalb hier kurz. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "auslage",
-  "description": "Website-as-a-Service für lokale Betriebe im Bezirk Baden und Triestingtal.",
+  "description": "Websites für lokale Betriebe im Triestingtal: mieten statt kaufen, ab 200 € Einrichtung und 50 € im Monat, Domain, Hosting und Wartung inklusive. Aus Berndorf in Niederösterreich.",
+  "url": "https://auslage.io",
+  "logo": "https://auslage.io/images/auslage-logo.png",
   "founder": { "@type": "Person", "name": "Marina Zaiser" },
   "telephone": "+436703532122",
   "email": "office@auslage.io",

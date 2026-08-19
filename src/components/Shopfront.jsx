@@ -9,6 +9,15 @@
  *
  * Bewusst inline statt als Datei: keine zusätzliche Anfrage, die Markenfarben
  * bleiben im Code sichtbar, und die Grafik skaliert verlustfrei.
+ *
+ * Seit 19.08. bewegt sich die Grafik (Marina, Stärkegrad 2 von drei gebauten):
+ * die Lampe atmet, die Website im Fenster scrollt, eine Spiegelung wandert über
+ * die Scheibe, Türfenster und Markise geben kurze Lebenszeichen. Die Bewegung
+ * steckt komplett im CSS (.shopfront-Regeln in sections.css) — kein GIF, keine
+ * zusätzliche Datei, und bei "Bewegung reduzieren" bleibt exakt das ruhige Bild
+ * von vorher stehen. Hier im Markup stehen nur die Haken dafür: die Klassen
+ * lampGlow / lampBulb / winGlow / spill / site / sheen / doorLight / awning.
+ * Wird eine davon umbenannt, hört die jeweilige Bewegung stillschweigend auf.
  */
 export default function Shopfront() {
   return (
@@ -45,6 +54,11 @@ export default function Shopfront() {
           <clipPath id="paneClip">
             <rect x="84" y="266" width="348" height="184" rx="8" />
           </clipPath>
+          {/* Etwas weiter als paneClip: hält die wandernde Spiegelung im Glas,
+              nicht auf der Fassade. */}
+          <clipPath id="glassClip">
+            <rect x="72" y="262" width="388" height="192" rx="8" />
+          </clipPath>
           <clipPath id="sceneClip">
             <rect x="0" y="0" width="640" height="580" rx="22" />
           </clipPath>
@@ -63,20 +77,22 @@ export default function Shopfront() {
           <rect x="36" y="126" width="568" height="10" fill="#234636" />
           <rect x="36" y="470" width="568" height="14" fill="#234636" />
 
-          {/* Markise */}
-          <path d="M20 196 H620 V232 Q620 242 610 242 H30 Q20 242 20 232 Z" fill="#d9773f" />
-          <path d="M20 236 q22 18 44 0 q22 18 44 0 q22 18 44 0 q22 18 44 0 q22 18 44 0 q22 18 44 0 q22 18 44 0 q22 18 44 0 q22 18 44 0 q22 18 44 0 q22 18 44 0 q22 18 44 0 q22 18 44 0 q22 18 44 0 V232 H20 Z" fill="#b45a26" />
-          <rect x="20" y="192" width="600" height="6" rx="3" fill="#a34f20" opacity="0.5" />
+          {/* Markise — schwingt minimal um ihre obere Kante (CSS: .awning) */}
+          <g className="awning">
+            <path d="M20 196 H620 V232 Q620 242 610 242 H30 Q20 242 20 232 Z" fill="#d9773f" />
+            <path d="M20 236 q22 18 44 0 q22 18 44 0 q22 18 44 0 q22 18 44 0 q22 18 44 0 q22 18 44 0 q22 18 44 0 q22 18 44 0 q22 18 44 0 q22 18 44 0 q22 18 44 0 q22 18 44 0 q22 18 44 0 q22 18 44 0 V232 H20 Z" fill="#b45a26" />
+            <rect x="20" y="192" width="600" height="6" rx="3" fill="#a34f20" opacity="0.5" />
+          </g>
 
           {/* Wandlampe links */}
-          <circle cx="70" cy="176" r="46" fill="url(#lamp)" />
-          <rect x="64" y="164" width="12" height="16" rx="4" fill="#f5c9a8" />
+          <circle className="lampGlow" cx="70" cy="176" r="46" fill="url(#lamp)" />
+          <rect className="lampBulb" x="64" y="164" width="12" height="16" rx="4" fill="#f5c9a8" />
 
           {/* Licht aus dem Fenster */}
-          <circle cx="258" cy="358" r="250" fill="url(#lamp)" />
+          <circle className="winGlow" cx="258" cy="358" r="250" fill="url(#lamp)" />
 
           {/* Lichtschein auf dem Gehsteig */}
-          <polygon points="72,456 460,456 576,580 -44,580" fill="url(#spill)" />
+          <polygon className="spill" points="72,456 460,456 576,580 -44,580" fill="url(#spill)" />
 
           {/* Schaufenster */}
           <rect x="60" y="250" width="412" height="216" rx="12" fill="#234636" />
@@ -85,33 +101,63 @@ export default function Shopfront() {
           {/* Heller Rahmen: die Scheibe leuchtet nach außen */}
           <rect x="68" y="258" width="396" height="200" rx="10" fill="none" stroke="#f7d4b6" strokeWidth="3" opacity="0.6" />
 
-          {/* Im Fenster: die Website */}
+          {/* Im Fenster: die Website. Die Gruppe .site fährt langsam nach oben
+              und wieder zurück — wie eine Seite, durch die jemand blättert.
+              Alles unterhalb von y=450 liegt im Stillstand hinter dem Clip und
+              wird erst beim Scrollen sichtbar; ohne diesen Nachschub wäre unter
+              der fahrenden Seite ein leeres Loch. */}
           <g clipPath="url(#paneClip)">
-            <rect x="86" y="278" width="360" height="76" rx="7" fill="#2f5d50" />
-            <rect x="102" y="296" width="216" height="9" rx="4.5" fill="#fbf6ee" opacity="0.95" />
-            <rect x="102" y="311" width="152" height="9" rx="4.5" fill="#fbf6ee" opacity="0.5" />
-            <rect x="102" y="327" width="86" height="16" rx="8" fill="#d9773f" />
+            <g className="site">
+              <rect x="86" y="278" width="360" height="76" rx="7" fill="#2f5d50" />
+              <rect x="102" y="296" width="216" height="9" rx="4.5" fill="#fbf6ee" opacity="0.95" />
+              <rect x="102" y="311" width="152" height="9" rx="4.5" fill="#fbf6ee" opacity="0.5" />
+              <rect x="102" y="327" width="86" height="16" rx="8" fill="#d9773f" />
 
-            {[0, 1, 2].map((i) => (
-              <g key={i}>
-                <rect
-                  x={86 + i * 122}
-                  y="370"
-                  width="110"
-                  height="56"
-                  rx="7"
-                  fill="#f3ecdd"
-                  stroke="#e0d8c6"
-                  strokeWidth="1.5"
-                />
-                <rect x={100 + i * 122} y="382" width="66" height="7" rx="3.5" fill="#cfc4ac" />
-                <rect x={100 + i * 122} y="396" width="82" height="7" rx="3.5" fill="#e0d8c6" />
-              </g>
-            ))}
+              {[0, 1, 2].map((i) => (
+                <g key={i}>
+                  <rect
+                    x={86 + i * 122}
+                    y="370"
+                    width="110"
+                    height="56"
+                    rx="7"
+                    fill="#f3ecdd"
+                    stroke="#e0d8c6"
+                    strokeWidth="1.5"
+                  />
+                  <rect x={100 + i * 122} y="382" width="66" height="7" rx="3.5" fill="#cfc4ac" />
+                  <rect x={100 + i * 122} y="396" width="82" height="7" rx="3.5" fill="#e0d8c6" />
+                </g>
+              ))}
+
+              {/* Fortsetzung der Seite — nur während der Bewegung sichtbar */}
+              <rect x="86" y="458" width="150" height="9" rx="4.5" fill="#8fa79b" />
+              <rect x="86" y="476" width="300" height="8" rx="4" fill="#cfc4ac" />
+              <rect x="86" y="492" width="256" height="8" rx="4" fill="#e0d8c6" />
+
+              <rect x="86" y="506" width="172" height="70" rx="7" fill="#f3ecdd" stroke="#e0d8c6" strokeWidth="1.5" />
+              <rect x="100" y="520" width="96" height="8" rx="4" fill="#cfc4ac" />
+              <rect x="100" y="536" width="128" height="7" rx="3.5" fill="#e0d8c6" />
+              <rect x="274" y="506" width="172" height="70" rx="7" fill="#2f5d50" />
+              <rect x="290" y="522" width="104" height="8" rx="4" fill="#fbf6ee" opacity="0.9" />
+              <rect x="290" y="540" width="72" height="14" rx="7" fill="#d9773f" />
+
+              <rect x="86" y="596" width="360" height="52" rx="7" fill="#e6ddcb" />
+              <rect x="102" y="612" width="120" height="7" rx="3.5" fill="#cfc4ac" />
+              <rect x="102" y="626" width="180" height="7" rx="3.5" fill="#d8cfbc" />
+            </g>
           </g>
 
           {/* Spiegelung in der Scheibe — eine schräge Lichtbahn */}
           <polygon points="316,262 372,262 212,454 156,454" fill="#ffffff" opacity="0.06" />
+
+          {/* Zweite, wandernde Lichtbahn: zieht alle paar Sekunden einmal über
+              die Scheibe und ist sonst unsichtbar (opacity 0). Die feste
+              Spiegelung darüber bleibt unangetastet — steht die Bewegung, sieht
+              das Fenster aus wie vorher. */}
+          <g clipPath="url(#glassClip)">
+            <polygon className="sheen" points="316,262 372,262 212,454 156,454" fill="#ffffff" opacity="0" />
+          </g>
 
           {/* Fensterbank / Ablage — dieselbe Linie wie im Markenicon */}
           <rect x="52" y="456" width="428" height="10" rx="5" fill="#d9773f" />
@@ -119,7 +165,7 @@ export default function Shopfront() {
           {/* Tür */}
           <rect x="492" y="250" width="88" height="234" rx="10" fill="#234636" stroke="#4a7a6b" strokeWidth="2" />
           <rect x="506" y="270" width="60" height="104" rx="6" fill="#3d6a5b" />
-          <rect x="506" y="270" width="60" height="104" rx="6" fill="#f5c9a8" opacity="0.24" />
+          <rect className="doorLight" x="506" y="270" width="60" height="104" rx="6" fill="#f5c9a8" opacity="0.24" />
           <circle cx="570" cy="398" r="5" fill="#f5c9a8" opacity="0.85" />
 
           {/* Gehsteig */}
