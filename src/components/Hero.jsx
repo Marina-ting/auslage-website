@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { availability, hero } from "../content/site";
+import { availability, business, hero } from "../content/site";
 import Shopfront from "./Shopfront";
 
 export default function Hero() {
@@ -25,6 +25,25 @@ export default function Hero() {
               <Link className="btn btn--primary" to={hero.primaryCta.href}>
                 {hero.primaryCta.label}
               </Link>
+              {/* Runder Telefon-Knopf neben dem Haupt-CTA. Er ist kein zweiter
+                  Knopf im Sinn der Entscheidung von oben: er stellt keine
+                  zweite Frage, sondern bietet denselben ersten Schritt auf dem
+                  anderen Kanal an — für Betriebe, die lieber anrufen. Rendert
+                  nur, wenn es eine echte Nummer gibt; ohne Sichttext ist das
+                  aria-label die einzige Beschriftung und darf nicht wegfallen. */}
+              {hero.phoneCta && business.phoneHref && (
+                <a
+                  className="btn btn--secondary btn--icon"
+                  href={business.phoneHref}
+                  aria-label={`${hero.phoneCta.label}: ${business.phone}`}
+                  title={`${hero.phoneCta.label}: ${business.phone}`}
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M6.4 3.6h3.1l1.5 3.8-1.9 1.4a12.2 12.2 0 0 0 5.1 5.1l1.4-1.9 3.8 1.5v3.1a1.9 1.9 0 0 1-2.1 1.9A16.6 16.6 0 0 1 4.5 5.7a1.9 1.9 0 0 1 1.9-2.1Z" />
+                  </svg>
+                </a>
+              )}
+
               <Link className="link-quiet" to={hero.secondaryLink.href}>
                 {hero.secondaryLink.label}
               </Link>

@@ -161,6 +161,14 @@ export const hero = {
   // Die Zusage zur Antwortzeit steht nicht mehr hier, sondern unten im
   // Kontaktblock, dort, wo tatsächlich abgeschickt wird.
   ctaNote: "Kostenlos und unverbindlich.",
+  // Der zweite Weg für alle, die lieber anrufen als tippen — Element 5 aus
+  // Herr Rats Gestaltungsliste. Am 18.08. bewusst weggelassen, weil es keine
+  // Nummer gab; die spusu-Wertkarte ist am 19.08. bestellt und die Nummer steht
+  // seither in `business.phone`. Der Knopf trägt keinen Sichttext, deshalb
+  // stehen hier nur die zwei Wörter für aria-label und Mauszeiger; die Nummer
+  // selbst hängt der Kopfbereich daraus an, damit sie an einer Stelle bleibt.
+  // Ohne `business.phoneHref` rendert der Knopf nicht.
+  phoneCta: { label: "Anrufen" },
 };
 
 // ─── Block 2: Vertrauensleiste ───────────────────────────────────────────────

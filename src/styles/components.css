@@ -92,6 +92,23 @@
   border-color: rgba(251, 246, 238, 0.7);
 }
 
+/* Runder Icon-Knopf: derselbe Knopf, nur ohne Beschriftung — er erbt Höhe,
+   Radius, Rahmen und Übergänge von `.btn` und `.btn--secondary`. Bisher nur
+   für das Telefon im Kopfbereich (Element 5 aus Herr Rats Gestaltungsliste).
+   Wer ihn woanders einsetzt: OHNE Sichttext ist das `aria-label` die einzige
+   Beschriftung — fehlt es, ist der Knopf für Screenreader stumm. */
+.btn--icon {
+  width: 3rem;
+  min-width: 3rem;
+  padding: 0;
+  flex: none;
+}
+
+.btn--icon svg {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
 .btn-row {
   display: flex;
   flex-wrap: wrap;

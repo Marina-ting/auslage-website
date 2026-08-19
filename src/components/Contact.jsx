@@ -4,11 +4,16 @@ import { contact, business, cta } from "../content/site";
 /**
  * Kontaktformular ohne Backend.
  *
- * Es gibt noch kein Formular-Backend und office@auslage.io ist nicht aktiv
- * (siehe PRODUCT.md). Statt ein Absenden vorzutäuschen, das im Nichts landet,
- * baut das Formular eine fertige E-Mail und öffnet das Mailprogramm. Das steht
- * auch so unter dem Formular — Kunden merken den Unterschied sofort, und eine
- * verlorene Anfrage kostet mehr als ein ehrlicher Hinweis.
+ * Es gibt noch kein Formular-Backend. Statt ein Absenden vorzutäuschen, das im
+ * Nichts landet, baut das Formular eine fertige E-Mail und öffnet das
+ * Mailprogramm. Das steht auch so unter dem Formular — Kunden merken den
+ * Unterschied sofort, und eine verlorene Anfrage kostet mehr als ein ehrlicher
+ * Hinweis.
+ *
+ * Hier stand bis 19.08. zusätzlich "office@auslage.io ist nicht aktiv (siehe
+ * PRODUCT.md)". Das stimmt nicht mehr: `business.emailActive` in site.js steht
+ * auf true, mit Quelle (Cloudflare-Mail-Routing live seit 08.08.). Der mailto-
+ * Weg landet also in einem echten Postfach; was fehlt, ist allein das Backend.
  *
  * Sobald ein Backend steht: handleSubmit auf fetch() umstellen und den
  * mailtoNote-Text in site.js entfernen.
@@ -57,11 +62,12 @@ export default function Contact() {
             </ul>
 
             {/* Telefon, WhatsApp und Mail gleichrangig nebeneinander, wie die
-                Blockfolge es verlangt. Telefon und WhatsApp tragen sichtbaren
-                Platzhaltertext statt einer erfundenen Nummer — eine falsche
-                Nummer, die jemand tatsächlich wählt, ist der teurere Fehler
-                (Marina, 17.08.). Ein Wert ohne `href` wird deshalb bewusst
-                nicht verlinkt. */}
+                Blockfolge es verlangt. Seit 19.08. haben alle drei einen echten
+                Wert und einen `href`; Platzhaltertext steht hier keiner mehr.
+                Die Regel dahinter gilt weiter und ist der Grund für den
+                `href`-Zweig unten: ein Kanal ohne `href` wird als stiller Text
+                ausgegeben statt als Link — eine erfundene Nummer, die jemand
+                tatsächlich wählt, ist der teurere Fehler (Marina, 17.08.). */}
             <dl className="contact__channels">
               {contact.channels.map((channel) => (
                 <div className="contact__channel" key={channel.label}>
