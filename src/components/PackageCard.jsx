@@ -1,8 +1,17 @@
 import { Link } from "react-router-dom";
 
+import GlossarText, { ohneGlossar } from "../lib/glossar";
+
 /**
  * Paketkarte. `detailed` schaltet die vollständige Leistungsliste frei —
  * auf der Startseite die Kurzform, auf der Preisseite alles.
+ *
+ * Die Merkmalszeilen laufen durch `GlossarText`: In der Starter-Liste stehen die
+ * Fachwörter nackt da (".at-Endung", "Hosting", "SSL", "Google-Business-Profil",
+ * "SEO"), anders als in `included` auf /preise, wo der Satz daneben sie schon
+ * erklärt. Genau dort sitzen deshalb die fünf Marker — siehe src/lib/glossar.jsx.
+ * `ohneGlossar` liefert den Klartext für den `key`, damit der Schlüssel stabil
+ * bleibt und nicht die Schreibweise enthält.
  */
 export default function PackageCard({ pkg, detailed = false, delay = 0 }) {
   const features = detailed ? pkg.features : pkg.features.slice(0, 4);
@@ -33,8 +42,8 @@ export default function PackageCard({ pkg, detailed = false, delay = 0 }) {
             const text = typeof f === "string" ? f : f.text;
             const tag = typeof f === "string" ? null : f.tag;
             return (
-              <li key={text}>
-                {text}
+              <li key={ohneGlossar(text)}>
+                <GlossarText text={text} />
                 {tag && <span className="checklist__tag">{tag}</span>}
               </li>
             );

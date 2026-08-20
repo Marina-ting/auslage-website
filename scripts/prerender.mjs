@@ -162,9 +162,11 @@ function faqSchema(route) {
  * `provider` verweist per `@id` auf den Betrieb aus index.html, statt Anschrift
  * und Telefonnummer ein zweites Mal hinzuschreiben. Zwei Kopien derselben
  * Angabe laufen irgendwann auseinander; ein Verweis nicht.
- * `areaServed` nennt ausschließlich Gemeindenamen. **Kein Bezirk** — der steht
- * allein im `areaServed` des Betriebs in index.html (Marina, 18.08.2026:
- * nirgends soll behauptet werden, dass die Orte im Bezirk Baden liegen).
+ * `areaServed` nennt ausschließlich Gemeindenamen. **Kein Bezirk** — und zwar
+ * nirgends mehr: seit Marinas Nadelöhr-Entscheidung vom 20.08.2026 (Option B)
+ * ist der Bezirk Baden auch aus dem `areaServed` des Betriebs in index.html
+ * verschwunden, dort steht nur noch das Triestingtal. Ein Bezirksname braucht
+ * ab jetzt überall eine neue Entscheidung von Marina.
  *
  * Rich Results bringt das keine. Es macht maschinenlesbar, was die Seite
  * ohnehin sagt: welche Leistung, für welchen Ort, von wem.

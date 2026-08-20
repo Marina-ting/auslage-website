@@ -504,6 +504,15 @@
   background: var(--terracotta);
 }
 
+/* Klappt in einer Zeile eine Glossar-Erklärung auf, wächst die Zeile um mehrere
+   Zeilen. Das Häkchen sitzt sonst (top: 50%) plötzlich in der Mitte des ganzen
+   Blocks statt neben der ersten Zeile. Hier wird es für diesen Fall an die
+   erste Zeile geheftet. */
+.checklist li:has(.gloss__body:not([hidden]))::before {
+  top: 0.8em;
+  transform: none;
+}
+
 /* Dezente Outline-Pille für einzelne, hervorzuhebende Features (z. B. "Neu").
    Bewusst als Umriss statt Vollfläche, damit sie nicht mit .pkg__badge
    (der Empfehlungsbadge, seit 17.08. in Teal) um Aufmerksamkeit konkurriert. */
@@ -520,6 +529,91 @@
   color: var(--terracotta-text);
   vertical-align: middle;
   white-space: nowrap;
+}
+
+/* ── Inline-Glossar ───────────────────────────────────────────────────────── */
+/* Ein Fachwort im Fließtext, das seine Erklärung an Ort und Stelle aufklappt.
+   Markup und Begründung stehen in src/lib/glossar.jsx.
+
+   Farbe: TEAL, nicht Terrakotta. Der Marker öffnet etwas, ist also Handlung,
+   und Handlung trägt seit 17.08. Teal (Branding, "Aktionsfarbe"). Terrakotta
+   bleibt Schmuck — es trägt in diesem Projekt keine Klicks mehr. Das Häkchen
+   der Zeile daneben (.checklist li::before) ist deshalb weiter terrakotta.
+
+   Der Knopf erbt Schriftgröße und Zeilenhöhe vom Text, damit er die Zeile nicht
+   auseinanderdrückt: ein Marker mitten im Satz darf den Zeilenfall nicht
+   ändern, sonst springt die Liste beim Aufklappen. */
+.gloss__btn {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  line-height: inherit;
+  color: var(--teal);
+  text-decoration: underline dotted currentColor;
+  text-underline-offset: 0.18em;
+  cursor: pointer;
+}
+
+.gloss__btn:hover {
+  color: var(--teal-deep);
+  text-decoration-style: solid;
+}
+
+/* Das ⓘ ist als eigener Kreis gebaut statt als Zeichen aus der Schrift: das
+   Unicode-ⓘ fehlt in Inter und würde aus einer Ersatzschrift kommen, also in
+   jedem Browser anders groß aussehen. */
+.gloss__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.95em;
+  height: 0.95em;
+  margin-left: 0.28em;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-family: var(--font-body);
+  font-size: 0.7em;
+  font-weight: 700;
+  line-height: 1;
+  vertical-align: 0.12em;
+}
+
+.gloss__btn[aria-expanded="true"] .gloss__mark {
+  background: var(--teal);
+  color: var(--cream);
+  border-color: var(--teal);
+}
+
+/* Die Erklärung steht IMMER im Markup und wird nur mit dem hidden-Attribut
+   weggeblendet (siehe glossar.jsx). Deshalb muss die [hidden]-Regel hier
+   ausdrücklich stehen: eine display-Angabe aus dem Autoren-Stylesheet schlägt
+   sonst die Browser-Voreinstellung für [hidden], und die Erklärung stünde immer
+   offen da. */
+.gloss__body {
+  display: block;
+  margin: 0.5rem 0 0.15rem;
+  padding: 0.6rem 0.8rem;
+  border-left: 3px solid var(--terracotta);
+  border-radius: 0 8px 8px 0;
+  background: var(--cream-deep);
+  font-size: 0.93rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+/* Der Begriff wird im Kasten wiederholt: Knopf und Erklärung stehen nicht
+   nebeneinander (der Kasten klappt am Zeilenende auf), sonst wüsste man bei
+   zwei offenen Erklärungen nicht mehr, welche zu welchem Wort gehört. */
+.gloss__wort {
+  color: var(--teal-deep);
+  font-weight: 600;
+}
+
+.gloss__body[hidden] {
+  display: none;
 }
 
 /* ── Formular ─────────────────────────────────────────────────────────────── */

@@ -275,6 +275,34 @@ export const included = {
   ],
 };
 
+// ─── Glossar (Inline-Marker) ─────────────────────────────────────────────────
+// Fünf Fachwörter, die im Text ein aufklappbares ⓘ tragen. Die Auswahl ist
+// Susis (20.08.2026), ausgezählt am ausgelieferten HTML: Domain (13×), SEO (7×),
+// Hosting (5×), SSL (3×), Google-Business-Profil (3×). Fünf sind die Obergrenze
+// und bewusst gesetzt — ab dem sechsten Marker liest sich die Seite wie ein
+// Beipackzettel. "Quellcode" und "Backup" stehen absichtlich NICHT hier: an
+// ihren Fundstellen erklärt der Satz sie schon mit.
+//
+// Gesetzt werden die Marker mit der Schreibweise [[schlüssel|sichtbares Wort]]
+// direkt im Sichttext; aufgelöst wird sie in src/lib/glossar.jsx. Wer einen
+// Schlüssel hier umbenennt, muss auch die Marker im Text nachziehen — ein
+// unbekannter Schlüssel lässt still nur das Wort stehen, ohne Erklärung.
+//
+// Die Texte sind bewusst kurz (zwei bis drei Sätze) und beantworten die Frage
+// "was heißt das für mich", nicht "wie funktioniert das technisch".
+export const glossar = {
+  domain:
+    "Die Adresse deiner Website, also das, was jemand in die Adresszeile tippt, um bei dir zu landen: zum Beispiel dein-betrieb.at. Registriert wird sie auf deinen Namen, nicht auf meinen. Gebühren und Verwaltung liegen bei mir, die Domain bei dir.",
+  hosting:
+    "Der Platz, auf dem deine Website liegt, damit sie Tag und Nacht erreichbar ist. Ohne Hosting gäbe es die Seite nur auf einem Rechner bei mir. Platz, Technik und Gebühren stecken im Monatspreis.",
+  ssl:
+    "Das kleine Schloss links in der Adresszeile. Es zeigt, dass die Verbindung verschlüsselt ist: Was jemand in dein Kontaktformular tippt, kann unterwegs niemand mitlesen. Fehlt es, warnt der Browser deine Besucher, bevor sie die Seite überhaupt sehen.",
+  seo:
+    "Kurz für Suchmaschinenoptimierung. Gemeint ist alles, damit Google versteht, was dein Betrieb macht und wo er ist: Seitentitel, Beschreibungen und eine saubere Struktur. Ohne das steht deine Seite zwar im Netz, wird aber kaum gefunden.",
+  googleProfil:
+    "Der Eintrag, der bei einer Suche rechts neben den Ergebnissen und in Google Maps auftaucht, mit Adresse, Öffnungszeiten, Telefonnummer und Fotos. Er ist von deiner Website unabhängig und wird in jedem Paket mit eingerichtet.",
+};
+
 // ─── Pakete ──────────────────────────────────────────────────────────────────
 // Notion → Preismodell, Stand 2026-08-05.
 // "Business" ist als Empfehlung markiert, nicht als Bestseller: mit einem Betrieb
@@ -289,10 +317,17 @@ export const packages = [
     features: [
       "Startseite plus bis zu 2 weitere Bereiche",
       // 18.08.: mehrere Adressen, ein Postfach — siehe included.items[0].
-      "Wunschadresse mit .at-Endung & E-Mail-Adressen darauf, inklusive",
-      "Hosting, SSL & laufende Wartung",
-      "Google-Business-Profil eingerichtet",
-      "SEO-Grundausstattung",
+      // Die [[…]]-Marker sind das Inline-Glossar (src/lib/glossar.jsx). Sie
+      // stehen nur in der Starter-Liste: Business und Premium sagen "Alles aus
+      // Starter", die Wörter kämen also sonst dreimal mit demselben ⓘ.
+      // Sichtbar sind sie damit genau auf /preise — die Paketkarten stehen seit
+      // dem Startseiten-Umbau vom 17.08. nur noch dort. Kommt eine Karte je
+      // zurück auf die Startseite, prüfen: PackageCard zeigt ohne `detailed`
+      // nur die ersten vier Zeilen, die SEO-Zeile fiele dann weg.
+      "Wunschadresse mit [[domain|.at-Endung]] & E-Mail-Adressen darauf, inklusive",
+      "[[hosting|Hosting]], [[ssl|SSL]] & laufende Wartung",
+      "[[googleProfil|Google-Business-Profil]] eingerichtet",
+      "[[seo|SEO]]-Grundausstattung",
       "Kontakt per Telefon-, Mail- und WhatsApp-Link",
       "bis zu 1 Änderungswunsch pro Monat, umgesetzt in 5 Werktagen",
     ],
@@ -884,8 +919,12 @@ export const pricingPage = {
     "Drei Pakete mit festem Monatspreis: ab 200 € Einrichtung und 50 € im Monat, inklusive Domain, Hosting, Wartung und Änderungen. Keine versteckten Kosten.",
   eyebrow: "Preise",
   heading: "Was es kostet, und was dafür drin ist.",
+  // Fassung 3 (Mark), von Marina am 19.08.2026 im Nadelöhr freigegeben mit der
+  // Auflage „A aber ohne genauen Preise" — daher „zum festen Monatspreis" statt
+  // eines Betrags. Der Satz muss allein verständlich sein: die H1 darüber besteht
+  // nur aus Fürwörtern (Susis Bitte vom 19.08.).
   intro:
-    "Du mietest deine Website quasi, statt sie einmalig zu kaufen — ohne hohe Startkosten, monatlich kündbar nach dem ersten Jahr. Drei Pakete, alle Preise offen. Kein Angebot auf Anfrage, keine Staffelung nach Betriebsgröße und nichts, was erst im Gespräch dazukommt.",
+    "Deine Website mietest du bei mir zum festen Monatspreis, statt sie einmalig zu kaufen. Keine hohen Startkosten, nach dem ersten Jahr monatlich kündbar. Drei Pakete, alle Preise offen. Kein Angebot auf Anfrage, keine Staffelung nach Betriebsgröße und nichts, was erst im Gespräch dazukommt.",
   anchor: {
     heading: "Zum Einordnen",
     text: `Vergleichbare Websites kosten bei anderen Anbietern ${proof.marktSetupVon} bis ${proof.marktSetupBis} einmalig, bevor überhaupt eine monatliche Betreuung dazukommt. auslage startet bei 200 € Einrichtung und 50 € im Monat, dafür mit Mindestlaufzeit.`,
