@@ -1539,60 +1539,66 @@ table.simple td {
 .trust__grid {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
-  gap: clamp(0.9rem, 0.7rem + 0.9vw, 1.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: clamp(0.8rem, 0.6rem + 0.7vw, 1.1rem);
 }
 
-/* Seit 20.08.2026 echte Kacheln statt vier schwebender Textblöcke (Marina,
-   19.08.: "der bereich direkt unter dem header … schaut so klein und
-   unscheinbar aus, dabei sollte er knallen"). Die Präsenz trägt jetzt die
-   Fläche — heller Karton auf dem abgesetzten Band, Rand, weicher Schatten —
-   und nicht mehr die Schriftfarbe. Genau das war Marinas zweiter Punkt:
-   Der Text stand vorher in --ink bei 500, also dunkler UND schwerer als der
-   Absatz im Kopfbereich direkt darüber (der ist .lead und damit --ink-muted).
-   Wer die Kacheln wieder ausbaut, muss die Hervorhebung woanders unterbringen,
-   sonst fällt das Band in dieselbe Unscheinbarkeit zurück. */
+/* Flache, dichte Kacheln seit 20.08.2026, nachmittags. Marina hat aus drei
+   vorgelegten Varianten gewählt ("b ist gut"); die Vergleichsseite liegt als
+   trust-varianten.html im waas-Ordner.
+
+   Vorgeschichte in zwei Schritten: erst vier schwebende Textblöcke, dann am
+   Vormittag hohe Kacheln — und die waren immer noch zu leise. Der Befund an der
+   gebauten Seite: creme Kachel auf creme Band gibt kaum Helligkeitsunterschied,
+   und die Kachel war rund doppelt so hoch wie ihr Inhalt, weil das Icon ÜBER
+   dem Text stand.
+
+   Deshalb jetzt: Icon NEBEN dem Text (eine Zeile statt zwei Etagen), halbe
+   Höhe, Terrakotta-Kante links als Farbe anstelle des großen Icon-Kreises.
+   Der Text steht wieder in --ink statt --ink-muted; die Rücksicht auf den
+   .lead-Absatz im Kopfbereich darüber ist hinfällig, seit die Kachel über ihre
+   Kante gelesen wird und nicht mehr über die Schriftfarbe.
+
+   Wer die Kante entfernt, nimmt der Leiste ihre einzige Farbe. Dann muss die
+   Hervorhebung woanders hin, sonst fällt das Band in die Unscheinbarkeit
+   zurück, aus der es zweimal herausgeholt wurde. */
 .trust__item {
-  display: grid;
-  gap: 0.9rem;
-  justify-items: start;
-  padding: clamp(1.15rem, 0.95rem + 0.7vw, 1.6rem);
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.95rem 1.1rem;
   background: var(--cream);
   border: 1px solid var(--border);
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow-soft);
+  border-left: 3px solid var(--terracotta);
+  border-radius: 10px;
 }
 
-/* Kreis mit Strichicon. Auf der hellen Kachel wäre ein cremefarbener Kreis
-   unsichtbar geworden, deshalb trägt er jetzt die Akzentfarbe als Fläche:
-   --terracotta-text auf --terracotta-light steht bei 3,7:1 und damit über der
-   3:1-Grenze für Grafik. Die Icons bleiben aria-hidden — die Kachel liest sich
-   als Text vollständig, die Farbe ist Zugabe, nicht Aussage. */
+/* Kein gefüllter Kreis mehr, nur noch das Strichicon in der Akzentfarbe.
+   --terracotta-text auf --cream steht bei 5,3:1 (gerechnet, nicht geschätzt)
+   und damit weit über der 3:1-Grenze für Grafik. Die feste Breite hält die
+   Textkanten aller vier Kacheln auf einer Linie, auch wenn ein Icon schmaler
+   zeichnet. Die Icons bleiben aria-hidden, die Kachel liest sich als Text
+   vollständig. */
 .trust__icon {
   display: grid;
   place-items: center;
-  width: 3.2rem;
-  height: 3.2rem;
+  width: 2.3rem;
+  height: 2.3rem;
   flex: none;
-  border-radius: 50%;
-  background: var(--terracotta-light);
-  border: 1px solid var(--terracotta-light);
   color: var(--terracotta-text);
 }
 
 .trust__icon svg {
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 1.55rem;
+  height: 1.55rem;
 }
 
-/* --ink-muted statt --ink: der Absatz im Kopfbereich darüber steht ebenfalls in
-   diesem Ton, das Band bricht also nicht mehr mit einer dunkleren Textstufe
-   heraus. Die 500 bleiben — "man kann ihn schon etwas hervorheben" (Marina).
-   6,8:1 auf --cream, damit deutlich über AA. */
+/* Kein max-width mehr: in der Zeilenform bestimmt die Kachelbreite den Umbruch,
+   eine zweite Grenze daneben würde nur Löcher reißen. */
 .trust__text {
   font-weight: 500;
-  color: var(--ink-muted);
-  max-width: 15rem;
+  color: var(--ink);
+  line-height: 1.35;
   text-wrap: balance;
 }
 

@@ -37,7 +37,12 @@ export const business = {
   name: "auslage",
   owner: "Marina Zaiser",
   tagline: "deine auslage im netz",
-  areaServed: "Bezirk Baden & Triestingtal",
+  // Nur noch das Triestingtal: Marina hat den Bezirk Baden am 15.08. aus dem
+  // Zuschnitt genommen und am 20.08. im Nadelöhr (Option B) auch aus der
+  // Gebietsangabe im JSON-LD. Susi hat index.html nachgezogen; das hier war
+  // die letzte Fundstelle im src/. Der Wert wird derzeit nirgends gerendert —
+  // wer ihn ausgibt, gibt ab jetzt den richtigen Zuschnitt aus.
+  areaServed: "Triestingtal",
   address: {
     street: "Kruppstraße 24",
     postalCode: "2560",
@@ -176,20 +181,37 @@ export const hero = {
 // Blockfolge (18.08.) zu einem eigenen Abschnitt geworden: vier Kacheln statt
 // drei Textpunkte. Aufbau nach Herr Rats Auswertung — DREI Ängste verneint und
 // EIN Beweis, nicht vier Selbstlobe.
+//
+// Wortlaut seit 20.08.2026 neu (Marina, im Gespräch): "2x kein, 2x nicht kein,
+// liest sich nicht rund". Die vier Zeilen standen in drei verschiedenen
+// Bauformen — zwei Verneinungen, eine Zusage, ein Fakt. Jetzt tragen alle vier
+// dieselbe Form: kurze Zusage, Komma, Zusatz. Die Argumentation darunter bleibt
+// unverändert (drei Ängste, ein Beweis) — sie wird nur nicht mehr über die
+// Verneinung transportiert, weil sich der Beweis nicht verneinen lässt, ohne
+// klein zu werden.
+// Marinas eigene Wendungen sind bewusst stehen geblieben: "Selberbefüllen" und
+// "Überraschung auf der Rechnung" stammen aus ihrer freigegebenen Fassung vom
+// 18.08. und werden nicht glattgeschliffen.
+//
 // Kachel 4 trägt "aus Berndorf" nicht dekorativ: Susi hat den Wegfall des
 // regionalen Claims aus dem Kopfbereich genau unter der Bedingung freigegeben,
 // dass der Ortsname im sichtbaren Text stehen bleibt. Nicht wegkürzen ohne
 // Rückfrage bei ihr.
 export const trust = {
   items: [
-    { icon: "baukasten", text: "Kein Baukasten zum Selberbefüllen" },
-    { icon: "rechnung", text: "Keine Überraschung auf der Rechnung" },
-    { icon: "adresse", text: "Deine Internetadresse läuft auf dich" },
+    { icon: "baukasten", text: "Fertig eingerichtet, nichts zum Selberbefüllen" },
+    { icon: "rechnung", text: "Fixer Preis, keine Überraschung auf der Rechnung" },
+    { icon: "adresse", text: "Deine Internetadresse, auf deinen Namen" },
     {
       icon: "erfahrung",
-      // Zahl aus `proof`, damit sie nur an einer Stelle steht. Wortlaut sonst
-      // wie von Marina freigegeben ("und" statt "&", Ort angehängt).
-      text: `${proof.jahreErfahrung} mit Websites und Onlinemarketing, aus Berndorf`,
+      // Zahl aus `proof`, damit sie nur an einer Stelle steht.
+      // ENTSCHIEDEN am 20.08.2026 (Marina, Nadelöhr, Antwort B): Die Kurzform
+      // bleibt. Sie nimmt der Zahl die Bezugsgröße, die Marina am 12.08. selbst
+      // nachgetragen hatte ("las sich wie 15 Jahre Webdesign-Handwerk", siehe
+      // `proof.erfahrungClaim`) — vorgelegt, abgewogen, so gewollt. Wer hier
+      // wieder "Websites und Onlinemarketing" einsetzen will, fragt vorher nach:
+      // es ist keine Nachlässigkeit, sondern eine Wahl.
+      text: `${proof.jahreErfahrung} Erfahrung, aus Berndorf`,
     },
   ],
 };
@@ -923,11 +945,15 @@ export const pricingPage = {
   // Auflage „A aber ohne genauen Preise" — daher „zum festen Monatspreis" statt
   // eines Betrags. Der Satz muss allein verständlich sein: die H1 darüber besteht
   // nur aus Fürwörtern (Susis Bitte vom 19.08.).
+  // Der Zielgruppen-Satz am Ende ist Marks zweiter Vorschlag, von Marina am
+  // 20.08.2026 im Nadelöhr freigegeben (Antwort A). Er nennt bewusst keine
+  // Branche, sondern die Betriebsgröße — das ist die Aussage, die der Satz
+  // davor („keine Staffelung nach Betriebsgröße") technisch schon macht.
   intro:
-    "Deine Website mietest du bei mir zum festen Monatspreis, statt sie einmalig zu kaufen. Keine hohen Startkosten, nach dem ersten Jahr monatlich kündbar. Drei Pakete, alle Preise offen. Kein Angebot auf Anfrage, keine Staffelung nach Betriebsgröße und nichts, was erst im Gespräch dazukommt.",
+    "Deine Website mietest du bei mir zum festen Monatspreis, statt sie einmalig zu kaufen. Keine hohen Startkosten, nach dem ersten Jahr monatlich kündbar. Drei Pakete, alle Preise offen. Kein Angebot auf Anfrage, keine Staffelung nach Betriebsgröße und nichts, was erst im Gespräch dazukommt. Gedacht ist das für kleine Betriebe hier in der Gegend: der Ein-Personen-Betrieb zahlt dasselbe wie das Kleinunternehmen mit zehn Leuten.",
   anchor: {
     heading: "Zum Einordnen",
-    text: `Vergleichbare Websites kosten bei anderen Anbietern ${proof.marktSetupVon} bis ${proof.marktSetupBis} einmalig, bevor überhaupt eine monatliche Betreuung dazukommt. auslage startet bei 200 € Einrichtung und 50 € im Monat, dafür mit Mindestlaufzeit.`,
+    text: `Vergleichbare Websites kosten bei anderen Anbietern ${proof.marktSetupVon} bis ${proof.marktSetupBis} einmalig, bevor überhaupt eine monatliche Betreuung dazukommt. auslage startet bei 200 € Einrichtung und 50 € im Monat, dafür mit Mindestlaufzeit. Im ersten Jahr sind das beim Starter 800 € zusammen, Einrichtung eingerechnet. Das ist weniger, als die Einrichtung allein bei den Anbietern oben kostet.`,
     footnote: proof.marktQuelle,
   },
   ablöseHeading: "Wenn du wieder gehst",
