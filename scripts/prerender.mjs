@@ -137,12 +137,78 @@ function faqSchema(route) {
 }
 
 /**
+ * Service-JSON-LD für eine Ortsseite — das „areaServed pro Ortsseite“ aus dem
+ * Task „Title-Tags, H1 und URLs ausrichten“ (Susi).
+ *
+ * ── Wie eine Seite dazu kommt ──────────────────────────────────────────────
+ * Nicht über eine zweite Liste hier im Skript, sondern über die Route selbst.
+ * Wer in `routes` (src/content/site.js) an einer Seite ein Feld `ort` ergänzt,
+ * bekommt den Block automatisch:
+ *
+ *   {
+ *     pfad: "/webdesign-berndorf",
+ *     datei: "webdesign-berndorf.html",
+ *     gesperrt: true,
+ *     meta: pageMeta.webdesignBerndorf,
+ *     ort: { name: "Berndorf", umland: ["Pottenstein", "Hernstein"] },
+ *   }
+ *
+ * `umland` sind die Gemeinden ohne eigene Seite, die diese Seite mitbedient
+ * (Zuordnung von Marina am 18.08.2026 bestätigt, siehe Gedächtnis
+ * „Einzugsgebiet und Ortsnennungen“). Fehlt das Feld, entsteht kein Block —
+ * eine Seite ohne Ortsbezug bekommt kein Ortsschema untergeschoben.
+ *
+ * ── Was drinsteht und was bewusst nicht ────────────────────────────────────
+ * `provider` verweist per `@id` auf den Betrieb aus index.html, statt Anschrift
+ * und Telefonnummer ein zweites Mal hinzuschreiben. Zwei Kopien derselben
+ * Angabe laufen irgendwann auseinander; ein Verweis nicht.
+ * `areaServed` nennt ausschließlich Gemeindenamen. **Kein Bezirk** — der steht
+ * allein im `areaServed` des Betriebs in index.html (Marina, 18.08.2026:
+ * nirgends soll behauptet werden, dass die Orte im Bezirk Baden liegen).
+ *
+ * Rich Results bringt das keine. Es macht maschinenlesbar, was die Seite
+ * ohnehin sagt: welche Leistung, für welchen Ort, von wem.
+ */
+function ortSchema(route) {
+  const { name, umland = [] } = route.ort;
+  if (!name) {
+    throw new Error(
+      `Prerendering abgebrochen: die Route ${route.pfad} hat ein Feld \`ort\` ohne \`name\`.`
+    );
+  }
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${siteUrl}${route.pfad}#leistung`,
+    name: `Webdesign ${name}`,
+    serviceType: "Webdesign",
+    url: `${siteUrl}${route.pfad}`,
+    inLanguage: "de-AT",
+    provider: { "@id": `${siteUrl}/#auslage` },
+    areaServed: [name, ...umland].map((gemeinde) => ({
+      "@type": "City",
+      name: gemeinde,
+    })),
+  };
+}
+
+/**
  * Welche Seite welches Schema bekommt.
  *
  * Das LocalBusiness-Schema steht in index.html und liegt damit auf jeder Seite;
- * hier stehen nur die Blöcke, die zu genau einer Seite gehören.
+ * hier stehen nur die Blöcke, die zu genau einer Seite gehören. Ortsseiten
+ * stehen nicht in dieser Liste — sie melden sich über ihr Route-Feld `ort`,
+ * damit hier keine zweite Seitenliste entsteht, die stumm veralten kann.
  */
 const schemaProSeite = { "/fragen": faqSchema };
+
+/** Das eine Schema dieser Seite, oder nichts. */
+function seitenSchema(route) {
+  const nachPfad = schemaProSeite[route.pfad];
+  if (nachPfad) return nachPfad(route);
+  if (route.ort) return ortSchema(route);
+  return null;
+}
 
 /**
  * JSON-LD als `<script>`-Zeile.
@@ -153,11 +219,11 @@ const schemaProSeite = { "/fragen": faqSchema };
  * hält auch dann, wenn später jemand einen Antworttext ergänzt.
  */
 function schemaBlock(route) {
-  const bauen = schemaProSeite[route.pfad];
-  if (!bauen) return null;
+  const schema = seitenSchema(route);
+  if (!schema) return null;
   if (comingSoon && route.gesperrt) return null;
 
-  const json = JSON.stringify(bauen(route), null, 2).replaceAll("<", "\\u003c");
+  const json = JSON.stringify(schema, null, 2).replaceAll("<", "\\u003c");
   return `<script type="application/ld+json">\n${json}\n</script>`;
 }
 

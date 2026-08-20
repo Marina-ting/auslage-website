@@ -61,13 +61,16 @@ export default function Contact() {
               ))}
             </ul>
 
-            {/* Telefon, WhatsApp und Mail gleichrangig nebeneinander, wie die
-                Blockfolge es verlangt. Seit 19.08. haben alle drei einen echten
-                Wert und einen `href`; Platzhaltertext steht hier keiner mehr.
-                Die Regel dahinter gilt weiter und ist der Grund für den
+            {/* Zwei Zeilen: die Nummer (Telefon und WhatsApp zusammen) und die
+                Mail. Bis 20.08. waren es drei, mit derselben Nummer zweimal
+                untereinander — zusammengezogen nach Marinas Entscheidung im
+                Nadelöhr (Option B).
+                Die Regel von 17.08. gilt unverändert und ist der Grund für den
                 `href`-Zweig unten: ein Kanal ohne `href` wird als stiller Text
                 ausgegeben statt als Link — eine erfundene Nummer, die jemand
-                tatsächlich wählt, ist der teurere Fehler (Marina, 17.08.). */}
+                tatsächlich wählt, ist der teurere Fehler (Marina, 17.08.).
+                `zweiterWeg` ist optional: fehlt er, sieht die Zeile aus wie
+                jede andere. */}
             <dl className="contact__channels">
               {contact.channels.map((channel) => (
                 <div className="contact__channel" key={channel.label}>
@@ -88,6 +91,21 @@ export default function Contact() {
                       </a>
                     ) : (
                       <span className="contact__channel-pending">{channel.value}</span>
+                    )}
+                    {channel.zweiterWeg && (
+                      // Der Trenner steht als ::before an diesem Link und nicht
+                      // als eigenes Zeichen dazwischen: rutscht der Link in die
+                      // nächste Zeile, wandert der Punkt mit. Ein Trenner, der
+                      // am Ende der ersten Zeile allein hängen bleibt, sieht
+                      // aus wie ein Tippfehler.
+                      <a
+                        className="contact__channel-alt"
+                        href={channel.zweiterWeg.href}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {channel.zweiterWeg.label}
+                      </a>
                     )}
                   </dd>
                 </div>

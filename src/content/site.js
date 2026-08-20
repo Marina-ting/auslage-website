@@ -50,9 +50,9 @@ export const business = {
   // Gmail konfiguriert). Quelle: Notion → Tasks Manager, Stand 2026-08-08.
   emailActive: true,
   // Die Business-Nummer steht seit 19.08.2026 (spusu-Wertkarte, keine
-  // Rufnummernmitnahme, also endgültig). Marina hat entschieden, sie sofort
-  // einzutragen, obwohl die eSIM noch auf die Freischaltung wartet — bis dahin
-  // hebt unter der Nummer niemand ab. Quelle: Notion → Task "Eigene
+  // Rufnummernmitnahme, also endgültig). Marina hat sie sofort eintragen
+  // lassen, damals noch vor der Freischaltung. Die eSIM ist seit 20.08.2026
+  // aktiviert, die Nummer also erreichbar. Quelle: Notion → Task "Eigene
   // auslage-Business-Nummer". `phoneHref` ist dieselbe Nummer ohne Leerzeichen,
   // weil `tel:` keine verträgt.
   // WhatsApp läuft auf derselben Nummer (Marina, 19.08.). `whatsappHref` zeigt
@@ -748,9 +748,26 @@ export const contact = {
   // sind beide verlinkt. Fällt einer der Werte je wieder auf `null`, zeigt die
   // Zeile "Nummer folgt" und wird nicht verlinkt — lieber ein sichtbarer
   // Platzhalter als ein Link, der ins Leere führt.
+  //
+  // Seit 20.08.2026 stehen die beiden in EINER Zeile (Marina im Nadelöhr,
+  // Option B, wörtlich: "Eine Zeile, die Telefon und WhatsApp zusammen
+  // nennt."). Zwei Zeilen mit derselben Nummer untereinander lasen sich wie
+  // ein Fehler. Die Nummer steht deshalb einmal da und trägt den tel:-Weg;
+  // `zweiterWeg` hängt den zweiten Kanal auf derselben Nummer daran. Ohne
+  // `zweiterWeg` verhält sich eine Zeile wie jede andere — das Feld ist
+  // optional und nur hier gesetzt.
   channels: [
-    { label: "Telefon", value: business.phone ?? "Nummer folgt", href: business.phoneHref },
-    { label: "WhatsApp", value: business.whatsapp ?? "Nummer folgt", href: business.whatsappHref },
+    {
+      label: "Telefon & WhatsApp",
+      value: business.phone ?? "Nummer folgt",
+      href: business.phoneHref,
+      // Kurz gehalten, damit die Zeile eine Zeile bleibt: "auf WhatsApp
+      // schreiben" war rund zehn Pixel zu breit und rutschte auf 1440 px unter
+      // die Nummer. Der Zusammenhang steht ohnehin in der Beschriftung davor.
+      zweiterWeg: business.whatsappHref
+        ? { label: "per WhatsApp", href: business.whatsappHref }
+        : null,
+    },
     { label: "E-Mail", value: business.email, href: `mailto:${business.email}` },
   ],
   formHeading: "Anfrage",

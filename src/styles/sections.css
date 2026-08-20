@@ -1540,37 +1540,58 @@ table.simple td {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
-  gap: clamp(1.4rem, 1rem + 1.6vw, 2.4rem);
+  gap: clamp(0.9rem, 0.7rem + 0.9vw, 1.5rem);
 }
 
+/* Seit 20.08.2026 echte Kacheln statt vier schwebender Textblöcke (Marina,
+   19.08.: "der bereich direkt unter dem header … schaut so klein und
+   unscheinbar aus, dabei sollte er knallen"). Die Präsenz trägt jetzt die
+   Fläche — heller Karton auf dem abgesetzten Band, Rand, weicher Schatten —
+   und nicht mehr die Schriftfarbe. Genau das war Marinas zweiter Punkt:
+   Der Text stand vorher in --ink bei 500, also dunkler UND schwerer als der
+   Absatz im Kopfbereich direkt darüber (der ist .lead und damit --ink-muted).
+   Wer die Kacheln wieder ausbaut, muss die Hervorhebung woanders unterbringen,
+   sonst fällt das Band in dieselbe Unscheinbarkeit zurück. */
 .trust__item {
   display: grid;
-  gap: 0.85rem;
+  gap: 0.9rem;
   justify-items: start;
+  padding: clamp(1.15rem, 0.95rem + 0.7vw, 1.6rem);
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
 }
 
-/* Heller Kreis mit Strichicon — dieselbe Formsprache wie die Ablage-Linien:
-   ruhig, keine Fläche, die mit dem Knopf konkurriert. */
+/* Kreis mit Strichicon. Auf der hellen Kachel wäre ein cremefarbener Kreis
+   unsichtbar geworden, deshalb trägt er jetzt die Akzentfarbe als Fläche:
+   --terracotta-text auf --terracotta-light steht bei 3,7:1 und damit über der
+   3:1-Grenze für Grafik. Die Icons bleiben aria-hidden — die Kachel liest sich
+   als Text vollständig, die Farbe ist Zugabe, nicht Aussage. */
 .trust__icon {
   display: grid;
   place-items: center;
-  width: 2.9rem;
-  height: 2.9rem;
+  width: 3.2rem;
+  height: 3.2rem;
   flex: none;
   border-radius: 50%;
-  background: var(--cream);
-  border: 1px solid var(--border-strong);
+  background: var(--terracotta-light);
+  border: 1px solid var(--terracotta-light);
   color: var(--terracotta-text);
 }
 
 .trust__icon svg {
-  width: 1.45rem;
-  height: 1.45rem;
+  width: 1.6rem;
+  height: 1.6rem;
 }
 
+/* --ink-muted statt --ink: der Absatz im Kopfbereich darüber steht ebenfalls in
+   diesem Ton, das Band bricht also nicht mehr mit einer dunkleren Textstufe
+   heraus. Die 500 bleiben — "man kann ihn schon etwas hervorheben" (Marina).
+   6,8:1 auf --cream, damit deutlich über AA. */
 .trust__text {
   font-weight: 500;
-  color: var(--ink);
+  color: var(--ink-muted);
   max-width: 15rem;
   text-wrap: balance;
 }
@@ -1816,9 +1837,15 @@ table.simple td {
   border-top: 1px solid var(--border);
 }
 
+/* Die Beschriftungsspalte trug bis 20.08. feste 6,5 rem und reichte für
+   "Telefon". Seit Telefon und WhatsApp in einer Zeile stehen, heißt die
+   Beschriftung "Telefon & WhatsApp" und passt dort nicht mehr hinein.
+   `max-content` statt einer neuen festen Zahl: die Spalte richtet sich nach der
+   längsten Beschriftung und bricht auch dann nicht um, wenn später eine
+   dazukommt. */
 .contact__channel {
   display: grid;
-  grid-template-columns: 6.5rem 1fr;
+  grid-template-columns: max-content 1fr;
   gap: 0.9rem;
   align-items: baseline;
 }
@@ -1830,9 +1857,21 @@ table.simple td {
   color: var(--ink-faint);
 }
 
+/* Flex mit Umbruch statt einer Textzeile: so rutscht der zweite Weg als Ganzes
+   in die nächste Zeile, wenn es eng wird, statt die Rufnummer mitten
+   durchzubrechen. Eine umbrochene Telefonnummer liest sich wie zwei Nummern. */
 .contact__channel dd {
   margin: 0;
   font-weight: 500;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.5rem;
+}
+
+.contact__channel dd > a,
+.contact__channel dd > .contact__channel-pending {
+  white-space: nowrap;
 }
 
 /* Kursiv statt grau: der Platzhalter muss lesbar bleiben (4,5:1), soll aber
@@ -1841,6 +1880,22 @@ table.simple td {
 .contact__channel-pending {
   font-style: italic;
   font-weight: 400;
+  color: var(--ink-faint);
+}
+
+/* Der zweite Weg auf derselben Nummer. Er steht bewusst kleiner und leiser als
+   die Nummer davor: die Nummer ist die Auskunft, WhatsApp nur der andere Kanal
+   dorthin. Der Trenner hängt als ::before am Link selbst — so wandert er mit,
+   wenn der Link umbricht, statt am Zeilenende allein stehen zu bleiben. */
+.contact__channel-alt {
+  font-size: var(--t-small);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.contact__channel-alt::before {
+  content: "·";
+  margin-right: 0.5rem;
   color: var(--ink-faint);
 }
 
@@ -1862,7 +1917,8 @@ table.simple td {
   }
 
   .contact__channel {
-    grid-template-columns: 5.5rem 1fr;
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
   }
 }
 

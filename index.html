@@ -45,15 +45,25 @@
      "description": eine Gebietsangabe sagt, wen auslage bedient, ein Fließ-
      textsatz wird zitiert wie ein Sichttext. Begründung und Beleg im Task
      "JSON-LD-Beschreibungssatz in index.html" (Susi). Kommentare gehen mit
-     ins ausgelieferte HTML, deshalb hier kurz. -->
+     ins ausgelieferte HTML, deshalb hier kurz.
+
+     20.08.2026 (Susi): Die Pakete trugen ein flaches "price": "50" - das sagt
+     einer Maschine "kostet einmalig 50 EUR" und war damit schlicht falsch.
+     Jetzt steht je Paket eine CompoundPriceSpecification: ein Monatspreis mit
+     unitCode MON und die einmalige Einrichtung als zweiter Posten. Zahlen
+     gegen site.js geprueft (Zeilen 285-322). Dazu neu: "@id", damit
+     seitenspezifische Schemata auf diesen Betrieb verweisen koennen, und
+     "image" fuer die Google-Business-Darstellung. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
+  "@id": "https://auslage.io/#auslage",
   "name": "auslage",
   "description": "Websites für lokale Betriebe im Triestingtal: mieten statt kaufen, ab 200 € Einrichtung und 50 € im Monat, Domain, Hosting und Wartung inklusive. Aus Berndorf in Niederösterreich.",
   "url": "https://auslage.io",
   "logo": "https://auslage.io/images/auslage-logo.png",
+  "image": "https://auslage.io/images/og-1200x630.png",
   "founder": { "@type": "Person", "name": "Marina Zaiser" },
   "telephone": "+436703532122",
   "email": "office@auslage.io",
@@ -77,22 +87,91 @@
       {
         "@type": "Offer",
         "name": "Starter",
-        "price": "50",
+        "url": "https://auslage.io/preise",
         "priceCurrency": "EUR",
+        "priceSpecification": {
+          "@type": "CompoundPriceSpecification",
+          "priceCurrency": "EUR",
+          "priceComponent": [
+            {
+              "@type": "UnitPriceSpecification",
+              "name": "Monatspreis",
+              "price": "50",
+              "priceCurrency": "EUR",
+              "referenceQuantity": {
+                "@type": "QuantitativeValue",
+                "value": 1,
+                "unitCode": "MON"
+              }
+            },
+            {
+              "@type": "UnitPriceSpecification",
+              "name": "Einrichtung, einmalig",
+              "price": "200",
+              "priceCurrency": "EUR"
+            }
+          ]
+        },
         "description": "50 € im Monat zzgl. 200 € einmalige Einrichtung."
       },
       {
         "@type": "Offer",
         "name": "Business",
-        "price": "100",
+        "url": "https://auslage.io/preise",
         "priceCurrency": "EUR",
+        "priceSpecification": {
+          "@type": "CompoundPriceSpecification",
+          "priceCurrency": "EUR",
+          "priceComponent": [
+            {
+              "@type": "UnitPriceSpecification",
+              "name": "Monatspreis",
+              "price": "100",
+              "priceCurrency": "EUR",
+              "referenceQuantity": {
+                "@type": "QuantitativeValue",
+                "value": 1,
+                "unitCode": "MON"
+              }
+            },
+            {
+              "@type": "UnitPriceSpecification",
+              "name": "Einrichtung, einmalig",
+              "price": "300",
+              "priceCurrency": "EUR"
+            }
+          ]
+        },
         "description": "100 € im Monat zzgl. 300 € einmalige Einrichtung."
       },
       {
         "@type": "Offer",
         "name": "Premium",
-        "price": "150",
+        "url": "https://auslage.io/preise",
         "priceCurrency": "EUR",
+        "priceSpecification": {
+          "@type": "CompoundPriceSpecification",
+          "priceCurrency": "EUR",
+          "priceComponent": [
+            {
+              "@type": "UnitPriceSpecification",
+              "name": "Monatspreis",
+              "price": "150",
+              "priceCurrency": "EUR",
+              "referenceQuantity": {
+                "@type": "QuantitativeValue",
+                "value": 1,
+                "unitCode": "MON"
+              }
+            },
+            {
+              "@type": "UnitPriceSpecification",
+              "name": "Einrichtung, einmalig",
+              "price": "500",
+              "priceCurrency": "EUR"
+            }
+          ]
+        },
         "description": "150 € im Monat zzgl. 500 € einmalige Einrichtung."
       }
     ]
