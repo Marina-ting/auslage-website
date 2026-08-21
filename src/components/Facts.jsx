@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { facts } from "../content/site";
 
 /**
@@ -17,6 +18,38 @@ import { facts } from "../content/site";
  * Der Wortlaut steht in site.js unter `facts` und ist eine freigegebene
  * Endfassung. Hier wird nichts formatiert, ergänzt oder gekürzt.
  */
+
+/**
+ * Ein Faktenwert darf ein einzelnes Wort verlinken (seit 21.08., Nadelöhr
+ * "Impressum verlinken — welche Stelle meinst du?", Antwort C).
+ *
+ * Der Wortlaut in site.js bleibt dabei EIN durchgehender String und wird nicht
+ * in Bruchstücke zerlegt; die Verlinkung steht als eigenes Feld `link`
+ * daneben ({ wort, href }). Grund: die Sätze sind freigegebene Endfassungen und
+ * sollen an ihrer Stelle am Stück lesbar bleiben — wer sonst den Satz ändert,
+ * müsste ihn erst aus drei Teilen zusammensetzen.
+ *
+ * Kommt `wort` im Text nicht vor, wird der Satz unverändert ausgegeben. Ein
+ * Tippfehler im Feld `link` kostet also die Verlinkung, nie den Satz.
+ *
+ * `Link` statt `<a>`, weil das Ziel eine eigene Route ist: ein `<a href>` würde
+ * die Seite komplett neu laden.
+ */
+function FaktenWert({ text, link }) {
+  if (!link) return text;
+
+  const start = text.indexOf(link.wort);
+  if (start === -1) return text;
+
+  return (
+    <>
+      {text.slice(0, start)}
+      <Link to={link.href}>{link.wort}</Link>
+      {text.slice(start + link.wort.length)}
+    </>
+  );
+}
+
 export default function Facts() {
   return (
     <section className="section facts" id="fakten" aria-labelledby="fakten-titel">
@@ -33,7 +66,9 @@ export default function Facts() {
           {facts.items.map((item) => (
             <div className="facts__row" key={item.label}>
               <dt className="facts__label">{item.label}</dt>
-              <dd className="facts__value">{item.text}</dd>
+              <dd className="facts__value">
+                <FaktenWert text={item.text} link={item.link} />
+              </dd>
             </div>
           ))}
         </dl>

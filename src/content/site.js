@@ -494,7 +494,16 @@ export const process = {
     {
       number: "03",
       title: "Ich baue",
-      text: "Du schickst Texte und Fotos, den Rest mache ich.",
+      // ERGÄNZT am 21.08.2026 aus Marinas Braindump. Sie wollte zwei Dinge
+      // drin haben: dass der Kunde von seinem Betrieb erzählt, und die alte
+      // Seite als Textquelle. Ihre Bedingung war, dass der Schritt ins
+      // Gesamtbild der vier Karten passt, und das war meine Entscheidung.
+      // Am Bild geprüft (1440×900 und 390×844): diese Fassung braucht in der
+      // Spalte vier Zeilen. Die kürzere Ersatzfassung ohne die alte Seite
+      // ("...und schickst mir Texte und Fotos") braucht dort ebenfalls vier
+      // Zeilen, weil die Spalte schmal ist. Sie kostet also einen von Marinas
+      // zwei Punkten und gewinnt optisch nichts. Deshalb diese hier.
+      text: "Du erzählst mir, was dein Betrieb anbietet. Texte und Fotos kommen von dir oder von deiner alten Seite.",
     },
     {
       number: "04",
@@ -590,9 +599,19 @@ export const references = {
   // Sobald die erste echte Referenz in `items` steht, fällt dieser Text von
   // selbst weg (References.jsx prüft die Länge). Er darf nicht stehenbleiben:
   // "Hier steht noch niemand" neben einer Referenzkarte wäre schlicht falsch.
+  // Gekürzt am 21.08.2026 auf Marinas Entscheidung (Nadelöhr "Belege-Block und
+  // Referenzblock beginnen fast gleich. Den zweiten Text kürzen?", Antwort A):
+  // "Der Referenzblock trägt nur noch den einen Satz, den er zusätzlich sagt."
+  //
+  // Der eine Satz ist dieser: was hier später stehen wird und dass es echt ist.
+  // Alles andere aus der Langfassung (nachlesen, Preise, Vertrag, Impressum)
+  // sagt der Belege-Block auf derselben Seite bereits, siehe `belege` oben.
+  // Der Bezug ist gegenüber der Langfassung aufgelöst ("sie" hing am
+  // gestrichenen Vorsatz "Die erste Seite ist im Bau"), sonst steht der Wortlaut
+  // unverändert. Die Langfassung steht im Task-Bericht, falls sie je zurück soll.
   leer: {
     heading: "Hier steht noch niemand.",
-    text: "auslage ist neu, und hier steht deshalb noch kein Kunde. Die erste Seite ist im Bau. Sobald sie online ist, steht der Betrieb hier mit Namen und mit einem Satz, den er selbst geschrieben hat. Bis dahin musst du mir nichts glauben, du kannst nachlesen: die Preise stehen offen auf der Preisseite, und was dir gehört, wenn du wieder gehst, steht im Vertrag. Meine Adresse steht im Impressum, nicht nur ein Kontaktformular.",
+    text: "Sobald die erste Kundenseite online ist, steht der Betrieb hier mit Namen und mit einem Satz, den er selbst geschrieben hat.",
   },
 };
 
@@ -780,15 +799,29 @@ export const facts = {
     {
       label: "Sitz",
       text: "Berndorf in Niederösterreich. Die vollständige Anschrift steht im Impressum.",
+      // Verlinkt das Wort "Impressum" auf /impressum (Marina, 21.08.2026,
+      // Nadelöhr "Impressum verlinken — welche Stelle meinst du?", Antwort C).
+      // Der Satz selbst bleibt unverändert: die Verlinkung ist ein Datenfeld,
+      // keine Textänderung an einer freigegebenen Endfassung. Facts.jsx sucht
+      // `wort` im Satz und macht daraus einen Link.
+      link: { wort: "Impressum", href: "/impressum" },
     },
     { label: "Erfahrung", text: "seit 2010 mit Websites und Onlinemarketing." },
     {
       label: "Leistung",
-      text: "Websites für lokale Betriebe. Die Website wird gebaut und danach laufend betreut. Der Betrieb mietet sie monatlich, statt sie zu kaufen.",
+      // BERICHTIGT am 21.08.2026. Freigabe ist Marinas Braindump-Eintrag vom
+      // selben Tag, wörtlich: "Fakten zu auslage - Leistungen der text ist
+      // überholt, wir bieten auch kauf an seit gestern, aber wird nicht
+      // explizit beworben, kerngeschäftz ist die miete." Der alte Satz sagte
+      // "mietet sie monatlich, statt sie zu kaufen" und widersprach damit dem
+      // Kauf-Block auf /preise (`pricingPage.kauf`, seit 20.08.). Der Kauf
+      // steht hier als Tatsache und wird nicht beworben. Kaufpreise bleiben
+      // bewusst draußen: der Faktenblock führt keine zweite Preisliste.
+      text: "Websites für lokale Betriebe. Die Website wird gebaut und danach laufend betreut. Im Regelfall mietet der Betrieb sie monatlich, jedes Paket ist auf Wunsch auch einmalig zu kaufen.",
     },
     {
       label: "Einzugsgebiet",
-      text: "das Triestingtal in Niederösterreich. Dazu gehören Kaumberg, Altenmarkt an der Triesting, Furth an der Triesting, Weissenbach an der Triesting, Pottenstein, Berndorf, Hernstein, Hirtenberg, Enzesfeld-Lindabrunn und Leobersdorf.",
+      text: "das Triestingtal in Niederösterreich. Dazu gehören unter anderem Kaumberg, Altenmarkt an der Triesting, Furth an der Triesting, Weissenbach an der Triesting, Pottenstein, Berndorf, Hernstein, Hirtenberg, Enzesfeld-Lindabrunn und Leobersdorf.",
     },
     {
       label: "Pakete und Preise",
@@ -834,7 +867,7 @@ export const facts = {
   ],
   // Datum der letzten inhaltlichen Änderung, nicht des Builds. Die Endfassung
   // trug den 18. August; mit der Telefonnummer ist es der 19. geworden.
-  stand: "Stand: 19. August 2026",
+  stand: "Stand: 21. August 2026",
 };
 
 // ─── Kontakt ─────────────────────────────────────────────────────────────────

@@ -54,7 +54,28 @@
      unitCode MON und die einmalige Einrichtung als zweiter Posten. Zahlen
      gegen site.js geprueft (Zeilen 285-322). Dazu neu: "@id", damit
      seitenspezifische Schemata auf diesen Betrieb verweisen koennen, und
-     "image" fuer die Google-Business-Darstellung. -->
+     "image" fuer die Google-Business-Darstellung.
+
+     21.08.2026 (Susi), drei Nachtraege:
+
+     1) Nettopreise. Die Preisseite sagt seit 20.08.2026 ausdruecklich
+     "zuzueglich gesetzlicher Umsatzsteuer"; im Schema stand nur der nackte
+     Betrag, und eine Maschine liest einen Preis ohne Angabe als Endpreis.
+     Jede UnitPriceSpecification traegt deshalb "valueAddedTaxIncluded": false.
+     Wird je brutto ausgezeichnet, wird hier true daraus.
+
+     2) Die Kaufpreise der Preisseite (1.000/2.000/3.000) stehen bewusst NICHT
+     in diesem Katalog. Ein Einmalpreis neben drei Abo-Angeboten im selben
+     hasOfferCatalog macht maschinell nicht unterscheidbar, was monatlich und
+     was einmalig gilt. Unvollstaendig ist harmlos, zweideutig nicht. Wer sie
+     auszeichnen will, braucht einen eigenen Offer-Zweig, keine vierte Zeile.
+
+     3) Dieser Block bleibt hinter der Coming-Soon-Sperre stehen, anders als
+     das FAQ-Schema, das im Prerendering abgeschaltet wird. FAQPage beschreibt
+     Seiteninhalt und verlangt sichtbare Fragen; dieser Block beschreibt den
+     Betrieb und wird seitenweit gesetzt. Dazu tragen alle Seiten waehrend
+     Coming-Soon noindex,nofollow, und er ist die zweite Sicherung, falls das
+     Prerendering ausfaellt. Mit comingSoon = false ist die Frage erledigt. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -95,6 +116,7 @@
           "priceComponent": [
             {
               "@type": "UnitPriceSpecification",
+              "valueAddedTaxIncluded": false,
               "name": "Monatspreis",
               "price": "50",
               "priceCurrency": "EUR",
@@ -106,6 +128,7 @@
             },
             {
               "@type": "UnitPriceSpecification",
+              "valueAddedTaxIncluded": false,
               "name": "Einrichtung, einmalig",
               "price": "200",
               "priceCurrency": "EUR"
@@ -125,6 +148,7 @@
           "priceComponent": [
             {
               "@type": "UnitPriceSpecification",
+              "valueAddedTaxIncluded": false,
               "name": "Monatspreis",
               "price": "100",
               "priceCurrency": "EUR",
@@ -136,6 +160,7 @@
             },
             {
               "@type": "UnitPriceSpecification",
+              "valueAddedTaxIncluded": false,
               "name": "Einrichtung, einmalig",
               "price": "300",
               "priceCurrency": "EUR"
@@ -155,6 +180,7 @@
           "priceComponent": [
             {
               "@type": "UnitPriceSpecification",
+              "valueAddedTaxIncluded": false,
               "name": "Monatspreis",
               "price": "150",
               "priceCurrency": "EUR",
@@ -166,6 +192,7 @@
             },
             {
               "@type": "UnitPriceSpecification",
+              "valueAddedTaxIncluded": false,
               "name": "Einrichtung, einmalig",
               "price": "500",
               "priceCurrency": "EUR"
