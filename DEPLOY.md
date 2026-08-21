@@ -28,8 +28,9 @@ Für Marina, geschrieben am 18.08.2026. Wenn du das hier nicht mehr brauchst, l�
 `npm run deploy` ist eine Abkürzung für mehrere Befehle hintereinander:
 
 ```
+node scripts/…       →  holt das Logo frisch aus branding/logo/ (siehe unten)
 vite build           →  baut die Seite in den Ordner dist/
-vite build --ssr     →  baut eine zweite, kleine Fassung für Schritt 3
+vite build --ssr     →  baut eine zweite, kleine Fassung für Schritt 4
 node scripts/…       →  schreibt jede Seite fertig nach dist/ (siehe unten)
 wrangler deploy      →  schiebt den Inhalt von dist/ zu Cloudflare
 ```
@@ -38,6 +39,27 @@ Jeder Schritt läuft nur, wenn der davor **fehlerfrei** durchgelaufen ist.
 
 Am Ende steht eine Zeile wie „Prerendering: 9 Seiten geschrieben". Kommt sie
 nicht, ist etwas schiefgegangen und es geht auch nichts hoch.
+
+### Was der Branding-Sync macht
+
+Seit 21.08. liegt das auslage-Logo unter festen Adressen im Netz —
+`auslage.io/branding/svg/…` und `auslage.io/branding/png/…`. Daran hängen die
+Mailsignatur und die Auswertungen; sie laden das Logo von dort, statt je eine
+eigene Kopie mitzuschleppen.
+
+Damit dabei keine neue Kopie entsteht, die altert, holt der erste Schritt des
+Builds die Dateien jedes Mal frisch aus `waas/branding/logo/`. Für dich heißt
+das: **Logo im branding-Ordner ändern, einmal deployen, fertig.** Nachziehen
+von Hand entfällt.
+
+Welche Dateien veröffentlicht werden, steht als Liste in
+`scripts/branding-sync.mjs`. Kommt eine dazu, dort eintragen. Eine
+herausnehmen heißt, eine Adresse ins Leere laufen zu lassen — vorher
+nachsehen, wer sie benutzt.
+
+Der Sync löscht nie etwas. Er sagt beim Bauen, was er aufgefrischt hat, und
+bricht ab, wenn eine Datei aus der Liste im branding-Ordner fehlt. Ein Deploy
+mit kaputten Logo-Adressen kann so nicht passieren.
 
 ### Was das Prerendering macht
 
