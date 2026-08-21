@@ -45,38 +45,6 @@ import { glossar } from "../content/site";
  * trotzdem im HTML, ist also für Maschinen da; für einen Menschen ohne
  * JavaScript bleibt sie unsichtbar. Das trifft auf dieser Seite auf jede
  * Interaktion zu außer der FAQ.
- *
- * ── Wer heute durch diese Datei läuft (Stand 21.08.2026) ─────────────────────
- * components/PackageCard.jsx · components/Services.jsx ·
- * components/Ownership.jsx · components/Faq.jsx (nur die Antwort).
- * Alle anderen Komponenten geben ihre Sichttexte weiter direkt aus. Ein Marker
- * in einem Text, den sie ausgeben, steht dort als roher [[…]]-Text auf der
- * Seite. Welche Felder in site.js deshalb markierbar sind und welche nicht,
- * steht dort beim `glossar`-Block.
- *
- * ── Rezept, um eine weitere Komponente anzuschließen ─────────────────────────
- * 1. `import GlossarText, { ohneGlossar } from "../lib/glossar";`
- * 2. `{text}` wird zu `<GlossarText text={text} />`.
- * 3. Jeder `key`, der aus diesem Text gebaut wird, bekommt `ohneGlossar(text)`.
- * 4. Drei Stellen, an denen es NICHT geht, alle drei am Bau geprüft:
- *    a) Attribute (title, alt, placeholder, aria-label). Dort landet die
- *       Klammer-Schreibweise sichtbar im Attributwert; für diesen Fall gibt es
- *       `ohneGlossar` weiter unten.
- *    b) Direkt in einem Flex- oder Grid-Container. Diese Datei gibt eine Folge
- *       von Textstücken und Knöpfen zurück; in einem Flex-Container wird jedes
- *       Stück ein eigenes Kind und bekommt den `gap` als Abstand, der Satz
- *       fällt auseinander. Der Text braucht dort ein eigenes Element um sich
- *       (siehe Ownership.jsx). Betroffen ist heute `.ownership__text`.
- *    c) In einem <summary> oder einer anderen Beschriftung, die selbst schon
- *       klickt. Der Marker ist ein <button>; ein Knopf im Knopf schaltet beim
- *       Klick beides (siehe Faq.jsx, deshalb nur die Antwort).
- *
- * ── Wie viele Marker pro Seite ───────────────────────────────────────────────
- * Ein Wort trägt sein ⓘ nur beim ERSTEN Vorkommen auf einer Seite, jedes
- * weitere bleibt nackt (Werner-Entscheidung 21.08.2026). Der Marker erklärt
- * ein Wort, er markiert es nicht; wer es beim zweiten Mal noch nicht kennt,
- * hat beim ersten nicht geklickt. Vier ⓘ auf "Domain" in einem Bildschirm
- * wären lauter als gar keins.
  */
 
 // [[schlüssel|sichtbares Wort]] — beides ohne eckige Klammern im Inhalt.

@@ -1,5 +1,4 @@
 import { ownership } from "../content/site";
-import GlossarText from "../lib/glossar";
 
 /**
  * Block 6 der Blockfolge — was dir gehört.
@@ -15,14 +14,6 @@ import GlossarText from "../lib/glossar";
  * Kein Vergleich mit Mitbewerbern in diesem Block. Ein Satz wie "bei
  * Mietmodellen ist danach alles weg" ist für EINEN Anbieter geprüft, nicht für
  * Mietmodelle allgemein.
- *
- * Die Zeilentexte laufen seit 21.08.2026 durch `GlossarText`; hier trägt
- * "Ablöse" das ⓘ. Der Text steht dabei in einem EIGENEN <span> und nicht mehr
- * nackt im <dd>: `.ownership__text` ist ein Flex-Container mit `gap`, und darin
- * würde jedes Textstück zwischen den Markern zu einem eigenen Flex-Kind mit
- * 0.7rem Abstand — der Satz fiele in Bruchstücke auseinander. Im span bleibt er
- * ein Fließtext, und der Erklärkasten klappt darunter auf. Wer den span
- * entfernt, bekommt den Effekt zurück.
  */
 export default function Ownership() {
   return (
@@ -42,9 +33,7 @@ export default function Ownership() {
             >
               <dt className="ownership__label">{item.label}</dt>
               <dd className="ownership__text">
-                <span>
-                  <GlossarText text={item.text} />
-                </span>
+                {item.text}
                 {item.badge && <span className="ownership__badge">{item.badge}</span>}
               </dd>
             </div>

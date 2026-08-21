@@ -1,5 +1,4 @@
 import { services } from "../content/site";
-import GlossarText, { ohneGlossar } from "../lib/glossar";
 
 /**
  * Block 5 der Blockfolge — was drin ist.
@@ -14,13 +13,6 @@ import GlossarText, { ohneGlossar } from "../lib/glossar";
  * Wirkung.
  *
  * Der Anker #leistungen bleibt — der Menüpunkt "Leistungen" zeigt darauf.
- *
- * Die Zeilentexte laufen seit 21.08.2026 durch `GlossarText` (Marinas Wunsch,
- * die ⓘ auf der ganzen Website statt nur in der Starter-Liste). Zwei Marker
- * sitzen hier: ".at" und "verschlüsselt". Die fette Beschriftung davor bleibt
- * bewusst markerfrei — sie steht in einem eigenen <strong>, und die Erklärung
- * klappt am Ende des Elements auf, in dem ihr Marker steht. Ein Marker in der
- * Beschriftung schöbe den Erklärkasten also fett mitten in die Zeile.
  */
 export default function Services() {
   return (
@@ -44,18 +36,13 @@ export default function Services() {
                 </svg>
               </span>
               <span>
-                <strong className="service-list__label">{item.label}:</strong>{" "}
-                <GlossarText text={item.text} />
+                <strong className="service-list__label">{item.label}:</strong> {item.text}
               </span>
             </li>
           ))}
         </ul>
 
-        {services.note && (
-          <p className="service-list__note reveal">
-            <GlossarText text={services.note} />
-          </p>
-        )}
+        {services.note && <p className="service-list__note reveal">{services.note}</p>}
 
         <div className="price-reasons reveal">
           <h3 className="price-reasons__heading">{services.priceReasonHeading}</h3>
@@ -63,10 +50,10 @@ export default function Services() {
             {services.priceReasons.map((reason, i) => (
               <p
                 className="price-reasons__card reveal"
-                key={ohneGlossar(reason)}
+                key={reason}
                 style={{ "--reveal-delay": `${i * 70}ms` }}
               >
-                <GlossarText text={reason} />
+                {reason}
               </p>
             ))}
           </div>

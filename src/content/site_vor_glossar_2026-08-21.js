@@ -315,74 +315,23 @@ export const included = {
 };
 
 // ─── Glossar (Inline-Marker) ─────────────────────────────────────────────────
-// Fachwörter, die im Text ein aufklappbares ⓘ tragen. Die ersten fünf sind
-// Susis Auswahl (20.08.2026), ausgezählt am ausgelieferten HTML: Domain (13×),
-// SEO (7×), Hosting (5×), SSL (3×), Google-Business-Profil (3×). Die vier
-// weiteren (authinfo, abloese, quellcode, lokaleSeo) sind am 21.08.2026 aus
-// Marinas Wunsch dazugekommen, die ⓘ auf der ganzen Seite zu zeigen und nicht
-// nur in der Starter-Liste. Wortlaut von Mark, hier auf die Sie-Linie gebracht
-// und durch copywriting, marketing-psychology und humanizer gelaufen.
-//
-// Der frühere Satz "Quellcode und Backup stehen absichtlich NICHT hier" gilt
-// nur noch für "Backup": das ist ein Alltagswort, und an seinen Fundstellen
-// erklärt der Satz es schon mit. "Quellcode" hat mit der Kaufoption und den
-// Kündigungstexten eine eigene Bedeutung bekommen und steht jetzt drin.
-//
-// ── Die Obergrenze ist umgezogen ────────────────────────────────────────────
-// Sie lag bei fünf Einträgen INSGESAMT. Jetzt gilt sie pro Bildschirm statt pro
-// Datei: ein Wort trägt sein ⓘ nur beim ERSTEN Vorkommen auf einer Seite, jedes
-// weitere bleibt nackt. Marinas Lob galt einer Liste, in der jedes Wort einmal
-// vorkam; vier ⓘ auf "Domain" in einem Bildschirm wären lauter als gar keins.
-// Werner-Entscheidung vom 21.08.2026, Begründung im Notion-Task.
-//
-// ── Wo ein Marker stehen darf ───────────────────────────────────────────────
-// 1. Nur in Fließtext, den eine Komponente durch `GlossarText` schickt. Wo das
-//    nicht passiert, steht die Klammer-Schreibweise als roher Text auf der
-//    Seite. Welche Felder das heute sind, steht unten bei "Markierbare Felder".
-// 2. NIE in einem Attribut (title, alt, placeholder, aria-label) und nie in
-//    einem Wert, aus dem ein `key` gebaut wird — dort hilft `ohneGlossar`.
-// 3. Nicht in Überschriften und nicht in Knopf- oder Linkbeschriftungen: der
-//    Marker ist selbst ein Knopf, und ein Knopf im Knopf schaltet beides.
-// 4. Nicht im Faktenblock (`facts`). Er ist die zitierfähige Faktenliste für
-//    KI-Assistenten, absichtlich trocken; ein Erklärkasten mitten in einer
-//    Tatsachenzeile arbeitet gegen den Zweck (Susi/Mark). Wenn Marina ihn dort
-//    ausdrücklich will, ist das ihre Entscheidung.
-// 5. Nicht auf Alltagswörtern (Kontaktformular, Öffnungszeiten, Backup). Trägt
-//    jedes zweite Wort ein ⓘ, verliert das Zeichen seine Bedeutung.
-//
-// ── Markierbare Felder, Stand 21.08.2026 ────────────────────────────────────
-// JA:   services.items[].text · ownership.items[].text · faq.items[].a
-//       (nur die Fragen, die NICHT in PREIS_FRAGEN in src/pages/Preise.jsx
-//       stehen) · packages[].features[]
-// NEIN: included.items[] · pricingPage.* · pricingTerms · facts.items[] und
-//       jede faq-Frage aus PREIS_FRAGEN. Diese Texte gibt src/pages/Preise.jsx
-//       direkt aus, ohne GlossarText. Seitendateien liegen nicht in Werners
-//       Dateihoheit; solange das so ist, bleiben diese Felder markerfrei.
-// NEIN: faq.items[].q — die Frage steht in einem <summary>, ein Knopf darin
-//       klappt beim Klick zusätzlich die ganze Frage auf oder zu.
-// NEIN, ZWEITER GRUND, und der wiegt schwerer: scripts/prerender.mjs baut aus
-//       faq.items[].q und [].a das FAQPage-JSON-LD von /fragen. Der Marker
-//       landet dort UNVERÄNDERT im maschinenlesbaren Text, also genau in dem
-//       Teil der Seite, der zitierfähig sein soll. Am 21.08.2026 im gebauten
-//       dist/fragen.html nachgesehen, nicht vermutet. Solange prerender.mjs
-//       den Text nicht durch `ohneGlossar` schickt, trägt KEINE FAQ-Antwort
-//       einen Marker. Die Datei ist Susis Terrain und wurde nicht angefasst.
-//       Deshalb steht `authinfo` heute im Glossar, aber noch an keiner Stelle
-//       im Text: das einzige Vorkommen des Wortes außerhalb der FAQ ist
-//       pricingPage.ablöseTextDomain, und das gibt Preise.jsx roh aus.
+// Fünf Fachwörter, die im Text ein aufklappbares ⓘ tragen. Die Auswahl ist
+// Susis (20.08.2026), ausgezählt am ausgelieferten HTML: Domain (13×), SEO (7×),
+// Hosting (5×), SSL (3×), Google-Business-Profil (3×). Fünf sind die Obergrenze
+// und bewusst gesetzt — ab dem sechsten Marker liest sich die Seite wie ein
+// Beipackzettel. "Quellcode" und "Backup" stehen absichtlich NICHT hier: an
+// ihren Fundstellen erklärt der Satz sie schon mit.
 //
 // Gesetzt werden die Marker mit der Schreibweise [[schlüssel|sichtbares Wort]]
 // direkt im Sichttext; aufgelöst wird sie in src/lib/glossar.jsx. Wer einen
 // Schlüssel hier umbenennt, muss auch die Marker im Text nachziehen — ein
 // unbekannter Schlüssel lässt still nur das Wort stehen, ohne Erklärung.
 //
-// Die Texte sind bewusst kurz (drei Sätze) und beantworten die Frage "was heißt
-// das für mich", nicht "wie funktioniert das technisch". Die Anrede folgt der
-// Hauslinie vom 21.08.: "Sie" steht dort, wo es um Besitz oder eine Handlung
-// des Kunden geht, sonst redet der Text über die Sache ("der Betrieb").
+// Die Texte sind bewusst kurz (zwei bis drei Sätze) und beantworten die Frage
+// "was heißt das für mich", nicht "wie funktioniert das technisch".
 export const glossar = {
   domain:
-    "Die Adresse der Website, also das, was jemand in die Adresszeile tippt, um beim Betrieb zu landen: zum Beispiel ihrbetrieb.at. Registriert wird sie auf Ihren Namen, nicht auf meinen. Gebühren und Verwaltung liegen bei mir, die Domain bei Ihnen.",
+    "Die Adresse der Website, also das, was jemand in die Adresszeile tippt, um beim Betrieb zu landen: zum Beispiel ihr-betrieb.at. Registriert wird sie auf Ihren Namen, nicht auf meinen. Gebühren und Verwaltung liegen bei mir, die Domain bei Ihnen.",
   hosting:
     "Der Platz, auf dem die Website liegt, damit sie Tag und Nacht erreichbar ist. Ohne Hosting gäbe es die Seite nur auf einem Rechner bei mir. Platz, Technik und Gebühren stecken im Monatspreis.",
   ssl:
@@ -391,14 +340,6 @@ export const glossar = {
     "Kurz für Suchmaschinenoptimierung. Gemeint ist alles, damit Google versteht, was der Betrieb macht und wo er ist: Seitentitel, Beschreibungen und eine saubere Struktur. Ohne das steht die Seite zwar im Netz, wird aber kaum gefunden.",
   googleProfil:
     "Der Eintrag, der bei einer Suche rechts neben den Ergebnissen und in Google Maps auftaucht, mit Adresse, Öffnungszeiten, Telefonnummer und Fotos. Er ist von der Website unabhängig und wird in jedem Paket mit eingerichtet.",
-  lokaleSeo:
-    "Der Teil der Suchmaschinenarbeit, der auf die Umgebung zielt. Er sorgt dafür, dass der Betrieb auftaucht, wenn jemand in der Nähe sucht, samt Adresse, Öffnungszeiten und Kartenpunkt. Für einen Betrieb, dessen Kunden aus der Gegend kommen, ist das der wichtigere Teil.",
-  authinfo:
-    "Der Schlüssel, mit dem eine .at-Adresse von einem Anbieter zum nächsten umzieht. Wer ihn hat, kann den Umzug beauftragen, deshalb gebe ich ihn nur an Sie weiter. Nach Vertragsende bekommen Sie ihn binnen zwei Wochen von mir.",
-  abloese:
-    "Der einmalige Betrag, mit dem Sie die fertige Website übernehmen, wenn der Vertrag endet. Wie hoch er ist, hängt vom Paket ab. Sie bekommen dafür den Quellcode und dürfen die Seite selbst weiterbetreiben oder von jemand anderem betreuen lassen.",
-  quellcode:
-    "Die Dateien, aus denen Ihre Website besteht. Wer sie hat, kann die Seite auf einen anderen Server stellen und ändern lassen. Beim Mieten bleiben sie bei mir, mit der Ablöse gehen sie an Sie.",
 };
 
 // ─── Pakete ──────────────────────────────────────────────────────────────────
@@ -415,20 +356,13 @@ export const packages = [
     features: [
       "Startseite plus bis zu 2 weitere Bereiche",
       // 18.08.: mehrere Adressen, ein Postfach — siehe included.items[0].
-      // Die [[…]]-Marker sind das Inline-Glossar (src/lib/glossar.jsx).
-      // GEÄNDERT am 21.08.2026: Sie stehen nicht mehr NUR hier. Marina wollte
-      // die ⓘ auf der ganzen Website, deshalb tragen sie jetzt auch Blöcke auf
-      // der Startseite und eine Antwort auf /fragen. Der alte Grund für die
-      // Beschränkung bleibt trotzdem gültig, nur enger gefasst: innerhalb der
-      // Pakettabelle stehen sie weiter allein in der Starter-Liste, weil
-      // Business und Premium "Alles aus Starter" sagen und die Wörter sonst
-      // dreimal mit demselben ⓘ kämen. Business ergänzt genau ein neues Wort
-      // (Lokale SEO), Premium keines.
-      // Sichtbar sind die Marker dieser Liste auf /preise — die Paketkarten
-      // stehen seit dem Startseiten-Umbau vom 17.08. nur noch dort. Kommt eine
-      // Karte je zurück auf die Startseite, prüfen: PackageCard zeigt ohne
-      // `detailed` nur die ersten vier Zeilen, die SEO-Zeile fiele dann weg —
-      // und die Startseite trüge dieselben Wörter dann doppelt.
+      // Die [[…]]-Marker sind das Inline-Glossar (src/lib/glossar.jsx). Sie
+      // stehen nur in der Starter-Liste: Business und Premium sagen "Alles aus
+      // Starter", die Wörter kämen also sonst dreimal mit demselben ⓘ.
+      // Sichtbar sind sie damit genau auf /preise — die Paketkarten stehen seit
+      // dem Startseiten-Umbau vom 17.08. nur noch dort. Kommt eine Karte je
+      // zurück auf die Startseite, prüfen: PackageCard zeigt ohne `detailed`
+      // nur die ersten vier Zeilen, die SEO-Zeile fiele dann weg.
       "Wunschadresse mit [[domain|.at-Endung]] & E-Mail-Adressen darauf, inklusive",
       "[[hosting|Hosting]], [[ssl|SSL]] & laufende Wartung",
       "[[googleProfil|Google-Business-Profil]] eingerichtet",
@@ -451,7 +385,7 @@ export const packages = [
       "Leistungen, Über uns und mindestens ein weiterer Bereich",
       "Kontaktformular",
       "Öffnungszeiten, Adresse & Routenlink",
-      "[[lokaleSeo|Lokale SEO]]-Basis",
+      "Lokale SEO-Basis",
       "bis zu 2 Änderungswünsche pro Monat, umgesetzt in 3 Werktagen",
     ],
     ablöse: "150 €",
@@ -618,13 +552,8 @@ export const services = {
   eyebrow: "In jedem Paket",
   heading: "Alles, was eine Website zum Laufen braucht, inklusive.",
   items: [
-    // Erstes Vorkommen von ".at" und "verschlüsselt" auf der Startseite, also
-    // tragen genau diese beiden das ⓘ. "Hosting" bekommt hier bewusst keines:
-    // Das Wort steht nur in der fetten Beschriftung, und die Erklärung klappt
-    // am Ende ihres eigenen Elements auf — sie stünde also mitten in der Zeile
-    // und fett, statt darunter. Begründung im Notion-Task vom 21.08.
-    { label: "Adresse und E-Mail", text: "Wunschadresse auf [[domain|.at]], dazu Adressen wie office@" },
-    { label: "Hosting und Sicherheit", text: "läuft [[ssl|verschlüsselt]], ohne Handgriff im Betrieb" },
+    { label: "Adresse und E-Mail", text: "Wunschadresse auf .at, dazu Adressen wie office@" },
+    { label: "Hosting und Sicherheit", text: "läuft verschlüsselt, ohne Handgriff im Betrieb" },
     { label: "Google-Karte", text: "der Betrieb mit Adresse und Öffnungszeiten" },
     { label: "Gefunden werden", text: "Titel, Beschreibungen und Struktur richte ich ein" },
     { label: "Wartung", text: "Updates, Backups und Sicherheits-Checks übernehme ich" },
@@ -668,7 +597,7 @@ export const ownership = {
     },
     {
       label: "Die Seite selbst",
-      text: "[[abloese|Ablöse]] ab 100 €, je nach Paket. Danach läuft sie ohne mich weiter.",
+      text: "Ablöse ab 100 €, je nach Paket. Danach läuft sie ohne mich weiter.",
       badge: "ab 100 €",
     },
   ],

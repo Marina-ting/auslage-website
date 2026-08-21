@@ -8,23 +8,6 @@
 //   • Branding                  (Stand 2026-08-06, Farben/Wortmarke final)
 //   • Wettbewerbsanalyse Herold (erfasst 2026-08-05)
 // Jede belegbare Zahl trägt unten ihre Quelle als Kommentar.
-//
-// ANREDE: Die Seite siezt (Marina, 21.08.2026). Dazu gehört eine zweite,
-// wichtigere Vorgabe von ihr — die Anrededichte:
-//
-//   Sie/Ihnen/Ihre steht dort, wo es um Besitz oder eine Handlung geht.
-//   Überall sonst redet der Text über die Sache.
-//
-// Ein „Ihnen" wirkt nur, solange es selten ist. Wer einen Satz ergänzt, prüft
-// deshalb zuerst, ob die Anrede darin überhaupt etwas trägt; wenn nicht,
-// beschreibt der Satz die Sache („Die Seite läuft" statt „Ihre Seite läuft
-// für Sie"). Kein Suchen-und-Ersetzen: aus „Damit dich findet, wer dich sucht"
-// wird nicht „Damit Sie findet, wer Sie sucht", sondern „Gefunden werden, wenn
-// jemand sucht."
-//
-// Zwei Ausnahmen: Die Tagline „deine auslage im netz" ist ein Markenname und
-// wird nicht gebeugt. Und „auslage" bleibt immer klein, auch am Satzanfang
-// (Regel 6) — im Zweifel den Satz umstellen.
 // ─────────────────────────────────────────────────────────────────────────────
 
 // Schalter für die Coming-Soon-Seite: true zeigt auf "/" und "/preise" nur die
@@ -164,14 +147,14 @@ export const hero = {
   // online. Finden sie dich?"), passt aber in zwei Zeilen — die alte Headline
   // füllte bei 1440x900 allein den ganzen ersten Bildschirm, Buttons und
   // Vertrauenszeile lagen unter der Kante.
-  headline: "Gefunden werden,",
-  headlineAccent: "wenn jemand sucht.",
+  headline: "Damit dich findet,",
+  headlineAccent: "wer dich sucht.",
   // Endfassung Block 1 (Mark, freigegeben von Marina am 18.08.). Gegenüber der
   // Fassung vom 17.08. um die Hälfte gekürzt: der Einstieg "Du willst online
   // gefunden werden" stand doppelt, das sagt die Headline schon. Aus "in rund
   // zwei Wochen" ist "in zwei Wochen" geworden — das "rund" hat nur genuschelt.
   subline:
-    "Fehlt es an Zeit, Lust oder Technikwissen? Ich baue die Website für Ihren Betrieb und halte sie am Laufen. In zwei Wochen online, ab 200 € Einrichtung und 50 € im Monat.",
+    "Fehlt es an Zeit, Lust oder Technikwissen? Ich baue die Website für deinen Betrieb und halte sie am Laufen. In zwei Wochen online, ab 200 € Einrichtung und 50 € im Monat.",
   primaryCta: cta,
   // Zweiter Knopf wird Textlink (Marina, 17.08.): zwei Knöpfe nebeneinander
   // sind zwei Entscheidungen, und die Blockfolge lässt nur eine zu.
@@ -218,7 +201,7 @@ export const trust = {
   items: [
     { icon: "baukasten", text: "Fertig eingerichtet, nichts zum Selberbefüllen" },
     { icon: "rechnung", text: "Fixer Preis, keine Überraschung auf der Rechnung" },
-    { icon: "adresse", text: "Die Internetadresse läuft auf Ihren Namen" },
+    { icon: "adresse", text: "Deine Internetadresse, auf deinen Namen" },
     {
       icon: "erfahrung",
       // Zahl aus `proof`, damit sie nur an einer Stelle steht.
@@ -239,11 +222,11 @@ export const trust = {
 // Text zeigt, wo die Empfehlung heute trotzdem verloren geht.
 // Die Langfassung dieses Blocks steht auf /warum-eine-website.
 export const objection = {
-  eyebrow: "Braucht es das überhaupt?",
-  heading: "Im Betrieb läuft alles offline. Wozu dann eine Website?",
+  eyebrow: "Brauchst du das überhaupt?",
+  heading: "Bei dir läuft alles offline. Wozu dann eine Website?",
   paragraphs: [
-    "Ihr Name wird weitergegeben, und der Nächste sucht ihn am Handy, bevor er anruft. Findet er nichts, landet der Auftrag woanders.",
-    "Eine Website ersetzt keine Empfehlung. Sie ist das, was er findet, wenn er den Namen bei Google eintippt.",
+    "Dein Name wird weitergegeben und der Nächste sucht ihn am Handy, bevor er anruft. Findet er nichts, landet der Auftrag woanders.",
+    "Eine Website ersetzt keine Empfehlung. Sie ist das, was er findet, wenn er deinen Namen bei Google eintippt.",
   ],
   more: { label: "Die lange Fassung", href: "/warum-eine-website" },
 };
@@ -282,30 +265,30 @@ export const included = {
   eyebrow: "In jedem Paket",
   heading: "Alles, was eine Website zum Laufen braucht, inklusive.",
   intro:
-    "Kein Baukasten-Abo zum Selberbefüllen und keine Rechnung im dritten Monat für etwas, das dabei zu sein schien.",
+    "Kein Baukasten-Abo, das du selbst befüllst, und keine Rechnung im dritten Monat für etwas, von dem du dachtest, es wäre dabei.",
   items: [
     {
       title: "Wunsch-.at-Domain & Firmen-E-Mail",
       // Umformuliert 18.08.: inkludiert sind mehrere E-Mail-ADRESSEN, aber nur
       // EIN Postfach (Weiterleitung). "ein Postfach darauf" war missverständlich
       // in die andere Richtung. Quelle: Preismodell-Seite, Update 18.08.
-      text: "Die eigene .at-Adresse und die E-Mail-Adressen darauf, die alle in ein Postfach laufen. Registrierung, Gebühren und Verwaltung sind im Paket.",
+      text: "Deine eigene .at-Adresse und die E-Mail-Adressen darauf, die alle in ein Postfach laufen. Registrierung, Gebühren und Verwaltung sind im Paket.",
     },
     {
       title: "Hosting & SSL",
-      text: "Die Seite läuft, ist verschlüsselt und braucht keinen Handgriff.",
+      text: "Die Seite läuft, ist verschlüsselt und braucht von dir keinen Handgriff.",
     },
     {
       title: "Laufende Wartung",
-      text: "Updates, Backups, Sicherheits-Checks und Erreichbarkeitsprüfung, alles im Hintergrund.",
+      text: "Updates, Backups, Sicherheits-Checks und Erreichbarkeitsprüfung, ohne dass du davon etwas mitbekommst.",
     },
     {
       title: "Google-Business-Profil",
-      text: "Eingerichtet, damit der Betrieb in der Kartensuche und rechts neben den Suchergebnissen auftaucht.",
+      text: "Eingerichtet, damit dein Betrieb in der Kartensuche und rechts neben den Suchergebnissen auftaucht.",
     },
     {
       title: "SEO-Grundausstattung",
-      text: "Saubere Struktur, Seitentitel und Beschreibungen, damit Google versteht, was der Betrieb macht.",
+      text: "Saubere Struktur, Seitentitel und Beschreibungen, damit Google versteht, was dein Betrieb macht.",
     },
     {
       title: "Änderungen inklusive",
@@ -315,90 +298,31 @@ export const included = {
 };
 
 // ─── Glossar (Inline-Marker) ─────────────────────────────────────────────────
-// Fachwörter, die im Text ein aufklappbares ⓘ tragen. Die ersten fünf sind
-// Susis Auswahl (20.08.2026), ausgezählt am ausgelieferten HTML: Domain (13×),
-// SEO (7×), Hosting (5×), SSL (3×), Google-Business-Profil (3×). Die vier
-// weiteren (authinfo, abloese, quellcode, lokaleSeo) sind am 21.08.2026 aus
-// Marinas Wunsch dazugekommen, die ⓘ auf der ganzen Seite zu zeigen und nicht
-// nur in der Starter-Liste. Wortlaut von Mark, hier auf die Sie-Linie gebracht
-// und durch copywriting, marketing-psychology und humanizer gelaufen.
-//
-// Der frühere Satz "Quellcode und Backup stehen absichtlich NICHT hier" gilt
-// nur noch für "Backup": das ist ein Alltagswort, und an seinen Fundstellen
-// erklärt der Satz es schon mit. "Quellcode" hat mit der Kaufoption und den
-// Kündigungstexten eine eigene Bedeutung bekommen und steht jetzt drin.
-//
-// ── Die Obergrenze ist umgezogen ────────────────────────────────────────────
-// Sie lag bei fünf Einträgen INSGESAMT. Jetzt gilt sie pro Bildschirm statt pro
-// Datei: ein Wort trägt sein ⓘ nur beim ERSTEN Vorkommen auf einer Seite, jedes
-// weitere bleibt nackt. Marinas Lob galt einer Liste, in der jedes Wort einmal
-// vorkam; vier ⓘ auf "Domain" in einem Bildschirm wären lauter als gar keins.
-// Werner-Entscheidung vom 21.08.2026, Begründung im Notion-Task.
-//
-// ── Wo ein Marker stehen darf ───────────────────────────────────────────────
-// 1. Nur in Fließtext, den eine Komponente durch `GlossarText` schickt. Wo das
-//    nicht passiert, steht die Klammer-Schreibweise als roher Text auf der
-//    Seite. Welche Felder das heute sind, steht unten bei "Markierbare Felder".
-// 2. NIE in einem Attribut (title, alt, placeholder, aria-label) und nie in
-//    einem Wert, aus dem ein `key` gebaut wird — dort hilft `ohneGlossar`.
-// 3. Nicht in Überschriften und nicht in Knopf- oder Linkbeschriftungen: der
-//    Marker ist selbst ein Knopf, und ein Knopf im Knopf schaltet beides.
-// 4. Nicht im Faktenblock (`facts`). Er ist die zitierfähige Faktenliste für
-//    KI-Assistenten, absichtlich trocken; ein Erklärkasten mitten in einer
-//    Tatsachenzeile arbeitet gegen den Zweck (Susi/Mark). Wenn Marina ihn dort
-//    ausdrücklich will, ist das ihre Entscheidung.
-// 5. Nicht auf Alltagswörtern (Kontaktformular, Öffnungszeiten, Backup). Trägt
-//    jedes zweite Wort ein ⓘ, verliert das Zeichen seine Bedeutung.
-//
-// ── Markierbare Felder, Stand 21.08.2026 ────────────────────────────────────
-// JA:   services.items[].text · ownership.items[].text · faq.items[].a
-//       (nur die Fragen, die NICHT in PREIS_FRAGEN in src/pages/Preise.jsx
-//       stehen) · packages[].features[]
-// NEIN: included.items[] · pricingPage.* · pricingTerms · facts.items[] und
-//       jede faq-Frage aus PREIS_FRAGEN. Diese Texte gibt src/pages/Preise.jsx
-//       direkt aus, ohne GlossarText. Seitendateien liegen nicht in Werners
-//       Dateihoheit; solange das so ist, bleiben diese Felder markerfrei.
-// NEIN: faq.items[].q — die Frage steht in einem <summary>, ein Knopf darin
-//       klappt beim Klick zusätzlich die ganze Frage auf oder zu.
-// NEIN, ZWEITER GRUND, und der wiegt schwerer: scripts/prerender.mjs baut aus
-//       faq.items[].q und [].a das FAQPage-JSON-LD von /fragen. Der Marker
-//       landet dort UNVERÄNDERT im maschinenlesbaren Text, also genau in dem
-//       Teil der Seite, der zitierfähig sein soll. Am 21.08.2026 im gebauten
-//       dist/fragen.html nachgesehen, nicht vermutet. Solange prerender.mjs
-//       den Text nicht durch `ohneGlossar` schickt, trägt KEINE FAQ-Antwort
-//       einen Marker. Die Datei ist Susis Terrain und wurde nicht angefasst.
-//       Deshalb steht `authinfo` heute im Glossar, aber noch an keiner Stelle
-//       im Text: das einzige Vorkommen des Wortes außerhalb der FAQ ist
-//       pricingPage.ablöseTextDomain, und das gibt Preise.jsx roh aus.
+// Fünf Fachwörter, die im Text ein aufklappbares ⓘ tragen. Die Auswahl ist
+// Susis (20.08.2026), ausgezählt am ausgelieferten HTML: Domain (13×), SEO (7×),
+// Hosting (5×), SSL (3×), Google-Business-Profil (3×). Fünf sind die Obergrenze
+// und bewusst gesetzt — ab dem sechsten Marker liest sich die Seite wie ein
+// Beipackzettel. "Quellcode" und "Backup" stehen absichtlich NICHT hier: an
+// ihren Fundstellen erklärt der Satz sie schon mit.
 //
 // Gesetzt werden die Marker mit der Schreibweise [[schlüssel|sichtbares Wort]]
 // direkt im Sichttext; aufgelöst wird sie in src/lib/glossar.jsx. Wer einen
 // Schlüssel hier umbenennt, muss auch die Marker im Text nachziehen — ein
 // unbekannter Schlüssel lässt still nur das Wort stehen, ohne Erklärung.
 //
-// Die Texte sind bewusst kurz (drei Sätze) und beantworten die Frage "was heißt
-// das für mich", nicht "wie funktioniert das technisch". Die Anrede folgt der
-// Hauslinie vom 21.08.: "Sie" steht dort, wo es um Besitz oder eine Handlung
-// des Kunden geht, sonst redet der Text über die Sache ("der Betrieb").
+// Die Texte sind bewusst kurz (zwei bis drei Sätze) und beantworten die Frage
+// "was heißt das für mich", nicht "wie funktioniert das technisch".
 export const glossar = {
   domain:
-    "Die Adresse der Website, also das, was jemand in die Adresszeile tippt, um beim Betrieb zu landen: zum Beispiel ihrbetrieb.at. Registriert wird sie auf Ihren Namen, nicht auf meinen. Gebühren und Verwaltung liegen bei mir, die Domain bei Ihnen.",
+    "Die Adresse deiner Website, also das, was jemand in die Adresszeile tippt, um bei dir zu landen: zum Beispiel dein-betrieb.at. Registriert wird sie auf deinen Namen, nicht auf meinen. Gebühren und Verwaltung liegen bei mir, die Domain bei dir.",
   hosting:
-    "Der Platz, auf dem die Website liegt, damit sie Tag und Nacht erreichbar ist. Ohne Hosting gäbe es die Seite nur auf einem Rechner bei mir. Platz, Technik und Gebühren stecken im Monatspreis.",
+    "Der Platz, auf dem deine Website liegt, damit sie Tag und Nacht erreichbar ist. Ohne Hosting gäbe es die Seite nur auf einem Rechner bei mir. Platz, Technik und Gebühren stecken im Monatspreis.",
   ssl:
-    "Das kleine Schloss links in der Adresszeile. Es zeigt, dass die Verbindung verschlüsselt ist: Was jemand in das Kontaktformular tippt, kann unterwegs niemand mitlesen. Fehlt es, warnt der Browser die Besucher, bevor sie die Seite überhaupt sehen.",
+    "Das kleine Schloss links in der Adresszeile. Es zeigt, dass die Verbindung verschlüsselt ist: Was jemand in dein Kontaktformular tippt, kann unterwegs niemand mitlesen. Fehlt es, warnt der Browser deine Besucher, bevor sie die Seite überhaupt sehen.",
   seo:
-    "Kurz für Suchmaschinenoptimierung. Gemeint ist alles, damit Google versteht, was der Betrieb macht und wo er ist: Seitentitel, Beschreibungen und eine saubere Struktur. Ohne das steht die Seite zwar im Netz, wird aber kaum gefunden.",
+    "Kurz für Suchmaschinenoptimierung. Gemeint ist alles, damit Google versteht, was dein Betrieb macht und wo er ist: Seitentitel, Beschreibungen und eine saubere Struktur. Ohne das steht deine Seite zwar im Netz, wird aber kaum gefunden.",
   googleProfil:
-    "Der Eintrag, der bei einer Suche rechts neben den Ergebnissen und in Google Maps auftaucht, mit Adresse, Öffnungszeiten, Telefonnummer und Fotos. Er ist von der Website unabhängig und wird in jedem Paket mit eingerichtet.",
-  lokaleSeo:
-    "Der Teil der Suchmaschinenarbeit, der auf die Umgebung zielt. Er sorgt dafür, dass der Betrieb auftaucht, wenn jemand in der Nähe sucht, samt Adresse, Öffnungszeiten und Kartenpunkt. Für einen Betrieb, dessen Kunden aus der Gegend kommen, ist das der wichtigere Teil.",
-  authinfo:
-    "Der Schlüssel, mit dem eine .at-Adresse von einem Anbieter zum nächsten umzieht. Wer ihn hat, kann den Umzug beauftragen, deshalb gebe ich ihn nur an Sie weiter. Nach Vertragsende bekommen Sie ihn binnen zwei Wochen von mir.",
-  abloese:
-    "Der einmalige Betrag, mit dem Sie die fertige Website übernehmen, wenn der Vertrag endet. Wie hoch er ist, hängt vom Paket ab. Sie bekommen dafür den Quellcode und dürfen die Seite selbst weiterbetreiben oder von jemand anderem betreuen lassen.",
-  quellcode:
-    "Die Dateien, aus denen Ihre Website besteht. Wer sie hat, kann die Seite auf einen anderen Server stellen und ändern lassen. Beim Mieten bleiben sie bei mir, mit der Ablöse gehen sie an Sie.",
+    "Der Eintrag, der bei einer Suche rechts neben den Ergebnissen und in Google Maps auftaucht, mit Adresse, Öffnungszeiten, Telefonnummer und Fotos. Er ist von deiner Website unabhängig und wird in jedem Paket mit eingerichtet.",
 };
 
 // ─── Pakete ──────────────────────────────────────────────────────────────────
@@ -411,24 +335,17 @@ export const packages = [
     setup: "200 €",
     monthly: "50 €",
     forWhom: "Kleinstbetriebe und EPU",
-    pitch: "Eine Seite, die den Betrieb findbar macht und erreichbar hält.",
+    pitch: "Eine Seite, die dich findbar macht und erreichbar hält.",
     features: [
       "Startseite plus bis zu 2 weitere Bereiche",
       // 18.08.: mehrere Adressen, ein Postfach — siehe included.items[0].
-      // Die [[…]]-Marker sind das Inline-Glossar (src/lib/glossar.jsx).
-      // GEÄNDERT am 21.08.2026: Sie stehen nicht mehr NUR hier. Marina wollte
-      // die ⓘ auf der ganzen Website, deshalb tragen sie jetzt auch Blöcke auf
-      // der Startseite und eine Antwort auf /fragen. Der alte Grund für die
-      // Beschränkung bleibt trotzdem gültig, nur enger gefasst: innerhalb der
-      // Pakettabelle stehen sie weiter allein in der Starter-Liste, weil
-      // Business und Premium "Alles aus Starter" sagen und die Wörter sonst
-      // dreimal mit demselben ⓘ kämen. Business ergänzt genau ein neues Wort
-      // (Lokale SEO), Premium keines.
-      // Sichtbar sind die Marker dieser Liste auf /preise — die Paketkarten
-      // stehen seit dem Startseiten-Umbau vom 17.08. nur noch dort. Kommt eine
-      // Karte je zurück auf die Startseite, prüfen: PackageCard zeigt ohne
-      // `detailed` nur die ersten vier Zeilen, die SEO-Zeile fiele dann weg —
-      // und die Startseite trüge dieselben Wörter dann doppelt.
+      // Die [[…]]-Marker sind das Inline-Glossar (src/lib/glossar.jsx). Sie
+      // stehen nur in der Starter-Liste: Business und Premium sagen "Alles aus
+      // Starter", die Wörter kämen also sonst dreimal mit demselben ⓘ.
+      // Sichtbar sind sie damit genau auf /preise — die Paketkarten stehen seit
+      // dem Startseiten-Umbau vom 17.08. nur noch dort. Kommt eine Karte je
+      // zurück auf die Startseite, prüfen: PackageCard zeigt ohne `detailed`
+      // nur die ersten vier Zeilen, die SEO-Zeile fiele dann weg.
       "Wunschadresse mit [[domain|.at-Endung]] & E-Mail-Adressen darauf, inklusive",
       "[[hosting|Hosting]], [[ssl|SSL]] & laufende Wartung",
       "[[googleProfil|Google-Business-Profil]] eingerichtet",
@@ -451,7 +368,7 @@ export const packages = [
       "Leistungen, Über uns und mindestens ein weiterer Bereich",
       "Kontaktformular",
       "Öffnungszeiten, Adresse & Routenlink",
-      "[[lokaleSeo|Lokale SEO]]-Basis",
+      "Lokale SEO-Basis",
       "bis zu 2 Änderungswünsche pro Monat, umgesetzt in 3 Werktagen",
     ],
     ablöse: "150 €",
@@ -465,7 +382,7 @@ export const packages = [
     features: [
       "Alles aus Business",
       {
-        text: "Eigene Seite, damit auch ChatGPT & Co. den Betrieb richtig wiedergeben",
+        text: "Eigene Seite, damit auch ChatGPT & Co. deinen Betrieb richtig wiedergeben",
         tag: "Früh dran",
       },
       "Buchungstool eingebunden",
@@ -477,21 +394,11 @@ export const packages = [
   },
 ];
 
-// Der Umsatzsteuer-Punkt trägt seit 21.08.2026 die Endpreis-Linie. Marina hat
-// im Nadelöhr „Die Preisseite sagt zzgl. USt, AGB und Rechnung sagen keine USt
-// — welcher Satz gilt?" Antwort A entschieden: der Satz, der schon auf der
-// Rechnung steht, gilt wortgleich auch in Angebot, Auftragsbestätigung und auf
-// der Preisseite. Er steht deshalb hier Wort für Wort so wie dort und wird
-// nicht umformuliert.
-//
-// KORREKTUR zur Vorgängerfassung, weil sie sonst weiter zitiert wird: Bis zum
-// 21.08. stand hier „Alle Preise verstehen sich zuzüglich gesetzlicher
-// Umsatzsteuer.", begründet mit „Die AGB sagen das seit längerem". Diese
-// Begründung war falsch. AGB Punkt 4 sagt zu den laufenden Preisen das
-// Gegenteil („es wird daher keine Umsatzsteuer ausgewiesen"); das „zuzüglich
-// allfälliger gesetzlicher Umsatzsteuer" steht in Punkt 7 und gilt nur für die
-// künftige Quellcode-Ablöse. Der Satz war der einzige Ausreißer gegenüber AGB,
-// Rechnung, Angebot und Auftragsbestätigung.
+// Der Umsatzsteuer-Punkt steht seit 20.08.2026 hier. Marina hat im Nadelöhr
+// („Der Deckel im Aufbaujahr liegt bei 60.500 €") Antwort A gewählt: Preise
+// öffentlich als Nettopreise auszeichnen. Die AGB sagen das seit längerem, die
+// Preisseite sagte es nicht — aus Kundensicht standen 200/300/500 € und
+// 50/100/150 € damit als Endpreise da.
 //
 // Bewusst NUR dieser eine Satz und keine Rechenhilfe daneben: Der Gedanke
 // „unsere Kunden holen sich die Umsatzsteuer ohnehin als Vorsteuer zurück"
@@ -503,7 +410,7 @@ export const packages = [
 // ausdrücklich nicht im Faktenblock haben wollen, der Wortlaut dort ist als
 // Endfassung markiert.
 export const pricingTerms = [
-  "Gemäß § 6 Abs. 1 Z 27 UStG (Kleinunternehmerregelung) wird keine Umsatzsteuer ausgewiesen. Der ausgewiesene Betrag ist der Gesamtbetrag.",
+  "Alle Preise verstehen sich zuzüglich gesetzlicher Umsatzsteuer.",
   "Mindestlaufzeit 12 Monate, kündbar mit einem Monat Frist zum Ende des zwölften Vertragsmonats.",
   "Wird nicht gekündigt, läuft der Vertrag auf unbestimmte Zeit weiter — kündbar mit einem Monat Frist zum Monatsletzten.",
   "Änderungswünsche gelten für den laufenden Monat und verfallen am Monatsende.",
@@ -517,17 +424,17 @@ export const why = {
   items: [
     {
       title: "Der Einstieg tut nicht weh",
-      text: `Vergleichbare Websites starten bei anderen Anbietern bei ${proof.marktSetupVon} bis ${proof.marktSetupBis} einmalig. Bei auslage sind es 200 €. Es braucht kein halbes Jahresbudget, nur um herauszufinden, ob es etwas bringt.`,
+      text: `Vergleichbare Websites starten bei anderen Anbietern bei ${proof.marktSetupVon} bis ${proof.marktSetupBis} einmalig. Bei auslage sind es 200 €. Du musst nicht erst ein halbes Jahresbudget aufmachen, um herauszufinden, ob es dir etwas bringt.`,
       footnote: proof.marktQuelle,
     },
     {
       title: "Zwei Wochen statt zwei Monate",
-      text: `Ein großer österreichischer Mitbewerber nennt selbst ${proof.mitbewerbDauer} Umsetzungsdauer. Bei mir ist die Seite in ${proof.eigeneDauer} online, vorausgesetzt, ich bekomme Texte und Fotos zügig.`,
+      text: `Ein großer österreichischer Mitbewerber nennt selbst ${proof.mitbewerbDauer} Umsetzungsdauer. Bei mir ist deine Seite in ${proof.eigeneDauer} online, vorausgesetzt, ich bekomme deine Texte und Fotos zügig.`,
       footnote: proof.mitbewerbQuelle,
     },
     {
-      title: "Immer dieselbe Person am anderen Ende",
-      text: "Kein Ticketsystem, keine wechselnden Ansprechpartner, keine Warteschleife. Sie schreiben mir, ich antworte. Das ist der Vorteil eines Ein-Personen-Betriebs, und der einzige Grund, warum Änderungen in 48 Stunden überhaupt möglich sind.",
+      title: "Du redest immer mit mir",
+      text: "Kein Ticketsystem, keine wechselnden Ansprechpartner, keine Warteschleife. Du schreibst mir, ich antworte. Das ist der Vorteil eines Ein-Personen-Betriebs, und der einzige Grund, warum Änderungen in 48 Stunden überhaupt möglich sind.",
     },
   ],
 };
@@ -540,19 +447,19 @@ export const limits = {
   eyebrow: "Ehrlich gesagt",
   heading: "Was auslage nicht ist.",
   intro:
-    "Der Preis funktioniert, weil das Angebot schlank ist. Das heißt aber auch: manches ist nicht dabei. Besser jetzt gesagt als nach der Auftragsbestätigung.",
+    "Der Preis funktioniert, weil das Angebot schlank ist. Das heißt aber auch: manches ist nicht dabei. Besser, du weißt es jetzt als nach der Auftragsbestätigung.",
   items: [
     {
       title: "Keine Rundum-Agentur",
-      text: "Zusatzleistungen sind möglich, wenn ein Betrieb mehr braucht als die Website selbst. Automatisch inklusive sind sie aber nicht. Angeboten und verrechnet werden sie separat, sonst müsste der Grundpreis für alle höher sein.",
+      text: "Zusatzleistungen sind möglich, wenn dein Betrieb mehr braucht als die Website selbst. Automatisch inklusive sind sie aber nicht. Sie werden separat angeboten und verrechnet, sonst müsste der Grundpreis für alle höher sein.",
     },
     {
       title: "Kein Online-Shop",
-      text: "Ich baue Websites, die Anfragen und Kunden in den Betrieb bringen. Einen Webshop mit Lager, Versand und Zahlungsabwicklung nicht. auslage macht den Betrieb sichtbar, verkauft aber nicht für ihn.",
+      text: "Ich baue Websites, die Anfragen und Kunden in den Betrieb bringen. Einen Webshop mit Lager, Versand und Zahlungsabwicklung nicht. auslage macht dich sichtbar, verkauft aber nicht für dich.",
     },
     {
-      title: "Die Texte kommen aus dem Betrieb",
-      text: "Den Betrieb kennen Sie, ich nicht. Ich frage, sortiere, formuliere um und mache daraus etwas Lesbares, aber der Inhalt kommt aus dem Betrieb. Wer stattdessen fertige Texte vom Anbieter will, ist bei einer größeren Agentur besser aufgehoben.",
+      title: "Die Texte kommen von dir",
+      text: "Du kennst deinen Betrieb, ich nicht. Ich frage, sortiere, formuliere um und mache daraus etwas Lesbares, aber der Inhalt muss von dir kommen. Wer stattdessen fertige Texte vom Anbieter will, ist bei einer größeren Agentur besser aufgehoben.",
     },
     {
       title: "Keine Bindung ohne Gegenleistung",
@@ -572,7 +479,7 @@ export const limits = {
 // Livegang bei 04. Nichts hier behauptet eine Vorschau.
 export const process = {
   eyebrow: "So läuft es ab",
-  heading: "Vier Schritte, und keiner kostet einen Nachmittag.",
+  heading: "Vier Schritte und keiner kostet dich einen Nachmittag.",
   steps: [
     {
       number: "01",
@@ -582,7 +489,7 @@ export const process = {
     {
       number: "02",
       title: "Angebot",
-      text: "Fester Preis, festes Paket. Sie entscheiden.",
+      text: "Fester Preis, festes Paket. Du entscheidest.",
     },
     {
       number: "03",
@@ -596,12 +503,12 @@ export const process = {
       // ("...und schickst mir Texte und Fotos") braucht dort ebenfalls vier
       // Zeilen, weil die Spalte schmal ist. Sie kostet also einen von Marinas
       // zwei Punkten und gewinnt optisch nichts. Deshalb diese hier.
-      text: "Sie erzählen mir, was der Betrieb anbietet. Texte und Fotos kommen von Ihnen oder von der alten Seite.",
+      text: "Du erzählst mir, was dein Betrieb anbietet. Texte und Fotos kommen von dir oder von deiner alten Seite.",
     },
     {
       number: "04",
       title: "Live und betreut",
-      text: "Online geht die Seite erst mit Ihrem Ja.",
+      text: "Online geht die Seite erst mit deinem Ja.",
     },
   ],
 };
@@ -618,14 +525,9 @@ export const services = {
   eyebrow: "In jedem Paket",
   heading: "Alles, was eine Website zum Laufen braucht, inklusive.",
   items: [
-    // Erstes Vorkommen von ".at" und "verschlüsselt" auf der Startseite, also
-    // tragen genau diese beiden das ⓘ. "Hosting" bekommt hier bewusst keines:
-    // Das Wort steht nur in der fetten Beschriftung, und die Erklärung klappt
-    // am Ende ihres eigenen Elements auf — sie stünde also mitten in der Zeile
-    // und fett, statt darunter. Begründung im Notion-Task vom 21.08.
-    { label: "Adresse und E-Mail", text: "Wunschadresse auf [[domain|.at]], dazu Adressen wie office@" },
-    { label: "Hosting und Sicherheit", text: "läuft [[ssl|verschlüsselt]], ohne Handgriff im Betrieb" },
-    { label: "Google-Karte", text: "der Betrieb mit Adresse und Öffnungszeiten" },
+    { label: "Adresse und E-Mail", text: "Wunschadresse auf .at, dazu Adressen wie office@" },
+    { label: "Hosting und Sicherheit", text: "läuft verschlüsselt, ohne Handgriff für dich" },
+    { label: "Google-Karte", text: "dein Betrieb mit Adresse und Öffnungszeiten" },
     { label: "Gefunden werden", text: "Titel, Beschreibungen und Struktur richte ich ein" },
     { label: "Wartung", text: "Updates, Backups und Sicherheits-Checks übernehme ich" },
     { label: "Änderungen", text: "neue Öffnungszeiten oder ein neues Foto, monatlich" },
@@ -643,11 +545,11 @@ export const services = {
   priceReasons: [
     "Eine Person. Kein Ticketsystem, keine Zwischenebene.",
     "Schlankes Angebot. Kein Shop, keine Sonderprogrammierung.",
-    "Die Einrichtung ist nicht auf einen Schlag fällig. 200 € am Anfang, den Rest trägt der Monatspreis über die Laufzeit.",
+    "Die Einrichtung zahlst du nicht auf einen Schlag. 200 € am Anfang, den Rest trägt der Monatspreis über die Laufzeit.",
   ],
 };
 
-// ─── Block 6: Was Ihnen gehört ─────────────────────────────────────────────────
+// ─── Block 6: Was dir gehört ─────────────────────────────────────────────────
 // Herr Rat: der Block, den ein Miet-Anbieter normalerweise nicht haben kann,
 // und deshalb das stärkste Argument der Seite. Risikoumkehr, gehört in den
 // Verkaufsteil und nicht in eine FAQ.
@@ -655,20 +557,20 @@ export const services = {
 // Mietmodellen ist nach der Kündigung alles weg" ist für EINEN Anbieter geprüft,
 // nicht für Mietmodelle allgemein. Der Block trägt nur, was für auslage gilt.
 export const ownership = {
-  eyebrow: "Was Ihnen gehört",
-  heading: "Die Website ist gemietet. Die Internetadresse gehört Ihnen.",
+  eyebrow: "Was dir gehört",
+  heading: "Du mietest die Website. Deine Internetadresse gehört dir.",
   items: [
     {
-      label: "Die Internetadresse",
-      text: "läuft vom ersten Tag an auf Ihren Namen",
+      label: "Deine Internetadresse",
+      text: "läuft vom ersten Tag an auf deinen Namen",
     },
     {
-      label: "Die Inhalte",
+      label: "Deine Inhalte",
       text: "nach Vertragsende kostenlos zurück, Texte, Bilder und Logos als Dateien",
     },
     {
       label: "Die Seite selbst",
-      text: "[[abloese|Ablöse]] ab 100 €, je nach Paket. Danach läuft sie ohne mich weiter.",
+      text: "Ablöse ab 100 €, je nach Paket. Danach läuft sie ohne mich weiter.",
       badge: "ab 100 €",
     },
   ],
@@ -734,8 +636,8 @@ export const references = {
 // und Referenzblock beginnen fast gleich. Den zweiten Text kürzen?"). Fällt
 // die Kurzfassung, ist es eine Zeile in `references.leer.text`.
 export const belege = {
-  heading: "Sie müssen mir nichts glauben.",
-  text: "auslage ist neu, und ein Kunde, der hier für mich spricht, ist noch nicht dabei. Die erste Seite ist im Bau. Bis dahin können Sie das Wichtigste selbst nachsehen. Die Preise stehen auf der Preisseite, mit Zahlen und nicht auf Anfrage. Dass die Internetadresse vom ersten Tag an auf Ihren Namen läuft, steht im Vertrag und nicht in einem Werbesatz. Was es kostet, die Seite mitzunehmen, wenn der Vertrag endet, steht dort mit Betrag. Und im Impressum steht meine Anschrift, nicht nur ein Kontaktformular.",
+  heading: "Du musst mir nichts glauben.",
+  text: "auslage ist neu, und ein Kunde, der hier für mich spricht, ist noch nicht dabei. Die erste Seite ist im Bau. Bis dahin kannst du das Wichtigste selbst nachsehen. Die Preise stehen auf der Preisseite, mit Zahlen und nicht auf Anfrage. Dass deine Internetadresse vom ersten Tag an auf dich läuft, steht im Vertrag und nicht in einem Werbesatz. Was es kostet, die Seite mitzunehmen, wenn du wieder gehst, steht dort mit Betrag. Und im Impressum steht meine Anschrift, nicht nur ein Kontaktformular.",
 };
 
 // ─── Über Marina ─────────────────────────────────────────────────────────────
@@ -787,7 +689,7 @@ export const about = {
   // ist mit diesem Wechsel aus dem Abschnitt verschwunden und liegt Marina als
   // offene Frage vor. Nicht stillschweigend wieder einsetzen.
   closing:
-    "Alle diese Erfahrungen kombiniere ich heute mit KI und Google-Optimierung und baue damit Websites, die für uns arbeiten und nicht umgekehrt. Kein Verkaufs-Blabla, sondern eine Ansprechperson auf Augenhöhe. Sie kümmern sich um Ihr Tagesgeschäft, ich um Aufbau, Pflege, Auffindbarkeit und Technik Ihrer Website.",
+    "Alle diese Erfahrungen kombiniere ich heute mit KI und Google-Optimierung und baue damit Websites, die für uns arbeiten und nicht umgekehrt. Kein Verkaufs-Blabla, sondern eine Ansprechperson auf Augenhöhe. Du kümmerst dich um dein Tagesgeschäft, ich um Aufbau, Pflege, Auffindbarkeit und Technik deiner Website.",
   // Marina-Entscheidung 14.08., endgültig: kein Porträtfoto auf der Website.
   // Wie bei phone/whatsapp bewusst null statt Platzhalter — die Komponente
   // rendert den Bildteil dann gar nicht erst.
@@ -815,32 +717,32 @@ export const faq = {
     {
       id: "mindestlaufzeit",
       q: "Warum 12 Monate Mindestlaufzeit?",
-      a: "Weil die Einrichtung sonst nicht 200 € kosten könnte. Die eigentliche Arbeit steckt am Anfang: Aufbau, Domain, Google-Profil, Struktur. Andere Anbieter verrechnen das einmalig mit 1.790 € aufwärts. Ich verteile es über die Laufzeit. Die Bindung ist der Preis dafür, und sie gilt in beide Richtungen: ich bin die 12 Monate auch für Sie da.",
+      a: "Weil die Einrichtung sonst nicht 200 € kosten könnte. Die eigentliche Arbeit steckt am Anfang: Aufbau, Domain, Google-Profil, Struktur. Andere Anbieter verrechnen das einmalig mit 1.790 € aufwärts. Ich verteile es über die Laufzeit. Die Bindung ist der Preis dafür, und sie gilt in beide Richtungen: ich bin die 12 Monate auch für dich da.",
     },
     {
       id: "website-mitnehmen",
       q: "Kann ich meine Website mitnehmen, wenn ich kündige?",
-      a: "Die Inhalte ja, und zwar kostenlos: Texte, Bilder, Logos, Firmendaten und alle Anfragen, die über die Website hereingekommen sind, gebe ich nach Vertragsende unentgeltlich in einem gängigen Format heraus. Eine Nachricht binnen drei Monaten genügt, dann sind sie binnen vier Wochen da. Den Quellcode gibt es gegen eine einmalige Ablöse: 100 € bei Starter, 150 € bei Business, 250 € bei Premium. Damit dürfen Sie die Website unbefristet selbst weiterbetreiben und weiterentwickeln lassen, von wem Sie wollen. Ausgenommen sind Bestandteile von Dritten wie Schriften, Bildmaterial und Softwarebibliotheken, für die eigene Lizenzen nötig sind — welche das sind, weise ich bei der Übergabe aus. Die Domain gehört ohnehin von Anfang an Ihnen.",
+      a: "Deine Inhalte ja, und zwar kostenlos: Texte, Bilder, Logos, Firmendaten und alle Anfragen, die über die Website hereingekommen sind, bekommst du nach Vertragsende unentgeltlich in einem gängigen Format. Sag mir binnen drei Monaten Bescheid, dann hast du sie binnen vier Wochen. Den Quellcode gibt es gegen eine einmalige Ablöse: 100 € bei Starter, 150 € bei Business, 250 € bei Premium. Damit darfst du die Website unbefristet selbst weiterbetreiben und weiterentwickeln lassen, von wem du willst. Ausgenommen sind Bestandteile von Dritten wie Schriften, Bildmaterial und Softwarebibliotheken, für die du eigene Lizenzen brauchst — welche das sind, weise ich dir bei der Übergabe aus. Die Domain gehört ohnehin von Anfang an dir.",
     },
     {
       id: "dauer-bis-online",
       q: "Wie lange dauert es, bis meine Website online ist?",
-      a: "In der Regel rund zwei Wochen. Was es länger macht, ist fast immer dasselbe: Ich warte auf Texte oder Fotos. Liegen die bereit, geht es schnell.",
+      a: "In der Regel rund zwei Wochen. Was es länger macht, ist fast immer dasselbe: Ich warte auf Texte oder Fotos. Wenn du die parat hast, geht es schnell.",
     },
     {
       id: "baukasten",
       q: "Kann ich das nicht selbst mit einem Baukasten machen?",
-      a: "Die Website lässt sich bei mir auch einfach monatlich mieten, statt sie selbst zusammenzubauen: Grundsätzlich ja, und für manche ist das genau richtig. Rechnen Sie nur ehrlich mit: Der Baukasten kostet auch monatlich, dazu kommen Domain und meist ein Aufpreis fürs eigene Postfach. Der eigentliche Preis sind die Abende, die dabei draufgehen, und danach das Nachpflegen, das erfahrungsgemäß nach ein paar Monaten liegen bleibt.",
+      a: "Du kannst die Website bei mir auch einfach monatlich mieten, statt sie selbst zusammenzubauen: Grundsätzlich ja, und für manche ist das genau richtig. Rechne nur ehrlich mit: Der Baukasten kostet auch monatlich, dazu kommen Domain und meist ein Aufpreis fürs eigene Postfach. Der eigentliche Preis sind die Abende, die du damit verbringst, und danach das Nachpflegen, das erfahrungsgemäß nach ein paar Monaten liegen bleibt.",
     },
     {
       id: "hosting-ssl-updates",
       q: "Muss ich mich um Hosting, SSL oder Updates kümmern?",
-      a: "Nein. Das ist in jedem Paket enthalten und der Grund, warum es überhaupt ein Monatsmodell ist. Davon merkt man nichts, außer dass die Seite läuft.",
+      a: "Nein. Das ist in jedem Paket enthalten und der Grund, warum es überhaupt ein Monatsmodell ist. Du bekommst davon nichts mit, außer dass die Seite läuft.",
     },
     {
       id: "domain-und-email",
       q: "Sind Domain und E-Mail-Adresse wirklich inklusive?",
-      a: "Ja, in allen drei Paketen. Die Wunsch-.at-Domain, sofern noch frei, und ein Firmen-Postfach darauf. Registrierung und laufende Gebühren übernehme ich, registriert wird sie aber auf Sie und nicht auf mich. Nach Vertragsende schicke ich binnen zwei Wochen die Authinfo, mit der die Domain zu einem beliebigen Anbieter umzieht; ab dann tragen Sie die Verlängerungskosten selbst. Nehmen Sie den Umzug binnen acht Wochen vor — danach wird die Domain nicht weiter verlängert und kann verfallen.",
+      a: "Ja, in allen drei Paketen. Deine Wunsch-.at-Domain, sofern noch frei, und ein Firmen-Postfach darauf. Registrierung und laufende Gebühren übernehme ich, registriert wird sie aber auf dich und nicht auf mich. Nach Vertragsende bekommst du binnen zwei Wochen die Authinfo, mit der du die Domain zu einem Anbieter deiner Wahl mitnimmst; ab dann trägst du die Verlängerungskosten selbst. Nimm den Umzug binnen acht Wochen vor — danach wird die Domain nicht weiter verlängert und kann verfallen.",
     },
     {
       id: "faktenseite-ki",
@@ -850,12 +752,12 @@ export const faq = {
     {
       id: "seo-in-den-paketen",
       q: "Wie unterscheidet sich die Suchmaschinenoptimierung in den drei Paketen?",
-      a: "In allen drei Paketen ist eine SEO-Grundausstattung dabei: saubere Struktur, Seitentitel und Beschreibungen, damit Google versteht, was der Betrieb macht. Ab Business kommt die lokale SEO-Basis dazu — wichtig, wenn die Kunden vor allem aus der Umgebung suchen. Bei Premium betreue ich die SEO laufend weiter, dazu kommt eine eigene Faktenseite, extra für KI-Assistenten wie ChatGPT aufbereitet, damit die auch die richtigen Infos über den Betrieb ausgeben.",
+      a: "In allen drei Paketen ist eine SEO-Grundausstattung dabei: saubere Struktur, Seitentitel und Beschreibungen, damit Google versteht, was dein Betrieb macht. Ab Business kommt die lokale SEO-Basis dazu — wichtig, wenn deine Kunden vor allem aus der Umgebung suchen. Bei Premium betreue ich die SEO laufend weiter und du bekommst zusätzlich eine eigene Faktenseite, extra für KI-Assistenten wie ChatGPT aufbereitet, damit die auch die richtigen Infos über deinen Betrieb ausgeben.",
     },
     {
       id: "zusatzleistungen",
       q: "Was, wenn ich später etwas brauche, das über mein Paket hinausgeht?",
-      a: "Dann schicke ich vorher ein Angebot dafür. Es wird nie etwas verrechnet, das nicht vorher freigegeben ist.",
+      a: "Dann bekommst du vorher ein Angebot dafür. Es wird nie etwas verrechnet, das du nicht vorher freigegeben hast.",
     },
   ],
 };
@@ -934,11 +836,11 @@ export const facts = {
     { label: "Dauer bis online", text: "zwei Wochen." },
     {
       label: "Internetadresse",
-      text: "In jedem Paket ist eine Wunschadresse mit .at-Endung enthalten, zum Beispiel ihrbetrieb.at. Registrierung, Gebühren und Verwaltung übernimmt auslage. Inhaber der Adresse ist der Betrieb selbst.",
+      text: "In jedem Paket ist eine Wunschadresse mit .at-Endung enthalten, zum Beispiel deinbetrieb.at. Registrierung, Gebühren und Verwaltung übernimmt auslage. Inhaber der Adresse ist der Betrieb selbst.",
     },
     {
       label: "E-Mail",
-      text: "Adressen auf der eigenen Internetadresse sind enthalten, zum Beispiel office@ihrbetrieb.at. Alle Adressen laufen in ein Postfach.",
+      text: "Adressen auf der eigenen Internetadresse sind enthalten, zum Beispiel office@deinbetrieb.at. Alle Adressen laufen in ein Postfach.",
     },
     {
       label: "In jedem Paket enthalten",
@@ -976,8 +878,8 @@ export const contact = {
   // Betrieb im Triestingtal."; der Ortsbezug trägt stattdessen über die
   // Vertrauenskachel "Aus Berndorf, Niederösterreich", den Footer und das
   // Impressum.
-  heading: "Erzählen Sie mir von Ihrem Betrieb.",
-  text: "Ein paar Zeilen reichen. Ich schaue mir den Betrieb online an und sage ehrlich, ob und welches Paket passt.",
+  heading: "Erzähl mir von deinem Betrieb.",
+  text: "Ein paar Zeilen reichen. Ich schaue mir deinen Betrieb online an und sage dir ehrlich, ob und welches Paket zu dir passt.",
   // Risikoumkehr: alle drei Punkte sind Zusagen, die Marina tatsächlich einhält.
   // "in der Regel" ist am 18.08. rausgeflogen — Marina: "das passt schon so,
   // auch im Urlaub." Damit ist die Antwortzeit eine Zusage, keine Tendenz.
@@ -1014,19 +916,19 @@ export const contact = {
   ],
   formHeading: "Anfrage",
   fields: {
-    name: "Ihr Name",
+    name: "Dein Name",
     company: "Betrieb",
     email: "E-Mail",
     message: "Worum geht's?",
   },
   messagePlaceholder:
-    "Was macht der Betrieb, und was soll die Website können? Ein paar Stichworte genügen.",
+    "Was macht dein Betrieb, und was soll die Website können? Ein paar Stichworte genügen.",
   // "submit" gibt es hier nicht mehr: der Absende-Knopf trägt seit 18.08.
   // denselben Wortlaut wie jeder andere CTA der Seite und liest ihn aus `cta`.
   // Solange emailActive false ist, erklärt die Seite offen, dass das Formular
   // ein mailto öffnet, statt so zu tun, als gäbe es ein Backend.
   mailtoNote:
-    "Das Formular öffnet Ihr E-Mail-Programm mit der fertigen Nachricht. Es wird nichts auf dieser Seite gespeichert.",
+    "Das Formular öffnet dein E-Mail-Programm mit der fertigen Nachricht. Es wird nichts auf dieser Seite gespeichert.",
 };
 
 export const ctaBand = {
@@ -1034,7 +936,7 @@ export const ctaBand = {
   // "Kostenloses Erstgespräch" ist hier rausgeflogen: der Wortlaut war der
   // unterlegene Knopftext-Vorschlag und stand nach der Entscheidung vom 18.08.
   // im Widerspruch zum Knopf daneben.
-  text: "Schreiben Sie mir ein paar Zeilen. Ohne Verpflichtung und ohne dass danach jemand hinterhertelefoniert.",
+  text: "Schreib mir ein paar Zeilen. Ohne Verpflichtung und ohne dass dir danach jemand hinterhertelefoniert.",
   cta,
 };
 
@@ -1090,17 +992,17 @@ export const pageMeta = {
     title: "Webdesign Triestingtal – Website mieten statt kaufen",
     // 151 Zeichen.
     description:
-      "Ihre Website im Triestingtal: in rund zwei Wochen online, ab 200 € Einrichtung und 50 € im Monat. Domain, Hosting und Wartung inklusive. Aus Berndorf.",
+      "Deine Website im Triestingtal: in rund zwei Wochen online, ab 200 € Einrichtung und 50 € im Monat. Domain, Hosting und Wartung inklusive. Aus Berndorf.",
   },
   warumWebsite: {
-    title: "Warum Ihr Betrieb eine Website braucht – auslage",
+    title: "Warum dein Betrieb eine Website braucht – auslage",
     description:
-      "Läuft im Betrieb alles über Empfehlung? Wer weiterempfohlen wird, wird gegoogelt. Was eine Website leistet, wenn ein Betrieb von Mundpropaganda lebt. Ehrlich.",
+      "Bei dir läuft alles über Empfehlung? Wer weiterempfohlen wird, wird gegoogelt. Was eine Website leistet, wenn dein Betrieb von Mundpropaganda lebt. Ehrlich.",
   },
   warumAuslage: {
     title: "Warum auslage: Website mieten statt einmal kaufen",
     description:
-      "Website mieten statt einmal kaufen: was das kostet, was inklusive ist, was Ihnen gehört und wo die Grenzen liegen. Ehrlich aufgelistet, auch das Kleingedruckte.",
+      "Website mieten statt einmal kaufen: was das kostet, was inklusive ist, was dir gehört und wo die Grenzen liegen. Ehrlich aufgelistet, auch das Kleingedruckte.",
   },
   fragen: {
     // Title 59 Zeichen, Description 154 — beide von Susi gezählt.
@@ -1135,7 +1037,7 @@ export const pricingPage = {
   // Branche, sondern die Betriebsgröße — das ist die Aussage, die der Satz
   // davor („keine Staffelung nach Betriebsgröße") technisch schon macht.
   intro:
-    "Die Website mieten Sie bei mir zum festen Monatspreis, statt sie einmalig zu kaufen. Keine hohen Startkosten, nach dem ersten Jahr monatlich kündbar. Drei Pakete, alle Preise offen. Kein Angebot auf Anfrage, keine Staffelung nach Betriebsgröße und nichts, was erst im Gespräch dazukommt. Gedacht ist das für kleine Betriebe hier in der Gegend: der Ein-Personen-Betrieb zahlt dasselbe wie das Kleinunternehmen mit zehn Leuten.",
+    "Deine Website mietest du bei mir zum festen Monatspreis, statt sie einmalig zu kaufen. Keine hohen Startkosten, nach dem ersten Jahr monatlich kündbar. Drei Pakete, alle Preise offen. Kein Angebot auf Anfrage, keine Staffelung nach Betriebsgröße und nichts, was erst im Gespräch dazukommt. Gedacht ist das für kleine Betriebe hier in der Gegend: der Ein-Personen-Betrieb zahlt dasselbe wie das Kleinunternehmen mit zehn Leuten.",
   anchor: {
     heading: "Zum Einordnen",
     text: `Vergleichbare Websites kosten bei anderen Anbietern ${proof.marktSetupVon} bis ${proof.marktSetupBis} einmalig, bevor überhaupt eine monatliche Betreuung dazukommt. auslage startet bei 200 € Einrichtung und 50 € im Monat, dafür mit Mindestlaufzeit. Im ersten Jahr sind das beim Starter 800 € zusammen, Einrichtung eingerechnet. Das ist weniger, als die Einrichtung allein bei den Anbietern oben kostet.`,
@@ -1163,7 +1065,7 @@ export const pricingPage = {
   kauf: {
     heading: "Lieber kaufen statt mieten?",
     intro:
-      "Nicht jeder Betrieb will ein Abo. Deshalb gibt es jedes der drei Pakete auch zum Kauf: einmalig zahlen, der Quellcode gehört Ihnen, es gibt keine Mindestlaufzeit und kein Monatshonorar.",
+      "Nicht jeder Betrieb will ein Abo. Deshalb gibt es jedes der drei Pakete auch zum Kauf: du zahlst einmalig, der Quellcode gehört dir, es gibt keine Mindestlaufzeit und kein Monatshonorar.",
     // Bewusst eigene Werte statt einer Ableitung aus `packages`: der Kaufpreis
     // ist keine Formel auf dem Monatspreis, sondern eine eigene Festlegung.
     // Eine gerechnete Zeile würde bei der nächsten Preisänderung still falsch.
@@ -1172,28 +1074,25 @@ export const pricingPage = {
       { name: "Business", price: "2.000 €" },
       { name: "Premium", price: "3.000 €" },
     ],
-    // Der Umsatzsteuer-Hinweis steht hier ein zweites Mal, obwohl er unten in
+    // Der Netto-Hinweis steht hier ein zweites Mal, obwohl er unten in
     // `pricingTerms` ohnehin für die ganze Seite gilt. Grund: Hier stehen die
     // höchsten Beträge der Seite, und zwischen ihnen und dem Kleingedruckten
-    // liegen zwei Bildschirme. Bei 3.000 € will niemand erst beim
-    // Weiterscrollen erfahren, ob noch etwas dazukommt.
-    // Wortlaut wie in `pricingTerms` und wie auf Rechnung, Angebot und
-    // Auftragsbestätigung (Marina, 21.08.2026, Nadelöhr, Antwort A). Nicht
-    // umformulieren — der Satz steht an neun Stellen gleich.
+    // liegen zwei Bildschirme. Bei 3.000 € sind zwanzig Prozent kein Detail,
+    // das man erst beim Weiterscrollen erfährt.
     preisNote:
-      "Einmalig. Gemäß § 6 Abs. 1 Z 27 UStG (Kleinunternehmerregelung) wird keine Umsatzsteuer ausgewiesen. Der ausgewiesene Betrag ist der Gesamtbetrag. Gebaut wird dieselbe Website, die im jeweiligen Paket oben beschrieben ist.",
+      "Einmalig, zuzüglich gesetzlicher Umsatzsteuer. Gebaut wird dieselbe Website, die im jeweiligen Paket oben beschrieben ist.",
     outro:
-      "Für die meisten kleinen Betriebe hier ist die Miete der günstigere Weg, deshalb steht sie oben. Kaufen lohnt sich, wenn das Geld ohnehin da ist und eine Bindung nicht infrage kommt.",
+      "Für die meisten kleinen Betriebe hier ist die Miete der günstigere Weg, deshalb steht sie oben. Kaufen lohnt sich, wenn du das Geld ohnehin liegen hast und dich nicht binden willst.",
   },
-  ablöseHeading: "Wenn der Vertrag endet",
+  ablöseHeading: "Wenn du wieder gehst",
   // Getrennt nach AGB §7 (Stand 16.08.): Inhalte unentgeltlich, Entgelt nur für
   // den Quellcode, Domain mit den beiden Bedingungen nach Vertragsende.
   ablöseText:
-    "Die Inhalte gehören Ihnen, kostenlos. Texte, Bilder, Logos, Firmendaten und alle Anfragen, die über die Website hereingekommen sind, gebe ich nach Vertragsende unentgeltlich heraus, in einem gängigen Format zum Weiterverwenden. Eine Nachricht binnen drei Monaten nach Vertragsende genügt, dann sind sie binnen vier Wochen da.",
+    "Deine Inhalte gehören dir, kostenlos. Texte, Bilder, Logos, Firmendaten und alle Anfragen, die über die Website hereingekommen sind, bekommst du nach Vertragsende unentgeltlich heraus, in einem gängigen Format zum Weiterverwenden. Sag binnen drei Monaten nach Vertragsende Bescheid, dann hast du sie binnen vier Wochen.",
   ablöseTextQuellcode:
-    "Den Quellcode gibt es gegen eine einmalige Ablöse: 100 € bei Starter, 150 € bei Business, 250 € bei Premium. Damit dürfen Sie die Website unbefristet selbst weiterbetreiben, bearbeiten und weiterentwickeln lassen, von wem Sie wollen. Ausgenommen sind Bestandteile von Dritten — Schriften, Bildmaterial, Softwarebibliotheken —, für die eigene Lizenzen nötig sind; welche das sind, weise ich bei der Übergabe aus.",
+    "Den Quellcode gibt es gegen eine einmalige Ablöse: 100 € bei Starter, 150 € bei Business, 250 € bei Premium. Damit darfst du die Website unbefristet selbst weiterbetreiben, bearbeiten und weiterentwickeln lassen, von wem du willst. Ausgenommen sind Bestandteile von Dritten — Schriften, Bildmaterial, Softwarebibliotheken —, für die du eigene Lizenzen brauchst; welche das sind, weise ich dir bei der Übergabe aus.",
   ablöseTextDomain:
-    "Die Domain gehört Ihnen, während der Laufzeit und danach. Nach Vertragsende schicke ich binnen zwei Wochen die Authinfo, mit der die Domain zu einem beliebigen Anbieter umzieht; beim Umzug helfe ich. Ab Vertragsende tragen Sie die Verlängerungskosten selbst. Wichtig: Nehmen Sie den Umzug binnen acht Wochen vor — danach wird die Domain nicht weiter verlängert und kann verfallen.",
+    "Die Domain gehört dir, während der Laufzeit und danach. Nach Vertragsende bekommst du binnen zwei Wochen die Authinfo, mit der du sie zu einem Anbieter deiner Wahl mitnimmst; beim Umzug helfe ich. Ab Vertragsende trägst du die Verlängerungskosten selbst. Wichtig: Nimm den Umzug binnen acht Wochen vor — danach wird die Domain nicht weiter verlängert und kann verfallen.",
   termsHeading: "Das Kleingedruckte, groß geschrieben",
 };
 

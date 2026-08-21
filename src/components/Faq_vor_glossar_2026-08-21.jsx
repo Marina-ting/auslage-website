@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { faq } from "../content/site";
-import GlossarText from "../lib/glossar";
 
 /**
  * FAQ als <details>/<summary>.
@@ -15,22 +14,6 @@ import GlossarText from "../lib/glossar";
  * bliebe verborgen. Der Effekt unten klappt die adressierte Frage deshalb auf.
  * Ohne JavaScript springt der Browser trotzdem richtig hin — dann muss man
  * einmal klicken. Das ist der vertretbare Rest.
- *
- * Die ANTWORT läuft seit 21.08.2026 durch `GlossarText`, die FRAGE nicht. Die
- * Frage steht in einem <summary>; ein Glossar-Marker ist ein echter Knopf, und
- * ein Klick darauf würde zusätzlich die ganze Frage auf- oder zuklappen.
- *
- * ACHTUNG, ZWEI GRÜNDE, WARUM HEUTE TROTZDEM KEINE ANTWORT EINEN MARKER TRÄGT:
- * 1. scripts/prerender.mjs baut aus `faq.items` das FAQPage-JSON-LD von
- *    /fragen. Ein Marker steht dort unverändert im maschinenlesbaren Text —
- *    also in dem Teil der Seite, der ausdrücklich zitierfähig sein soll.
- *    Am 21.08.2026 im gebauten dist/fragen.html nachgesehen.
- * 2. src/pages/Preise.jsx gibt eine Auswahl derselben Antworten noch einmal
- *    aus, dort ohne GlossarText. In einer Antwort aus PREIS_FRAGEN wäre ein
- *    Marker auf /preise als roher [[…]]-Text sichtbar.
- * Diese Komponente ist trotzdem schon angeschlossen: sie ist die Bedingung
- * dafür, dass ein Marker hier je funktioniert, und ohne Marker im Text ändert
- * `GlossarText` nichts an der Ausgabe.
  */
 export default function Faq({ headless = false }) {
   useEffect(() => {
@@ -78,9 +61,7 @@ export default function Faq({ headless = false }) {
                 {item.q}
                 <span className="faq__sign" aria-hidden="true" />
               </summary>
-              <p className="faq__answer">
-                <GlossarText text={item.a} />
-              </p>
+              <p className="faq__answer">{item.a}</p>
             </details>
           ))}
         </div>
