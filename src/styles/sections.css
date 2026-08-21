@@ -519,6 +519,88 @@
   font-weight: 600;
 }
 
+/* ── Kaufoption (nur /preise) ─────────────────────────────────────────────
+   Bewusst derselbe ruhige Kasten wie der Preisanker oben und keine vierte
+   Paketkarte: das Abo bleibt das beworbene Angebot, der Kauf ist die Antwort
+   auf einen Einwand. Wer daraus eine Karte macht, dreht die Gewichtung um.
+   Der Kasten steht am ENDE seines Abschnitts, deshalb Abstand oben statt
+   unten — `.anchor-note` bringt `margin-bottom` mit, das hier stören würde. */
+.anchor-note--kauf {
+  margin-top: clamp(2.5rem, 1.8rem + 2.5vw, 4rem);
+  margin-bottom: 0;
+}
+
+/* Ein echtes <h2>, weil Marina einen Block mit eigener Überschrift wollte.
+   Die Größe liegt bewusst unter der von "Die drei Pakete" darüber: in der
+   Gliederung gleichrangig, im Bild nachgeordnet. */
+.kauf__title {
+  font-size: var(--t-h3);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--teal);
+}
+
+.kauf__preise {
+  list-style: none;
+  display: grid;
+  gap: 0.4rem;
+  margin: 0.3rem 0;
+  max-width: 22rem;
+}
+
+.kauf__preise li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding-block: 0.35rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.kauf__preise li:last-child {
+  border-bottom: 0;
+}
+
+.kauf__paket {
+  color: var(--ink-muted);
+}
+
+/* Der Preis ist die einzige Stelle im Kasten, die Tinte statt Grauton trägt —
+   offen ausgewiesen war Marinas Auflage, aber ohne Signalfarbe: Teal gehört
+   hier den Knöpfen und der empfohlenen Paketkarte. */
+.kauf__preis {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ── Belege & leerer Referenzblock ────────────────────────────────────────
+   Zwei Abschnitte auf der Startseite, die nur so lange existieren, wie es
+   keine Kundenreferenz gibt (Belege.jsx und der Leerzustand von
+   References.jsx). Beide tragen einen ungewöhnlich langen Absatz: sechs Sätze,
+   wo ein `lead` sonst einen oder zwei trägt.
+
+   Deshalb hier eine eigene Stufe statt der normalen Abschnitts-Optik. In
+   `lead`-Größe gesetzt lesen sich sechs Sätze wie ein Manifest, und der
+   Abschnitt bekommt ein Gewicht, das er nicht haben soll: Er ist ein
+   Übergangszustand, kein Hauptargument. Überschrift eine Stufe kleiner,
+   Fließtext in normaler Größe. Dieselbe Behandlung wie der Ablöse-Abschnitt
+   auf /preise, wo lange Erklärtexte stehen.
+
+   Verschwindet mit der ersten echten Referenz. Wer das hier löscht, prüft
+   vorher, ob die beiden Komponenten auch weg sind. */
+.belege-head h2 {
+  font-size: var(--t-h3);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.belege-head .lead {
+  font-size: var(--t-body);
+}
+
 /* ── Warum / Grenzen ──────────────────────────────────────────────────────── */
 .why__item {
   padding: clamp(1.5rem, 1.1rem + 1.2vw, 2rem);

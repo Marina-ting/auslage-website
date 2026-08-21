@@ -48,6 +48,29 @@ export default function Preise() {
               <PackageCard key={pkg.name} pkg={pkg} detailed delay={i * 80} />
             ))}
           </div>
+
+          {/* Kaufoption: eigener Block UNTERHALB der Pakettabelle, eigene
+              Überschrift, bewusst keine vierte Karte und keine vierte
+              Tabellenzeile (Marinas Entscheidung vom 20.08.2026). Der ruhige
+              Kasten ist dieselbe Optik wie der Preisanker oben: er soll den
+              Paketkarten optisch nicht den Rang ablaufen, weil das Abo das
+              beworbene Angebot bleibt. Texte und Zahlen: pricingPage.kauf. */}
+          <div className="anchor-note anchor-note--kauf reveal">
+            <h2 className="kauf__title">{pricingPage.kauf.heading}</h2>
+            <p>{pricingPage.kauf.intro}</p>
+
+            <ul className="kauf__preise">
+              {pricingPage.kauf.preise.map((p) => (
+                <li key={p.name}>
+                  <span className="kauf__paket">{p.name}</span>
+                  <span className="kauf__preis">{p.price}</span>
+                </li>
+              ))}
+            </ul>
+
+            <p className="footnote">{pricingPage.kauf.preisNote}</p>
+            <p>{pricingPage.kauf.outro}</p>
+          </div>
         </div>
       </section>
 

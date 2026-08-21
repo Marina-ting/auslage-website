@@ -394,7 +394,23 @@ export const packages = [
   },
 ];
 
+// Der Umsatzsteuer-Punkt steht seit 20.08.2026 hier. Marina hat im Nadelöhr
+// („Der Deckel im Aufbaujahr liegt bei 60.500 €") Antwort A gewählt: Preise
+// öffentlich als Nettopreise auszeichnen. Die AGB sagen das seit längerem, die
+// Preisseite sagte es nicht — aus Kundensicht standen 200/300/500 € und
+// 50/100/150 € damit als Endpreise da.
+//
+// Bewusst NUR dieser eine Satz und keine Rechenhilfe daneben: Der Gedanke
+// „unsere Kunden holen sich die Umsatzsteuer ohnehin als Vorsteuer zurück"
+// stimmt für die Zielgruppe dieser Seite nicht durchgehend. Kleinstbetriebe
+// und EPU sind oft selbst Kleinunternehmer und dann nicht vorsteuerabzugs-
+// berechtigt. Ein solcher Satz wäre für einen Teil der Leser schlicht falsch.
+//
+// NICHT auf /fragen übernehmen: Marina hat die Umsatzsteuer-Zeile am 18.08.
+// ausdrücklich nicht im Faktenblock haben wollen, der Wortlaut dort ist als
+// Endfassung markiert.
 export const pricingTerms = [
+  "Alle Preise verstehen sich zuzüglich gesetzlicher Umsatzsteuer.",
   "Mindestlaufzeit 12 Monate, kündbar mit einem Monat Frist zum Ende des zwölften Vertragsmonats.",
   "Wird nicht gekündigt, läuft der Vertrag auf unbestimmte Zeit weiter — kündbar mit einem Monat Frist zum Monatsletzten.",
   "Änderungswünsche gelten für den laufenden Monat und verfallen am Monatsende.",
@@ -565,6 +581,44 @@ export const references = {
   eyebrow: "Aus der Nachbarschaft",
   heading: "Betriebe, die schon online sind.",
   items: [],
+  // Was im Referenzblock steht, solange `items` leer ist. Marina hat am
+  // 20.08.2026 im Nadelöhr Antwort B gewählt: der leere Block bleibt nicht
+  // leer, sondern sagt selbst, dass noch niemand darin steht. Wortlaut von
+  // Mark, freigegeben, nicht bearbeiten. Der `eyebrow` oben bleibt stehen —
+  // "Aus der Nachbarschaft" trägt beide Zustände.
+  //
+  // Sobald die erste echte Referenz in `items` steht, fällt dieser Text von
+  // selbst weg (References.jsx prüft die Länge). Er darf nicht stehenbleiben:
+  // "Hier steht noch niemand" neben einer Referenzkarte wäre schlicht falsch.
+  leer: {
+    heading: "Hier steht noch niemand.",
+    text: "auslage ist neu, und hier steht deshalb noch kein Kunde. Die erste Seite ist im Bau. Sobald sie online ist, steht der Betrieb hier mit Namen und mit einem Satz, den er selbst geschrieben hat. Bis dahin musst du mir nichts glauben, du kannst nachlesen: die Preise stehen offen auf der Preisseite, und was dir gehört, wenn du wieder gehst, steht im Vertrag. Meine Adresse steht im Impressum, nicht nur ein Kontaktformular.",
+  },
+};
+
+// ─── Belege (Block 6b, nur solange es keine Referenz gibt) ───────────────────
+// Marina hat am 20.08.2026 im Nadelöhr "Vertrauensbeweise: an welcher Stelle
+// der Seite stehen die nachprüfbaren Belege?" Antwort B gewählt: BEIDE Texte
+// kommen auf die Seite, dieser als eigener Abschnitt VOR dem Referenzblock.
+// Wortlaut von Mark, freigegeben, nicht bearbeiten (auch "auslage" bleibt am
+// Satzanfang klein, Regel 6).
+//
+// Der Abschnitt hängt an `references.items` und nicht an einem eigenen
+// Schalter: er verschwindet zusammen mit dem leeren Referenzblock, sobald die
+// erste Kundenseite eingetragen ist. Ein zweiter Schalter würde irgendwann
+// vergessen, und dann stünde hier "ein Kunde ist noch nicht dabei", während
+// direkt darunter einer steht.
+//
+// Kein eyebrow: Mark hat Überschrift und Text freigegeben, mehr nicht. Eine
+// erfundene Zeile darüber wäre ungeprüfter Sichttext auf der Verkaufsseite.
+//
+// OFFEN, ändert aber am Bau nichts: Beide Texte beginnen fast gleich. Ob der
+// zweite um zwei Sätze gekürzt wird, liegt bei Marina (Nadelöhr "Belege-Block
+// und Referenzblock beginnen fast gleich. Den zweiten Text kürzen?"). Fällt
+// die Kurzfassung, ist es eine Zeile in `references.leer.text`.
+export const belege = {
+  heading: "Du musst mir nichts glauben.",
+  text: "auslage ist neu, und ein Kunde, der hier für mich spricht, ist noch nicht dabei. Die erste Seite ist im Bau. Bis dahin kannst du das Wichtigste selbst nachsehen. Die Preise stehen auf der Preisseite, mit Zahlen und nicht auf Anfrage. Dass deine Internetadresse vom ersten Tag an auf dich läuft, steht im Vertrag und nicht in einem Werbesatz. Was es kostet, die Seite mitzunehmen, wenn du wieder gehst, steht dort mit Betrag. Und im Impressum steht meine Anschrift, nicht nur ein Kontaktformular.",
 };
 
 // ─── Über Marina ─────────────────────────────────────────────────────────────
@@ -955,6 +1009,47 @@ export const pricingPage = {
     heading: "Zum Einordnen",
     text: `Vergleichbare Websites kosten bei anderen Anbietern ${proof.marktSetupVon} bis ${proof.marktSetupBis} einmalig, bevor überhaupt eine monatliche Betreuung dazukommt. auslage startet bei 200 € Einrichtung und 50 € im Monat, dafür mit Mindestlaufzeit. Im ersten Jahr sind das beim Starter 800 € zusammen, Einrichtung eingerechnet. Das ist weniger, als die Einrichtung allein bei den Anbietern oben kostet.`,
     footnote: proof.marktQuelle,
+  },
+  // ── Kaufoption ───────────────────────────────────────────────────────────
+  // Marina hat die Kaufoption am 20.08.2026 im Nadelöhr entschieden (Option A,
+  // zwei Auflagen: Preis wird offengelegt, aber NICHT neben den Abo-Preisen,
+  // und in runden Zahlen). Zahlen und Zuschnitt stehen in Notion →
+  // "Auslage: Preismodell", Abschnitt "Kaufoption"; von dort übernommen, nicht
+  // hier gerechnet. Wer sie ändert, ändert sie zuerst dort.
+  //
+  // Warum der Block hier unten steht und nicht in der Pakettabelle: Marinas
+  // Vorgabe war ein eigener Block UNTERHALB der Tabelle mit eigener Überschrift,
+  // ausdrücklich keine vierte Spalte und keine vierte Zeile. Beworben wird im
+  // Triestingtal weiterhin ausschließlich das Abo; die Kaufoption beantwortet nur
+  // den häufigsten Einwand im Verkaufsgespräch ("ich will kein Abo"). Deshalb
+  // trägt der Block keinen eigenen Knopf: es gibt genau EINEN CTA-Text auf der
+  // Seite, und das CTA-Band steht ohnehin direkt darunter.
+  //
+  // NICHT ergänzen ohne neue Entscheidung: ob Wartung und Hosting nach dem Kauf
+  // als kleines Technikpaket weiterlaufen. Das ist offen (Preismodell,
+  // "Noch offen"), und bis dahin steht dazu nichts auf der Seite. Auch die
+  // steuerliche Behandlung beim Kunden ist ungeklärt und gehört nicht hierher.
+  kauf: {
+    heading: "Lieber kaufen statt mieten?",
+    intro:
+      "Nicht jeder Betrieb will ein Abo. Deshalb gibt es jedes der drei Pakete auch zum Kauf: du zahlst einmalig, der Quellcode gehört dir, es gibt keine Mindestlaufzeit und kein Monatshonorar.",
+    // Bewusst eigene Werte statt einer Ableitung aus `packages`: der Kaufpreis
+    // ist keine Formel auf dem Monatspreis, sondern eine eigene Festlegung.
+    // Eine gerechnete Zeile würde bei der nächsten Preisänderung still falsch.
+    preise: [
+      { name: "Starter", price: "1.000 €" },
+      { name: "Business", price: "2.000 €" },
+      { name: "Premium", price: "3.000 €" },
+    ],
+    // Der Netto-Hinweis steht hier ein zweites Mal, obwohl er unten in
+    // `pricingTerms` ohnehin für die ganze Seite gilt. Grund: Hier stehen die
+    // höchsten Beträge der Seite, und zwischen ihnen und dem Kleingedruckten
+    // liegen zwei Bildschirme. Bei 3.000 € sind zwanzig Prozent kein Detail,
+    // das man erst beim Weiterscrollen erfährt.
+    preisNote:
+      "Einmalig, zuzüglich gesetzlicher Umsatzsteuer. Gebaut wird dieselbe Website, die im jeweiligen Paket oben beschrieben ist.",
+    outro:
+      "Für die meisten kleinen Betriebe hier ist die Miete der günstigere Weg, deshalb steht sie oben. Kaufen lohnt sich, wenn du das Geld ohnehin liegen hast und dich nicht binden willst.",
   },
   ablöseHeading: "Wenn du wieder gehst",
   // Getrennt nach AGB §7 (Stand 16.08.): Inhalte unentgeltlich, Entgelt nur für
