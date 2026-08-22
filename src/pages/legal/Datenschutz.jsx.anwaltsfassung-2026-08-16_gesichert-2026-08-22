@@ -15,14 +15,6 @@ import LegalLayout from "./LegalLayout";
 //
 // Der Abschnitt "Schriftarten" hat kein Pendant in Notion, ist aber im Code
 // belegt (Poppins/Inter werden in main.jsx selbst gehostet) und bleibt deshalb.
-//
-// ANREDE: gesiezt seit 22.08.2026. Marina hat im Nadelöhr-Eintrag "Die
-// Datenschutzerklärung duzt als einzige Seite weiter — darf ich sie anfassen?"
-// Antwort A gewählt: nur die Anrede wechselt, Satzbau und Rechtsinhalt bleiben
-// Wort für Wort gleich. Geändert wurden 18 Anredestellen und sonst nichts —
-// keine Überschrift, keine Frist, kein Link, kein Rechtssatz, keine Reihenfolge.
-// Die anwaltlich abgenommene Du-Fassung liegt unverändert daneben als
-// `Datenschutz.jsx.anwaltsfassung-2026-08-16_gesichert-2026-08-22`.
 export default function Datenschutz() {
   return (
     <LegalLayout title="Datenschutzerklärung">
@@ -35,12 +27,12 @@ export default function Datenschutz() {
         {!business.emailActive && <em> (Adresse noch in Einrichtung)</em>}
       </p>
 
-      <h2>2. Ihre Rechte</h2>
+      <h2>2. Deine Rechte</h2>
       <p>
-        Ihnen stehen grundsätzlich die Rechte auf Auskunft, Berichtigung, Löschung,
-        Einschränkung, Datenübertragbarkeit, Widerruf und Widerspruch zu. Wenden Sie sich dafür an{" "}
-        <a href={`mailto:${business.email}`}>{business.email}</a>. Wenn Sie glauben, dass die
-        Verarbeitung Ihrer Daten gegen das Datenschutzrecht verstößt, können Sie sich bei der
+        Dir stehen grundsätzlich die Rechte auf Auskunft, Berichtigung, Löschung,
+        Einschränkung, Datenübertragbarkeit, Widerruf und Widerspruch zu. Wende dich dafür an{" "}
+        <a href={`mailto:${business.email}`}>{business.email}</a>. Wenn du glaubst, dass die
+        Verarbeitung deiner Daten gegen das Datenschutzrecht verstößt, kannst du dich bei der
         österreichischen Datenschutzbehörde beschweren (
         <a href="https://www.dsb.gv.at" target="_blank" rel="noreferrer">
           dsb.gv.at
@@ -76,7 +68,7 @@ export default function Datenschutz() {
           <p>
             Zur Reichweitenmessung nutzen wir Cloudflare Web Analytics, ein Analyse-Werkzeug
             der Cloudflare, Inc. Die Messung erfolgt cookielos: Es werden keine Informationen
-            auf Ihrem Endgerät gespeichert oder ausgelesen, und es werden keine
+            auf deinem Endgerät gespeichert oder ausgelesen, und es werden keine
             seitenübergreifenden Nutzerprofile gebildet. Verarbeitet werden technische
             Zugriffsdaten zum einzelnen Seitenaufruf (aufgerufene Seite, Referrer, ungefährer
             Standort auf Länderebene, Gerätetyp und Browser sowie die beim Abruf technisch
@@ -88,10 +80,10 @@ export default function Datenschutz() {
           </p>
           <p>
             <strong>
-              Sie haben das Recht, dieser Verarbeitung jederzeit aus Gründen, die sich aus Ihrer
+              Du hast das Recht, dieser Verarbeitung jederzeit aus Gründen, die sich aus deiner
               besonderen Situation ergeben, zu widersprechen (Art. 21 DSGVO)
             </strong>{" "}
-            — wenden Sie sich dazu an die unter Punkt 1 genannten Kontaktdaten. Cloudflare, Inc.
+            — wende dich dazu an die unter Punkt 1 genannten Kontaktdaten. Cloudflare, Inc.
             ist bereits als Auftragsverarbeiter für das Hosting dieser Website eingebunden
             (siehe Punkt 3) und ist auch für die Reichweitenmessung als Auftragsverarbeiter
             für uns tätig. Für die Übermittlung in die USA gelten die in Punkt 3 genannten
@@ -102,15 +94,15 @@ export default function Datenschutz() {
 
       <h2>{analyticsActive ? "6." : "5."} Kontaktaufnahme (Formular und E-Mail)</h2>
       <p>
-        Das Kontaktformular auf dieser Seite speichert nichts. Es setzt aus Ihren Eingaben
-        eine E-Mail zusammen und öffnet Ihr E-Mail-Programm damit — die Daten verlassen
-        Ihren Rechner erst, wenn Sie dort selbst auf Senden klicken. Eine Übertragung an einen
+        Das Kontaktformular auf dieser Seite speichert nichts. Es setzt aus deinen Eingaben
+        eine E-Mail zusammen und öffnet dein E-Mail-Programm damit — die Daten verlassen
+        deinen Rechner erst, wenn du dort selbst auf Senden klickst. Eine Übertragung an einen
         Server dieser Website findet nicht statt.
       </p>
       <p>
-        Wenn Sie uns die Mail dann schicken — über das Formular oder direkt —, verarbeiten wir
+        Wenn du uns die Mail dann schickst — über das Formular oder direkt —, verarbeiten wir
         die angegebenen Daten (zum Beispiel Name, E-Mail-Adresse, Nachricht) zur Bearbeitung
-        Ihrer Anfrage. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (vorvertraglich) bzw. lit.
+        deiner Anfrage. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (vorvertraglich) bzw. lit.
         f (berechtigtes Interesse an der Beantwortung). Der E-Mail-Empfang läuft technisch
         über Cloudflare Email Routing und Google (Gmail). Anfragen ohne Vertragsbezug werden
         spätestens nach 6 Monaten gelöscht; entsteht eine Geschäftsbeziehung, gelten die
@@ -123,7 +115,7 @@ export default function Datenschutz() {
       <h2>{analyticsActive ? "8." : "7."} Schriftarten</h2>
       <p>
         Poppins und Inter werden von dieser Website selbst ausgeliefert, nicht von Google
-        Fonts nachgeladen. Es entsteht dadurch keine Verbindung zu Servern Dritter und Ihre
+        Fonts nachgeladen. Es entsteht dadurch keine Verbindung zu Servern Dritter und deine
         IP-Adresse wird nicht an Google übertragen.
       </p>
     </LegalLayout>
