@@ -350,14 +350,22 @@ export const included = {
 // 5. Nicht auf Alltagswörtern (Kontaktformular, Öffnungszeiten, Backup). Trägt
 //    jedes zweite Wort ein ⓘ, verliert das Zeichen seine Bedeutung.
 //
-// ── Markierbare Felder, Stand 21.08.2026 ────────────────────────────────────
-// JA:   services.items[].text · ownership.items[].text · faq.items[].a
-//       (nur die Fragen, die NICHT in PREIS_FRAGEN in src/pages/Preise.jsx
-//       stehen) · packages[].features[]
-// NEIN: included.items[] · pricingPage.* · pricingTerms · facts.items[] und
-//       jede faq-Frage aus PREIS_FRAGEN. Diese Texte gibt src/pages/Preise.jsx
-//       direkt aus, ohne GlossarText. Seitendateien liegen nicht in Werners
-//       Dateihoheit; solange das so ist, bleiben diese Felder markerfrei.
+// ── Markierbare Felder, Stand 22.08.2026 ────────────────────────────────────
+// Geändert am 22.08.2026: Marina hat den Nadelöhr-Eintrag "ⓘ auf der ganzen
+// Website: zwei Stellen liegen außerhalb von Werners Dateien" mit Antwort A
+// entschieden (beides nachziehen). `src/pages/Preise.jsx` liegt in diesem Lauf
+// in Werners Dateihoheit und schickt seither die Kauf- und Ablöse-Texte sowie
+// die Preisseiten-FAQ durch `GlossarText`. Die Hälfte, die noch fehlt, ist
+// `scripts/prerender.mjs` (Susi) — siehe den zweiten NEIN-Punkt unten.
+// JA:   services.items[].text · ownership.items[].text · packages[].features[] ·
+//       pricingPage.kauf.intro / .outro · pricingPage.ablöseText /
+//       .ablöseTextQuellcode / .ablöseTextDomain · faq.items[].a, ABER erst,
+//       wenn prerender.mjs nachgezogen ist (siehe unten).
+// NEIN: included.items[] · pricingTerms · pricingPage.preisNote ·
+//       pricingPage.ablöseTabelleCaption · facts.items[]. Die ersten drei sind
+//       Rechts- und Konditionentext, in dem ein Erklärkasten nichts verloren
+//       hat; die Bildunterschrift ist eine <caption>, der Faktenblock ist die
+//       zitierfähige Liste (Punkt 4 oben).
 // NEIN: faq.items[].q — die Frage steht in einem <summary>, ein Knopf darin
 //       klappt beim Klick zusätzlich die ganze Frage auf oder zu.
 // NEIN, ZWEITER GRUND, und der wiegt schwerer: scripts/prerender.mjs baut aus
@@ -366,10 +374,11 @@ export const included = {
 //       Teil der Seite, der zitierfähig sein soll. Am 21.08.2026 im gebauten
 //       dist/fragen.html nachgesehen, nicht vermutet. Solange prerender.mjs
 //       den Text nicht durch `ohneGlossar` schickt, trägt KEINE FAQ-Antwort
-//       einen Marker. Die Datei ist Susis Terrain und wurde nicht angefasst.
-//       Deshalb steht `authinfo` heute im Glossar, aber noch an keiner Stelle
-//       im Text: das einzige Vorkommen des Wortes außerhalb der FAQ ist
-//       pricingPage.ablöseTextDomain, und das gibt Preise.jsx roh aus.
+//       einen Marker. Die Datei ist Susis Terrain und wurde nicht angefasst;
+//       der Handgriff liegt als eigene Aufgabe bei ihr (22.08.2026).
+//       `authinfo` trägt seit dem 22.08. trotzdem sein ⓘ, nämlich in
+//       pricingPage.ablöseTextDomain auf /preise — Preise.jsx gibt den Text
+//       seither durch GlossarText aus statt roh.
 //
 // Gesetzt werden die Marker mit der Schreibweise [[schlüssel|sichtbares Wort]]
 // direkt im Sichttext; aufgelöst wird sie in src/lib/glossar.jsx. Wer einen
@@ -703,7 +712,9 @@ export const references = {
   //
   // Der eine Satz ist dieser: was hier später stehen wird und dass es echt ist.
   // Alles andere aus der Langfassung (nachlesen, Preise, Vertrag, Impressum)
-  // sagt der Belege-Block auf derselben Seite bereits, siehe `belege` oben.
+  // stand bis zum 22.08.2026 im Belege-Block darüber. Der ist mit Marinas
+  // Antwort A gestrichen; die vier Belege stehen weiter auf /preise, im Block
+  // "Was dir gehört", im Impressum und im Fußbereich.
   // Der Bezug ist gegenüber der Langfassung aufgelöst ("sie" hing am
   // gestrichenen Vorsatz "Die erste Seite ist im Bau"), sonst steht der Wortlaut
   // unverändert. Die Langfassung steht im Task-Bericht, falls sie je zurück soll.
@@ -711,31 +722,6 @@ export const references = {
     heading: "Hier steht noch niemand.",
     text: "Sobald die erste Kundenseite online ist, steht der Betrieb hier mit Namen und mit einem Satz, den er selbst geschrieben hat.",
   },
-};
-
-// ─── Belege (Block 6b, nur solange es keine Referenz gibt) ───────────────────
-// Marina hat am 20.08.2026 im Nadelöhr "Vertrauensbeweise: an welcher Stelle
-// der Seite stehen die nachprüfbaren Belege?" Antwort B gewählt: BEIDE Texte
-// kommen auf die Seite, dieser als eigener Abschnitt VOR dem Referenzblock.
-// Wortlaut von Mark, freigegeben, nicht bearbeiten (auch "auslage" bleibt am
-// Satzanfang klein, Regel 6).
-//
-// Der Abschnitt hängt an `references.items` und nicht an einem eigenen
-// Schalter: er verschwindet zusammen mit dem leeren Referenzblock, sobald die
-// erste Kundenseite eingetragen ist. Ein zweiter Schalter würde irgendwann
-// vergessen, und dann stünde hier "ein Kunde ist noch nicht dabei", während
-// direkt darunter einer steht.
-//
-// Kein eyebrow: Mark hat Überschrift und Text freigegeben, mehr nicht. Eine
-// erfundene Zeile darüber wäre ungeprüfter Sichttext auf der Verkaufsseite.
-//
-// OFFEN, ändert aber am Bau nichts: Beide Texte beginnen fast gleich. Ob der
-// zweite um zwei Sätze gekürzt wird, liegt bei Marina (Nadelöhr "Belege-Block
-// und Referenzblock beginnen fast gleich. Den zweiten Text kürzen?"). Fällt
-// die Kurzfassung, ist es eine Zeile in `references.leer.text`.
-export const belege = {
-  heading: "Sie müssen mir nichts glauben.",
-  text: "auslage ist neu, und ein Kunde, der hier für mich spricht, ist noch nicht dabei. Die erste Seite ist im Bau. Bis dahin können Sie das Wichtigste selbst nachsehen. Die Preise stehen auf der Preisseite, mit Zahlen und nicht auf Anfrage. Dass die Internetadresse vom ersten Tag an auf Ihren Namen läuft, steht im Vertrag und nicht in einem Werbesatz. Was es kostet, die Seite mitzunehmen, wenn der Vertrag endet, steht dort mit Betrag. Und im Impressum steht meine Anschrift, nicht nur ein Kontaktformular.",
 };
 
 // ─── Über Marina ─────────────────────────────────────────────────────────────
@@ -1163,7 +1149,7 @@ export const pricingPage = {
   kauf: {
     heading: "Lieber kaufen statt mieten?",
     intro:
-      "Nicht jeder Betrieb will ein Abo. Deshalb gibt es jedes der drei Pakete auch zum Kauf: einmalig zahlen, der Quellcode gehört Ihnen, es gibt keine Mindestlaufzeit und kein Monatshonorar.",
+      "Nicht jeder Betrieb will ein Abo. Deshalb gibt es jedes der drei Pakete auch zum Kauf: einmalig zahlen, der [[quellcode|Quellcode]] gehört Ihnen, es gibt keine Mindestlaufzeit und kein Monatshonorar.",
     // Bewusst eigene Werte statt einer Ableitung aus `packages`: der Kaufpreis
     // ist keine Formel auf dem Monatspreis, sondern eine eigene Festlegung.
     // Eine gerechnete Zeile würde bei der nächsten Preisänderung still falsch.
@@ -1191,10 +1177,26 @@ export const pricingPage = {
   ablöseText:
     "Die Inhalte gehören Ihnen, kostenlos. Texte, Bilder, Logos, Firmendaten und alle Anfragen, die über die Website hereingekommen sind, gebe ich nach Vertragsende unentgeltlich heraus, in einem gängigen Format zum Weiterverwenden. Eine Nachricht binnen drei Monaten nach Vertragsende genügt, dann sind sie binnen vier Wochen da.",
   ablöseTextQuellcode:
-    "Den Quellcode gibt es gegen eine einmalige Ablöse: 100 € bei Starter, 150 € bei Business, 250 € bei Premium. Damit dürfen Sie die Website unbefristet selbst weiterbetreiben, bearbeiten und weiterentwickeln lassen, von wem Sie wollen. Ausgenommen sind Bestandteile von Dritten — Schriften, Bildmaterial, Softwarebibliotheken —, für die eigene Lizenzen nötig sind; welche das sind, weise ich bei der Übergabe aus.",
+    "Den Quellcode gibt es gegen eine einmalige [[abloese|Ablöse]]: 100 € bei Starter, 150 € bei Business, 250 € bei Premium. Damit dürfen Sie die Website unbefristet selbst weiterbetreiben, bearbeiten und weiterentwickeln lassen, von wem Sie wollen. Ausgenommen sind Bestandteile von Dritten — Schriften, Bildmaterial, Softwarebibliotheken —, für die eigene Lizenzen nötig sind; welche das sind, weise ich bei der Übergabe aus.",
   ablöseTextDomain:
-    "Die Domain gehört Ihnen, während der Laufzeit und danach. Nach Vertragsende schicke ich binnen zwei Wochen die Authinfo, mit der die Domain zu einem beliebigen Anbieter umzieht; beim Umzug helfe ich. Ab Vertragsende tragen Sie die Verlängerungskosten selbst. Wichtig: Nehmen Sie den Umzug binnen acht Wochen vor — danach wird die Domain nicht weiter verlängert und kann verfallen.",
+    "Die Domain gehört Ihnen, während der Laufzeit und danach. Nach Vertragsende schicke ich binnen zwei Wochen die [[authinfo|Authinfo]], mit der die Domain zu einem beliebigen Anbieter umzieht; beim Umzug helfe ich. Ab Vertragsende tragen Sie die Verlängerungskosten selbst. Wichtig: Nehmen Sie den Umzug binnen acht Wochen vor — danach wird die Domain nicht weiter verlängert und kann verfallen.",
   termsHeading: "Das Kleingedruckte, groß geschrieben",
+  // Die Bildunterschrift der Ablöse-Tabelle. Sie stand bis zum 22.08.2026 hart
+  // in `src/pages/Preise.jsx` und ist deshalb bei der Du-auf-Sie-Umstellung vom
+  // 21.08. übersehen worden — sie lautete "Inhalte und Anfragen bekommst du
+  // unabhängig davon kostenlos." und war danach der letzte Du-Satz auf einer
+  // durchgehend siezenden Seite. Jetzt ohne Anrede, nach der Hausregel: das
+  // Pronomen steht dort, wo es um Besitz oder eine Handlung geht, sonst redet
+  // der Text über die Sache.
+  //
+  // Sie ist `visually-hidden` und damit nur für Vorleseprogramme da. Genau
+  // deshalb gehört sie hierher und nicht in die Komponente: unsichtbarer
+  // Sichttext fällt bei keiner Sichtprüfung auf.
+  //
+  // KEIN Glossar-Marker: `Preise.jsx` gibt sie als <caption> aus, und ein Knopf
+  // in einer Tabellen-Bildunterschrift ist für ein Vorleseprogramm eine Zumutung.
+  ablöseTabelleCaption:
+    "Einmalige Ablöse-Gebühr je Paket für die Übergabe des Quellcodes. Inhalte und Anfragen gibt es unabhängig davon kostenlos.",
 };
 
 // ─── Seitenverzeichnis fürs Prerendering ─────────────────────────────────────

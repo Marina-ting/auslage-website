@@ -56,13 +56,18 @@
      seitenspezifische Schemata auf diesen Betrieb verweisen koennen, und
      "image" fuer die Google-Business-Darstellung.
 
-     21.08.2026 (Susi), drei Nachtraege:
+     Vier Nachtraege von Susi. Punkt 2 und 3 stammen unveraendert vom
+     21.08.2026, Punkt 1 ist am 22.08.2026 berichtigt worden, Punkt 4 kam an
+     dem Tag dazu:
 
-     1) Nettopreise. Die Preisseite sagt seit 20.08.2026 ausdruecklich
-     "zuzueglich gesetzlicher Umsatzsteuer"; im Schema stand nur der nackte
-     Betrag, und eine Maschine liest einen Preis ohne Angabe als Endpreis.
-     Jede UnitPriceSpecification traegt deshalb "valueAddedTaxIncluded": false.
-     Wird je brutto ausgezeichnet, wird hier true daraus.
+     1) Endpreise. Marina hat am 21.08.2026 die Endpreis-Linie entschieden
+     (Nadeloehr, Antwort A): der genannte Betrag ist der Gesamtbetrag, eine
+     Umsatzsteuer kommt nicht dazu (Kleinunternehmerregelung, Paragraf 6 Abs. 1
+     Z 27 UStG). Jede der sechs UnitPriceSpecification traegt deshalb
+     "valueAddedTaxIncluded": true. Bis zum 22.08.2026 stand hier false - unter
+     der Netto-Entscheidung vom 20.08. war das richtig und ist mit der neuen
+     Entscheidung still falsch geworden. Wer wieder netto auszeichnen will,
+     braucht dafuer eine neue Entscheidung von Marina.
 
      2) Die Kaufpreise der Preisseite (1.000/2.000/3.000) stehen bewusst NICHT
      in diesem Katalog. Ein Einmalpreis neben drei Abo-Angeboten im selben
@@ -75,7 +80,16 @@
      Seiteninhalt und verlangt sichtbare Fragen; dieser Block beschreibt den
      Betrieb und wird seitenweit gesetzt. Dazu tragen alle Seiten waehrend
      Coming-Soon noindex,nofollow, und er ist die zweite Sicherung, falls das
-     Prerendering ausfaellt. Mit comingSoon = false ist die Frage erledigt. -->
+     Prerendering ausfaellt. Mit comingSoon = false ist die Frage erledigt.
+
+     4) 22.08.2026: "logo" zeigt nicht mehr auf public/images/, sondern auf
+     /branding/png/lockup-horizontal-teal.png. Die beiden Dateien sind
+     byteweise gleich (gleiche Pruefsumme, 24.900 Byte), fuer Google aendert
+     sich also nur die Herkunft. Die neue Adresse haengt an dem Ordner, den
+     scripts/branding-sync.mjs bei jedem Bau aus dem Master befuellt; die alte
+     lag in einem gewoehnlichen Bilderordner. PNG und nicht SVG: die SVGs
+     tragen die Wortmarke als echten Text in Poppins und fallen verlinkt auf
+     Arial zurueck (Thomas, 21.08., im Browser nebeneinandergelegt). -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -84,7 +98,7 @@
   "name": "auslage",
   "description": "Websites für lokale Betriebe im Triestingtal: mieten statt kaufen, ab 200 € Einrichtung und 50 € im Monat, Domain, Hosting und Wartung inklusive. Aus Berndorf in Niederösterreich.",
   "url": "https://auslage.io",
-  "logo": "https://auslage.io/images/auslage-logo.png",
+  "logo": "https://auslage.io/branding/png/lockup-horizontal-teal.png",
   "image": "https://auslage.io/images/og-1200x630.png",
   "founder": { "@type": "Person", "name": "Marina Zaiser" },
   "telephone": "+436703532122",
@@ -116,7 +130,7 @@
           "priceComponent": [
             {
               "@type": "UnitPriceSpecification",
-              "valueAddedTaxIncluded": false,
+              "valueAddedTaxIncluded": true,
               "name": "Monatspreis",
               "price": "50",
               "priceCurrency": "EUR",
@@ -128,7 +142,7 @@
             },
             {
               "@type": "UnitPriceSpecification",
-              "valueAddedTaxIncluded": false,
+              "valueAddedTaxIncluded": true,
               "name": "Einrichtung, einmalig",
               "price": "200",
               "priceCurrency": "EUR"
@@ -148,7 +162,7 @@
           "priceComponent": [
             {
               "@type": "UnitPriceSpecification",
-              "valueAddedTaxIncluded": false,
+              "valueAddedTaxIncluded": true,
               "name": "Monatspreis",
               "price": "100",
               "priceCurrency": "EUR",
@@ -160,7 +174,7 @@
             },
             {
               "@type": "UnitPriceSpecification",
-              "valueAddedTaxIncluded": false,
+              "valueAddedTaxIncluded": true,
               "name": "Einrichtung, einmalig",
               "price": "300",
               "priceCurrency": "EUR"
@@ -180,7 +194,7 @@
           "priceComponent": [
             {
               "@type": "UnitPriceSpecification",
-              "valueAddedTaxIncluded": false,
+              "valueAddedTaxIncluded": true,
               "name": "Monatspreis",
               "price": "150",
               "priceCurrency": "EUR",
@@ -192,7 +206,7 @@
             },
             {
               "@type": "UnitPriceSpecification",
-              "valueAddedTaxIncluded": false,
+              "valueAddedTaxIncluded": true,
               "name": "Einrichtung, einmalig",
               "price": "500",
               "priceCurrency": "EUR"

@@ -576,11 +576,13 @@
   white-space: nowrap;
 }
 
-/* ── Belege & leerer Referenzblock ────────────────────────────────────────
-   Zwei Abschnitte auf der Startseite, die nur so lange existieren, wie es
-   keine Kundenreferenz gibt (Belege.jsx und der Leerzustand von
-   References.jsx). Beide tragen einen ungewöhnlich langen Absatz: sechs Sätze,
-   wo ein `lead` sonst einen oder zwei trägt.
+/* ── Leerer Referenzblock ─────────────────────────────────────────────────
+   Die Stufe hieß bis zum 22.08.2026 "Belege & leerer Referenzblock" und galt
+   für zwei Abschnitte. Der Belege-Abschnitt ist gestrichen (Marina, Nadelöhr
+   "Du sagst im Braindump, der Belege-Abschnitt wirkt deplatziert. Kommt er
+   raus?", Antwort A); die Klasse trägt jetzt nur noch der Leerzustand von
+   References.jsx. Der Name bleibt, damit bestehende Verweise nicht brechen.
+   Der Absatz dort ist kürzer als früher, die Begründung unten gilt trotzdem.
 
    Deshalb hier eine eigene Stufe statt der normalen Abschnitts-Optik. In
    `lead`-Größe gesetzt lesen sich sechs Sätze wie ein Manifest, und der
@@ -1581,18 +1583,64 @@ table.simple td {
   max-width: var(--measure);
 }
 
+/* Der Abschlusssatz — neu gesetzt am 22.08.2026.
+   Marinas Befund vom 21.08., wörtlich: "der absatz bei über mich sieht noch
+   immer deplatziert aus. die textfarbe ist auch eine andere als auf der
+   restlichen seite."
+
+   Beides war messbar und ist gemessen worden, nicht geraten (1440 px,
+   getComputedStyle):
+   - Er begann bei x = 184 px, die Stationstexte darüber bei x = 386 px. Er
+     stand also unter der MARKEN-Spalte statt unter der Textspalte und lief
+     als schmale Säule ins Leere. Das ist das "schief".
+   - Seine Farbe war rgb(43, 36, 32) (--ink), die der Stationstexte
+     rgb(93, 85, 76) (--ink-muted). Er war die einzige Farbinsel im Block.
+
+   Die Lösung nimmt ihm nichts weg, sondern gibt ihm eine Rolle: er ist die
+   Klammer zum `about__lead` ganz oben. Beide stehen jetzt in derselben Größe
+   (--t-lead) und derselben Farbe (--ink-muted), der Block beginnt und endet
+   also gleich. Ausgerichtet ist er auf die Textspalte der Stationen, damit
+   eine einzige Kante durch den ganzen Abschnitt läuft.
+
+   Der Terrakotta-Strich darüber ist die Auszeichnung, die vorher die dunklere
+   Farbe leisten musste. Terrakotta trägt laut Branding Linien und Schmuck und
+   keine Klicks — hier trägt es genau das.
+
+   Die 11rem sind die Breite der Marken-Spalte in `.about__station`, die
+   1.6rem deren Spaltenabstand. Ändert sich dort etwas, ändert es sich hier
+   mit — sonst steht der Satz wieder schief. */
 .about__closing {
-  margin-top: 1.8rem;
-  color: var(--ink);
-  font-size: var(--t-body);
-  line-height: 1.62;
+  margin-top: 2.2rem;
+  margin-left: calc(11rem + 1.6rem);
+  padding-top: 1.5rem;
+  position: relative;
+  color: var(--ink-muted);
+  font-size: var(--t-lead);
+  line-height: 1.6;
   max-width: var(--measure);
+}
+
+.about__closing::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2.5rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--terracotta);
 }
 
 @media (max-width: 40rem) {
   .about__station {
     grid-template-columns: 1fr;
     gap: 0.3rem;
+  }
+
+  /* Unter 40rem klappen die Stationen auf eine Spalte — dann gibt es keine
+     Marken-Spalte mehr, auf die der Abschlusssatz Rücksicht nehmen müsste. */
+  .about__closing {
+    margin-left: 0;
   }
 }
 

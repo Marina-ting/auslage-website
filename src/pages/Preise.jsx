@@ -1,7 +1,45 @@
 import { packages, pricingPage, pricingTerms, faq, included } from "../content/site";
 import PackageCard from "../components/PackageCard";
 import CtaBand from "../components/CtaBand";
+import GlossarText from "../lib/glossar";
 import { useDocumentMeta, useReveal } from "../lib/useReveal";
+
+/*
+ * ⓘ-Erklärungen auf dieser Seite — nachgezogen am 22.08.2026.
+ *
+ * Marina hat den Nadelöhr-Eintrag "ⓘ auf der ganzen Website: zwei Stellen
+ * liegen außerhalb von Werners Dateien" mit Antwort A entschieden: beides
+ * nachziehen. Diese Datei ist die eine Hälfte davon, `scripts/prerender.mjs`
+ * die andere (Susi).
+ *
+ * Vorher gab diese Datei ihre Texte roh aus. Ein Marker in einem der Felder
+ * wäre als sichtbares `[[quellcode|Quellcode]]` auf der Verkaufsseite gelandet,
+ * deshalb trugen "Quellcode", "Ablöse" und "Authinfo" nirgends ein ⓘ, obwohl
+ * sie im Glossar stehen. Genau die Wörter, bei denen ein Kleinbetrieb vor der
+ * Unterschrift stockt.
+ *
+ * Was durch `GlossarText` läuft: die Kauf-Texte, die drei Ablöse-Absätze und
+ * die Antworten der Preisseiten-FAQ.
+ *
+ * Was bewusst NICHT durchläuft:
+ *  - `pricingTerms` und `kauf.preisNote` — Konditionen- und Umsatzsteuertext.
+ *    Der Satz steht laut Kommentar in site.js an neun Stellen wortgleich; ein
+ *    Erklärkasten mittendrin wäre eine Abweichung an genau einer davon.
+ *  - `pricingPage.ablöseTabelleCaption` — eine <caption> für Vorleseprogramme.
+ *  - `included.items[]` — die Kärtchen wiederholen Wörter, die in den
+ *    Paketkarten darüber schon ihr ⓘ tragen (ein ⓘ je Wort und Seite).
+ *
+ * REIHENFOLGE BEACHTEN, wer hier Marker ergänzt: ein Wort trägt sein ⓘ nur beim
+ * ERSTEN Vorkommen auf der Seite. Domain, Hosting, SSL, Google-Business-Profil
+ * und SEO haben ihres bereits in den Paketkarten weiter oben. Deshalb sitzen
+ * hier unten nur `quellcode` (Kauf-Block), `abloese` und `authinfo` (Ablöse-
+ * Block), und zwar je an ihrer ersten Fundstelle.
+ *
+ * Die FAQ-Antworten laufen schon jetzt durch `GlossarText`, obwohl noch keine
+ * einen Marker trägt: sobald prerender.mjs nachgezogen ist und die Marker in
+ * `faq.items[].a` kommen dürfen, stehen sie hier sofort richtig statt als rohe
+ * Klammern. `key={item.q}` ist ungefährlich, weil Fragen nie Marker tragen.
+ */
 
 // Auf der Preisseite stehen nur die Fragen, die tatsächlich mit Geld und
 // Bindung zu tun haben — der Rest bleibt der Startseite überlassen.
@@ -57,7 +95,9 @@ export default function Preise() {
               beworbene Angebot bleibt. Texte und Zahlen: pricingPage.kauf. */}
           <div className="anchor-note anchor-note--kauf reveal">
             <h2 className="kauf__title">{pricingPage.kauf.heading}</h2>
-            <p>{pricingPage.kauf.intro}</p>
+            <p>
+              <GlossarText text={pricingPage.kauf.intro} />
+            </p>
 
             <ul className="kauf__preise">
               {pricingPage.kauf.preise.map((p) => (
@@ -69,7 +109,9 @@ export default function Preise() {
             </ul>
 
             <p className="footnote">{pricingPage.kauf.preisNote}</p>
-            <p>{pricingPage.kauf.outro}</p>
+            <p>
+              <GlossarText text={pricingPage.kauf.outro} />
+            </p>
           </div>
         </div>
       </section>
@@ -115,21 +157,23 @@ export default function Preise() {
               {pricingPage.ablöseHeading}
             </h2>
             <p className="lead" style={{ fontSize: "var(--t-body)" }}>
-              {pricingPage.ablöseText}
+              <GlossarText text={pricingPage.ablöseText} />
             </p>
             <p className="lead" style={{ fontSize: "var(--t-body)" }}>
-              {pricingPage.ablöseTextQuellcode}
+              <GlossarText text={pricingPage.ablöseTextQuellcode} />
             </p>
             <p className="lead" style={{ fontSize: "var(--t-body)" }}>
-              {pricingPage.ablöseTextDomain}
+              <GlossarText text={pricingPage.ablöseTextDomain} />
             </p>
           </div>
 
           <div className="table-wrap reveal">
             <table className="simple">
+              {/* Wortlaut in site.js (`pricingPage.ablöseTabelleCaption`). Er stand
+                  bis zum 22.08.2026 hier hart im Code und war deshalb bei der
+                  Du-auf-Sie-Umstellung vom 21.08. übersehen worden. */}
               <caption className="visually-hidden">
-                Einmalige Ablöse-Gebühr je Paket für die Übergabe des Quellcodes. Inhalte und
-                Anfragen bekommst du unabhängig davon kostenlos.
+                {pricingPage.ablöseTabelleCaption}
               </caption>
               <thead>
                 <tr>
@@ -172,7 +216,9 @@ export default function Preise() {
                   {item.q}
                   <span className="faq__sign" aria-hidden="true" />
                 </summary>
-                <p className="faq__answer">{item.a}</p>
+                <p className="faq__answer">
+                  <GlossarText text={item.a} />
+                </p>
               </details>
             ))}
           </div>

@@ -4,7 +4,6 @@ import Objection from "../components/Objection";
 import Process from "../components/Process";
 import Services from "../components/Services";
 import Ownership from "../components/Ownership";
-import Belege from "../components/Belege";
 import References from "../components/References";
 import About from "../components/About";
 import Contact from "../components/Contact";
@@ -23,18 +22,28 @@ import { useDocumentMeta, useReveal } from "../lib/useReveal";
  *  4 Ablauf           Die Entscheidung sichtbar am Ende, nicht am Anfang
  *  5 Was drin ist     Als Nutzen formuliert, mit der Preisfrage direkt daneben
  *  6 Was dir gehört   Das stärkste Argument — Risikoumkehr
- * 6b Belege           Nur solange es keine Referenz gibt, siehe unten
  *  7 Referenzen       Zeigt im Leerzustand, dass noch niemand darin steht
  *  8 Marina           Mit Gesicht und Namen
  *  9 Kontakt          Handlung, derselbe CTA wie oben
  *
- * Block 6b ist am 20.08.2026 dazugekommen und trägt bewusst keine eigene
- * Nummer: Er ist kein zehnter Block der freigegebenen Blockfolge, sondern ein
- * Provisorium, das mit der ersten Kundenreferenz von selbst wieder verschwindet
- * (beide Komponenten prüfen `references.items`). Bleibt die Nummerierung
- * unverändert, bleibt auch die Blockfolge lesbar, die Marina am 18.08.
- * freigegeben hat. Marinas Entscheidung dazu: Nadelöhr "Vertrauensbeweise: an
- * welcher Stelle der Seite stehen die nachprüfbaren Belege?", Antwort B.
+ * Der Block 6b "Belege" ist am 22.08.2026 wieder herausgefallen. Er stand vom
+ * 20.08. bis dahin zwischen "Was dir gehört" und den Referenzen und trug die
+ * Überschrift "Sie müssen mir nichts glauben.". Marina hat ihn im Nadelöhr
+ * "Du sagst im Braindump, der Belege-Abschnitt wirkt deplatziert. Kommt er
+ * raus?" mit Antwort A gestrichen: alle vier Belege stehen ohnehin an anderer
+ * Stelle derselben Seite (Preise auf /preise, Internetadresse und Ablöse im
+ * Block "Was dir gehört", Anschrift im Impressum und im Fußbereich). Der
+ * Referenzblock darunter stand nicht zur Wahl und ist unverändert.
+ *
+ * Die Blockfolge ist damit wieder die neun Blöcke, die Marina am 18.08.
+ * freigegeben hat. Wortlaut und Begründung des gestrichenen Abschnitts liegen
+ * im Baubericht des Tasks; die Komponente liegt als
+ * `Belege.jsx_entfernt-freilauf8_2026-08-22.jsx` in `waas\_to_delete`.
+ *
+ * ACHTUNG bei der Hintergrundfolge: Ownership (teal) → References (creme, im
+ * Leerzustand bewusst OHNE `section--cream-alt`) → About (cream-alt). Wer den
+ * Referenzblock anfasst, prüft, dass keine zwei gleichen Flächen aneinander
+ * stoßen.
  *
  * Was hier NICHT mehr steht und wohin es gewandert ist (Marina, 17.08.):
  *   problem → /warum-eine-website · why + limits → /warum-auslage ·
@@ -54,7 +63,6 @@ export default function Home() {
       <Process />
       <Services />
       <Ownership />
-      <Belege />
       <References />
       <About />
       <Contact />

@@ -220,12 +220,60 @@ function seitenSchema(route) {
  * anzeigen. Heute kommt sie nirgends vor — die Absicherung kostet nichts und
  * hält auch dann, wenn später jemand einen Antworttext ergänzt.
  */
+/**
+ * Glossar-Marker aus strukturierten Daten herausnehmen.
+ *
+ * Die Sichttexte in site.js dürfen die Schreibweise [[schlüssel|Wort]] tragen
+ * (Inline-Glossar, src/lib/glossar.jsx). Auf der Seite löst React sie auf, der
+ * Besucher liest nur das Wort. In dieses Skript kommen dieselben Texte aber
+ * roh: `faqSchema` baut das FAQPage-JSON-LD aus denselben Antworten, die die
+ * Seite zeigt, und `ortSchema` aus den Feldern der Route. Ohne diesen Schritt
+ * steht der Marker unaufgelöst in den maschinenlesbaren Daten — und die müssen
+ * dasselbe sagen wie der sichtbare Text, sonst widersprechen sie Googles
+ * Richtlinien für strukturierte Daten.
+ *
+ * Genau das ist am 21.08.2026 im gebauten dist/fragen.html gestanden. Gesehen
+ * hat es nur, wer nach dem Einbau wirklich gebaut und das Ergebnis gelesen hat.
+ * Ein Marker im Sichttext ist harmlos, derselbe Marker in maschinenlesbaren
+ * Daten nicht.
+ *
+ * Ersetzt wird durch das sichtbare Wort und nicht durch nichts — dasselbe, was
+ * `ohneGlossar` in src/lib/glossar.jsx tut. Der Ausdruck steht hier ein zweites
+ * Mal, weil dieses Skript kein JSX laden kann; damit die beiden Fassungen nicht
+ * stumm auseinanderlaufen, bricht `schemaBlock` ab, wenn danach noch eine
+ * offene Klammer übrig ist.
+ */
+const GLOSSAR_MARKER = /\[\[([a-zA-Z0-9]+)\|([^\]|]+)\]\]/g;
+
+function ohneMarker(text) {
+  return text.replaceAll(GLOSSAR_MARKER, "$2");
+}
+
 function schemaBlock(route) {
   const schema = seitenSchema(route);
   if (!schema) return null;
   if (comingSoon && route.gesperrt) return null;
 
-  const json = JSON.stringify(schema, null, 2).replaceAll("<", "\\u003c");
+  const roh = JSON.stringify(schema, null, 2).replaceAll("<", "\\u003c");
+  const json = ohneMarker(roh);
+  if (json !== roh) {
+    console.log(
+      `  Hinweis: Glossar-Marker im JSON-LD von ${route.pfad} auf das sichtbare Wort gebracht.`,
+    );
+  }
+
+  // Drift-Sicherung: steht danach noch eine [[-Klammer im JSON, hat sich die
+  // Schreibweise in src/lib/glossar.jsx geändert und GLOSSAR_MARKER oben passt
+  // nicht mehr. Laut abbrechen ist besser als stumm falsche strukturierte
+  // Daten ausliefern.
+  if (json.includes("[[")) {
+    throw new Error(
+      `Prerendering abgebrochen: Im JSON-LD von ${route.pfad} steht noch ein Glossar-Marker. ` +
+        "Die Schreibweise in src/lib/glossar.jsx passt nicht mehr zum Ausdruck " +
+        "GLOSSAR_MARKER in scripts/prerender.mjs — beide gehören zusammen.",
+    );
+  }
+
   return `<script type="application/ld+json">\n${json}\n</script>`;
 }
 
