@@ -1975,16 +1975,43 @@ table.simple td {
    die Nummer davor: die Nummer ist die Auskunft, WhatsApp nur der andere Kanal
    dorthin. Der Trenner hängt als ::before am Link selbst — so wandert er mit,
    wenn der Link umbricht, statt am Zeilenende allein stehen zu bleiben. */
+/* Seit dem Symbol davor ist der Link ein `inline-flex`: Trenner, Glyph und
+   Beschriftung sind damit drei Flex-Kinder in einer nicht umbrechenden Reihe.
+   Mit dem alten Inline-Fluss riss der Zeilenumbruch zwischen Glyph und Text
+   hindurch — `white-space: nowrap` hält Wörter zusammen, aber nicht ein
+   ersetztes Element und den Text dahinter (gesehen am 22.08. auf 1440 und
+   390 px: „·" blieb allein am Zeilenende, Symbol und Beschriftung standen
+   darunter auf zwei weiteren Zeilen). */
 .contact__channel-alt {
   font-size: var(--t-small);
   font-weight: 500;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32em;
 }
 
-.contact__channel-alt::before {
-  content: "·";
-  margin-right: 0.5rem;
-  color: var(--ink-faint);
+/* Der Trenner "·" ist am 22.08. entfallen. Er stand seit 20.08. als ::before am
+   Link, damit er beim Umbruch mitwandert statt am Zeilenende hängen zu bleiben.
+   Mitgewandert ist er auch — und führte dann die neue Zeile an, was genauso
+   aussieht wie ein Tippfehler (gesehen auf 1100 px). Seit das Symbol davor
+   steht, trennt es die beiden Kanäle ohnehin sichtbar; die Lücke unten genügt.
+   Wer den Punkt zurückholt, holt sich das Umbruch-Problem mit. */
+.contact__channel dd > .contact__channel-alt {
+  margin-left: 0.25rem;
+}
+
+/* Das WhatsApp-Glyph vor der Beschriftung (Marina, 22.08.: Symbol ja, eigener
+   Knopf nein). Es misst sich an der Schriftgröße der Zeile statt an einer
+   festen Pixelzahl, damit es bei geänderter Grundschrift mitwandert; 1,05 em
+   statt 1 em, weil das runde Glyph optisch kleiner wirkt als die Buchstaben
+   daneben. `currentColor` erbt die Linkfarbe — kein zweites Grün in der
+   Teal/Terrakotta-Palette. Ausgerichtet wird ueber `align-items: center` der
+   Reihe, nicht ueber einen Grundlinien-Versatz. */
+.contact__channel-glyph {
+  width: 1.05em;
+  height: 1.05em;
+  flex: none;
 }
 
 /* ── Schmale Fenster ───────────────────────────────────────────────────────── */
